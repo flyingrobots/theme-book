@@ -1,7 +1,7 @@
 {
   "name": "theme-book",
   "version": "0.1.0",
-  "description": "A humble CLI and AI agent skill that wires David Aerne's (@meodai) color-expert knowledge, poline / rampensau palette generators, and design-book reactive constraint engine into one local workflow.",
+  "description": "Rule-based color theme compiler, contrast auditor, and AI agent skill built on David Aerne's (@meodai) design-book, poline, rampensau, and culori.",
   "type": "module",
   "license": "AGPL-3.0-only",
   "repository": {
@@ -14,6 +14,7 @@
   "scripts": {
     "test": "bun test",
     "typecheck": "bun x tsc --noEmit",
+    "specimen": "bun scripts/specimen.ts",
     "install:local": "./install.sh"
   },
   "dependencies": {

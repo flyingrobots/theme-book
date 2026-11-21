@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, test } from "bun:test";
-import { existsSync, mkdirSync, mkdtempSync, readdirSync, readlinkSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, readlinkSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { DesignBook, FunctionError, closest, color, ref } from "design-book";
@@ -7,6 +7,7 @@ import { buildThemeBook, suggestCompanionColors, type ThemePreset } from "../src
 import { evaluateAudit, parseTokensFromText, type AuditStandard } from "../src/audit";
 import { formatOklchCss, oklabDistance, parseToOklch, toSafeHex } from "../src/palette";
 import { renderThemeOutput } from "../src/render";
+import { generateSpecimenSvg } from "../scripts/specimen";
 import type { GeneratorKind, Mood } from "../src/palette";
 
 const REPO_ROOT = resolve(import.meta.dir, "..");
@@ -477,5 +478,47 @@ describe("theme-book Commit 2: generator charts, exact seeds, AA/AAA/APCA matrix
     expect(refused.exitCode).toBe(1);
     expect(refused.stderr.toString()).toContain("refusing to overwrite");
     expect(existsSync(join(unrelatedDir, "precious.txt"))).toBe(true);
+  });
+});
+
+describe("theme-book Commit 3: full rule provenance, reproducible recipe & deterministic SVG specimen", () => {
+  test("provenance exposes full Design Book rule arguments (no abbreviated ...) and recipe preserves rawSeeds + hex audit authority", () => {
+    const built = buildThemeBook({
+      seeds: ["#2563eb"],
+      preset: "shadcn",
+      mood: "editorial",
+      generator: "poline",
+      standard: "wcag-aa",
+      hexOutput: true,
+    });
+
+    expect(built.light.primary!.rule).not.toContain("(...)");
+    expect(built.light.primary!.rule).toContain("closest(");
+    expect(built.light.primary!.rule).toContain("brandSolvableLight");
+    expect(built.light.primary!.rule).toContain("readableOn: ref(light.background)");
+
+    expect(built.recipe.version).toBe(1);
+    expect(built.recipe.rawSeeds).toEqual(["#2563eb"]);
+    expect(built.recipe.formatOptions.hex).toBe(true);
+    expect(built.recipe.command).toContain('--seed "#2563eb"');
+    expect(built.recipe.command).toContain("--hex");
+
+    const jsonText = renderThemeOutput(built, "json", { hex: true });
+    const parsed = parseTokensFromText(jsonText, "theme.json");
+    expect(parsed.light.primary).toBe("#2563eb");
+    const report = evaluateAudit(parsed, { standard: "wcag-aa" });
+    expect(report.status).toBe("pass");
+    expect(report.coverage.assumptions.some((a) => a.includes("hex"))).toBe(true);
+  });
+
+  test("docs/specimen.svg matches deterministic regeneration from scripts/specimen.ts", () => {
+    const specimenPath = join(REPO_ROOT, "docs", "specimen.svg");
+    expect(existsSync(specimenPath)).toBe(true);
+    const onDisk = readFileSync(specimenPath, "utf8");
+    const generated = generateSpecimenSvg();
+    expect(onDisk).toBe(generated);
+    expect(onDisk).toContain("<svg");
+    expect(onDisk).toContain("editorial");
+    expect(onDisk).toContain("vivid");
   });
 });

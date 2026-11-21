@@ -1,24 +1,17 @@
 # theme-book
 
-> **Huge respect & gratitude to David Aerne ([`@meodai`](https://github.com/meodai) / [Elastiq GmbH](https://elastiq.ch/)).**
->
-> All of the real brilliance here is David's work:
-> - [`meodai/skill.color-expert`](https://github.com/meodai/skill.color-expert) — the extraordinary 180+ document color knowledge base for AI agents
-> - [`meodai/design-book`](https://github.com/meodai/design-book) — the reactive constraint engine that encodes *how* design tokens are chosen instead of freezing static hex dumps
-> - [`meodai/poline`](https://github.com/meodai/poline) — the esoteric, perceptually grounded anchor palette generator
-> - [`meodai/rampensau`](https://github.com/meodai/rampensau) — the easing-driven color ramp generator
->
-> Plus huge thanks to the maintainers of [`culori`](https://culorijs.org/) for rock-solid OKLCH conversions, gamut clamping, and contrast math.
->
-> **All `theme-book` does is humbly feed one into the other.** It is a thin, local CLI and companion AI agent skill that lets coding agents combine `color-expert`'s color judgment with `poline` / `rampensau` candidate pools and `design-book`'s reactive constraint solver — so agents compute, explain, and mathematically verify themes instead of eyeballing hex codes.
+A local CLI and AI agent skill for compiling rule-based light/dark UI color themes, auditing contrast at full floating-point precision, and suggesting accessible companion colors — built on [David Aerne's (`@meodai`)](https://github.com/meodai) [`design-book`](https://github.com/meodai/design-book), [`poline`](https://github.com/meodai/poline), and [`rampensau`](https://github.com/meodai/rampensau), paired with [`skill.color-expert`](https://github.com/meodai/skill.color-expert), plus [`culori`](https://culorijs.org/).
+
+![theme-book UI specimen across editorial and vivid moods in light and dark modes](docs/specimen.svg)
 
 ---
 
-## Why This Exists
+## What `theme-book` Does
 
-- **`skill.color-expert`** gives an AI agent deep perceptual and practical color judgment (OKLCH, character-first harmony, gamut mapping, APCA/WCAG, naming).
-- **`design-book`** gives you a reactive rule graph (`bestContrastWith`, `minContrastWith`, `mostVivid`, `leastVivid`, `furthestFrom`, `shade`, `colorMix`, `dark extends light`, `book.inspect()`) that turns a palette into an auditable, self-consistent token system.
-- **`theme-book`** connects the two as a private local authoring CLI (`~/.theme-book/` + `~/.local/bin/theme-book`) paired with a lightweight agent skill (`skills/theme-book/SKILL.md`), so your agents can generate and audit themes cleanly without installing `design-book` into every target repository.
+- **Compiles procedural themes (`theme`)** — builds a reactive `DesignBook` (`light` + `dark extends light`) from one or more seed colors, a mood profile, a chart palette generator (`oklch`, `poline`, `rampensau`), and a contrast standard (`wcag-aa`, `wcag-aaa`, `apca`). Emits ready-to-drop CSS (`:root` + `.dark` in gamut-safe `oklch()`), provenance JSON with a reproducible `recipe`, W3C Design Tokens JSON, or an SVG dependency graph.
+- **Audits & repairs existing token files (`audit`)** — evaluates CSS (`@layer base`, `@supports`, `@media (prefers-color-scheme: dark)`, `:root.dark`, `html.dark`, classic shadcn bare HSL triples, `var()` aliases), `theme-book` JSON, and W3C DTCG JSON at **full floating-point precision** without pre-comparison rounding or dropped alpha. Proposes pair-local repairs verified directly against the selected standard.
+- **Suggests companion colors (`suggest`)** — generates gamut-safe candidate pools and runs `design-book` selectors (`mostVivid`, `closest`, `furthestFrom`, `leastVivid`, `bestContrastWith`, `minContrastWith`, `colorMix`, `shade`) against your target surface.
+- **Runs private `design-book` scripts (`eval`)** — executes ad-hoc TypeScript files (or stdin via `-`) from any working directory with `design-book`, `poline`, `rampensau`, and `culori` pre-resolved from `~/.theme-book/node_modules/`, keeping target repositories free of AGPL runtime dependencies.
 
 ---
 
@@ -32,76 +25,109 @@ cd theme-book
 ./install.sh
 ```
 
-`install.sh` copies the runtime into `~/.theme-book/`, installs production dependencies inside `~/.theme-book/`, symlinks `~/.local/bin/theme-book`, and (if `sync-agents` from [`agent-hub`](https://github.com/flyingrobots/agent-hub) is installed) syncs `skills/theme-book/` across Claude Code, Codex, and Antigravity/Gemini.
-
-Your dev checkout stays cleanly separated from `~/.theme-book/`.
+`install.sh` resolves paths canonically, stages an isolated runtime into `~/.theme-book/` (marked with `.theme-book-install` and refusing to overwrite unrelated non-empty directories), installs production dependencies via `--frozen-lockfile`, symlinks `~/.local/bin/theme-book`, and syncs `skills/theme-book/` if `sync-agents` from [`agent-hub`](https://github.com/flyingrobots/agent-hub) is installed.
 
 ---
 
 ## Usage
 
-### 1. Suggest Companion Colors
+### 1. Build Complete Light + Dark Themes
 
 ```bash
-theme-book suggest --seed "#2563eb" --mood editorial --generator poline
-theme-book suggest --seed "#d97706" --surface "#0f172a" --generator rampensau --format json
-```
+# shadcn/ui (:root + .dark OKLCH CSS variables) with contrast audit
+theme-book theme --seed "#2563eb" --preset shadcn --mood editorial --generator poline --audit
 
-Generates gamut-safe candidate pools (`oklch`, `poline`, or `rampensau`) and runs `design-book` selectors (`mostVivid`, `closest`, `furthestFrom`, `leastVivid`, `bestContrastWith`, `minContrastWith`, `colorMix`, `shade`) against your surface — returning OKLCH, hex, WCAG 2.1 ratio, APCA Lc, and the exact rule that won.
+# High-contrast theme (defaults to wcag-aaa and solves all text + status fills at 7:1)
+theme-book theme --seed "#2563eb" --preset shadcn --mood high-contrast --audit
 
-### 2. Build Complete Light + Dark Themes
+# APCA-verified dual-seed theme (seed-1 explicitly tints --accent)
+theme-book theme --seed "#c2410c" --seed "#0f766e" --preset shadcn --mood vivid --generator rampensau --standard apca --audit
 
-```bash
-# shadcn/ui (:root + .dark OKLCH CSS variables) with WCAG + APCA audit
-theme-book theme --seed "#0f766e" --preset shadcn --mood editorial --audit
-
-# Generic semantic UI tokens
-theme-book theme --seed "#9333ea" --preset semantic --format css
-
-# Slide-deck drop-in tokens
-theme-book theme --seed "#2563eb" --preset slide-deck --generator poline
-
-# W3C Design Tokens JSON
+# Slide-deck drop-in tokens, W3C Design Tokens JSON, or SVG dependency graph
+theme-book theme --seed "#0f766e" --preset slide-deck --format css
 theme-book theme --seed "#2563eb" --preset semantic --format w3-tokens
-
-# Visual SVG dependency graph (via design-book's SVGRenderer)
 theme-book theme --seed "#2563eb" --preset shadcn --format svg --out graph.svg
 ```
 
-### 3. Audit & Fix Existing Token Files
+### 2. Audit & Repair Existing Themes
 
 ```bash
 theme-book audit path/to/tokens.css
 theme-book audit path/to/tokens.css --standard wcag-aaa --fix
-theme-book audit path/to/tokens.json --standard apca --fix --format json
+theme-book audit path/to/tokens.css --standard apca --fix --strict-borders
+theme-book audit path/to/theme.json --format json
 ```
 
-Evaluates every inferred foreground/background pair against WCAG 2.1 and APCA Lc. With `--fix`, uses `design-book`'s `minContrastWith` over a hue-preserving OKLCH lightness ramp to suggest minimal passing fixes.
+### 3. Suggest Companion Colors
+
+```bash
+theme-book suggest --seed "#2563eb" --mood editorial --generator poline
+theme-book suggest --seed "#d97706" --surface "#0f172a" --generator rampensau --count 10 --format json
+```
 
 ### 4. Run Bespoke `design-book` Scripts From Any Directory
 
 ```bash
-theme-book eval my-custom-book.ts
-theme-book eval - < my-custom-book.ts
+theme-book eval my-book.ts
+theme-book eval - < my-book.ts
 ```
 
-A Bun preload plugin resolves `design-book`, `design-book/engine`, `design-book/naming`, `design-book/internals`, `poline`, `rampensau`, and `culori` straight from `~/.theme-book/node_modules/` — no `npm install` in your working directory required.
+---
+
+## Design Decisions & Audit Contracts
+
+These rules and heuristics belong to `theme-book` itself (distinct from the upstream libraries it builds on):
+
+### Role Assignment & Exact Seeds
+- **Exact seed domain:** Opaque, in-gamut 8-bit sRGB hex inputs (`#rrggbb`) are preserved verbatim into `brand.seed-0` without an OKLCH round-trip, and `formatOklchCss()` ensures the emitted `oklch()` string stays strictly inside sRGB and re-parses back to the exact hex.
+- **`primary` vs. `background`:** Selected via `closest(ref("brand.seed-0"), pool(brandSolvableLight|Dark), { readableOn: background, readableContrast: 4.5 })`. `primary` stays at ≥ 4.5:1 against `background` even under `wcag-aaa` (since it is a UI fill, not body copy), while `primary-foreground` on `primary` and every status fill (`destructive`, `success`, `warning`, `danger`) enforce the full active text standard via standard-filtered named `DesignBook` scopes.
+- **`secondary` & `accent`:** In `shadcn` and `slide-deck`, these remain quiet primary tints on single-seed themes; `--accent` tints from a second hue **only** when a second `--seed` is explicitly supplied.
+- **`chart-1..5`:** Driven by `--generator` (`oklch`, `poline`, `rampensau`) + all seeds, mapped to polarity-safe lightness/chroma so every bar clears ≥ 3.0:1 WCAG and `|Lc| >= 45` APCA. Uses a **legibility-wins** policy: if a narrow generator arc falls below `0.8 × effectiveChroma` minimum pairwise OKLab distance, evenly-spaced synthetic pentagon spokes are added and reported transparently in `chartDiagnostics`.
+- **Reproducible recipes:** `--format json` exports a versioned `recipe` (`toolVersion`, `designBookVersion`, `rawSeeds`, `preset`, `mood`, `generator`, `standard`, `formatOptions`, `command`) alongside full `DesignBook` rule expressions and dependencies.
+
+### Audit Contract & Exit Codes
+
+| Status | Meaning | Exit Code |
+| :--- | :--- | :---: |
+| `pass` | Every applicable required check (`text` and `ui-graphic`) was evaluated at full precision and passed | `0` |
+| `fail` | One or more required checks failed (incomplete coverage, if any, is also reported) | `1` |
+| `invalid` | Unknown CLI option, missing argument, or malformed input | `2` |
+| `incomplete` | Zero known required failures, but required evidence could not be verified (unresolved/cyclic `var()`, out-of-sRGB-gamut color, unknown translucent backdrop, unsupported conditional `@media` override, or zero required pairs) | `3` |
+
+- **Precision & alpha:** Colors are parsed into full-precision floating-point sRGB (no 8-bit hex quantization before measuring) and compared against unrounded thresholds. Translucent foregrounds composite over opaque backgrounds in sRGB; translucent non-root tokens (such as shadcn's `oklch(1 0 0 / 10%)` borders) composite over the mode's opaque `background` with the assumption recorded; translucent root backgrounds are marked `unverified` (`exit 3`).
+- **sRGB gamut policy (note on Tailwind v4):** WCAG 2.x and APCA are evaluated on sRGB channels; colors outside sRGB gamut (such as wide-gamut P3 stops in stock Tailwind v4 palettes) are intentionally marked `unverified` (`exit 3`) rather than silently clamped into a false pass.
+- **APCA policy assumption:** `--standard apca` uses `|Lc| >= 60` for text and `|Lc| >= 45` for UI graphics as a content-text baseline; APCA guidance varies by font size and weight, so treat `Lc 60` as a declared policy threshold rather than a guarantee for tiny or thin text.
+- **Pair-local `--fix`:** Repairs verify serialized `oklch()` candidates directly against that pair's exact standard and threshold, returning `status: "fixed"` (`verified: true`) or `status: "no-solution"` (`verified: false`).
 
 ---
 
 ## Development & Tests
 
 ```bash
-bun install
+bun install --frozen-lockfile
 bun run typecheck
 bun test
+bun run specimen
 ./install.sh
 ```
 
 ---
 
+## Credits & Respect
+
+Huge respect and gratitude to **David Aerne ([`@meodai`](https://github.com/meodai) / [Elastiq GmbH](https://elastiq.ch/))**, whose color engineering makes this entire workflow possible:
+
+- [`meodai/design-book`](https://github.com/meodai/design-book) — the reactive constraint engine that encodes *how* design tokens are chosen instead of freezing static hex dumps
+- [`meodai/skill.color-expert`](https://github.com/meodai/skill.color-expert) — the extraordinary 180+ document color knowledge base for AI agents
+- [`meodai/poline`](https://github.com/meodai/poline) — the perceptually grounded anchor palette generator
+- [`meodai/rampensau`](https://github.com/meodai/rampensau) — the easing-driven color ramp generator
+
+And sincere thanks to the maintainers of [`culori`](https://culorijs.org/) for accurate OKLCH/OKLab conversions and gamut tooling.
+
+---
+
 ## License
 
-`theme-book` is licensed under **[AGPL-3.0-only](LICENSE)** in full compliance with and respect for [`meodai/design-book`](https://github.com/meodai/design-book).
+`theme-book` is licensed under **[AGPL-3.0-only](LICENSE)** in full compliance with [`meodai/design-book`](https://github.com/meodai/design-book).
 
-If you want to embed `design-book` itself inside proprietary/closed-source software, please support David Aerne by obtaining a commercial license from [Elastiq GmbH](mailto:david@elastiq.ch). Running `theme-book` privately as a local authoring tool to emit static CSS/JSON tokens keeps your output tokens clean and dependency-free.
+If you want to embed `design-book` itself inside proprietary or closed-source software, please obtain a commercial license from [Elastiq GmbH](mailto:david@elastiq.ch). Running `theme-book` privately as a local authoring CLI to emit static CSS/JSON tokens keeps consuming projects free of runtime AGPL dependencies.

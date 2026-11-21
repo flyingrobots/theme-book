@@ -34,6 +34,25 @@ import {
   type AuditStandard,
 } from "./audit";
 
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import pkgJson from "../package.json";
+
+function readDesignBookVersion(): string {
+  const pkgPath = resolve(import.meta.dir, "..", "node_modules", "design-book", "package.json");
+  if (existsSync(pkgPath)) {
+    try {
+      const parsed = JSON.parse(readFileSync(pkgPath, "utf8")) as { version?: string };
+      if (parsed.version) return parsed.version;
+    } catch {
+      // fall through
+    }
+  }
+  return pkgJson.dependencies["design-book"];
+}
+
+const DESIGN_BOOK_VERSION = readDesignBookVersion();
+
 export type ThemePreset = "shadcn" | "semantic" | "slide-deck";
 
 export interface ThemeBuildOptions {
@@ -43,6 +62,23 @@ export interface ThemeBuildOptions {
   generator: GeneratorKind;
   standard?: AuditStandard;
   hexOutput?: boolean;
+  nativeOutput?: boolean;
+}
+
+export interface ThemeRecipe {
+  version: 1;
+  toolVersion: string;
+  designBookVersion: string;
+  rawSeeds: string[];
+  preset: ThemePreset;
+  mood: Mood;
+  generator: GeneratorKind;
+  standard: AuditStandard;
+  formatOptions: {
+    hex: boolean;
+    native: boolean;
+  };
+  command: string;
 }
 
 export interface TokenProvenance {
@@ -54,6 +90,7 @@ export interface TokenProvenance {
 }
 
 export interface BuiltTheme {
+  recipe: ThemeRecipe;
   preset: ThemePreset;
   mood: Mood;
   generator: GeneratorKind;
@@ -81,16 +118,46 @@ function populateScope(book: DesignBook, name: string, entries: Record<string, s
   return scope;
 }
 
+function formatAstArg(arg: unknown): string {
+  if (arg === null || arg === undefined) return String(arg);
+  if (typeof arg === "string") return JSON.stringify(arg);
+  if (typeof arg === "number" || typeof arg === "boolean") return String(arg);
+  if (Array.isArray(arg)) return `[${arg.map(formatAstArg).join(", ")}]`;
+  if (typeof arg === "object") {
+    const o = arg as Record<string, unknown>;
+    if (o.type === "reference" && typeof o.key === "string") return `ref(${o.key})`;
+    if (o.type === "pool" && typeof o.key === "string") return `pool(${o.key})`;
+    if (o.type === "member" && typeof o.key === "string") return `member(${o.key})`;
+    if (o.type === "function" && typeof o.name === "string") {
+      const fnArgs = Array.isArray(o.args) ? o.args.map(formatAstArg) : [];
+      if (o.options && typeof o.options === "object") {
+        const optEntries = Object.entries(o.options as Record<string, unknown>)
+          .filter(([, v]) => v !== undefined)
+          .map(([k, v]) => `${k}: ${formatAstArg(v)}`);
+        if (optEntries.length > 0) fnArgs.push(`{ ${optEntries.join(", ")} }`);
+      }
+      return `${o.name}(${fnArgs.join(", ")})`;
+    }
+    if ("rawValue" in o && typeof o.type === "string") {
+      return `${o.type}(${JSON.stringify(o.rawValue)})`;
+    }
+    const entries = Object.entries(o)
+      .filter(([, v]) => v !== undefined)
+      .map(([k, v]) => `${k}: ${formatAstArg(v)}`);
+    return `{ ${entries.join(", ")} }`;
+  }
+  return String(arg);
+}
+
 function describeInspection(book: DesignBook, key: string): TokenProvenance {
   const resolved = book.resolve(key);
   const info = book.inspect(key);
   const raw = book.getTokenByKey(key);
   let rule = info?.tokenType ?? "literal";
   if (raw && typeof raw === "object" && "type" in raw) {
-    if (raw.type === "function" && "name" in raw) {
-      rule = info?.picked ? `${raw.name}(...) -> ${info.picked}` : `${raw.name}(...)`;
-    } else if (raw.type === "reference" && "target" in raw) {
-      rule = `ref(${raw.target})`;
+    rule = formatAstArg(raw);
+    if (info?.picked) {
+      rule = `${rule} -> ${info.picked}`;
     }
   }
   const hex = toSafeHex(resolved);
@@ -101,6 +168,28 @@ function describeInspection(book: DesignBook, key: string): TokenProvenance {
     ...(info?.picked ? { picked: info.picked } : {}),
     dependencies: info?.dependencies ?? [],
   };
+}
+
+function buildRecipeCommand(opts: {
+  rawSeeds: string[];
+  preset: ThemePreset;
+  mood: Mood;
+  generator: GeneratorKind;
+  standard: AuditStandard;
+  hex: boolean;
+  native: boolean;
+}): string {
+  const parts = ["theme-book theme"];
+  for (const s of opts.rawSeeds) {
+    parts.push(`--seed ${JSON.stringify(s)}`);
+  }
+  parts.push(`--preset ${opts.preset}`);
+  parts.push(`--mood ${opts.mood}`);
+  parts.push(`--generator ${opts.generator}`);
+  parts.push(`--standard ${opts.standard}`);
+  if (opts.hex) parts.push("--hex");
+  if (opts.native) parts.push("--native");
+  return parts.join(" ");
 }
 
 export function resolveEffectiveStandard(mood: Mood, explicit?: AuditStandard): AuditStandard {
@@ -451,7 +540,34 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
     { standard, withFixes: false },
   );
 
+  const hexFlag = opts.hexOutput ?? false;
+  const nativeFlag = opts.nativeOutput ?? false;
+  const recipe: ThemeRecipe = {
+    version: 1,
+    toolVersion: pkgJson.version,
+    designBookVersion: DESIGN_BOOK_VERSION,
+    rawSeeds: pools.rawSeeds,
+    preset: opts.preset,
+    mood: opts.mood,
+    generator: opts.generator,
+    standard,
+    formatOptions: {
+      hex: hexFlag,
+      native: nativeFlag,
+    },
+    command: buildRecipeCommand({
+      rawSeeds: pools.rawSeeds,
+      preset: opts.preset,
+      mood: opts.mood,
+      generator: opts.generator,
+      standard,
+      hex: hexFlag,
+      native: nativeFlag,
+    }),
+  };
+
   return {
+    recipe,
     preset: opts.preset,
     mood: opts.mood,
     generator: opts.generator,

@@ -269,6 +269,7 @@ async function main() {
       generator,
       standard: standardRaw as AuditStandard | undefined,
       hexOutput: booleans.has("hex"),
+      nativeOutput: booleans.has("native"),
     });
     const rendered = renderThemeOutput(built, format, {
       hex: booleans.has("hex"),

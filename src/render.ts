@@ -18,9 +18,11 @@ export function renderThemeCss(
 
   const lines: string[] = [];
   lines.push(
-    `/* theme-book (${theme.preset} · mood=${theme.mood} · generator=${theme.generator} · seeds=${theme.seeds.join(", ")}) */`,
+    `/* ${theme.recipe.command} */`,
   );
-  lines.push(`/* Powered by David Aerne's (@meodai) design-book */`);
+  lines.push(
+    `/* theme-book v${theme.recipe.toolVersion} · design-book v${theme.recipe.designBookVersion} · audit=${theme.audit.status} (${theme.standard}) */`,
+  );
   lines.push(":root {");
   for (const k of theme.lightKeys) {
     lines.push(`  --${k}: ${pickVal(k, "light")};`);
@@ -57,12 +59,21 @@ export function renderThemeOutput(
       return (
         JSON.stringify(
           {
+            recipe: {
+              ...theme.recipe,
+              formatOptions: {
+                hex: opts.hex ?? theme.recipe.formatOptions.hex,
+                native: opts.native ?? theme.recipe.formatOptions.native,
+              },
+            },
             preset: theme.preset,
             mood: theme.mood,
             generator: theme.generator,
+            standard: theme.standard,
             seeds: theme.seeds,
             light: theme.light,
             dark: theme.dark,
+            chartDiagnostics: theme.chartDiagnostics,
             extras: theme.extras,
             audit: theme.audit,
           },
