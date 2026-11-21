@@ -13,8 +13,7 @@ import {
   type ThemePreset,
 } from "./books";
 import {
-  evaluatePairs,
-  inferAuditPairs,
+  evaluateAudit,
   parseTokensFromText,
   type AuditStandard,
 } from "./audit";
@@ -33,8 +32,8 @@ const VALID_FORMATS = new Set<RenderOutputFormat>(["css", "json", "w3-tokens", "
 const VALID_STANDARDS = new Set<AuditStandard>(["wcag-aa", "wcag-aaa", "apca"]);
 
 function usage(): string {
-  return `theme-book — Humble glue CLI wiring David Aerne's (@meodai) color tools together
-             (design-book + poline + rampensau + culori, paired with skill.color-expert).
+  return `theme-book — Rule-based color theme compiler and contrast auditor
+             built on David Aerne's (@meodai) design-book, poline, rampensau, and culori.
 
 Usage:
   theme-book suggest --seed <color> [--seed <color>...] [--surface <color>]
@@ -48,15 +47,15 @@ Usage:
                      [--audit] [--out <path>]
 
   theme-book audit   <file.css|file.json> [--standard wcag-aa|wcag-aaa|apca]
-                     [--fix] [--format text|json]
+                     [--fix] [--strict-borders] [--format text|json]
 
   theme-book eval    <script.ts | -> [-- ...args]
 
-Credits:
-  All of the reactive token engine, palette generators, and color science belong to
-  David Aerne (@meodai / Elastiq GmbH) — design-book, poline, rampensau, and
-  skill.color-expert — plus the culori authors. All theme-book does is feed one
-  into the other for local coding agents.
+Exit codes:
+  0  Pass / success
+  1  Audit failed (one or more required contrast checks failed)
+  2  Invalid CLI usage or malformed input
+  3  Incomplete audit (zero failures, but required checks could not be verified)
 `;
 }
 
@@ -65,7 +64,30 @@ function fail(msg: string, code = 2): never {
   process.exit(code);
 }
 
-function parseFlags(args: string[]): {
+interface FlagSchema {
+  valueFlags: Set<string>;
+  boolFlags: Set<string>;
+}
+
+const COMMAND_SCHEMAS: Record<string, FlagSchema> = {
+  suggest: {
+    valueFlags: new Set(["seed", "surface", "polarity", "mood", "generator", "count", "format"]),
+    boolFlags: new Set(["help", "h"]),
+  },
+  theme: {
+    valueFlags: new Set(["seed", "preset", "mood", "generator", "format", "out"]),
+    boolFlags: new Set(["hex", "native", "audit", "help", "h"]),
+  },
+  audit: {
+    valueFlags: new Set(["standard", "format"]),
+    boolFlags: new Set(["fix", "strict-borders", "help", "h"]),
+  },
+};
+
+function parseFlags(
+  args: string[],
+  schema: FlagSchema,
+): {
   positionals: string[];
   flags: Record<string, string[]>;
   booleans: Set<string>;
@@ -73,7 +95,6 @@ function parseFlags(args: string[]): {
   const positionals: string[] = [];
   const flags: Record<string, string[]> = {};
   const booleans = new Set<string>();
-  const booleanNames = new Set(["hex", "native", "audit", "fix", "help", "h"]);
 
   for (let i = 0; i < args.length; i++) {
     const a = args[i]!;
@@ -86,20 +107,27 @@ function parseFlags(args: string[]): {
       if (eq !== -1) {
         const k = a.slice(2, eq);
         const v = a.slice(eq + 1);
+        if (!schema.valueFlags.has(k)) {
+          fail(`unknown option "--${k}"`);
+        }
         (flags[k] ??= []).push(v);
       } else {
         const k = a.slice(2);
-        if (booleanNames.has(k)) {
+        if (schema.boolFlags.has(k)) {
           booleans.add(k);
-        } else {
+        } else if (schema.valueFlags.has(k)) {
           const next = args[i + 1];
           if (next === undefined) fail(`--${k} requires a value`);
           (flags[k] ??= []).push(next);
           i++;
+        } else {
+          fail(`unknown option "--${k}"`);
         }
       }
     } else if (a === "-h") {
       booleans.add("help");
+    } else if (a.startsWith("-") && a.length > 1) {
+      fail(`unknown option "${a}"`);
     } else {
       positionals.push(a);
     }
@@ -112,11 +140,11 @@ function getOne(flags: Record<string, string[]>, key: string): string | undefine
   return arr && arr.length > 0 ? arr[arr.length - 1] : undefined;
 }
 
-async function runEval(args: string[]): Promise<void> {
+async function runEval(args: string[]): Promise<number> {
   const target = args[0];
   if (!target || target === "-h" || target === "--help") {
     console.log(usage());
-    return;
+    return 0;
   }
   const rest = args.slice(1);
   const preload = resolve(import.meta.dir, "eval-preload.ts");
@@ -130,7 +158,8 @@ async function runEval(args: string[]): Promise<void> {
     scriptPath = join(tempDir, "stdin-script.ts");
     writeFileSync(scriptPath, stdinText, "utf8");
   } else if (!existsSync(target)) {
-    fail(`eval script not found: ${target}`, 1);
+    console.error(`theme-book: eval script not found: ${target}`);
+    return 2;
   }
 
   try {
@@ -140,7 +169,7 @@ async function runEval(args: string[]): Promise<void> {
       stdout: "inherit",
       stderr: "inherit",
     });
-    process.exit(proc.exitCode);
+    return proc.exitCode;
   } finally {
     if (tempDir) {
       rmSync(tempDir, { recursive: true, force: true });
@@ -158,11 +187,16 @@ async function main() {
   }
 
   if (cmd === "eval") {
-    await runEval(argv.slice(1));
-    return;
+    const code = await runEval(argv.slice(1));
+    process.exit(code);
   }
 
-  const { positionals, flags, booleans } = parseFlags(argv.slice(1));
+  const schema = COMMAND_SCHEMAS[cmd];
+  if (!schema) {
+    fail(`unknown command "${cmd}". Run "theme-book --help" for usage.`);
+  }
+
+  const { positionals, flags, booleans } = parseFlags(argv.slice(1), schema);
   if (booleans.has("help")) {
     console.log(usage());
     return;
@@ -187,6 +221,8 @@ async function main() {
     if (!Number.isFinite(count) || count < 1) fail(`invalid --count`);
 
     const outFormat = getOne(flags, "format") ?? "text";
+    if (outFormat !== "text" && outFormat !== "json") fail(`invalid --format "${outFormat}"`);
+
     const result = suggestCompanionColors({
       seeds,
       surface: getOne(flags, "surface"),
@@ -237,6 +273,9 @@ async function main() {
     if (booleans.has("audit")) {
       const stream = outPath ? process.stdout : process.stderr;
       stream.write("\n" + formatAuditText(built.audit));
+      if (built.audit.exitCode !== 0) {
+        process.exit(built.audit.exitCode);
+      }
     }
     return;
   }
@@ -244,33 +283,38 @@ async function main() {
   if (cmd === "audit") {
     const filePath = positionals[0];
     if (!filePath) fail("audit requires a <file.css|file.json> argument");
-    if (!existsSync(filePath)) fail(`file not found: ${filePath}`, 1);
+    if (!existsSync(filePath)) fail(`file not found: ${filePath}`, 2);
 
     const standard = (getOne(flags, "standard") ?? "wcag-aa") as AuditStandard;
     if (!VALID_STANDARDS.has(standard)) fail(`invalid --standard "${standard}"`);
 
+    const outFormat = getOne(flags, "format") ?? "text";
+    if (outFormat !== "text" && outFormat !== "json") fail(`invalid --format "${outFormat}"`);
+
     const content = readFileSync(filePath, "utf8");
-    const modes = parseTokensFromText(content, filePath);
-    const pairs = inferAuditPairs(modes);
-    if (pairs.length === 0) {
-      fail(`no foreground/background token pairs found in ${filePath}`, 1);
+    let parsedModes;
+    try {
+      parsedModes = parseTokensFromText(content, filePath);
+    } catch (err) {
+      fail(`failed to parse ${filePath}: ${err instanceof Error ? err.message : String(err)}`, 2);
     }
 
-    const report = evaluatePairs(pairs, standard, booleans.has("fix"));
-    const outFormat = getOne(flags, "format") ?? "text";
+    const report = evaluateAudit(parsedModes, {
+      standard,
+      withFixes: booleans.has("fix"),
+      strictBorders: booleans.has("strict-borders"),
+    });
 
     if (outFormat === "json") {
       process.stdout.write(JSON.stringify(report, null, 2) + "\n");
     } else {
       process.stdout.write(formatAuditText(report));
     }
-    if (report.failed > 0) {
-      process.exit(1);
+    if (report.exitCode !== 0) {
+      process.exit(report.exitCode);
     }
     return;
   }
-
-  fail(`unknown command "${cmd}". Run "theme-book --help" for usage.`);
 }
 
 main().catch((err) => {

@@ -77,6 +77,30 @@ export const MOOD_PROFILES: Record<Mood, MoodProfile> = {
 
 const toOklch = converter("oklch");
 const toHsl = converter("hsl");
+const toRgb = converter("rgb");
+
+export const SRGB_GAMUT_EPSILON = 5e-4;
+
+export function isRgbInSrgbGamut(rgb: { r: number; g: number; b: number }, eps = SRGB_GAMUT_EPSILON): boolean {
+  return (
+    rgb.r >= -eps &&
+    rgb.r <= 1 + eps &&
+    rgb.g >= -eps &&
+    rgb.g <= 1 + eps &&
+    rgb.b >= -eps &&
+    rgb.b <= 1 + eps
+  );
+}
+
+export function normalizeHexInput(input: string): string | undefined {
+  const m = input.trim().match(/^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/);
+  if (!m) return undefined;
+  const raw = m[1]!.toLowerCase();
+  if (raw.length === 3) {
+    return `#${raw[0]}${raw[0]}${raw[1]}${raw[1]}${raw[2]}${raw[2]}`;
+  }
+  return `#${raw}`;
+}
 
 export function normalizeHue(h: number | undefined): number {
   if (h === undefined || Number.isNaN(h)) return 0;
@@ -115,7 +139,34 @@ export function gamutSafeOklch(l: number, c: number, h: number): Oklch {
 }
 
 export function toSafeHex(input: string | Oklch): string {
+  if (typeof input === "string") {
+    const exactHex = normalizeHexInput(input);
+    if (exactHex) return exactHex;
+    const parsed = parse(input.trim());
+    if (parsed) {
+      const rgb = toRgb(parsed);
+      if (rgb && isRgbInSrgbGamut(rgb)) {
+        const hex = formatHex({
+          mode: "rgb",
+          r: Math.max(0, Math.min(1, rgb.r)),
+          g: Math.max(0, Math.min(1, rgb.g)),
+          b: Math.max(0, Math.min(1, rgb.b)),
+        });
+        if (hex) return hex.toLowerCase();
+      }
+    }
+  }
   const c = typeof input === "string" ? parseToOklch(input) : input;
+  const rgbDirect = toRgb(c);
+  if (rgbDirect && isRgbInSrgbGamut(rgbDirect)) {
+    const hex = formatHex({
+      mode: "rgb",
+      r: Math.max(0, Math.min(1, rgbDirect.r)),
+      g: Math.max(0, Math.min(1, rgbDirect.g)),
+      b: Math.max(0, Math.min(1, rgbDirect.b)),
+    });
+    if (hex) return hex.toLowerCase();
+  }
   const clamped = clampChroma(c, "oklch", "rgb");
   const hex = formatHex(clamped);
   if (!hex) {
@@ -124,12 +175,54 @@ export function toSafeHex(input: string | Oklch): string {
   return hex.toLowerCase();
 }
 
+/**
+ * Format an OKLCH color string guaranteed to re-parse strictly inside sRGB gamut.
+ * When given an 8-bit hex input, uses enough precision that re-parsing maps back
+ * to the exact same 8-bit hex.
+ */
 export function formatOklchCss(input: string | Oklch): string {
+  const exactHex = typeof input === "string" ? normalizeHexInput(input) : undefined;
   const c = typeof input === "string" ? parseToOklch(input) : input;
-  const l = Number(c.l.toFixed(4));
-  const ch = c.c < 0.0005 ? 0 : Number(c.c.toFixed(4));
-  const h = ch === 0 ? 0 : Number(normalizeHue(c.h).toFixed(2));
-  return `oklch(${l} ${ch} ${h})`;
+
+  const build = (l: number, ch: number, h: number, decimals: number) => {
+    const lStr = Number(l.toFixed(decimals));
+    const cStr = ch < 0.00005 ? 0 : Number(ch.toFixed(decimals));
+    const hStr = cStr === 0 ? 0 : Number(normalizeHue(h).toFixed(decimals >= 5 ? decimals - 1 : 2));
+    return `oklch(${lStr} ${cStr} ${hStr})`;
+  };
+
+  // If caller passed an exact 8-bit sRGB hex, try 4..6 decimals (with tiny inward
+  // chroma micro-step for sRGB cube corners like #00ff00) so re-parsing reproduces
+  // the exact hex AND stays strictly inside sRGB gamut.
+  if (exactHex) {
+    for (const dec of [4, 5, 6]) {
+      const candidate = build(c.l, c.c, c.h ?? 0, dec);
+      const rgb = toRgb(parse(candidate));
+      if (rgb && isRgbInSrgbGamut(rgb) && formatHex(rgb)?.toLowerCase() === exactHex) {
+        return candidate;
+      }
+    }
+    for (let step = 1; step <= 20; step++) {
+      const candidate = build(c.l, Math.max(0, c.c - step * 0.00002), c.h ?? 0, 6);
+      const rgb = toRgb(parse(candidate));
+      if (rgb && isRgbInSrgbGamut(rgb) && formatHex(rgb)?.toLowerCase() === exactHex) {
+        return candidate;
+      }
+    }
+  }
+
+  // Otherwise format at 4 decimals and step chroma down by 0.0001 if boundary
+  // rounding pushed the re-parsed sRGB channels outside [0, 1].
+  let ch = Math.floor(c.c * 10000) / 10000;
+  for (let step = 0; step < 30; step++) {
+    const candidate = build(c.l, Math.max(0, ch), c.h ?? 0, 4);
+    const rgb = toRgb(parse(candidate));
+    if (rgb && isRgbInSrgbGamut(rgb)) {
+      return candidate;
+    }
+    ch = Math.max(0, ch - 0.0001);
+  }
+  return build(c.l, 0, 0, 4);
 }
 
 export interface GeneratedPools {

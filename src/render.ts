@@ -76,18 +76,51 @@ export function renderThemeOutput(
 export function formatAuditText(report: AuditReport): string {
   const lines: string[] = [];
   lines.push(
-    `Contrast Audit (${report.standard}): ${report.passed} passed, ${report.failed} failed`,
+    `Contrast Audit [${report.status.toUpperCase()}] (${report.standard}): ${report.passed} passed, ${report.failed} failed, ${report.unverifiedCount} unverified, ${report.advisoryCount} advisory`,
+  );
+  lines.push(
+    `Coverage: ${report.coverage.assessedPairs.text} text, ${report.coverage.assessedPairs.uiGraphic} ui-graphic, ${report.coverage.assessedPairs.borderAdvisory} border-advisory`,
   );
   lines.push("");
   for (const p of report.pairs) {
-    const badge = p.pass ? "PASS" : "FAIL";
+    const badge = !p.required ? "INFO" : p.pass ? "PASS" : "FAIL";
+    const compNote = p.composited ? " [composited]" : "";
     lines.push(
-      `[${badge}] (${p.mode}) ${p.fgToken} (${p.fgHex}) on ${p.bgToken} (${p.bgHex}) — WCAG ${p.wcag}:1 | APCA Lc ${p.apcaLc}`,
+      `[${badge}] (${p.mode} · ${p.kind}) ${p.fgToken} (${p.fgHex}) on ${p.bgToken} (${p.bgHex})${compNote} — WCAG ${p.wcag}:1 (exact ${p.wcagExact.toFixed(4)}) | APCA Lc ${p.apcaLc}`,
     );
     if (p.suggestedFix) {
+      if (p.suggestedFix.status === "fixed") {
+        lines.push(
+          `       fix [pair-local, verified] -> ${p.suggestedFix.oklch} (${p.suggestedFix.hex}) [WCAG ${p.suggestedFix.wcag}:1 | APCA Lc ${p.suggestedFix.apcaLc}] (${p.suggestedFix.reason})`,
+        );
+      } else {
+        lines.push(
+          `       fix [pair-local, no-solution] -> ${p.suggestedFix.reason}`,
+        );
+      }
+    }
+  }
+  if (report.coverage.unverifiedPairs.length > 0) {
+    lines.push("");
+    lines.push("Unverified pairs:");
+    for (const u of report.coverage.unverifiedPairs) {
       lines.push(
-        `       fix -> ${p.suggestedFix.oklch} (${p.suggestedFix.hex}) [WCAG ${p.suggestedFix.wcag}:1 | APCA Lc ${p.suggestedFix.apcaLc}] via ${p.suggestedFix.reason}`,
+        `[UNVERIFIED] (${u.mode} · ${u.kind}${u.required ? "" : " · advisory"}) ${u.fgToken} (${u.fgRaw}) on ${u.bgToken} (${u.bgRaw}) — ${u.reason}`,
       );
+    }
+  }
+  if (report.coverage.skippedTokens.length > 0) {
+    lines.push("");
+    lines.push("Skipped tokens:");
+    for (const s of report.coverage.skippedTokens) {
+      lines.push(`[SKIPPED] (${s.mode}) --${s.token}: ${s.raw} — ${s.reason}`);
+    }
+  }
+  if (report.coverage.assumptions.length > 0) {
+    lines.push("");
+    lines.push("Assumptions:");
+    for (const a of report.coverage.assumptions) {
+      lines.push(`- ${a}`);
     }
   }
   return lines.join("\n") + "\n";

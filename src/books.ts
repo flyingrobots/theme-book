@@ -22,7 +22,7 @@ import {
   type GeneratorKind,
   type Mood,
 } from "./palette";
-import { apcaContrast, evaluatePairs, inferAuditPairs, wcagRatio, type AuditReport } from "./audit";
+import { apcaContrast, evaluateAudit, wcagRatio, type AuditReport } from "./audit";
 
 export type ThemePreset = "shadcn" | "semantic" | "slide-deck";
 
@@ -421,17 +421,20 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
 
   const lightResolved: Record<string, TokenProvenance> = {};
   const darkResolved: Record<string, TokenProvenance> = {};
-  const lightHexMap: Record<string, string> = {};
-  const darkHexMap: Record<string, string> = {};
+  const lightOklchMap: Record<string, string> = {};
+  const darkOklchMap: Record<string, string> = {};
 
   for (const k of keys) {
     lightResolved[k] = describeInspection(book, `light.${k}`);
     darkResolved[k] = describeInspection(book, `dark.${k}`);
-    lightHexMap[k] = lightResolved[k]!.hex;
-    darkHexMap[k] = darkResolved[k]!.hex;
+    lightOklchMap[k] = lightResolved[k]!.oklch;
+    darkOklchMap[k] = darkResolved[k]!.oklch;
   }
 
-  const audit = evaluatePairs(inferAuditPairs({ light: lightHexMap, dark: darkHexMap }), "wcag-aa", false);
+  const audit = evaluateAudit(
+    { light: lightOklchMap, dark: darkOklchMap, skippedTokens: [], assumptions: [] },
+    { standard: "wcag-aa", withFixes: false },
+  );
 
   return {
     preset: opts.preset,
