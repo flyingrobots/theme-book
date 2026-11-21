@@ -137,5 +137,11 @@ export function formatSuggestText(res: SuggestResult): string {
       `- ${s.role.padEnd(18)} ${s.hex}  ${s.oklch.padEnd(28)}  WCAG ${String(s.wcagOnSurface).padStart(5)}:1  APCA ${String(s.apcaOnSurface).padStart(6)}  [${s.rule}]`,
     );
   }
+  if (res.warnings.length > 0) {
+    lines.push("");
+    for (const w of res.warnings) {
+      lines.push(`[warning] ${w}`);
+    }
+  }
   return lines.join("\n") + "\n";
 }

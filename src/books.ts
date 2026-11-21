@@ -17,12 +17,22 @@ import {
   MOOD_PROFILES,
   formatOklchCss,
   generatePools,
+  oklabDistance,
   parseToOklch,
   toSafeHex,
+  type ChartPolarityDiagnostics,
   type GeneratorKind,
   type Mood,
 } from "./palette";
-import { apcaContrast, evaluateAudit, wcagRatio, type AuditReport } from "./audit";
+import {
+  apcaContrast,
+  evaluateAudit,
+  parseCssColorExact,
+  wcagRatio,
+  wcagRatioExact,
+  type AuditReport,
+  type AuditStandard,
+} from "./audit";
 
 export type ThemePreset = "shadcn" | "semantic" | "slide-deck";
 
@@ -31,12 +41,15 @@ export interface ThemeBuildOptions {
   preset: ThemePreset;
   mood: Mood;
   generator: GeneratorKind;
+  standard?: AuditStandard;
+  hexOutput?: boolean;
 }
 
 export interface TokenProvenance {
   hex: string;
   oklch: string;
   rule: string;
+  picked?: string;
   dependencies: string[];
 }
 
@@ -44,13 +57,19 @@ export interface BuiltTheme {
   preset: ThemePreset;
   mood: Mood;
   generator: GeneratorKind;
+  standard: AuditStandard;
   seeds: string[];
+  rawSeeds: string[];
   book: DesignBook;
   lightKeys: string[];
   darkKeys: string[];
   light: Record<string, TokenProvenance>;
   dark: Record<string, TokenProvenance>;
   audit: AuditReport;
+  chartDiagnostics: {
+    light: ChartPolarityDiagnostics;
+    dark: ChartPolarityDiagnostics;
+  };
   extras?: Record<string, string>;
 }
 
@@ -74,43 +93,81 @@ function describeInspection(book: DesignBook, key: string): TokenProvenance {
       rule = `ref(${raw.target})`;
     }
   }
+  const hex = toSafeHex(resolved);
   return {
-    hex: toSafeHex(resolved),
-    oklch: formatOklchCss(resolved),
+    hex,
+    oklch: formatOklchCss(hex),
     rule,
+    ...(info?.picked ? { picked: info.picked } : {}),
     dependencies: info?.dependencies ?? [],
   };
 }
 
+export function resolveEffectiveStandard(mood: Mood, explicit?: AuditStandard): AuditStandard {
+  if (explicit) return explicit;
+  return mood === "high-contrast" ? "wcag-aaa" : "wcag-aa";
+}
+
 export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
-  const pools = generatePools(opts.seeds, opts.mood, opts.generator);
+  const standard = resolveEffectiveStandard(opts.mood, opts.standard);
+  const pools = generatePools(opts.seeds, opts.mood, opts.generator, standard);
   const profile = MOOD_PROFILES[opts.mood];
   const isAchromatic = pools.seedOklch[0]!.c < 0.015;
+  const hasSecondarySeed = opts.seeds.length > 1;
+
+  // Compute required muted-text WCAG target for the active standard:
+  // APCA |Lc| >= 60 on dark surfaces needs higher WCAG (~7.2) than 4.8.
+  const effectiveTextContrast =
+    standard === "wcag-aaa"
+      ? Math.max(profile.minTextContrast, 14.5)
+      : profile.minTextContrast;
+  const effectiveMutedLightContrast =
+    standard === "wcag-aaa"
+      ? Math.max(profile.minMutedContrast, 7.2)
+      : profile.minMutedContrast;
+  const effectiveMutedDarkContrast =
+    standard === "wcag-aaa"
+      ? Math.max(profile.minMutedContrast, 7.4)
+      : standard === "apca"
+        ? Math.max(profile.minMutedContrast, 9.5)
+        : profile.minMutedContrast;
 
   const book = new DesignBook(`theme-book-${opts.preset}`);
   populateScope(book, "neutrals", pools.neutrals);
   populateScope(book, "brand", pools.brand);
+  populateScope(book, "brandSolvableLight", pools.brandSolvableLight);
+  populateScope(book, "brandSolvableDark", pools.brandSolvableDark);
   populateScope(book, "candidates", pools.candidates);
-  populateScope(book, "status", pools.status);
-  populateScope(book, "charts", pools.charts);
+  populateScope(book, "statusTargets", pools.statusTargets);
+  populateScope(book, "dangerLightPool", pools.statusPools.dangerLight);
+  populateScope(book, "dangerDarkPool", pools.statusPools.dangerDark);
+  populateScope(book, "successLightPool", pools.statusPools.successLight);
+  populateScope(book, "successDarkPool", pools.statusPools.successDark);
+  populateScope(book, "warningLightPool", pools.statusPools.warningLight);
+  populateScope(book, "warningDarkPool", pools.statusPools.warningDark);
+  populateScope(book, "chartsLight", pools.chartsLight);
+  populateScope(book, "chartsDark", pools.chartsDark);
 
-  // Build explicit light/dark chart pools so chart colors read cleanly on each polarity
-  const chartsLight = book.addScope("chartsLight");
-  const chartsDark = book.addScope("chartsDark");
-  for (const [k, v] of Object.entries(pools.charts)) {
-    if (k.startsWith("cl-")) chartsLight.set(k, color(v));
-    if (k.startsWith("cd-")) chartsDark.set(k, color(v));
-  }
-
-  // Ink pool with crisp pure endpoints so bestContrastWith always has high-contrast options
+  // Pure ink endpoints so bestContrastWith always maximizes contrast for button/badge text
   const inks = book.addScope("inks");
   inks.set("white", color("#ffffff"));
   inks.set("black", color("#000000"));
-  inks.set("light", ref("neutrals.n050"));
-  inks.set("dark", ref("neutrals.n990"));
+
+  // Helper scope holding secondary-seed accent target only when seed-1 is explicitly supplied
+  const accentSeeds = book.addScope("accentSeeds");
+  accentSeeds.set("seed-0", ref("brand.seed-0"));
+  if (hasSecondarySeed) {
+    accentSeeds.set("seed-1", ref("candidates.seed-1"));
+  }
 
   const light = book.addScope("light");
   const dark = book.addScope("dark", { extends: "light" });
+
+  // Primary fill vs background stays at >= 4.5:1 (even under AAA, because primary is a fill,
+  // not body copy — while primary-foreground on primary enforces the full active standard
+  // via brandSolvableLight/Dark). Under APCA, ring/focus on dark surface needs ~4.5+ WCAG
+  // to clear |Lc| >= 45.
+  const primaryOnBgContrast = standard === "apca" ? 5.2 : 4.5;
 
   let keys: string[];
   let extras: Record<string, string> | undefined;
@@ -143,14 +200,14 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
     light.set(
       "ink",
       minContrastWith(ref("light.surface"), ref("neutrals"), {
-        minContrast: profile.minTextContrast,
+        minContrast: effectiveTextContrast,
         direction: "darker",
       }),
     );
     light.set(
       "ink-muted",
       minContrastWith(ref("light.surface"), ref("neutrals"), {
-        minContrast: profile.minMutedContrast,
+        minContrast: effectiveMutedLightContrast,
         direction: "darker",
       }),
     );
@@ -158,9 +215,9 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
       "accent",
       isAchromatic
         ? ref("neutrals.n990")
-        : mostVivid(ref("brand"), {
+        : closest(ref("brand.seed-0"), ref("brandSolvableLight"), {
             readableOn: ref("light.surface"),
-            readableContrast: 4.5,
+            readableContrast: primaryOnBgContrast,
           }),
     );
     light.set("accent-hover", shade(ref("light.accent"), { amount: 0.1 }));
@@ -168,28 +225,28 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
     light.set("border", shade(ref("light.surface"), { amount: 0.08 }));
     light.set("border-strong", shade(ref("light.surface"), { amount: 0.2 }));
     light.set("focus", ref("light.accent"));
-    light.set("success", ref("status.success-light"));
+    light.set("success", closest(ref("statusTargets.success-light"), ref("successLightPool")));
     light.set("success-ink", bestContrastWith(ref("light.success"), ref("inks")));
-    light.set("warning", ref("status.warning-light"));
+    light.set("warning", closest(ref("statusTargets.warning-light"), ref("warningLightPool")));
     light.set("warning-ink", bestContrastWith(ref("light.warning"), ref("inks")));
-    light.set("danger", ref("status.danger-light"));
+    light.set("danger", closest(ref("statusTargets.danger-light"), ref("dangerLightPool")));
     light.set("danger-ink", bestContrastWith(ref("light.danger"), ref("inks")));
 
-    // Dark semantic overrides (inherits structure from light)
+    // Dark semantic rules (extends light)
     dark.set("surface", nth(ref("neutrals"), -2));
     dark.set("surface-raised", nth(ref("neutrals"), -3));
     dark.set("surface-sunken", nth(ref("neutrals"), -1));
     dark.set(
       "ink",
       minContrastWith(ref("dark.surface"), ref("neutrals"), {
-        minContrast: profile.minTextContrast,
+        minContrast: effectiveTextContrast,
         direction: "lighter",
       }),
     );
     dark.set(
       "ink-muted",
       minContrastWith(ref("dark.surface"), ref("neutrals"), {
-        minContrast: profile.minMutedContrast,
+        minContrast: effectiveMutedDarkContrast,
         direction: "lighter",
       }),
     );
@@ -197,9 +254,9 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
       "accent",
       isAchromatic
         ? ref("neutrals.n000")
-        : mostVivid(ref("brand"), {
+        : closest(ref("brand.seed-0"), ref("brandSolvableDark"), {
             readableOn: ref("dark.surface"),
-            readableContrast: 4.5,
+            readableContrast: primaryOnBgContrast,
           }),
     );
     dark.set("accent-hover", shade(ref("dark.accent"), { amount: 0.1 }));
@@ -207,14 +264,13 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
     dark.set("border", shade(ref("dark.surface"), { amount: 0.12 }));
     dark.set("border-strong", shade(ref("dark.surface"), { amount: 0.24 }));
     dark.set("focus", ref("dark.accent"));
-    dark.set("success", ref("status.success-dark"));
+    dark.set("success", closest(ref("statusTargets.success-dark"), ref("successDarkPool")));
     dark.set("success-ink", bestContrastWith(ref("dark.success"), ref("inks")));
-    dark.set("warning", ref("status.warning-dark"));
+    dark.set("warning", closest(ref("statusTargets.warning-dark"), ref("warningDarkPool")));
     dark.set("warning-ink", bestContrastWith(ref("dark.warning"), ref("inks")));
-    dark.set("danger", ref("status.danger-dark"));
+    dark.set("danger", closest(ref("statusTargets.danger-dark"), ref("dangerDarkPool")));
     dark.set("danger-ink", bestContrastWith(ref("dark.danger"), ref("inks")));
   } else {
-    // shadcn and slide-deck share the exact shadcn/ui OKLCH token surface
     keys = [
       "background",
       "foreground",
@@ -242,12 +298,12 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
       "chart-5",
     ];
 
-    // Light shadcn rules
+    // Light shadcn / slide-deck rules
     light.set("background", nth(ref("neutrals"), 0));
     light.set(
       "foreground",
       minContrastWith(ref("light.background"), ref("neutrals"), {
-        minContrast: profile.minTextContrast,
+        minContrast: effectiveTextContrast,
         direction: "darker",
       }),
     );
@@ -259,77 +315,57 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
       "primary",
       isAchromatic
         ? ref("neutrals.n990")
-        : mostVivid(ref("brand"), {
+        : closest(ref("brand.seed-0"), ref("brandSolvableLight"), {
             readableOn: ref("light.background"),
-            readableContrast: 4.5,
+            readableContrast: primaryOnBgContrast,
           }),
     );
     light.set("primary-foreground", bestContrastWith(ref("light.primary"), ref("inks")));
-    light.set("secondary", colorMix(ref("light.background"), ref("light.primary"), { ratio: 0.08, colorSpace: "oklch" }));
+    light.set(
+      "secondary",
+      colorMix(ref("light.background"), ref("light.primary"), {
+        ratio: 0.07,
+        colorSpace: "oklch",
+      }),
+    );
     light.set("secondary-foreground", bestContrastWith(ref("light.secondary"), ref("inks")));
     light.set("muted", nth(ref("neutrals"), 2));
     light.set(
       "muted-foreground",
       minContrastWith(ref("light.muted"), ref("neutrals"), {
-        minContrast: profile.minMutedContrast,
+        minContrast: effectiveMutedLightContrast,
         direction: "darker",
       }),
     );
-    light.set("accent", colorMix(ref("light.background"), ref("light.primary"), { ratio: 0.12, colorSpace: "oklch" }));
+    // Quiet tint of primary by default; tint from seed-1 ONLY when explicitly supplied!
+    light.set(
+      "accent",
+      colorMix(
+        ref("light.background"),
+        hasSecondarySeed ? ref("accentSeeds.seed-1") : ref("light.primary"),
+        { ratio: 0.11, colorSpace: "oklch" },
+      ),
+    );
     light.set("accent-foreground", bestContrastWith(ref("light.accent"), ref("inks")));
-    light.set("destructive", ref("status.danger-light"));
+    light.set("destructive", closest(ref("statusTargets.danger-light"), ref("dangerLightPool")));
     light.set("destructive-foreground", bestContrastWith(ref("light.destructive"), ref("inks")));
     light.set("border", shade(ref("light.background"), { amount: 0.09 }));
     light.set("input", shade(ref("light.background"), { amount: 0.07 }));
     light.set("ring", ref("light.primary"));
 
-    // Distinct chart colors solved sequentially via Design Book's furthestFrom / mostVivid + not exclusions
-    light.set(
-      "chart-1",
-      mostVivid(ref("chartsLight"), {
-        readableOn: ref("light.background"),
-        readableContrast: 3.1,
-      }),
-    );
-    light.set(
-      "chart-2",
-      furthestFrom(ref("light.chart-1"), ref("chartsLight"), {
-        readableOn: ref("light.background"),
-        readableContrast: 3.1,
-        not: [ref("light.chart-1")],
-      }),
-    );
-    light.set(
-      "chart-3",
-      furthestFrom(ref("light.chart-2"), ref("chartsLight"), {
-        readableOn: ref("light.background"),
-        readableContrast: 3.1,
-        not: [ref("light.chart-1"), ref("light.chart-2")],
-      }),
-    );
-    light.set(
-      "chart-4",
-      furthestFrom(ref("light.chart-3"), ref("chartsLight"), {
-        readableOn: ref("light.background"),
-        readableContrast: 3.1,
-        not: [ref("light.chart-1"), ref("light.chart-2"), ref("light.chart-3")],
-      }),
-    );
-    light.set(
-      "chart-5",
-      leastVivid(ref("chartsLight"), {
-        readableOn: ref("light.background"),
-        readableContrast: 3.1,
-        not: [ref("light.chart-1"), ref("light.chart-2"), ref("light.chart-3"), ref("light.chart-4")],
-      }),
-    );
+    // Generator-driven maximin chart series
+    light.set("chart-1", ref("chartsLight.c-1"));
+    light.set("chart-2", ref("chartsLight.c-2"));
+    light.set("chart-3", ref("chartsLight.c-3"));
+    light.set("chart-4", ref("chartsLight.c-4"));
+    light.set("chart-5", ref("chartsLight.c-5"));
 
-    // Dark shadcn rules (extends light)
+    // Dark shadcn / slide-deck rules (extends light)
     dark.set("background", nth(ref("neutrals"), -2));
     dark.set(
       "foreground",
       minContrastWith(ref("dark.background"), ref("neutrals"), {
-        minContrast: profile.minTextContrast,
+        minContrast: effectiveTextContrast,
         direction: "lighter",
       }),
     );
@@ -341,69 +377,48 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
       "primary",
       isAchromatic
         ? ref("neutrals.n000")
-        : mostVivid(ref("brand"), {
+        : closest(ref("brand.seed-0"), ref("brandSolvableDark"), {
             readableOn: ref("dark.background"),
-            readableContrast: 4.5,
+            readableContrast: primaryOnBgContrast,
           }),
     );
     dark.set("primary-foreground", bestContrastWith(ref("dark.primary"), ref("inks")));
-    dark.set("secondary", colorMix(ref("dark.background"), ref("dark.primary"), { ratio: 0.14, colorSpace: "oklch" }));
+    dark.set(
+      "secondary",
+      colorMix(ref("dark.background"), ref("dark.primary"), {
+        ratio: 0.13,
+        colorSpace: "oklch",
+      }),
+    );
     dark.set("secondary-foreground", bestContrastWith(ref("dark.secondary"), ref("inks")));
     dark.set("muted", nth(ref("neutrals"), -4));
     dark.set(
       "muted-foreground",
       minContrastWith(ref("dark.muted"), ref("neutrals"), {
-        minContrast: profile.minMutedContrast,
+        minContrast: effectiveMutedDarkContrast,
         direction: "lighter",
       }),
     );
-    dark.set("accent", colorMix(ref("dark.background"), ref("dark.primary"), { ratio: 0.2, colorSpace: "oklch" }));
+    dark.set(
+      "accent",
+      colorMix(
+        ref("dark.background"),
+        hasSecondarySeed ? ref("accentSeeds.seed-1") : ref("dark.primary"),
+        { ratio: 0.18, colorSpace: "oklch" },
+      ),
+    );
     dark.set("accent-foreground", bestContrastWith(ref("dark.accent"), ref("inks")));
-    dark.set("destructive", ref("status.danger-dark"));
+    dark.set("destructive", closest(ref("statusTargets.danger-dark"), ref("dangerDarkPool")));
     dark.set("destructive-foreground", bestContrastWith(ref("dark.destructive"), ref("inks")));
     dark.set("border", shade(ref("dark.background"), { amount: 0.14 }));
     dark.set("input", shade(ref("dark.background"), { amount: 0.18 }));
     dark.set("ring", ref("dark.primary"));
 
-    dark.set(
-      "chart-1",
-      mostVivid(ref("chartsDark"), {
-        readableOn: ref("dark.background"),
-        readableContrast: 3.5,
-      }),
-    );
-    dark.set(
-      "chart-2",
-      furthestFrom(ref("dark.chart-1"), ref("chartsDark"), {
-        readableOn: ref("dark.background"),
-        readableContrast: 3.5,
-        not: [ref("dark.chart-1")],
-      }),
-    );
-    dark.set(
-      "chart-3",
-      furthestFrom(ref("dark.chart-2"), ref("chartsDark"), {
-        readableOn: ref("dark.background"),
-        readableContrast: 3.5,
-        not: [ref("dark.chart-1"), ref("dark.chart-2")],
-      }),
-    );
-    dark.set(
-      "chart-4",
-      furthestFrom(ref("dark.chart-3"), ref("chartsDark"), {
-        readableOn: ref("dark.background"),
-        readableContrast: 3.5,
-        not: [ref("dark.chart-1"), ref("dark.chart-2"), ref("dark.chart-3")],
-      }),
-    );
-    dark.set(
-      "chart-5",
-      leastVivid(ref("chartsDark"), {
-        readableOn: ref("dark.background"),
-        readableContrast: 3.5,
-        not: [ref("dark.chart-1"), ref("dark.chart-2"), ref("dark.chart-3"), ref("dark.chart-4")],
-      }),
-    );
+    dark.set("chart-1", ref("chartsDark.c-1"));
+    dark.set("chart-2", ref("chartsDark.c-2"));
+    dark.set("chart-3", ref("chartsDark.c-3"));
+    dark.set("chart-4", ref("chartsDark.c-4"));
+    dark.set("chart-5", ref("chartsDark.c-5"));
 
     if (opts.preset === "slide-deck") {
       extras = {
@@ -421,32 +436,35 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
 
   const lightResolved: Record<string, TokenProvenance> = {};
   const darkResolved: Record<string, TokenProvenance> = {};
-  const lightOklchMap: Record<string, string> = {};
-  const darkOklchMap: Record<string, string> = {};
+  const lightSerialized: Record<string, string> = {};
+  const darkSerialized: Record<string, string> = {};
 
   for (const k of keys) {
     lightResolved[k] = describeInspection(book, `light.${k}`);
     darkResolved[k] = describeInspection(book, `dark.${k}`);
-    lightOklchMap[k] = lightResolved[k]!.oklch;
-    darkOklchMap[k] = darkResolved[k]!.oklch;
+    lightSerialized[k] = opts.hexOutput ? lightResolved[k]!.hex : lightResolved[k]!.oklch;
+    darkSerialized[k] = opts.hexOutput ? darkResolved[k]!.hex : darkResolved[k]!.oklch;
   }
 
   const audit = evaluateAudit(
-    { light: lightOklchMap, dark: darkOklchMap, skippedTokens: [], assumptions: [] },
-    { standard: "wcag-aa", withFixes: false },
+    { light: lightSerialized, dark: darkSerialized, skippedTokens: [], assumptions: [] },
+    { standard, withFixes: false },
   );
 
   return {
     preset: opts.preset,
     mood: opts.mood,
     generator: opts.generator,
+    standard,
     seeds: pools.seedHexes,
+    rawSeeds: pools.rawSeeds,
     book,
     lightKeys: keys,
     darkKeys: keys,
     light: lightResolved,
     dark: darkResolved,
     audit,
+    chartDiagnostics: pools.chartDiagnostics,
     extras,
   };
 }
@@ -465,7 +483,9 @@ export interface SuggestResult {
   surface: { hex: string; oklch: string; polarity: "light" | "dark" };
   mood: Mood;
   generator: GeneratorKind;
+  requestedCount: number;
   suggestions: ColorSuggestion[];
+  warnings: string[];
 }
 
 export function suggestCompanionColors(opts: {
@@ -476,7 +496,7 @@ export function suggestCompanionColors(opts: {
   generator: GeneratorKind;
   count: number;
 }): SuggestResult {
-  const pools = generatePools(opts.seeds, opts.mood, opts.generator);
+  const pools = generatePools(opts.seeds, opts.mood, opts.generator, "wcag-aa");
   const defaultSurfaceHex =
     opts.polarity === "dark" ? pools.neutrals.n950! : pools.neutrals.n000!;
   const surfaceHex = opts.surface ? toSafeHex(opts.surface) : defaultSurfaceHex;
@@ -484,10 +504,11 @@ export function suggestCompanionColors(opts: {
   const polarity: "light" | "dark" = surfaceOklch.l > 0.5 ? "light" : "dark";
 
   const book = new DesignBook("theme-book-suggest");
-  populateScope(book, "pool", {
+  const poolEntries: Record<string, string> = {
     ...pools.candidates,
     ...pools.brand,
-  });
+  };
+  populateScope(book, "pool", poolEntries);
   populateScope(book, "neutrals", pools.neutrals);
   const s = book.addScope("pick");
   s.set("seed", color(pools.seedHexes[0]!));
@@ -580,8 +601,11 @@ export function suggestCompanionColors(opts: {
     },
   ];
 
+  const requestedCount = Math.max(1, Math.floor(opts.count));
   const suggestions: ColorSuggestion[] = [];
-  for (const r of roles.slice(0, Math.max(1, opts.count))) {
+  const warnings: string[] = [];
+
+  for (const r of roles.slice(0, requestedCount)) {
     r.setup();
     const hex = toSafeHex(book.resolve(`pick.${r.name}`));
     suggestions.push({
@@ -594,11 +618,67 @@ export function suggestCompanionColors(opts: {
     });
   }
 
+  // If caller asked for more than 8 suggestions, select additional readable,
+  // deduplicated, maximally-separated candidates from the remaining pool.
+  if (requestedCount > suggestions.length) {
+    const surfaceParsed = parseCssColorExact(surfaceHex);
+    const usedHexes = new Set(suggestions.map((x) => x.hex));
+    const readableRemaining: Array<{ key: string; hex: string }> = [];
+
+    for (const [k, hex] of Object.entries(poolEntries)) {
+      if (usedHexes.has(hex)) continue;
+      const p = parseCssColorExact(hex);
+      if (p.ok && surfaceParsed.ok && wcagRatioExact(p.rgb, surfaceParsed.rgb) >= 4.5) {
+        usedHexes.add(hex);
+        readableRemaining.push({ key: k, hex });
+      }
+    }
+
+    while (suggestions.length < requestedCount && readableRemaining.length > 0) {
+      let bestIdx = 0;
+      let bestMinDist = -1;
+      for (let i = 0; i < readableRemaining.length; i++) {
+        const cand = readableRemaining[i]!;
+        let minDist = Infinity;
+        for (const chosen of suggestions) {
+          const d = oklabDistance(cand.hex, chosen.hex);
+          if (d < minDist) minDist = d;
+        }
+        if (
+          minDist > bestMinDist + 1e-9 ||
+          (Math.abs(minDist - bestMinDist) <= 1e-9 &&
+            cand.key.localeCompare(readableRemaining[bestIdx]!.key) < 0)
+        ) {
+          bestMinDist = minDist;
+          bestIdx = i;
+        }
+      }
+      const next = readableRemaining.splice(bestIdx, 1)[0]!;
+      const idx = suggestions.length + 1;
+      suggestions.push({
+        role: `companion-${idx}`,
+        hex: next.hex,
+        oklch: formatOklchCss(next.hex),
+        wcagOnSurface: wcagRatio(next.hex, surfaceHex),
+        apcaOnSurface: apcaContrast(next.hex, surfaceHex),
+        rule: `maximin(pool.${next.key}, readableContrast >= 4.5)`,
+      });
+    }
+
+    if (suggestions.length < requestedCount) {
+      warnings.push(
+        `Requested ${requestedCount} suggestions, but only ${suggestions.length} unique readable candidates were available in the generated pool.`,
+      );
+    }
+  }
+
   return {
     seeds: pools.seedHexes,
     surface: { hex: surfaceHex, oklch: formatOklchCss(surfaceHex), polarity },
     mood: opts.mood,
     generator: opts.generator,
+    requestedCount,
     suggestions,
+    warnings,
   };
 }

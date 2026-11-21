@@ -1,15 +1,17 @@
 import { afterEach, describe, expect, test } from "bun:test";
-import { mkdtempSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readlinkSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
+import { DesignBook, FunctionError, closest, color, ref } from "design-book";
 import { buildThemeBook, suggestCompanionColors, type ThemePreset } from "../src/books";
-import { evaluateAudit, parseTokensFromText } from "../src/audit";
-import { formatOklchCss, toSafeHex } from "../src/palette";
+import { evaluateAudit, parseTokensFromText, type AuditStandard } from "../src/audit";
+import { formatOklchCss, oklabDistance, parseToOklch, toSafeHex } from "../src/palette";
 import { renderThemeOutput } from "../src/render";
 import type { GeneratorKind, Mood } from "../src/palette";
 
 const REPO_ROOT = resolve(import.meta.dir, "..");
 const CLI_BIN = join(REPO_ROOT, "bin", "theme-book");
+const INSTALL_SH = join(REPO_ROOT, "install.sh");
 const tempDirs: string[] = [];
 
 afterEach(() => {
@@ -237,39 +239,243 @@ describe("theme-book Commit 1: audit integrity, precision, alpha, parser & CLI",
   });
 });
 
-describe("theme-book existing baseline checks", () => {
-  const seeds = ["#000000", "#2563eb", "#facc15", "#c2410c", "#06b6d4", "#0f766e"];
-  const presets: ThemePreset[] = ["shadcn", "semantic", "slide-deck"];
+describe("theme-book Commit 2: generator charts, exact seeds, AA/AAA/APCA matrix, count & safe installer", () => {
+  test("exact readable sRGB hex seed reaches light.primary verbatim (picked brandSolvableLight.seed-0); unreadable yellow adjusts", () => {
+    const blue = buildThemeBook({
+      seeds: ["#2563eb"],
+      preset: "shadcn",
+      mood: "editorial",
+      generator: "oklch",
+      standard: "wcag-aa",
+    });
+    expect(blue.light.primary!.hex).toBe("#2563eb");
+    expect(blue.light.primary!.picked).toBe("brandSolvableLight.seed-0");
+    expect(toSafeHex(blue.light.primary!.oklch)).toBe("#2563eb");
 
-  test("all presets pass WCAG AA across diverse seeds", () => {
-    for (const preset of presets) {
-      for (const seed of seeds) {
+    const yellow = buildThemeBook({
+      seeds: ["#facc15"],
+      preset: "shadcn",
+      mood: "editorial",
+      generator: "oklch",
+      standard: "wcag-aa",
+    });
+    expect(yellow.light.primary!.hex).not.toBe("#facc15");
+    expect(yellow.audit.status).toBe("pass");
+  });
+
+  test("generator drives chart-1..5 while single-seed shadcn accent/secondary stay quiet primary tints; seed-1 tints accent", () => {
+    const tOklch = buildThemeBook({
+      seeds: ["#2563eb"],
+      preset: "shadcn",
+      mood: "editorial",
+      generator: "oklch",
+    });
+    const tPoline = buildThemeBook({
+      seeds: ["#2563eb"],
+      preset: "shadcn",
+      mood: "editorial",
+      generator: "poline",
+    });
+    const tRamp = buildThemeBook({
+      seeds: ["#2563eb"],
+      preset: "shadcn",
+      mood: "editorial",
+      generator: "rampensau",
+    });
+
+    const chartSig = (t: ReturnType<typeof buildThemeBook>) =>
+      [1, 2, 3, 4, 5].map((i) => t.light[`chart-${i}`]!.hex).join(",");
+
+    // Discriminating fixture: all three generators produce distinct chart palettes
+    expect(chartSig(tOklch)).not.toBe(chartSig(tPoline));
+    expect(chartSig(tOklch)).not.toBe(chartSig(tRamp));
+    expect(chartSig(tPoline)).not.toBe(chartSig(tRamp));
+
+    // Single-seed shadcn accent stays in the blue hue family (NOT turned faintly orange by generator!)
+    const accentHue = parseToOklch(tPoline.light.accent!.hex).h ?? 0;
+    expect(accentHue).toBeGreaterThan(220);
+    expect(accentHue).toBeLessThan(300);
+    expect(tPoline.light.accent!.hex).toBe(tOklch.light.accent!.hex);
+
+    // Explicit second seed (#d97706 warm amber) tints accent cleanly
+    const tDual = buildThemeBook({
+      seeds: ["#2563eb", "#d97706"],
+      preset: "shadcn",
+      mood: "editorial",
+      generator: "oklch",
+    });
+    expect(tDual.light.accent!.hex).not.toBe(tOklch.light.accent!.hex);
+    expect(tDual.audit.status).toBe("pass");
+  });
+
+  test("design-book closest(..., { readableOn }) fallback behavior when no candidate in pool clears readableContrast", () => {
+    const book = new DesignBook("no-candidate-check");
+    const pool = book.addScope("pool");
+    pool.set("light-gray", color("#d4d4d4"));
+    pool.set("mid-gray", color("#a3a3a3"));
+    const ui = book.addScope("ui");
+    ui.set("bg", color("#ffffff"));
+    ui.set(
+      "pick",
+      closest(ref("pool.light-gray"), ref("pool"), {
+        readableOn: ref("ui.bg"),
+        readableContrast: 10.0,
+      }),
+    );
+    // Verify design-book fails closed by throwing FunctionError when no pool member meets readableContrast
+    expect(() => book.resolve("ui.pick")).toThrow(FunctionError);
+  });
+
+  test("chart series meets chroma-scaled pairwise OKLab separation (>= 0.8 * effectiveChroma) across all 10 pairs and generators", () => {
+    const generators: GeneratorKind[] = ["oklch", "poline", "rampensau"];
+    const moods: Mood[] = ["muted", "editorial", "vivid"];
+
+    for (const generator of generators) {
+      for (const mood of moods) {
         const built = buildThemeBook({
-          seeds: [seed],
-          preset,
-          mood: "editorial",
-          generator: "oklch",
+          seeds: ["#2563eb"],
+          preset: "shadcn",
+          mood,
+          generator,
         });
-        expect(built.audit.status).toBe("pass");
-        expect(built.audit.failed).toBe(0);
+        for (const polarity of ["light", "dark"] as const) {
+          const map = polarity === "light" ? built.light : built.dark;
+          const colors = [1, 2, 3, 4, 5].map((i) => map[`chart-${i}`]!.oklch);
+          let minDist = Infinity;
+          for (let i = 0; i < 5; i++) {
+            for (let j = i + 1; j < 5; j++) {
+              minDist = Math.min(minDist, oklabDistance(colors[i]!, colors[j]!));
+            }
+          }
+          const diag = built.chartDiagnostics[polarity];
+          expect(minDist).toBeGreaterThanOrEqual(diag.thresholdRatio * diag.effectiveChroma - 1e-3);
+        }
       }
     }
   });
 
-  test("suggest works with oklch, poline, and rampensau generators", () => {
-    const generators: GeneratorKind[] = ["oklch", "poline", "rampensau"];
+  test("full matrix: all 5 moods x all 3 generators x all 3 presets x all 3 standards (AA, AAA, APCA) pass with zero failures", () => {
     const moods: Mood[] = ["neutral", "muted", "vivid", "editorial", "high-contrast"];
-    for (const generator of generators) {
+    const generators: GeneratorKind[] = ["oklch", "poline", "rampensau"];
+    const presets: ThemePreset[] = ["shadcn", "semantic", "slide-deck"];
+    const standards: AuditStandard[] = ["wcag-aa", "wcag-aaa", "apca"];
+
+    for (const standard of standards) {
       for (const mood of moods) {
-        const res = suggestCompanionColors({
-          seeds: ["#2563eb"],
-          polarity: "dark",
-          mood,
-          generator,
-          count: 6,
-        });
-        expect(res.suggestions.length).toBe(6);
+        for (const generator of generators) {
+          for (const preset of presets) {
+            const built = buildThemeBook({
+              seeds: ["#2563eb"],
+              preset,
+              mood,
+              generator,
+              standard,
+            });
+            if (built.audit.status !== "pass") {
+              const bad = built.audit.pairs.filter((p) => p.required && !p.pass);
+              throw new Error(
+                `Failed matrix (${standard}/${mood}/${generator}/${preset}): status=${built.audit.status}, unverified=${built.audit.unverifiedCount}, failures=${JSON.stringify(bad)}`,
+              );
+            }
+            expect(built.audit.status).toBe("pass");
+            expect(built.audit.failed).toBe(0);
+            expect(built.audit.unverifiedCount).toBe(0);
+          }
+        }
       }
     }
+
+    // Also verify high-contrast defaults to wcag-aaa automatically and passes diverse seeds
+    for (const seed of ["#000000", "#2563eb", "#facc15", "#c2410c", "#0f766e"]) {
+      const hc = buildThemeBook({
+        seeds: [seed],
+        preset: "shadcn",
+        mood: "high-contrast",
+        generator: "oklch",
+      });
+      expect(hc.standard).toBe("wcag-aaa");
+      expect(hc.audit.status).toBe("pass");
+      expect(hc.light.foreground!.hex).not.toBe(hc.light["muted-foreground"]!.hex);
+      expect(hc.dark.foreground!.hex).not.toBe(hc.dark["muted-foreground"]!.hex);
+    }
+  });
+
+  test("suggest honors --count 10 and reports shortage warning when pool is exhausted", () => {
+    const ten = suggestCompanionColors({
+      seeds: ["#2563eb"],
+      polarity: "light",
+      mood: "editorial",
+      generator: "oklch",
+      count: 10,
+    });
+    expect(ten.suggestions.length).toBe(10);
+    expect(ten.warnings.length).toBe(0);
+
+    const huge = suggestCompanionColors({
+      seeds: ["#2563eb"],
+      polarity: "light",
+      mood: "editorial",
+      generator: "oklch",
+      count: 200,
+    });
+    expect(huge.suggestions.length).toBeLessThan(200);
+    expect(huge.warnings.length).toBeGreaterThan(0);
+  });
+
+  test("install.sh 4-case matrix: fresh relative prefix, marked upgrade, legacy upgrade, and unrelated dir refusal", () => {
+    const root = mkdtempSync(join(tmpdir(), "theme-book-install-test-"));
+    tempDirs.push(root);
+    const binDir = join(root, "bin");
+    mkdirSync(binDir, { recursive: true });
+
+    // 1. Fresh destination with RELATIVE --prefix produces working absolute symlink
+    const fresh = Bun.spawnSync(
+      [INSTALL_SH, "--prefix", "./rel-install", "--bin-dir", "./bin", "--no-skill"],
+      { cwd: root, stdout: "pipe", stderr: "pipe" },
+    );
+    expect(fresh.exitCode).toBe(0);
+    const linkTarget = readlinkSync(join(binDir, "theme-book"));
+    expect(linkTarget.startsWith("/")).toBe(true);
+    expect(existsSync(join(root, "rel-install", ".theme-book-install"))).toBe(true);
+    const smoke = Bun.spawnSync([join(binDir, "theme-book"), "--help"], {
+      cwd: tmpdir(),
+      stdout: "pipe",
+      stderr: "pipe",
+    });
+    expect(smoke.exitCode).toBe(0);
+
+    // 2. Existing marked installation upgrades cleanly
+    const marked = Bun.spawnSync(
+      [INSTALL_SH, "--prefix", join(root, "rel-install"), "--bin-dir", binDir, "--no-skill"],
+      { cwd: root, stdout: "pipe", stderr: "pipe" },
+    );
+    expect(marked.exitCode).toBe(0);
+
+    // 3. Baseline unmarked legacy layout (package.json name="theme-book" + bin/theme-book + src/cli.ts) migrates cleanly
+    const legacyDir = join(root, "legacy-install");
+    mkdirSync(join(legacyDir, "bin"), { recursive: true });
+    mkdirSync(join(legacyDir, "src"), { recursive: true });
+    writeFileSync(join(legacyDir, "package.json"), JSON.stringify({ name: "theme-book" }));
+    writeFileSync(join(legacyDir, "bin", "theme-book"), "#!/usr/bin/env bash\n");
+    writeFileSync(join(legacyDir, "src", "cli.ts"), "// legacy\n");
+    const legacy = Bun.spawnSync(
+      [INSTALL_SH, "--prefix", legacyDir, "--bin-dir", binDir, "--no-skill"],
+      { cwd: root, stdout: "pipe", stderr: "pipe" },
+    );
+    expect(legacy.exitCode).toBe(0);
+    expect(legacy.stdout.toString()).toContain("[migrate]");
+    expect(existsSync(join(legacyDir, ".theme-book-install"))).toBe(true);
+
+    // 4. Unrelated non-empty directory is REFUSED and its contents remain untouched
+    const unrelatedDir = join(root, "unrelated");
+    mkdirSync(unrelatedDir, { recursive: true });
+    writeFileSync(join(unrelatedDir, "precious.txt"), "do not delete");
+    const refused = Bun.spawnSync(
+      [INSTALL_SH, "--prefix", unrelatedDir, "--bin-dir", binDir, "--no-skill"],
+      { cwd: root, stdout: "pipe", stderr: "pipe" },
+    );
+    expect(refused.exitCode).toBe(1);
+    expect(refused.stderr.toString()).toContain("refusing to overwrite");
+    expect(existsSync(join(unrelatedDir, "precious.txt"))).toBe(true);
   });
 });

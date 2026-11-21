@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.2"
+      - run: bun install --frozen-lockfile
+      - run: bun run typecheck
+      - run: bun test
+      - name: CLI smoke check
+        run: |
+          ./bin/theme-book theme --seed "#2563eb" --preset shadcn --mood high-contrast --audit > /dev/null
+          ./bin/theme-book suggest --seed "#2563eb" --generator poline --count 10 --format json > /dev/null

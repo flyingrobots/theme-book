@@ -43,6 +43,7 @@ Usage:
   theme-book theme   --seed <color> [--seed <color>...] [--preset shadcn|semantic|slide-deck]
                      [--mood neutral|muted|vivid|editorial|high-contrast]
                      [--generator oklch|poline|rampensau]
+                     [--standard wcag-aa|wcag-aaa|apca]
                      [--format css|json|w3-tokens|svg] [--hex | --native]
                      [--audit] [--out <path>]
 
@@ -75,7 +76,7 @@ const COMMAND_SCHEMAS: Record<string, FlagSchema> = {
     boolFlags: new Set(["help", "h"]),
   },
   theme: {
-    valueFlags: new Set(["seed", "preset", "mood", "generator", "format", "out"]),
+    valueFlags: new Set(["seed", "preset", "mood", "generator", "standard", "format", "out"]),
     boolFlags: new Set(["hex", "native", "audit", "help", "h"]),
   },
   audit: {
@@ -256,7 +257,19 @@ async function main() {
     const format = (getOne(flags, "format") ?? "css") as RenderOutputFormat;
     if (!VALID_FORMATS.has(format)) fail(`invalid --format "${format}"`);
 
-    const built = buildThemeBook({ seeds, preset, mood, generator });
+    const standardRaw = getOne(flags, "standard");
+    if (standardRaw && !VALID_STANDARDS.has(standardRaw as AuditStandard)) {
+      fail(`invalid --standard "${standardRaw}"`);
+    }
+
+    const built = buildThemeBook({
+      seeds,
+      preset,
+      mood,
+      generator,
+      standard: standardRaw as AuditStandard | undefined,
+      hexOutput: booleans.has("hex"),
+    });
     const rendered = renderThemeOutput(built, format, {
       hex: booleans.has("hex"),
       native: booleans.has("native"),
