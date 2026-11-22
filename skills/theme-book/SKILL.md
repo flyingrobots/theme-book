@@ -47,6 +47,33 @@ Options:
 - `--audit` (run serialized-output verification and exit `0`/`1`/`3`)
 - `--out <path>`
 
+### Which Standard, and When
+
+**Audit with WCAG for conformance, and read the APCA numbers for the truth. Never one alone.**
+
+WCAG 2.x is *polarity-blind*: its ratio is symmetric, so dark-on-light and light-on-dark score
+identically. Human vision is not symmetric — light text on a dark background blooms and reads
+worse than the arithmetic implies. The practical consequence:
+
+> **Passing WCAG AAA does not mean dark mode is readable.** Audit dark themes with WCAG alone and
+> you will systematically overrate them.
+
+`theme-book audit` prints a **polarity advisory** for any required text pair that clears the
+requested WCAG standard but that APCA rates below `Lc 75` (fluent body reading). It is advisory
+and never changes the exit code, because WCAG is the conformance standard and APCA — the WCAG 3
+candidate — has no legal standing yet.
+
+| APCA `Lc` | Reading |
+| --- | --- |
+| 45 | large or non-body text floor |
+| 60 | body-text minimum |
+| 75 | fluent body reading |
+| 90 | preferred for body copy |
+
+When an advisory fires, decide deliberately rather than reflexively: raising a dark theme's muted
+greys to `Lc 75` is a visible change in character, and `Lc` in the 50s is defensible for secondary
+or large text. Record the decision either way, so the next person does not "fix" it by accident.
+
 ### 2. Audit & Fix Existing Themes (`theme-book audit`)
 
 Audits CSS (`@layer base`, `@supports`, `@media (prefers-color-scheme: dark)`, `:root.dark`, `html.dark`, classic shadcn bare HSL, post-merge `var()`), `theme-book` JSON, and W3C DTCG JSON at full floating-point precision with alpha compositing and explicit coverage reporting:

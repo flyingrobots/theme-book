@@ -279,6 +279,29 @@ export interface SkippedToken {
   reason: string;
 }
 
+/**
+ * APCA's guidance levels. Lc 75 is the threshold for fluent body reading; below it text is
+ * usable for secondary or large copy but is not comfortable prose.
+ */
+export const APCA_FLUENT_READING = 75;
+
+/**
+ * A pair that satisfies the requested WCAG standard but that APCA rates below fluent
+ * reading. WCAG 2.x is polarity-blind — it scores light-on-dark and dark-on-light
+ * identically — so dark themes routinely pass WCAG while reading worse than their light
+ * counterparts. Advisory only: it never changes the exit code, because WCAG is the
+ * conformance standard and APCA (WCAG 3, still draft) is not.
+ */
+export interface PolarityAdvisory {
+  mode: "light" | "dark";
+  fgToken: string;
+  bgToken: string;
+  wcagExact: number;
+  apcaLc: number;
+  requiredApca: number;
+  note: string;
+}
+
 export interface AuditReport {
   status: AuditStatus;
   exitCode: 0 | 1 | 3;
@@ -289,6 +312,8 @@ export interface AuditReport {
   advisoryCount: number;
   unverifiedCount: number;
   pairs: PairAudit[];
+  /** WCAG-passing pairs that APCA rates below fluent reading. Advisory; see PolarityAdvisory. */
+  polarityAdvisories: PolarityAdvisory[];
   coverage: {
     assessedPairs: {
       text: number;
@@ -1068,6 +1093,26 @@ export function evaluateAudit(
   const passed = requiredPairs.filter((p) => p.pass).length;
   const failed = requiredPairs.length - passed;
 
+  // WCAG 2.x scores a pair identically whichever way round it is, so a dark theme can clear
+  // AA or AAA while reading materially worse than the light one. Surface that, without
+  // letting it affect conformance.
+  const polarityAdvisories: PolarityAdvisory[] =
+    standard === "apca"
+      ? []
+      : pairs
+          .filter((p) => p.required && p.pass && p.kind === "text" && Math.abs(p.apcaLc) < APCA_FLUENT_READING)
+          .map((p) => ({
+            mode: p.mode,
+            fgToken: p.fgToken,
+            bgToken: p.bgToken,
+            wcagExact: p.wcagExact,
+            apcaLc: p.apcaLc,
+            requiredApca: APCA_FLUENT_READING,
+            note:
+              `passes ${standard} at ${p.wcagExact.toFixed(2)}:1 but APCA rates it Lc ${Math.abs(p.apcaLc).toFixed(1)}, ` +
+              `below the Lc ${APCA_FLUENT_READING} needed for fluent body reading`,
+          }));
+
   // Determine explicit AuditStatus & exitCode
   let status: AuditStatus;
   let exitCode: 0 | 1 | 3;
@@ -1087,6 +1132,7 @@ export function evaluateAudit(
   }
 
   return {
+    polarityAdvisories,
     status,
     exitCode,
     standard,

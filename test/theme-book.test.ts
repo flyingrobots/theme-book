@@ -522,3 +522,48 @@ describe("theme-book Commit 3: full rule provenance, reproducible recipe & deter
     expect(onDisk).toContain("vivid");
   });
 });
+
+describe("polarity advisory", () => {
+  // WCAG 2.x is symmetric, so a dark theme can clear AAA while reading materially worse
+  // than its light counterpart. The advisory surfaces that without touching conformance.
+  const css = `
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+  --muted: #ffffff;
+  --muted-foreground: #595959;
+}
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+  --muted: #000000;
+  --muted-foreground: #767676;
+}
+`;
+
+  test("flags a dark pair that passes WCAG but reads below APCA fluent reading", () => {
+    const report = evaluateAudit(parseTokensFromText(css, "t.css"), { standard: "wcag-aa" });
+    expect(report.exitCode).toBe(0); // advisory must never change conformance
+    expect(report.status).toBe("pass");
+
+    const dark = report.polarityAdvisories.filter((a) => a.mode === "dark");
+    expect(dark.length).toBeGreaterThan(0);
+    for (const a of dark) {
+      expect(Math.abs(a.apcaLc)).toBeLessThan(75);
+      expect(a.wcagExact).toBeGreaterThanOrEqual(4.5);
+      expect(a.note).toContain("fluent body reading");
+    }
+  });
+
+  test("auditing under apca raises no advisory, because apca already is the standard", () => {
+    const report = evaluateAudit(parseTokensFromText(css, "t.css"), { standard: "apca" });
+    expect(report.polarityAdvisories).toEqual([]);
+  });
+
+  test("a pair comfortably above the fluent-reading threshold is not flagged", () => {
+    const strong = `:root { --background: #ffffff; --foreground: #000000; }`;
+    const report = evaluateAudit(parseTokensFromText(strong, "t.css"), { standard: "wcag-aaa" });
+    expect(report.polarityAdvisories).toEqual([]);
+  });
+});
+

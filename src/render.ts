@@ -127,6 +127,18 @@ export function formatAuditText(report: AuditReport): string {
       lines.push(`[SKIPPED] (${s.mode}) --${s.token}: ${s.raw} — ${s.reason}`);
     }
   }
+  if (report.polarityAdvisories.length > 0) {
+    lines.push("");
+    lines.push("Polarity advisory (WCAG 2.x scores both directions the same; APCA does not):");
+    for (const a of report.polarityAdvisories) {
+      lines.push(
+        `[ADVISORY] (${a.mode} \u00b7 text) ${a.fgToken} on ${a.bgToken} \u2014 ${a.note}`,
+      );
+    }
+    lines.push("- Advisory only: it does not affect the exit code. WCAG is the conformance standard;");
+    lines.push("  APCA models readability better, especially for light text on dark backgrounds.");
+  }
+
   if (report.coverage.assumptions.length > 0) {
     lines.push("");
     lines.push("Assumptions:");
