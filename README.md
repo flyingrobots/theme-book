@@ -101,6 +101,15 @@ These rules and heuristics belong to `theme-book` itself (distinct from the upst
 
 ---
 
+## Documentation
+
+The [documentation spine](docs/README.md) routes to every durable page:
+
+- [Contrast auditing](docs/topics/contrast-auditing/README.md) — what `audit` checks, which
+  standard to ask for, how to read the result, and the known gaps
+- [Documentation standards](docs/DOCUMENTATION_STANDARDS.md) — how pages here are written
+- [`AGENTS.md`](AGENTS.md) — working agreement: the local gate, the install trap, hard don'ts
+
 ## Development & Tests
 
 ```bash
