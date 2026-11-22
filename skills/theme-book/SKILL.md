@@ -144,7 +144,7 @@ theme-book theme --book school.book.ts --seed "#0f766e" --mood editorial --stand
 ```
 
 - Only tokens the preset emits may be set; an extension adds no tokens.
-- Rule constructors (`closest`, `nth`, `ref`, `color`, `minContrastWith`, `bestContrastWith`, `mostVivid`, `leastVivid`, `furthestFrom`, `colorMix`, `shade`, `relativeTo`) arrive as `rules`, so the file needs no imports.
+- Rule constructors (`closest`, `nth`, `ref`, `color`, `minContrastWith`, `bestContrastWith`, `mostVivid`, `leastVivid`, `furthestFrom`, `colorMix`, `shade`, `relativeTo`) arrive as `rules`, so the file needs no imports, and it must import nothing: theme-book loads a private copy of exactly the bytes it hashes, so a relative import would not resolve.
 - Keep a site's extension with that site's private theme material, not in a non-AGPL repository's published code.
 - When theme-book bumps a preset's rules version, re-check the extension against the new rules and update its `extends.version`.
 

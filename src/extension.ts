@@ -2,8 +2,9 @@
 // An extension names itself, its version, and the preset and preset rules version it extends.
 // Its rules are design-book expressions, built with constructors passed to `apply`, so an
 // extension file needs no imports and carries no dependency on design-book itself.
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import {
   bestContrastWith,
@@ -73,9 +74,20 @@ export async function loadBookExtension(file: string): Promise<BookExtension> {
   const fail = (msg: string): never => {
     throw new ExtensionError(`extension ${path}: ${msg}`);
   };
-  if (path.includes("\\")) fail("the path contains a backslash, which Bun cannot import; rename the file");
-  // By URL, so a path with spaces or quotes is a file, not a module specifier.
-  const mod = (await import(pathToFileURL(path).href)) as { default?: unknown };
+  const sha256 = new Bun.CryptoHasher("sha256").update(bytes).digest("hex");
+  // Import a private copy of the hashed bytes, so the code applied is the code the hash names,
+  // never a module an earlier load cached or a file rewritten after it was read.
+  const copyDir = mkdtempSync(join(tmpdir(), "theme-book-book-"));
+  let mod: { default?: unknown };
+  try {
+    const copy = join(copyDir, `${sha256}.ts`);
+    writeFileSync(copy, bytes);
+    mod = (await import(pathToFileURL(copy).href)) as { default?: unknown };
+  } catch (err) {
+    return fail(`failed to import: ${err instanceof Error ? err.message : String(err)}`);
+  } finally {
+    rmSync(copyDir, { recursive: true, force: true });
+  }
   const def = mod.default;
   if (!isObj(def)) return fail("must have a default export");
   if (typeof def.name !== "string" || def.name === "") return fail("must have a name");
@@ -89,7 +101,7 @@ export async function loadBookExtension(file: string): Promise<BookExtension> {
     version: def.version,
     extends: { preset: parent.preset, version: parent.version },
     apply: def.apply as BookExtension["apply"],
-    sha256: new Bun.CryptoHasher("sha256").update(bytes).digest("hex"),
+    sha256,
     path,
   };
 }

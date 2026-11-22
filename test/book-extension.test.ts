@@ -137,8 +137,24 @@ test("the recipe command replays the --book path literally in a POSIX shell", as
   expect(Bun.spawnSync(["sh", "-c", `printf '%s' ${arg}`]).stdout.toString()).toBe(awkward);
 });
 
-test("an extension path containing a backslash is refused clearly, since Bun cannot import it", async () => {
-  const path = join(dir, "back\\slash.ts");
-  writeFileSync(path, readFileSync(school()));
-  await expect(loadBookExtension(path)).rejects.toThrow(/contains a backslash, which Bun cannot import; rename the file/);
+test("an extension loads from a path with a backslash, quote, spaces, # and ?", async () => {
+  const path = join(dir, "it's \\ a b #h ?q.ts");
+  const bytes = readFileSync(school());
+  writeFileSync(path, bytes);
+  const loaded = await loadBookExtension(path);
+  expect(loaded.path).toBe(path);
+  expect(loaded.sha256).toBe(new Bun.CryptoHasher("sha256").update(bytes).digest("hex"));
+});
+
+test("reloading a rewritten extension applies the new rules, and the hash describes them", async () => {
+  const header = { name: "rewritten", version: "1.0.0", extends: { preset: "shadcn", version: PRESET_RULES_VERSION.shadcn } };
+  const path = extension("rewritten", header, LIGHTER_DARK);
+  const first = await loadBookExtension(path);
+  extension("rewritten", { ...header, version: "2.0.0" }, LIGHTER_DARK.replace("0.145", "0.3"));
+  const second = await loadBookExtension(path);
+  const bytes = readFileSync(path);
+  expect(second.version).toBe("2.0.0");
+  expect(second.sha256).toBe(new Bun.CryptoHasher("sha256").update(bytes).digest("hex"));
+  expect(second.sha256).not.toBe(first.sha256);
+  expect(build({ extension: second }).dark.background).not.toBe(build({ extension: first }).dark.background);
 });

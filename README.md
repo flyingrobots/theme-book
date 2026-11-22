@@ -77,7 +77,8 @@ theme-book eval - < my-book.ts
 A site that needs a preset with a few rules changed writes a **book extension** rather than
 forking the preset. The extension names itself, its own version, and the preset and preset
 **rules version** it extends. Its rules are `design-book` expressions built with constructors
-passed to `apply`, so the file needs no imports:
+passed to `apply`, so the file needs no imports. It must import nothing: theme-book loads a
+private copy of exactly the bytes it hashes, so a relative import would not resolve:
 
 ```ts
 // school.book.ts

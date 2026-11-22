@@ -20,9 +20,12 @@ may change between minor versions.
   every mood, every standard and three kinds of seed set (one chromatic seed, an achromatic seed,
   two seeds), so a change confined to an achromatic, second-seed, AAA or APCA branch is caught.
 - **Strict extension headers.** Versions follow semver's core form, so `01.0.0` is refused;
-  an explicitly empty `--book=` is refused rather than ignored; a path containing a backslash is
-  refused with a clear message, because Bun cannot import such a file. The recipe command quotes
+  an explicitly empty `--book=` is refused rather than ignored. The recipe command quotes
   the `--book` path as a POSIX shell word, so it replays literally.
+- **The hash names the code that ran.** An extension is imported from a private copy of the
+  bytes it was hashed from, so reloading a rewritten file in one process applies the new rules,
+  never a cached module, and a path with a backslash, quote, `#` or `?` loads. An extension must
+  therefore import nothing.
 - **`recipe.book`** in `--format json`: the preset, its rules version and, with `--book`, the
   extension's name, version and SHA-256. The recipe `command` includes `--book`.
 

@@ -16,7 +16,8 @@ Versions track the tool's releases.
 - **Section 5, book extensions.** When a site needs some preset rules changed, the skill now says
   to write a `--book` extension naming its parent preset and rules version, never to fork the
   preset or hand-edit emitted tokens, and to keep the extension with the site's private theme
-  material.
+  material. An extension must import nothing, since it is loaded from a copy of the bytes
+  theme-book hashed.
 
 ### Fixed
 
