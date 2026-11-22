@@ -4,6 +4,7 @@
 // extension file needs no imports and carries no dependency on design-book itself.
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 import {
   bestContrastWith,
   closest,
@@ -57,7 +58,7 @@ export interface BookExtension {
   path: string;
 }
 
-const SEMVER = /^\d+\.\d+\.\d+$/;
+const SEMVER = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/; // semver core: no leading zeroes
 const isObj = (v: unknown): v is Record<string, unknown> => typeof v === "object" && v !== null;
 
 /** Load and check an extension module. Throws ExtensionError naming the first problem. */
@@ -69,11 +70,13 @@ export async function loadBookExtension(file: string): Promise<BookExtension> {
   } catch {
     throw new ExtensionError(`extension not found: ${path}`);
   }
-  const mod = (await import(path)) as { default?: unknown };
-  const def = mod.default;
   const fail = (msg: string): never => {
     throw new ExtensionError(`extension ${path}: ${msg}`);
   };
+  if (path.includes("\\")) fail("the path contains a backslash, which Bun cannot import; rename the file");
+  // By URL, so a path with spaces or quotes is a file, not a module specifier.
+  const mod = (await import(pathToFileURL(path).href)) as { default?: unknown };
+  const def = mod.default;
   if (!isObj(def)) return fail("must have a default export");
   if (typeof def.name !== "string" || def.name === "") return fail("must have a name");
   if (typeof def.version !== "string" || !SEMVER.test(def.version)) return fail(`version ${JSON.stringify(def.version)} must be semver (major.minor.patch)`);

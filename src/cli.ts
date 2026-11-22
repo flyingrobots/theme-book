@@ -248,7 +248,8 @@ async function main() {
 
     const bookPath = getOne(flags, "book");
     let extension: BookExtension | undefined;
-    if (bookPath) {
+    if (bookPath !== undefined) {
+      if (bookPath.trim() === "") fail("--book requires a file path");
       try {
         extension = await loadBookExtension(bookPath);
       } catch (e) {

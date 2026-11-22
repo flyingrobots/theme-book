@@ -208,7 +208,7 @@ function buildRecipeCommand(opts: {
   parts.push(`--standard ${opts.standard}`);
   if (opts.hex) parts.push("--hex");
   if (opts.native) parts.push("--native");
-  if (opts.book) parts.push(`--book ${JSON.stringify(opts.book)}`);
+  if (opts.book) parts.push(`--book ${shellWord(opts.book)}`);
   return parts.join(" ");
 }
 
@@ -250,15 +250,42 @@ function applyExtension(
   ext.apply({ light: guard(light), dark: guard(dark), rules: RULES });
 }
 
+/** Seed sets that drive each kind of rule branch: one chromatic seed, an achromatic seed, two seeds. */
+export const FINGERPRINT_SEEDS: Record<"chromatic" | "achromatic" | "two-seed", string[]> = {
+  chromatic: ["#0f766e"],
+  achromatic: ["#777777"],
+  "two-seed": ["#0f766e", "#c2410c"],
+};
+
 /**
- * A hash of a preset's rule expressions, for the version check. Each rule is taken without the
- * pool entry it picked, so the fingerprint follows the rules and not the seeds.
+ * Every rule expression a preset uses, one line per token per configuration: each mood, each
+ * standard and each kind of seed set, so conditional branches are covered. A rule is taken
+ * without the pool entry it picked, so the lines follow the rules and not the seeds.
  */
-export function presetRulesFingerprint(preset: ThemePreset, seeds: string[] = ["#0f766e"]): string {
-  const built = buildThemeBook({ seeds, preset, mood: "editorial", generator: "oklch", standard: "wcag-aa" });
+export function presetRulesLines(preset: ThemePreset, seedSets: Record<string, string[]> = FINGERPRINT_SEEDS): string[] {
   const rule = (r: string) => r.split(" -> ")[0];
-  const lines = built.lightKeys.map((k) => `${k}=${rule(built.light[k]!.rule)}|${rule(built.dark[k]!.rule)}`);
-  return new Bun.CryptoHasher("sha256").update(lines.join("\n")).digest("hex");
+  const lines: string[] = [];
+  for (const mood of Object.keys(MOOD_PROFILES) as Mood[]) {
+    for (const standard of ["wcag-aa", "wcag-aaa", "apca"] as const) {
+      for (const [kind, seeds] of Object.entries(seedSets)) {
+        const built = buildThemeBook({ seeds, preset, mood, generator: "oklch", standard });
+        for (const k of built.lightKeys) {
+          lines.push(`${mood}/${standard}/${kind} ${k}=${rule(built.light[k]!.rule)}|${rule(built.dark[k]!.rule)}`);
+        }
+      }
+    }
+  }
+  return lines;
+}
+
+/** A hash of presetRulesLines, recorded per rules version so a rule change forces a version bump. */
+export function presetRulesFingerprint(preset: ThemePreset, seedSets: Record<string, string[]> = FINGERPRINT_SEEDS): string {
+  return new Bun.CryptoHasher("sha256").update(presetRulesLines(preset, seedSets).join("\n")).digest("hex");
+}
+
+/** One POSIX shell word that replays as exactly `s`: plain when safe, otherwise single-quoted. */
+function shellWord(s: string): string {
+  return /^[A-Za-z0-9_./:@%+=,-]+$/.test(s) ? s : `'${s.replace(/'/g, `'\\''`)}'`;
 }
 
 export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {

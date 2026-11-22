@@ -1,14 +1,14 @@
 {
   "shadcn": {
     "version": "1.0.0",
-    "fingerprint": "3a04d1bc377d8ce20248a15c42d1e3b96a4d9b7678b8e06254c1503a217288e7"
+    "fingerprint": "37917ecc5e48b3a0e157a05c4ca68465d1fc24c1b80c0ee473ac16b716113368"
   },
   "semantic": {
     "version": "1.0.0",
-    "fingerprint": "e6652059a0a86c4d60be3ba4812e08d524325c54ab64443036d6f580406ff38c"
+    "fingerprint": "c8e432a2059be8f66c848db5a7a73c82971a25f2e099772d0ed1af3f314c2b87"
   },
   "slide-deck": {
     "version": "1.0.0",
-    "fingerprint": "619a05e53ef801af7f0ebbd0a5537ac1c046cd3efe90847873e5c523a443fbc5"
+    "fingerprint": "b75151519b30802feb8ccf092e1549b9dee417a04c0c8624eeba8435315c9d36"
   }
 }

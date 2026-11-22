@@ -16,7 +16,13 @@ may change between minor versions.
 - **Versioned preset rules.** Each preset declares a rules version, independent of the tool's
   (`shadcn`, `semantic` and `slide-deck` start at 1.0.0). An extension naming any other version
   is refused with exit `2`. A fingerprint of each preset's rule expressions is recorded per
-  version, and a test fails when a rule changes without a version bump.
+  version, and a test fails when a rule changes without a version bump. The fingerprint covers
+  every mood, every standard and three kinds of seed set (one chromatic seed, an achromatic seed,
+  two seeds), so a change confined to an achromatic, second-seed, AAA or APCA branch is caught.
+- **Strict extension headers.** Versions follow semver's core form, so `01.0.0` is refused;
+  an explicitly empty `--book=` is refused rather than ignored; a path containing a backslash is
+  refused with a clear message, because Bun cannot import such a file. The recipe command quotes
+  the `--book` path as a POSIX shell word, so it replays literally.
 - **`recipe.book`** in `--format json`: the preset, its rules version and, with `--book`, the
   extension's name, version and SHA-256. The recipe `command` includes `--book`.
 

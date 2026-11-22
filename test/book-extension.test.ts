@@ -3,7 +3,7 @@ import { expect, test } from "bun:test";
 import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { PRESET_RULES_VERSION, buildThemeBook, presetRulesFingerprint, type ThemePreset } from "../src/books";
+import { PRESET_RULES_VERSION, buildThemeBook, presetRulesFingerprint, presetRulesLines, type ThemePreset } from "../src/books";
 import { loadBookExtension } from "../src/extension";
 
 const PRESETS: ThemePreset[] = ["shadcn", "semantic", "slide-deck"];
@@ -34,7 +34,19 @@ test.each(PRESETS)("the %s preset's rules are versioned, and a rule change witho
 });
 
 test("a preset's fingerprint depends on its rules, not on the seeds", () => {
-  expect(presetRulesFingerprint("shadcn", ["#c2410c"])).toBe(presetRulesFingerprint("shadcn", ["#0f766e"]));
+  // Other seeds of the same three kinds: the rules are the same, so the fingerprint must be too.
+  const others = { chromatic: ["#2563eb"], achromatic: ["#555555"], "two-seed": ["#2563eb", "#eab308"] };
+  expect(presetRulesFingerprint("shadcn", others)).toBe(presetRulesFingerprint("shadcn"));
+});
+
+test("the fingerprint covers the achromatic, second-seed, AAA and APCA rule branches", () => {
+  const lines = presetRulesLines("shadcn");
+  const configs = new Set(lines.map((l) => l.split(" ")[0]));
+  // 5 moods x 3 standards x 3 kinds of seed set.
+  expect(configs.size).toBe(45);
+  for (const part of ["/achromatic", "/two-seed", "/wcag-aaa/", "/apca/", "high-contrast/"]) {
+    expect([part, [...configs].some((c) => c.includes(part))]).toEqual([part, true]);
+  }
 });
 
 test("an extension overrides the rules it sets, and only the tokens that depend on them change", async () => {
@@ -72,6 +84,7 @@ test.each([
 
 test.each([
   ["a version that is not semver", { name: "x", version: "one", extends: { preset: "shadcn", version: "1.0.0" } }, /version "one" must be semver/],
+  ["a version with a leading zero", { name: "x", version: "01.0.0", extends: { preset: "shadcn", version: "1.0.0" } }, /version "01\.0\.0" must be semver/],
   ["a parent version that is not semver", { name: "x", version: "1.0.0", extends: { preset: "shadcn", version: "latest" } }, /extends\.version "latest" must be semver/],
   ["no parent", { name: "x", version: "1.0.0" }, /must name its parent: extends \{ preset, version \}/],
   ["no name", { version: "1.0.0", extends: { preset: "shadcn", version: "1.0.0" } }, /must have a name/],
@@ -105,4 +118,27 @@ test("the CLI builds with --book, and refuses a stale parent with exit 2", async
   const stale = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--preset", "shadcn", "--book", school("0.0.1")]);
   expect(stale.exitCode).toBe(2);
   expect(stale.stderr.toString()).toMatch(/extends shadcn@0\.0\.1, but this theme-book's shadcn rules are/);
+});
+
+test("the CLI refuses an empty --book and a leading-zero version with exit 2", () => {
+  const empty = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--book="]);
+  expect([empty.exitCode, empty.stderr.toString()]).toEqual([2, expect.stringMatching(/--book requires a file path/)]);
+  const zero = extension("leading-zero", { name: "x", version: "01.0.0", extends: { preset: "shadcn", version: PRESET_RULES_VERSION.shadcn } }, "");
+  const bad = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--book", zero]);
+  expect([bad.exitCode, bad.stderr.toString()]).toEqual([2, expect.stringMatching(/version "01\.0\.0" must be semver/)]);
+});
+
+test("the recipe command replays the --book path literally in a POSIX shell", async () => {
+  const loaded = await loadBookExtension(school());
+  const awkward = "/tmp/it's $HOME `x` \\ a b.ts"; // quote, expansion, substitution, backslash, spaces
+  const command = build({ extension: { ...loaded, path: awkward } }).recipe.command;
+  const arg = command.split(" --book ")[1]!;
+  // Let sh parse the quoted word back, and compare it with the real path.
+  expect(Bun.spawnSync(["sh", "-c", `printf '%s' ${arg}`]).stdout.toString()).toBe(awkward);
+});
+
+test("an extension path containing a backslash is refused clearly, since Bun cannot import it", async () => {
+  const path = join(dir, "back\\slash.ts");
+  writeFileSync(path, readFileSync(school()));
+  await expect(loadBookExtension(path)).rejects.toThrow(/contains a backslash, which Bun cannot import; rename the file/);
 });
