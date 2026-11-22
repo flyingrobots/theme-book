@@ -1,10 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 816" width="1200" height="816" role="img" aria-label="theme-book UI specimen across editorial and vivid moods in light and dark modes">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 832" width="1200" height="832" role="img" aria-label="theme-book UI specimen across editorial and vivid moods in light and dark modes">
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
   </style>
-  <rect x="0" y="0" width="1200" height="816" fill="#18181b"/>
   
-  <g transform="translate(24, 20)">
+  <g transform="translate(24, 24)">
     <!-- Panel background -->
     <rect x="0" y="0" width="564" height="380" rx="14" fill="#fdfdff" stroke="#dfdfe1" stroke-width="1.5"/>
 
@@ -59,7 +58,7 @@
     <text x="478" y="366" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#51555e">chart-5</text>
   </g>
   
-  <g transform="translate(612, 20)">
+  <g transform="translate(612, 24)">
     <!-- Panel background -->
     <rect x="0" y="0" width="564" height="380" rx="14" fill="#020203" stroke="#1c1c1f" stroke-width="1.5"/>
 
@@ -114,7 +113,7 @@
     <text x="478" y="366" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#979ba4">chart-5</text>
   </g>
   
-  <g transform="translate(24, 416)">
+  <g transform="translate(24, 428)">
     <!-- Panel background -->
     <rect x="0" y="0" width="564" height="380" rx="14" fill="#fffdfc" stroke="#e1dfde" stroke-width="1.5"/>
 
@@ -169,7 +168,7 @@
     <text x="478" y="366" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5c5351">chart-5</text>
   </g>
   
-  <g transform="translate(612, 416)">
+  <g transform="translate(612, 428)">
     <!-- Panel background -->
     <rect x="0" y="0" width="564" height="380" rx="14" fill="#020202" stroke="#1c1c1c" stroke-width="1.5"/>
 

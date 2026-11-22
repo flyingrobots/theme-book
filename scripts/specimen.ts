@@ -108,19 +108,22 @@ export function generateSpecimenSvg(): string {
   });
 
   const W = 1200;
-  const H = 816;
   const PW = 564;
   const PH = 380;
+  // One gutter everywhere. The horizontal rhythm was already 24 (24+564+24+564+24=1200);
+  // the vertical was 20/16/20, which read as uneven. 24+380+24+380+24 = 832.
+  const G = 24;
+  const H = G * 3 + PH * 2;
+  const ROW2 = G * 2 + PH;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="theme-book UI specimen across editorial and vivid moods in light and dark modes">
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
   </style>
-  <rect x="0" y="0" width="${W}" height="${H}" fill="#18181b"/>
-  ${renderPanel(editorial, "light", 24, 20, PW, PH, 'seed="#2563eb" · generator=poline · preset=shadcn')}
-  ${renderPanel(editorial, "dark", 612, 20, PW, PH, 'seed="#2563eb" · generator=poline · preset=shadcn')}
-  ${renderPanel(vividDual, "light", 24, 416, PW, PH, 'seeds="#c2410c, #0f766e" · generator=rampensau · preset=shadcn')}
-  ${renderPanel(vividDual, "dark", 612, 416, PW, PH, 'seeds="#c2410c, #0f766e" · generator=rampensau · preset=shadcn')}
+  ${renderPanel(editorial, "light", G, G, PW, PH, 'seed="#2563eb" · generator=poline · preset=shadcn')}
+  ${renderPanel(editorial, "dark", G * 2 + PW, G, PW, PH, 'seed="#2563eb" · generator=poline · preset=shadcn')}
+  ${renderPanel(vividDual, "light", G, ROW2, PW, PH, 'seeds="#c2410c, #0f766e" · generator=rampensau · preset=shadcn')}
+  ${renderPanel(vividDual, "dark", G * 2 + PW, ROW2, PW, PH, 'seeds="#c2410c, #0f766e" · generator=rampensau · preset=shadcn')}
 </svg>
 `;
 }
