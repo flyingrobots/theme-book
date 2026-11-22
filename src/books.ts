@@ -386,6 +386,20 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
       "chart-4",
       "chart-5",
     ];
+    // Stock shadcn's token set (flyingrobots/theme-book#19): current shadcn has no
+    // destructive-foreground and has eight sidebar tokens. slide-deck keeps its own set.
+    if (opts.preset === "shadcn") {
+      keys = keys.filter((k) => k !== "destructive-foreground").concat([
+        "sidebar",
+        "sidebar-foreground",
+        "sidebar-primary",
+        "sidebar-primary-foreground",
+        "sidebar-accent",
+        "sidebar-accent-foreground",
+        "sidebar-border",
+        "sidebar-ring",
+      ]);
+    }
 
     // Light shadcn / slide-deck rules
     light.set("background", nth(ref("neutrals"), 0));
@@ -449,6 +463,38 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
     light.set("chart-4", ref("chartsLight.c-4"));
     light.set("chart-5", ref("chartsLight.c-5"));
 
+    // Sidebar: the page-level rules again, solved against the sidebar's own surface, which sits
+    // one neutral step off the background so the two regions read as distinct.
+    light.set("sidebar", nth(ref("neutrals"), 1));
+    light.set(
+      "sidebar-foreground",
+      minContrastWith(ref("light.sidebar"), ref("neutrals"), {
+        minContrast: effectiveTextContrast,
+        direction: "darker",
+      }),
+    );
+    light.set(
+      "sidebar-primary",
+      isAchromatic
+        ? ref("neutrals.n990")
+        : closest(ref("brand.seed-0"), ref("brandSolvableLight"), {
+            readableOn: ref("light.sidebar"),
+            readableContrast: primaryOnBgContrast,
+          }),
+    );
+    light.set("sidebar-primary-foreground", bestContrastWith(ref("light.sidebar-primary"), ref("inks")));
+    light.set(
+      "sidebar-accent",
+      colorMix(
+        ref("light.sidebar"),
+        hasSecondarySeed ? ref("accentSeeds.seed-1") : ref("light.sidebar-primary"),
+        { ratio: 0.11, colorSpace: "oklch" },
+      ),
+    );
+    light.set("sidebar-accent-foreground", bestContrastWith(ref("light.sidebar-accent"), ref("inks")));
+    light.set("sidebar-border", shade(ref("light.sidebar"), { amount: 0.09 }));
+    light.set("sidebar-ring", ref("light.sidebar-primary"));
+
     // Dark shadcn / slide-deck rules (extends light)
     dark.set("background", nth(ref("neutrals"), -2));
     dark.set(
@@ -508,6 +554,36 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
     dark.set("chart-3", ref("chartsDark.c-3"));
     dark.set("chart-4", ref("chartsDark.c-4"));
     dark.set("chart-5", ref("chartsDark.c-5"));
+
+    dark.set("sidebar", nth(ref("neutrals"), -3));
+    dark.set(
+      "sidebar-foreground",
+      minContrastWith(ref("dark.sidebar"), ref("neutrals"), {
+        minContrast: effectiveTextContrast,
+        direction: "lighter",
+      }),
+    );
+    dark.set(
+      "sidebar-primary",
+      isAchromatic
+        ? ref("neutrals.n000")
+        : closest(ref("brand.seed-0"), ref("brandSolvableDark"), {
+            readableOn: ref("dark.sidebar"),
+            readableContrast: primaryOnBgContrast,
+          }),
+    );
+    dark.set("sidebar-primary-foreground", bestContrastWith(ref("dark.sidebar-primary"), ref("inks")));
+    dark.set(
+      "sidebar-accent",
+      colorMix(
+        ref("dark.sidebar"),
+        hasSecondarySeed ? ref("accentSeeds.seed-1") : ref("dark.sidebar-primary"),
+        { ratio: 0.18, colorSpace: "oklch" },
+      ),
+    );
+    dark.set("sidebar-accent-foreground", bestContrastWith(ref("dark.sidebar-accent"), ref("inks")));
+    dark.set("sidebar-border", shade(ref("dark.sidebar"), { amount: 0.14 }));
+    dark.set("sidebar-ring", ref("dark.sidebar-primary"));
 
     if (opts.preset === "slide-deck") {
       extras = {
