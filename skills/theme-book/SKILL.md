@@ -5,7 +5,7 @@ description: Build rule-based light/dark UI color themes, shadcn/ui tokens, slid
 
 # Theme Book (`theme-book`)
 
-Compile rule-based light/dark UI color themes, verify contrast at full floating-point precision, and suggest accessible companion colors locally — built on **David Aerne's ([`@meodai`](https://github.com/meodai) / Elastiq GmbH)** [`design-book`](https://github.com/meodai/design-book), [`poline`](https://github.com/meodai/poline), and [`rampensau`](https://github.com/meodai/rampensau), paired with [`skill.color-expert`](https://github.com/meodai/skill.color-expert), plus [`culori`](https://culorijs.org/).
+Compile rule-based light/dark UI color themes, verify contrast at full floating-point precision, and suggest accessible companion colors locally — built on **David Aerne's ([`@meodai`](https://github.com/meodai) / Elastiq GmbH)** [`design-book`](https://github.com/meodai/design-book), [`poline`](https://github.com/meodai/poline) and [`rampensau`](https://github.com/meodai/rampensau), and on [`culori`](https://culorijs.org/), and paired with the separate [`skill.color-expert`](https://github.com/meodai/skill.color-expert) skill.
 
 ## Two-Stage Workflow (Pair With `color-expert`)
 
@@ -122,6 +122,31 @@ EOF
 ```
 
 ---
+
+
+### 5. Change a Few Preset Rules for One Site (`theme-book theme --book`)
+
+When a site needs a preset with some rules changed (for example, lighter dark surfaces), **write a book extension; never fork or edit the preset, and never hand-edit the emitted tokens.** The extension names its parent preset and the parent's **rules version**; any other version is refused with exit `2`.
+
+```ts
+export default {
+  name: "school",
+  version: "1.0.0",
+  extends: { preset: "shadcn", version: "1.0.0" },
+  apply({ light, dark, rules }) {
+    dark.set("background", rules.closest(rules.color("oklch(0.145 0 0)"), rules.ref("neutrals")));
+  },
+};
+```
+
+```bash
+theme-book theme --book school.book.ts --seed "#0f766e" --mood editorial --standard wcag-aaa --audit
+```
+
+- Only tokens the preset emits may be set; an extension adds no tokens.
+- Rule constructors (`closest`, `nth`, `ref`, `color`, `minContrastWith`, `bestContrastWith`, `mostVivid`, `leastVivid`, `furthestFrom`, `colorMix`, `shade`, `relativeTo`) arrive as `rules`, so the file needs no imports.
+- Keep a site's extension with that site's private theme material, not in a non-AGPL repository's published code.
+- When theme-book bumps a preset's rules version, re-check the extension against the new rules and update its `extends.version`.
 
 ## Licensing & Privacy Boundary
 

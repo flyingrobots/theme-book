@@ -9,6 +9,19 @@ travels apart from the repository and needs its own history.
 
 Versions track the tool's releases.
 
+## [Unreleased]
+
+### Added
+
+- **Section 5, book extensions.** When a site needs some preset rules changed, the skill now says
+  to write a `--book` extension naming its parent preset and rules version, never to fork the
+  preset or hand-edit emitted tokens, and to keep the extension with the site's private theme
+  material.
+
+### Fixed
+
+- The description no longer reads as if culori were paired with theme-book; it is a dependency.
+
 ## [0.2.1] — 2026-11-21
 
 ### Added

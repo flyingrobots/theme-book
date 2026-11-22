@@ -1,0 +1,14 @@
+{
+  "shadcn": {
+    "version": "1.0.0",
+    "fingerprint": "3a04d1bc377d8ce20248a15c42d1e3b96a4d9b7678b8e06254c1503a217288e7"
+  },
+  "semantic": {
+    "version": "1.0.0",
+    "fingerprint": "e6652059a0a86c4d60be3ba4812e08d524325c54ab64443036d6f580406ff38c"
+  },
+  "slide-deck": {
+    "version": "1.0.0",
+    "fingerprint": "619a05e53ef801af7f0ebbd0a5537ac1c046cd3efe90847873e5c523a443fbc5"
+  }
+}

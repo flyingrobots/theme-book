@@ -35,6 +35,7 @@ import {
 } from "./audit";
 
 import { existsSync, readFileSync } from "node:fs";
+import { ExtensionError, RULES, type BookExtension } from "./extension";
 import { resolve } from "node:path";
 import pkgJson from "../package.json";
 
@@ -55,6 +56,17 @@ const DESIGN_BOOK_VERSION = readDesignBookVersion();
 
 export type ThemePreset = "shadcn" | "semantic" | "slide-deck";
 
+/**
+ * Each preset's rules version, independent of the tool's version. An extension names the version
+ * it was written against and is refused by any other. Bump it whenever a rule changes; the
+ * fingerprint test in test/book-extension.test.ts fails until you do.
+ */
+export const PRESET_RULES_VERSION: Record<ThemePreset, string> = {
+  shadcn: "1.0.0",
+  semantic: "1.0.0",
+  "slide-deck": "1.0.0",
+};
+
 export interface ThemeBuildOptions {
   seeds: string[];
   preset: ThemePreset;
@@ -63,6 +75,7 @@ export interface ThemeBuildOptions {
   standard?: AuditStandard;
   hexOutput?: boolean;
   nativeOutput?: boolean;
+  extension?: BookExtension;
 }
 
 export interface ThemeRecipe {
@@ -79,6 +92,11 @@ export interface ThemeRecipe {
     native: boolean;
   };
   command: string;
+  book: {
+    preset: ThemePreset;
+    rulesVersion: string;
+    extension?: { name: string; version: string; sha256: string };
+  };
 }
 
 export interface TokenProvenance {
@@ -178,6 +196,7 @@ function buildRecipeCommand(opts: {
   standard: AuditStandard;
   hex: boolean;
   native: boolean;
+  book?: string;
 }): string {
   const parts = ["theme-book theme"];
   for (const s of opts.rawSeeds) {
@@ -189,12 +208,57 @@ function buildRecipeCommand(opts: {
   parts.push(`--standard ${opts.standard}`);
   if (opts.hex) parts.push("--hex");
   if (opts.native) parts.push("--native");
+  if (opts.book) parts.push(`--book ${JSON.stringify(opts.book)}`);
   return parts.join(" ");
 }
 
 export function resolveEffectiveStandard(mood: Mood, explicit?: AuditStandard): AuditStandard {
   if (explicit) return explicit;
   return mood === "high-contrast" ? "wcag-aaa" : "wcag-aa";
+}
+
+/**
+ * Run an extension's rules over the preset's. The parent must be this preset at exactly this
+ * rules version, and only tokens the preset emits may be set: an extension adds no tokens.
+ */
+function applyExtension(
+  ext: BookExtension,
+  preset: ThemePreset,
+  keys: readonly string[],
+  light: ReturnType<DesignBook["addScope"]>,
+  dark: ReturnType<DesignBook["addScope"]>,
+): void {
+  const id = `${ext.name}@${ext.version}`;
+  if (ext.extends.preset !== preset) {
+    throw new ExtensionError(`${id} extends ${ext.extends.preset}, but the theme is being built with --preset ${preset}`);
+  }
+  const installed = PRESET_RULES_VERSION[preset];
+  if (ext.extends.version !== installed) {
+    throw new ExtensionError(
+      `${id} extends ${preset}@${ext.extends.version}, but this theme-book's ${preset} rules are ${installed}; update the extension to name ${preset}@${installed}`,
+    );
+  }
+  const allowed = new Set(keys);
+  const guard = (scope: ReturnType<DesignBook["addScope"]>) => ({
+    set(token: string, rule: unknown) {
+      if (!allowed.has(token)) {
+        throw new ExtensionError(`${id}: "${token}" is not a ${preset} token; an extension may only override the tokens the preset emits`);
+      }
+      scope.set(token, rule as Parameters<typeof scope.set>[1]);
+    },
+  });
+  ext.apply({ light: guard(light), dark: guard(dark), rules: RULES });
+}
+
+/**
+ * A hash of a preset's rule expressions, for the version check. Each rule is taken without the
+ * pool entry it picked, so the fingerprint follows the rules and not the seeds.
+ */
+export function presetRulesFingerprint(preset: ThemePreset, seeds: string[] = ["#0f766e"]): string {
+  const built = buildThemeBook({ seeds, preset, mood: "editorial", generator: "oklch", standard: "wcag-aa" });
+  const rule = (r: string) => r.split(" -> ")[0];
+  const lines = built.lightKeys.map((k) => `${k}=${rule(built.light[k]!.rule)}|${rule(built.dark[k]!.rule)}`);
+  return new Bun.CryptoHasher("sha256").update(lines.join("\n")).digest("hex");
 }
 
 export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
@@ -599,6 +663,8 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
     }
   }
 
+  if (opts.extension) applyExtension(opts.extension, opts.preset, keys, light, dark);
+
   const lightResolved: Record<string, TokenProvenance> = {};
   const darkResolved: Record<string, TokenProvenance> = {};
   const lightSerialized: Record<string, string> = {};
@@ -639,7 +705,15 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
       standard,
       hex: hexFlag,
       native: nativeFlag,
+      book: opts.extension?.path,
     }),
+    book: {
+      preset: opts.preset,
+      rulesVersion: PRESET_RULES_VERSION[opts.preset],
+      ...(opts.extension
+        ? { extension: { name: opts.extension.name, version: opts.extension.version, sha256: opts.extension.sha256 } }
+        : {}),
+    },
   };
 
   return {
