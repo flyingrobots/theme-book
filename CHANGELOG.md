@@ -4,6 +4,13 @@ Notable changes to `theme-book`. Format follows [Keep a Changelog](https://keepa
 versioning is [SemVer](https://semver.org/). Pre-1.0: the CLI, library APIs and emitted output
 may change between minor versions.
 
+## [0.2.1] — 2026-11-21
+
+### Added
+
+- **`skills/theme-book/CHANGELOG.md`.** The skill is synced into an agent hub and travels apart
+  from this repository, so it now carries its own history. `RELEASE.md` requires updating both.
+
 ## [0.2.0] — 2026-11-21
 
 ### Added
