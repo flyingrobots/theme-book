@@ -4,7 +4,7 @@ Notable changes to `theme-book`. Format follows [Keep a Changelog](https://keepa
 versioning is [SemVer](https://semver.org/). Pre-1.0: the CLI, library APIs and emitted output
 may change between minor versions.
 
-## [Unreleased]
+## [0.3.0] — 2026-11-22
 
 ### Changed
 
