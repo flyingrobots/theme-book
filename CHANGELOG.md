@@ -4,6 +4,25 @@ Notable changes to `theme-book`. Format follows [Keep a Changelog](https://keepa
 versioning is [SemVer](https://semver.org/). Pre-1.0: the CLI, library APIs and emitted output
 may change between minor versions.
 
+## [Unreleased]
+
+### Changed
+
+- **The `shadcn` preset now emits stock shadcn's token set** (flyingrobots/theme-book#19). It was
+  written from an older shadcn theme and had drifted: it emitted `destructive-foreground`, which
+  current shadcn does not define, and omitted the eight `sidebar-*` tokens current shadcn does.
+  It now matches the `src/index.css` that `shadcn init` writes (CLI 4.23.0), checked by a test
+  against that file. The `slide-deck` and `semantic` presets are unchanged.
+- **Sidebar tokens are solved, not copied.** `sidebar` sits one neutral step off `background`
+  (light) or at the card level (dark); `sidebar-foreground`, `sidebar-primary`,
+  `sidebar-accent` and their foregrounds use the page-level rules re-solved against the sidebar's
+  own surface; `sidebar-ring` follows `sidebar-primary`.
+- **The audit checks the sidebar's ring and border against the sidebar.** `sidebar-ring` on
+  `sidebar` is a required ui-graphic pair and `sidebar-border` on `sidebar` a border advisory. The
+  sidebar's text pairs were already covered by the `<base>-foreground` rule.
+- **The specimen draws the destructive button as stock shadcn does**: destructive text on a
+  destructive tint, since there is no `destructive-foreground`.
+
 ## [0.2.1] — 2026-11-21
 
 ### Added

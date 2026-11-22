@@ -13,7 +13,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#eff0f2" stroke="#dfdfe1" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#51555e">✓ 15/15 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#51555e">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="180" rx="10" fill="#ffffff" stroke="#dfdfe1" stroke-width="1"/>
@@ -35,9 +35,11 @@
     <rect x="166" y="174" width="108" height="32" rx="6" fill="#f1f2ff" stroke="#dfdfe1" stroke-width="1"/>
     <text x="220" y="194" text-anchor="middle" font-size="12" font-weight="500" fill="#000000">Preview</text>
 
-    <!-- Destructive Alert -->
-    <rect x="288" y="174" width="240" height="32" rx="6" fill="#af3433"/>
-    <text x="408" y="194" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Destructive: Revoke token</text>
+    <!-- Destructive button, drawn as stock shadcn draws it: destructive text on a destructive tint
+         (bg-destructive/10 in light, /20 in dark). Stock shadcn has no destructive-foreground. -->
+    <rect x="288" y="174" width="240" height="32" rx="6" fill="#fdfdff"/>
+    <rect x="288" y="174" width="240" height="32" rx="6" fill="#af3433" fill-opacity="0.1"/>
+    <text x="408" y="194" text-anchor="middle" font-size="11.5" font-weight="600" fill="#af3433">Destructive: Revoke token</text>
 
     <!-- Inline token footer inside card -->
     <text x="40" y="234" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#51555e">primary=#2563eb · accent=#eaebfe · ring=#2563eb</text>
@@ -68,7 +70,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#121418" stroke="#1c1c1f" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#979ba4">✓ 15/15 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#979ba4">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="180" rx="10" fill="#08090c" stroke="#1c1c1f" stroke-width="1"/>
@@ -90,9 +92,11 @@
     <rect x="166" y="174" width="108" height="32" rx="6" fill="#0a0b16" stroke="#1c1c1f" stroke-width="1"/>
     <text x="220" y="194" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">Preview</text>
 
-    <!-- Destructive Alert -->
-    <rect x="288" y="174" width="240" height="32" rx="6" fill="#f77571"/>
-    <text x="408" y="194" text-anchor="middle" font-size="11.5" font-weight="600" fill="#000000">Destructive: Revoke token</text>
+    <!-- Destructive button, drawn as stock shadcn draws it: destructive text on a destructive tint
+         (bg-destructive/10 in light, /20 in dark). Stock shadcn has no destructive-foreground. -->
+    <rect x="288" y="174" width="240" height="32" rx="6" fill="#020203"/>
+    <rect x="288" y="174" width="240" height="32" rx="6" fill="#f77571" fill-opacity="0.2"/>
+    <text x="408" y="194" text-anchor="middle" font-size="11.5" font-weight="600" fill="#f77571">Destructive: Revoke token</text>
 
     <!-- Inline token footer inside card -->
     <text x="40" y="234" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#979ba4">primary=#5280db · accent=#0f101f · ring=#5280db</text>
@@ -123,7 +127,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#f1f0ef" stroke="#e1dfde" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#5c5351">✓ 15/15 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#5c5351">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="180" rx="10" fill="#ffffff" stroke="#e1dfde" stroke-width="1"/>
@@ -145,9 +149,11 @@
     <rect x="166" y="174" width="108" height="32" rx="6" fill="#fcf1eb" stroke="#e1dfde" stroke-width="1"/>
     <text x="220" y="194" text-anchor="middle" font-size="12" font-weight="500" fill="#000000">Preview</text>
 
-    <!-- Destructive Alert -->
-    <rect x="288" y="174" width="240" height="32" rx="6" fill="#be0f22"/>
-    <text x="408" y="194" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Destructive: Revoke token</text>
+    <!-- Destructive button, drawn as stock shadcn draws it: destructive text on a destructive tint
+         (bg-destructive/10 in light, /20 in dark). Stock shadcn has no destructive-foreground. -->
+    <rect x="288" y="174" width="240" height="32" rx="6" fill="#fffdfc"/>
+    <rect x="288" y="174" width="240" height="32" rx="6" fill="#be0f22" fill-opacity="0.1"/>
+    <text x="408" y="194" text-anchor="middle" font-size="11.5" font-weight="600" fill="#be0f22">Destructive: Revoke token</text>
 
     <!-- Inline token footer inside card -->
     <text x="40" y="234" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5c5351">primary=#c2410c · accent=#f2eae4 · ring=#c2410c</text>
@@ -178,7 +184,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#171312" stroke="#1c1c1c" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a19997">✓ 15/15 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a19997">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="180" rx="10" fill="#0b0808" stroke="#1c1c1c" stroke-width="1"/>
@@ -200,9 +206,11 @@
     <rect x="166" y="174" width="108" height="32" rx="6" fill="#140805" stroke="#1c1c1c" stroke-width="1"/>
     <text x="220" y="194" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">Preview</text>
 
-    <!-- Destructive Alert -->
-    <rect x="288" y="174" width="240" height="32" rx="6" fill="#ff6e6a"/>
-    <text x="408" y="194" text-anchor="middle" font-size="11.5" font-weight="600" fill="#000000">Destructive: Revoke token</text>
+    <!-- Destructive button, drawn as stock shadcn draws it: destructive text on a destructive tint
+         (bg-destructive/10 in light, /20 in dark). Stock shadcn has no destructive-foreground. -->
+    <rect x="288" y="174" width="240" height="32" rx="6" fill="#020202"/>
+    <rect x="288" y="174" width="240" height="32" rx="6" fill="#ff6e6a" fill-opacity="0.2"/>
+    <text x="408" y="194" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ff6e6a">Destructive: Revoke token</text>
 
     <!-- Inline token footer inside card -->
     <text x="40" y="234" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a19997">primary=#d45529 · accent=#06100f · ring=#d45529</text>

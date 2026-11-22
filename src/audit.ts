@@ -928,6 +928,11 @@ export function inferAuditPairs(modes: {
       for (let i = 1; i <= 5; i++) {
         add(`chart-${i}`, rootBg, "ui-graphic");
       }
+      // The sidebar is its own surface: its ring and border are judged against it.
+      if (tokens.sidebar !== undefined) {
+        add("sidebar-ring", "sidebar", "ui-graphic");
+        add("sidebar-border", "sidebar", "border-advisory");
+      }
       // Subtle dividers / input borders (advisory unless --strict-borders)
       add("border", rootBg, "border-advisory");
       add("input", rootBg, "border-advisory");

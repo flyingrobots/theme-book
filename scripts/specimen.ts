@@ -67,9 +67,11 @@ function renderPanel(
     <rect x="166" y="174" width="108" height="32" rx="6" fill="${c("secondary")}" stroke="${c("border")}" stroke-width="1"/>
     <text x="220" y="194" text-anchor="middle" font-size="12" font-weight="500" fill="${c("secondary-foreground")}">Preview</text>
 
-    <!-- Destructive Alert -->
-    <rect x="288" y="174" width="240" height="32" rx="6" fill="${c("destructive")}"/>
-    <text x="408" y="194" text-anchor="middle" font-size="11.5" font-weight="600" fill="${c("destructive-foreground")}">Destructive: Revoke token</text>
+    <!-- Destructive button, drawn as stock shadcn draws it: destructive text on a destructive tint
+         (bg-destructive/10 in light, /20 in dark). Stock shadcn has no destructive-foreground. -->
+    <rect x="288" y="174" width="240" height="32" rx="6" fill="${c("background")}"/>
+    <rect x="288" y="174" width="240" height="32" rx="6" fill="${c("destructive")}" fill-opacity="${polarity === "dark" ? 0.2 : 0.1}"/>
+    <text x="408" y="194" text-anchor="middle" font-size="11.5" font-weight="600" fill="${c("destructive")}">Destructive: Revoke token</text>
 
     <!-- Inline token footer inside card -->
     <text x="40" y="234" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="${c("muted-foreground")}">primary=${c("primary")} · accent=${c("accent")} · ring=${c("ring")}</text>
