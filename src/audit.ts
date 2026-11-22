@@ -920,12 +920,12 @@ export function inferAuditPairs(modes: {
       if (m) add(key, m[1]!, "text");
     }
 
-    // Non-text UI graphic pairs (WCAG 1.4.11 >= 3:1): focus rings & data-viz series
     // The sidebar is its own surface: its ring and border are judged against it, page background or not.
     if (tokens.sidebar !== undefined) {
       add("sidebar-ring", "sidebar", "ui-graphic");
       add("sidebar-border", "sidebar", "border-advisory");
     }
+    // Non-text UI graphic pairs (WCAG 1.4.11 >= 3:1): focus rings & data-viz series
     const rootBg = tokens.background !== undefined ? "background" : tokens.surface !== undefined ? "surface" : undefined;
     if (rootBg) {
       add("ring", rootBg, "ui-graphic");
