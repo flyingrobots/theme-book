@@ -41,6 +41,7 @@ test.each(["#0f766e", "#2563eb", "#c2410c", "#777777", "#eab308"])(
     const failing = required.filter((p) => !p.pass).map((p) => `${p.mode} ${p.fgToken} on ${p.bgToken}: ${p.wcagExact.toFixed(2)}:1`);
     expect(required.length).toBeGreaterThan(0); // zero witnesses would mean the audit checked nothing
     expect(failing).toEqual([]);
+    expect(report.status).toBe("pass"); // also fails on unverified evidence, which `failing` cannot see
   },
 );
 
@@ -59,4 +60,28 @@ test.each([
 test("the slide-deck preset keeps destructive-foreground and gains no sidebar tokens", () => {
   const names = Object.keys(build(["#0f766e"], "slide-deck").light);
   expect([names.includes("destructive-foreground"), names.some((n) => n.startsWith("sidebar"))]).toEqual([true, false]);
+});
+
+// Every output format renders the token set, not only the serialized CSS (CodeRabbit on #20):
+// --native and w3-tokens render the book itself, so the book must hold exactly the preset's tokens.
+const tokensIn = (text: string) => new Set([...text.matchAll(/(?:--|"light\.|\b)(destructive-foreground|sidebar(?:-[a-z-]+)?)\b/g)].map((m) => m[1]!));
+test.each([
+  ["shadcn", "css", { native: true }],
+  ["shadcn", "w3-tokens", {}],
+] as const)("%s %s output (%o) has the sidebar tokens and no destructive-foreground", (preset, format, opts) => {
+  const found = tokensIn(renderThemeOutput(build(["#0f766e"], preset), format, opts));
+  expect([found.has("destructive-foreground"), found.has("sidebar-ring")]).toEqual([false, true]);
+});
+test.each([
+  ["slide-deck", "css", { native: true }],
+  ["slide-deck", "w3-tokens", {}],
+] as const)("%s %s output (%o) has destructive-foreground and no sidebar tokens", (preset, format, opts) => {
+  const found = tokensIn(renderThemeOutput(build(["#0f766e"], preset), format, opts));
+  expect([found.has("destructive-foreground"), [...found].some((n) => n.startsWith("sidebar"))]).toEqual([true, false]);
+});
+
+test("the audit checks the sidebar ring against the sidebar even without a page background", () => {
+  const css = ":root { --sidebar: #ffffff; --sidebar-foreground: #000000; --sidebar-ring: #ffffff; }";
+  const ring = evaluateAudit(parseTokensFromText(css, "t.css"), { standard: "wcag-aa" }).pairs.filter((p) => p.fgToken === "sidebar-ring");
+  expect(ring.map((p) => [p.bgToken, p.pass])).toEqual([["sidebar", false]]);
 });
