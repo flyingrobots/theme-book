@@ -1,10 +1,10 @@
 // Versioned preset rules, and extensions that name their parent and version (flyingrobots/theme-book#22).
 import { expect, test } from "bun:test";
-import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { PRESET_RULES_VERSION, buildThemeBook, presetRulesFingerprint, presetRulesLines, type ThemePreset } from "../src/books";
-import { loadBookExtension } from "../src/extension";
+import { ExtensionError, loadBookExtension } from "../src/extension";
 
 const PRESETS: ThemePreset[] = ["shadcn", "semantic", "slide-deck"];
 const recorded = JSON.parse(readFileSync(join(import.meta.dir, "fixtures", "preset-rules.json"), "utf8")) as Record<
@@ -31,13 +31,13 @@ test.each(PRESETS)("the %s preset's rules are versioned, and a rule change witho
   expect(PRESET_RULES_VERSION[preset]).toMatch(/^\d+\.\d+\.\d+$/);
   // If this fails you changed a rule: bump PRESET_RULES_VERSION and record the new fingerprint.
   expect({ version: PRESET_RULES_VERSION[preset], fingerprint: presetRulesFingerprint(preset) }).toEqual(recorded[preset]!);
-});
+}, 60_000); // a fingerprint builds a few hundred themes
 
 test("a preset's fingerprint depends on its rules, not on the seeds", () => {
   // Other seeds of the same three kinds: the rules are the same, so the fingerprint must be too.
   const others = { chromatic: ["#2563eb"], achromatic: ["#555555"], "two-seed": ["#2563eb", "#eab308"] };
   expect(presetRulesFingerprint("shadcn", others)).toBe(presetRulesFingerprint("shadcn"));
-});
+}, 60_000);
 
 test("the fingerprint covers the achromatic, second-seed, AAA and APCA rule branches", () => {
   const lines = presetRulesLines("shadcn");
@@ -158,3 +158,106 @@ test("reloading a rewritten extension applies the new rules, and the hash descri
   expect(second.sha256).not.toBe(first.sha256);
   expect(build({ extension: second }).dark.background).not.toBe(build({ extension: first }).dark.background);
 });
+
+// flyingrobots/theme-book#24: the hash names the extension module, which may import nothing.
+const HEADER = `name: "x", version: "1.0.0", extends: { preset: "shadcn", version: "1.0.0" }`;
+const module = (name: string, source: string) => {
+  const path = join(dir, `${name}.ts`);
+  writeFileSync(path, source);
+  return path;
+};
+const helper = module("helper", `export const L = "oklch(0.5 0.3 30)";\n`);
+
+test.each([
+  ["a relative static import", `import { L } from "./helper.ts";`, /imports "\.\/helper\.ts"/],
+  ["an absolute static import", `import { L } from ${JSON.stringify(helper)};`, /imports ".*\/helper\.ts"/],
+  ["a bare import of design-book", `import "design-book";`, /imports "design-book"/],
+  ["a node: import", `import { readFileSync } from "node:fs";`, /imports "node:fs"/],
+  ["a re-export", `export * from ${JSON.stringify(helper)};`, /imports ".*\/helper\.ts"/],
+  ["a literal dynamic import", `const m = await import(${JSON.stringify(helper)});`, /imports ".*\/helper\.ts"/],
+  ["a computed dynamic import", `const p = ${JSON.stringify(helper)}; const m = await import(p);`, /uses import\(\)/],
+  ["a literal require", `const fs = require("node:fs");`, /imports "node:fs"/],
+  ["a computed require", `const n = "node:fs"; const fs = require(n);`, /uses require/],
+  ["import.meta.require", `const fs = import.meta.require("node:fs");`, /uses import\.meta/],
+] as const)("an extension with %s is refused before it runs", async (name, line, message) => {
+  const marker = join(dir, `ran-${name.replace(/\W+/g, "-")}`);
+  const path = module(`import-${name.replace(/\W+/g, "-")}`, `${line}\nawait Bun.write(${JSON.stringify(marker)}, "ran");\nexport default { ${HEADER}, apply() {} };\n`);
+  const err = await loadBookExtension(path).then(() => undefined, (e: unknown) => e);
+  expect(err).toBeInstanceOf(ExtensionError);
+  expect((err as Error).message).toMatch(/must import nothing/);
+  expect((err as Error).message).toMatch(message);
+  expect(existsSync(marker)).toBe(false); // refused from the bytes, before any of its code ran
+});
+
+test("a type-only import is allowed, since it is erased and loads nothing", async () => {
+  const path = module("type-only", `import type { BookExtension } from "./extension";\nexport default { ${HEADER}, apply() {} } as unknown as BookExtension;\n`);
+  expect((await loadBookExtension(path)).name).toBe("x");
+});
+
+test("the CLI refuses an extension that imports, with exit 2", () => {
+  const path = module("cli-import", `import "design-book";\nexport default { ${HEADER}, apply() {} };\n`);
+  const r = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--book", path]);
+  expect([r.exitCode, r.stderr.toString()]).toEqual([2, expect.stringMatching(/must import nothing, but imports "design-book"/)]);
+});
+
+test("an async apply is refused, in the library and the CLI with exit 2", async () => {
+  const path = module("async-apply", `export default { ${HEADER}, async apply({ dark, rules }) { await 0; dark.set("background", rules.color("#f00")); } };\n`);
+  expect(() => build({ extension: undefined })).not.toThrow();
+  const loaded = await loadBookExtension(path);
+  expect(() => build({ extension: loaded })).toThrow(/x@1\.0\.0 .*apply must return nothing; it returned a promise/);
+  const r = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--book", path]);
+  expect([r.exitCode, r.stderr.toString()]).toEqual([2, expect.stringMatching(/apply must return nothing; it returned a promise/)]);
+});
+
+test("set() after apply returns throws", async () => {
+  const path = module("late-set", `export default { ${HEADER}, apply(ctx) { globalThis.__lateCtx = ctx; } };\n`);
+  build({ extension: await loadBookExtension(path) });
+  const ctx = (globalThis as { __lateCtx?: { dark: { set(t: string, r: unknown): void }; rules: { color(c: string): unknown } } }).__lateCtx!;
+  expect(() => ctx.dark.set("background", ctx.rules.color("#f00"))).toThrow(/extension x@1\.0\.0 \(.*\): set\(\) after apply returned/);
+  expect(() => ctx.dark.set("background", ctx.rules.color("#f00"))).toThrow(ExtensionError);
+});
+
+test.each([
+  ["an apply that throws", `apply() { throw new Error("boom"); }`, /apply threw: boom/],
+  ["a rule naming a missing token", `apply({ dark, rules }) { dark.set("background", rules.ref("light.nope")); }`, /rules failed to resolve: .*nope/],
+  ["a rule that is not an expression", `apply({ dark }) { dark.set("background", "red"); }`, /rules failed to resolve/],
+] as const)("%s exits 2 naming the extension and its path", async (name, apply, message) => {
+  const path = module(`errors-${name.replace(/\W+/g, "-")}`, `export default { ${HEADER}, ${apply} };\n`);
+  const loaded = await loadBookExtension(path);
+  expect(() => build({ extension: loaded })).toThrow(ExtensionError);
+  const r = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--book", path]);
+  const stderr = r.stderr.toString();
+  expect([r.exitCode, stderr.includes(`extension x@1.0.0 (${path})`)]).toEqual([2, true]);
+  expect(stderr).toMatch(message);
+});
+
+test("--book-sha256 accepts the extension's hash and refuses any other before running it, with exit 2", () => {
+  const path = school();
+  const sha = new Bun.CryptoHasher("sha256").update(readFileSync(path)).digest("hex");
+  const run = (...args: string[]) => Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", ...args]);
+  expect(run("--book", path, "--book-sha256", sha).exitCode).toBe(0);
+  expect(run("--book", path, "--book-sha256", sha.toUpperCase()).exitCode).toBe(0);
+  const wrong = run("--book", path, "--book-sha256", "0".repeat(64));
+  expect([wrong.exitCode, wrong.stderr.toString()]).toEqual([2, expect.stringMatching(new RegExp(`sha256 is ${sha}, but --book-sha256 is 0{64}`))]);
+  const marker = join(dir, "sha-mismatch-ran");
+  const side = module("sha-side-effect", `await Bun.write(${JSON.stringify(marker)}, "ran");\nexport default { ${HEADER}, apply() {} };\n`);
+  expect(run("--book", side, "--book-sha256", "0".repeat(64)).exitCode).toBe(2);
+  expect(existsSync(marker)).toBe(false);
+  const malformed = run("--book", path, "--book-sha256", "abc");
+  expect([malformed.exitCode, malformed.stderr.toString()]).toEqual([2, expect.stringMatching(/--book-sha256 must be 64 hex digits/)]);
+  const alone = run("--book-sha256", sha);
+  expect([alone.exitCode, alone.stderr.toString()]).toEqual([2, expect.stringMatching(/--book-sha256 requires --book/)]);
+}, 30_000); // seven CLI runs
+
+test("the recipe command records --book-sha256, so replaying it refuses a rewritten extension", () => {
+  const header = { name: "replayed", version: "1.0.0", extends: { preset: "shadcn", version: PRESET_RULES_VERSION.shadcn } };
+  const path = extension("replayed", header, LIGHTER_DARK);
+  const first = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--format", "json", "--book", path]);
+  const recipe = JSON.parse(first.stdout.toString()).recipe as { command: string; book: { extension: { sha256: string } } };
+  expect(recipe.command).toContain(` --book-sha256 ${recipe.book.extension.sha256} --book `);
+  const replay = () => Bun.spawnSync(["sh", "-c", recipe.command.replace(/^theme-book /, `${JSON.stringify(CLI)} `)]);
+  expect(replay().exitCode).toBe(0);
+  extension("replayed", header, LIGHTER_DARK.replace("0.145", "0.3"));
+  const stale = replay();
+  expect([stale.exitCode, stale.stderr.toString()]).toEqual([2, expect.stringMatching(/but --book-sha256 is/)]);
+}, 30_000); // three CLI runs
