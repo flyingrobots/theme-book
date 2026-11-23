@@ -1,6 +1,6 @@
 # theme-book
 
-A local CLI and AI agent skill for compiling rule-based light/dark UI color themes, auditing contrast at full floating-point precision, and suggesting accessible companion colors — built on [David Aerne's (`@meodai`)](https://github.com/meodai) [`design-book`](https://github.com/meodai/design-book), [`poline`](https://github.com/meodai/poline), and [`rampensau`](https://github.com/meodai/rampensau), paired with [`skill.color-expert`](https://github.com/meodai/skill.color-expert), plus [`culori`](https://culorijs.org/).
+A local CLI and AI agent skill for compiling rule-based light/dark UI color themes, auditing contrast at full floating-point precision, and suggesting accessible companion colors — built on [David Aerne's (`@meodai`)](https://github.com/meodai) [`design-book`](https://github.com/meodai/design-book), [`poline`](https://github.com/meodai/poline) and [`rampensau`](https://github.com/meodai/rampensau), and on [`culori`](https://culorijs.org/), and paired with the separate [`skill.color-expert`](https://github.com/meodai/skill.color-expert) skill.
 
 ![theme-book UI specimen across editorial and vivid moods in light and dark modes](docs/specimen.svg)
 
@@ -72,6 +72,45 @@ theme-book eval my-book.ts
 theme-book eval - < my-book.ts
 ```
 
+### 5. Extend a Preset With a Site's Own Rules (`--book`)
+
+A site that needs a preset with a few rules changed writes a **book extension** rather than
+forking the preset. The extension names itself, its own version, and the preset and preset
+**rules version** it extends. Its rules are `design-book` expressions built with constructors
+passed to `apply`, so the file needs no imports. It must import nothing: theme-book loads a
+private copy of exactly the bytes it hashes, so a relative import would not resolve:
+
+```ts
+// school.book.ts
+export default {
+  name: "school",
+  version: "1.0.0",
+  extends: { preset: "shadcn", version: "1.0.0" },
+  apply({ dark, rules }) {
+    dark.set("background", rules.closest(rules.color("oklch(0.145 0 0)"), rules.ref("neutrals")));
+  },
+};
+```
+
+```bash
+theme-book theme --book school.book.ts --seed "#0f766e" --mood editorial --standard wcag-aaa --audit
+```
+
+- **Rules are versioned.** Each preset has a rules version, independent of the tool's version.
+  An extension naming any other version is refused (exit `2`) with the installed version in the
+  message, so an extension never silently runs against rules it was not written for.
+- **No new tokens.** An extension may only override tokens the preset emits.
+- **Audited like a preset.** `--audit` checks the extended theme exactly as it checks a preset.
+- **Provenance.** `--format json` records `recipe.book`: the preset, its rules version, and the
+  extension's name, version and SHA-256.
+- Without `--preset`, the extension's parent decides the preset.
+
+| Preset | Rules version |
+| --- | --- |
+| `shadcn` | 1.0.0 |
+| `semantic` | 1.0.0 |
+| `slide-deck` | 1.0.0 |
+
 ---
 
 ## Design Decisions & Audit Contracts
@@ -85,7 +124,7 @@ These rules and heuristics belong to `theme-book` itself (distinct from the upst
 - **`primary` vs. `background`:** Selected via `closest(ref("brand.seed-0"), pool(brandSolvableLight|Dark), { readableOn: background, readableContrast: 4.5 })`. `primary` stays at ≥ 4.5:1 against `background` even under `wcag-aaa` (since it is a UI fill, not body copy), while `primary-foreground` on `primary` and every status fill (`destructive`, `success`, `warning`, `danger`) enforce the full active text standard via standard-filtered named `DesignBook` scopes.
 - **`secondary` & `accent`:** In `shadcn` and `slide-deck`, these remain quiet primary tints on single-seed themes; `--accent` tints from a second hue **only** when a second `--seed` is explicitly supplied.
 - **`chart-1..5`:** Driven by `--generator` (`oklch`, `poline`, `rampensau`) + all seeds, mapped to polarity-safe lightness/chroma so every bar clears ≥ 3.0:1 WCAG and `|Lc| >= 45` APCA. Uses a **legibility-wins** policy: if a narrow generator arc falls below `0.8 × effectiveChroma` minimum pairwise OKLab distance, evenly-spaced synthetic pentagon spokes are added and reported transparently in `chartDiagnostics`.
-- **Reproducible recipes:** `--format json` exports a versioned `recipe` (`toolVersion`, `designBookVersion`, `rawSeeds`, `preset`, `mood`, `generator`, `standard`, `formatOptions`, `command`) alongside full `DesignBook` rule expressions and dependencies.
+- **Reproducible recipes:** `--format json` exports a versioned `recipe` (`toolVersion`, `designBookVersion`, `rawSeeds`, `preset`, `mood`, `generator`, `standard`, `formatOptions`, `command`, `book`) alongside full `DesignBook` rule expressions and dependencies.
 
 ### Audit Contract & Exit Codes
 

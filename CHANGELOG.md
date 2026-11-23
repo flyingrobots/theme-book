@@ -4,6 +4,37 @@ Notable changes to `theme-book`. Format follows [Keep a Changelog](https://keepa
 versioning is [SemVer](https://semver.org/). Pre-1.0: the CLI, library APIs and emitted output
 may change between minor versions.
 
+## [Unreleased]
+
+### Added
+
+- **Book extensions: a site's own rules on top of a preset** (flyingrobots/theme-book#22).
+  `theme-book theme --book <file.ts>` loads a module that names itself, its version, and the
+  preset and preset rules version it extends, and overrides rules through `apply`. The rule
+  constructors are passed in, so the file needs no imports. An extension may only override tokens
+  the preset emits, and is audited like a preset. Without `--preset`, its parent decides.
+- **Versioned preset rules.** Each preset declares a rules version, independent of the tool's
+  (`shadcn`, `semantic` and `slide-deck` start at 1.0.0). An extension naming any other version
+  is refused with exit `2`. A fingerprint of each preset's rule expressions is recorded per
+  version, and a test fails when a rule changes without a version bump. The fingerprint covers
+  every mood, every standard and three kinds of seed set (one chromatic seed, an achromatic seed,
+  two seeds), so a change confined to an achromatic, second-seed, AAA or APCA branch is caught.
+- **Strict extension headers.** Versions follow semver's core form, so `01.0.0` is refused;
+  an explicitly empty `--book=` is refused rather than ignored. The recipe command quotes
+  the `--book` path as a POSIX shell word, so it replays literally.
+- **The hash names the code that ran.** An extension is imported from a private copy of the
+  bytes it was hashed from, so reloading a rewritten file in one process applies the new rules,
+  never a cached module, and a path with a backslash, quote, `#` or `?` loads. An extension must
+  therefore import nothing.
+- **`recipe.book`** in `--format json`: the preset, its rules version and, with `--book`, the
+  extension's name, version and SHA-256. The recipe `command` includes `--book`.
+
+### Fixed
+
+- The README and skill said theme-book was "paired with skill.color-expert, plus culori", which
+  read as if culori were paired. culori is a runtime dependency like design-book, poline and
+  rampensau; color-expert is the separate skill theme-book pairs with.
+
 ## [0.3.0] — 2026-11-22
 
 ### Changed

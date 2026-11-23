@@ -7,6 +7,7 @@ process.stdout.on("error", (err: NodeJS.ErrnoException) => {
 });
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
+import { ExtensionError, loadBookExtension, type BookExtension } from "./extension";
 import {
   buildThemeBook,
   suggestCompanionColors,
@@ -45,7 +46,7 @@ Usage:
                      [--generator oklch|poline|rampensau]
                      [--standard wcag-aa|wcag-aaa|apca]
                      [--format css|json|w3-tokens|svg] [--hex | --native]
-                     [--audit] [--out <path>]
+                     [--audit] [--out <path>] [--book <extension.ts>]
 
   theme-book audit   <file.css|file.json> [--standard wcag-aa|wcag-aaa|apca]
                      [--fix] [--strict-borders] [--format text|json]
@@ -76,7 +77,7 @@ const COMMAND_SCHEMAS: Record<string, FlagSchema> = {
     boolFlags: new Set(["help", "h"]),
   },
   theme: {
-    valueFlags: new Set(["seed", "preset", "mood", "generator", "standard", "format", "out"]),
+    valueFlags: new Set(["seed", "preset", "mood", "generator", "standard", "format", "out", "book"]),
     boolFlags: new Set(["hex", "native", "audit", "help", "h"]),
   },
   audit: {
@@ -245,7 +246,19 @@ async function main() {
     const seeds = [...(flags.seed ?? []), ...positionals];
     if (seeds.length === 0) fail("theme requires at least one --seed <color>");
 
-    const preset = (getOne(flags, "preset") ?? "shadcn") as ThemePreset;
+    const bookPath = getOne(flags, "book");
+    let extension: BookExtension | undefined;
+    if (bookPath !== undefined) {
+      if (bookPath.trim() === "") fail("--book requires a file path");
+      try {
+        extension = await loadBookExtension(bookPath);
+      } catch (e) {
+        fail(e instanceof Error ? e.message : String(e));
+      }
+    }
+
+    // With --book and no --preset, the extension's parent decides the preset.
+    const preset = (getOne(flags, "preset") ?? extension?.extends.preset ?? "shadcn") as ThemePreset;
     if (!VALID_PRESETS.has(preset)) fail(`invalid --preset "${preset}"`);
 
     const mood = (getOne(flags, "mood") ?? "neutral") as Mood;
@@ -262,15 +275,22 @@ async function main() {
       fail(`invalid --standard "${standardRaw}"`);
     }
 
-    const built = buildThemeBook({
-      seeds,
-      preset,
-      mood,
-      generator,
-      standard: standardRaw as AuditStandard | undefined,
-      hexOutput: booleans.has("hex"),
-      nativeOutput: booleans.has("native"),
-    });
+    let built: ReturnType<typeof buildThemeBook>;
+    try {
+      built = buildThemeBook({
+        seeds,
+        preset,
+        mood,
+        generator,
+        standard: standardRaw as AuditStandard | undefined,
+        hexOutput: booleans.has("hex"),
+        nativeOutput: booleans.has("native"),
+        extension,
+      });
+    } catch (e) {
+      if (e instanceof ExtensionError) fail(e.message);
+      throw e;
+    }
     const rendered = renderThemeOutput(built, format, {
       hex: booleans.has("hex"),
       native: booleans.has("native"),
