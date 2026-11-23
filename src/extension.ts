@@ -3,8 +3,8 @@
 // Its rules are design-book expressions, built with constructors passed to `apply`, so an
 // extension needs no imports, and it may have none: the hash names the extension module, which
 // may import nothing, and any import is refused before the module loads (flyingrobots/theme-book#24).
-// An extension that reads files at runtime (node:fs through a global, Bun.file, fetch) cannot be
-// refused this way and is outside the contract. Loading the module runs its top-level code, so
+// An extension that reads files at runtime (Bun.file, Bun.spawn, fetch) cannot be refused this
+// way, and is outside the contract. Loading the module runs its top-level code, so
 // that code runs before the header is checked.
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";

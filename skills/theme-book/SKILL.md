@@ -46,6 +46,7 @@ Options:
 - `--hex` (emit hex) or `--native` (emit Design Book's native CSS `var()`/`color-mix()`)
 - `--audit` (run serialized-output verification and exit `0`/`1`/`3`)
 - `--out <path>`
+- `--book <extension.ts>` and `--book-sha256 <hex>` (a site's rule overrides; see section 5)
 
 ### Which Standard, and When
 
@@ -144,7 +145,10 @@ theme-book theme --book school.book.ts --seed "#0f766e" --mood editorial --stand
 ```
 
 - Only tokens the preset emits may be set; an extension adds no tokens.
-- Rule constructors (`closest`, `nth`, `ref`, `color`, `minContrastWith`, `bestContrastWith`, `mostVivid`, `leastVivid`, `furthestFrom`, `colorMix`, `shade`, `relativeTo`) arrive as `rules`, so the file needs no imports, and it must import nothing: theme-book loads a private copy of exactly the bytes it hashes, so a relative import would not resolve.
+- Rule constructors (`closest`, `nth`, `ref`, `color`, `minContrastWith`, `bestContrastWith`, `mostVivid`, `leastVivid`, `furthestFrom`, `colorMix`, `shade`, `relativeTo`) arrive as `rules`, so the file needs no imports, and it may have none. The hash names the extension module, which may import nothing; an extension that reads files at runtime is outside the contract. theme-book refuses any static import, re-export, `import()`, `require` or `import.meta` with exit `2` before the extension runs. It cannot refuse runtime file reads (`Bun.file`, `fetch`), so never write one.
+- Set every rule inside `apply`, synchronously: an async `apply` is refused, and `set()` throws after `apply` returns. Keep top-level code to the `export default`, because it runs before the header is checked.
+- An error from the extension's own code (a throw in `apply`, a rule that fails to resolve) exits `2` naming the extension and its path.
+- To replay a theme exactly, run the recipe `command` from `--format json`. It carries `--book-sha256 <hex>`, which refuses the extension if its bytes changed. A bare `--book` does not verify anything.
 - Keep a site's extension with that site's private theme material, not in a non-AGPL repository's published code.
 - When theme-book bumps a preset's rules version, re-check the extension against the new rules and update its `extends.version`.
 
