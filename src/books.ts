@@ -278,9 +278,55 @@ export function presetRulesLines(preset: ThemePreset, seedSets: Record<string, s
   return lines;
 }
 
-/** A hash of presetRulesLines, recorded per rules version so a rule change forces a version bump. */
+/**
+ * Fixed seeds just either side of the achromatic threshold (chroma 0.015), so moving the threshold
+ * in either direction flips a branch the fingerprint sees.
+ */
+const THRESHOLD_SEEDS: Record<string, string[]> = {
+  "just-chromatic": ["oklch(0.6 0.016 200)"],
+  "just-achromatic": ["oklch(0.6 0.014 200)"],
+};
+
+const sha256 = (s: string) => new Bun.CryptoHasher("sha256").update(s).digest("hex");
+
+/**
+ * Everything else an extension builds on, sampled at fixed seeds so it follows the code and not
+ * the caller's seeds: every helper scope's tokens (the pools, `inks`, `accentSeeds`), the preset's
+ * extras, the pools `generatePools` makes with each generator, and the rules at seeds either side
+ * of the achromatic threshold.
+ */
+export function presetHelperLines(preset: ThemePreset): string[] {
+  const lines: string[] = [];
+  for (const mood of Object.keys(MOOD_PROFILES) as Mood[]) {
+    for (const standard of ["wcag-aa", "wcag-aaa", "apca"] as const) {
+      for (const [kind, seeds] of Object.entries({ ...FINGERPRINT_SEEDS, ...THRESHOLD_SEEDS })) {
+        const config = `${mood}/${standard}/${kind}`;
+        const built = buildThemeBook({ seeds, preset, mood, generator: "oklch", standard });
+        for (const scope of built.book.getAllScopes()) {
+          if (scope.name === "light" || scope.name === "dark") continue;
+          for (const key of built.book.getAllKeysForScope(scope.name)) {
+            lines.push(`${config} ${scope.name}.${key}=${formatAstArg(built.book.getTokenByKey(`${scope.name}.${key}`))}`);
+          }
+        }
+        for (const [k, v] of Object.entries(built.extras ?? {})) lines.push(`${config} extra ${k}=${v}`);
+        for (const generator of ["oklch", "poline", "rampensau"] as const) {
+          lines.push(`${config} pools/${generator}=${sha256(JSON.stringify(generatePools(seeds, mood, generator, standard)))}`);
+        }
+        if (kind in THRESHOLD_SEEDS) {
+          for (const k of built.lightKeys) lines.push(`${config} ${k}=${built.light[k]!.rule}|${built.dark[k]!.rule}`);
+        }
+      }
+    }
+  }
+  return lines;
+}
+
+/**
+ * A hash of presetRulesLines and presetHelperLines, recorded per rules version so a change to any
+ * rule, helper scope, extra or pool generation forces a version bump.
+ */
 export function presetRulesFingerprint(preset: ThemePreset, seedSets: Record<string, string[]> = FINGERPRINT_SEEDS): string {
-  return new Bun.CryptoHasher("sha256").update(presetRulesLines(preset, seedSets).join("\n")).digest("hex");
+  return sha256([...presetRulesLines(preset, seedSets), ...presetHelperLines(preset)].join("\n"));
 }
 
 /** One POSIX shell word that replays as exactly `s`: plain when safe, otherwise single-quoted. */

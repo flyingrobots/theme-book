@@ -15,10 +15,17 @@ may change between minor versions.
   the preset emits, and is audited like a preset. Without `--preset`, its parent decides.
 - **Versioned preset rules.** Each preset declares a rules version, independent of the tool's
   (`shadcn`, `semantic` and `slide-deck` start at 1.0.0). An extension naming any other version
-  is refused with exit `2`. A fingerprint of each preset's rule expressions is recorded per
-  version, and a test fails when a rule changes without a version bump. The fingerprint covers
-  every mood, every standard and three kinds of seed set (one chromatic seed, an achromatic seed,
-  two seeds), so a change confined to an achromatic, second-seed, AAA or APCA branch is caught.
+  is refused with exit `2`. A fingerprint of each preset's rules is recorded per version, and a
+  test fails when a rule changes without a version bump. The fingerprint covers each token's rule
+  expression in every mood, every standard and three kinds of seed set (one chromatic seed, an
+  achromatic seed, two seeds), so a change confined to an achromatic, second-seed, AAA or APCA
+  branch is caught. It also covers what those rules build on, sampled at fixed seeds: every helper
+  scope's tokens (the pools, `inks`, `accentSeeds`), the preset's extras (slide-deck's fonts,
+  radius and shadows), the pools each generator makes, and the rules at seeds either side of the
+  achromatic threshold (flyingrobots/theme-book#24). Tests mutate a copy of `src/` and check that
+  each of these changes the fingerprint. The fingerprint was widened before any release recorded
+  one, so no extension was ever checked against the narrower one, and the rules versions stay at
+  1.0.0.
 - **Strict extension headers.** Versions follow semver's core form, so `01.0.0` is refused;
   an explicitly empty `--book=` is refused rather than ignored. The recipe command quotes
   the `--book` path as a POSIX shell word, so it replays literally.
