@@ -317,6 +317,11 @@ const THRESHOLD_SEEDS: Record<string, string[]> = {
 
 // The helper lines depend on nothing but the code, and take seconds to compute.
 const helperLinesCache = new Map<ThemePreset, string[]>();
+/**
+ * Numbers rounded to six decimals: the pools hold raw OKLCH floats (the seeds' l, c, h, the primary
+ * hue) whose last bits differ between platforms' math libraries, which must not move a fingerprint.
+ */
+const quantized = (_: string, v: unknown) => (typeof v === "number" && !Number.isInteger(v) ? Number(v.toFixed(6)) : v);
 const sha256 = (s: string) => new Bun.CryptoHasher("sha256").update(s).digest("hex");
 
 /**
@@ -342,7 +347,7 @@ export function presetHelperLines(preset: ThemePreset): string[] {
         }
         for (const [k, v] of Object.entries(built.extras ?? {})) lines.push(`${config} extra ${k}=${v}`);
         for (const generator of ["oklch", "poline", "rampensau"] as const) {
-          lines.push(`${config} pools/${generator}=${sha256(JSON.stringify(generatePools(seeds, mood, generator, standard)))}`);
+          lines.push(`${config} pools/${generator}=${sha256(JSON.stringify(generatePools(seeds, mood, generator, standard), quantized))}`);
         }
         if (kind in THRESHOLD_SEEDS) {
           for (const k of built.lightKeys) lines.push(`${config} ${k}=${built.light[k]!.rule}|${built.dark[k]!.rule}`);
