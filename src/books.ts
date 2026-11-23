@@ -261,10 +261,18 @@ function applyExtension(
   } finally {
     open = false;
   }
-  if (isThenable(returned)) {
+  // Inspecting the returned value can run the extension's code too (a `then` getter): keep its
+  // errors inside the boundary, named like any other error from the extension.
+  let thenable: boolean;
+  try {
+    thenable = isThenable(returned);
+  } catch (err) {
+    throw new ExtensionError(`${where}: apply returned a value that threw when inspected: ${errorMessage(err)}`);
+  }
+  if (thenable) {
     // Its later set() calls now throw; keep that rejection from surfacing as an unhandled one.
     try {
-      returned.then(undefined, () => {});
+      (returned as PromiseLike<unknown>).then(undefined, () => {});
     } catch {
       // a thenable whose then throws: nothing more to silence
     }

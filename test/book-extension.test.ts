@@ -261,3 +261,15 @@ test("the recipe command records --book-sha256, so replaying it refuses a rewrit
   const stale = replay();
   expect([stale.exitCode, stale.stderr.toString()]).toEqual([2, expect.stringMatching(/but --book-sha256 is/)]);
 }, 30_000); // three CLI runs
+
+test("an apply whose return value throws when inspected exits 2 naming the extension and its path", async () => {
+  // CodeRabbit on flyingrobots/theme-book#25: reading `then` on the returned value runs the extension's code too.
+  const path = module("throwing-then", `export default { ${HEADER}, apply() { return { get then() { throw new Error("boom"); } }; } };\n`);
+  const loaded = await loadBookExtension(path);
+  expect(() => build({ extension: loaded })).toThrow(ExtensionError);
+  expect(() => build({ extension: loaded })).toThrow(/apply returned a value that threw when inspected: boom/);
+  const r = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--book", path]);
+  const stderr = r.stderr.toString();
+  expect([r.exitCode, stderr.includes(`extension x@1.0.0 (${path})`)]).toEqual([2, true]);
+  expect(stderr).toMatch(/apply returned a value that threw when inspected: boom/);
+});
