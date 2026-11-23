@@ -6,6 +6,8 @@ may change between minor versions.
 
 ## [Unreleased]
 
+## [0.4.0] — 2026-11-23
+
 ### Added
 
 - **Book extensions: a site's own rules on top of a preset** (flyingrobots/theme-book#22).

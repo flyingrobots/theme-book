@@ -11,6 +11,8 @@ Versions track the tool's releases.
 
 ## [Unreleased]
 
+## [0.4.0] — 2026-11-23
+
 ### Added
 
 - **Section 5, book extensions.** When a site needs some preset rules changed, the skill now says
