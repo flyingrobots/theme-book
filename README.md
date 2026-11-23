@@ -77,8 +77,7 @@ theme-book eval - < my-book.ts
 A site that needs a preset with a few rules changed writes a **book extension** rather than
 forking the preset. The extension names itself, its own version, and the preset and preset
 **rules version** it extends. Its rules are `design-book` expressions built with constructors
-passed to `apply`, so the file needs no imports. It must import nothing: theme-book loads a
-private copy of exactly the bytes it hashes, so a relative import would not resolve:
+passed to `apply`, so the file needs no imports, and it may have none:
 
 ```ts
 // school.book.ts
@@ -102,7 +101,24 @@ theme-book theme --book school.book.ts --seed "#0f766e" --mood editorial --stand
 - **No new tokens.** An extension may only override tokens the preset emits.
 - **Audited like a preset.** `--audit` checks the extended theme exactly as it checks a preset.
 - **Provenance.** `--format json` records `recipe.book`: the preset, its rules version, and the
-  extension's name, version and SHA-256.
+  extension's name, version and SHA-256. The hash names the extension module, which may import
+  nothing; an extension that reads files at runtime is outside the contract. theme-book loads a
+  private copy of exactly the bytes it hashed, after scanning them: a static import, a re-export,
+  `import()` and `require` of any form, and `import.meta` are refused (exit `2`, naming the import)
+  before any of the extension's code runs. Type-only imports are erased and allowed. A runtime
+  API that reads a file (`Bun.file`, `Bun.spawn`, `fetch`) cannot be refused by scanning, which
+  is why such an extension is outside the contract rather than refused.
+- **Replay verifies the hash.** `--book-sha256 <hex>` refuses an extension whose SHA-256
+  differs (exit `2`) before importing it. The recipe `command` includes it, so replaying the
+  command refuses a rewritten extension. Without the flag, `--book` loads whatever the file
+  holds and records its hash.
+- **Top-level code runs first.** Loading a module runs its top-level code, so an extension's
+  top-level code runs before its header (name, versions, `apply`) is checked. Keep everything
+  inside `apply`.
+- **`apply` is synchronous.** An `apply` that returns a promise is refused (exit `2`), and `set()`
+  throws once `apply` has returned.
+- **Errors name the extension.** An error thrown by `apply`, or by resolving the rules it set,
+  exits `2` with the extension's name, version and path.
 - Without `--preset`, the extension's parent decides the preset.
 
 | Preset | Rules version |

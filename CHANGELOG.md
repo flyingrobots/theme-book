@@ -15,22 +15,59 @@ may change between minor versions.
   the preset emits, and is audited like a preset. Without `--preset`, its parent decides.
 - **Versioned preset rules.** Each preset declares a rules version, independent of the tool's
   (`shadcn`, `semantic` and `slide-deck` start at 1.0.0). An extension naming any other version
-  is refused with exit `2`. A fingerprint of each preset's rule expressions is recorded per
-  version, and a test fails when a rule changes without a version bump. The fingerprint covers
-  every mood, every standard and three kinds of seed set (one chromatic seed, an achromatic seed,
-  two seeds), so a change confined to an achromatic, second-seed, AAA or APCA branch is caught.
+  is refused with exit `2`. A fingerprint of each preset's rules is recorded per version, and a
+  test fails when a rule changes without a version bump. The fingerprint covers each token's rule
+  expression in every mood, every standard and three kinds of seed set (one chromatic seed, an
+  achromatic seed, two seeds), so a change confined to an achromatic, second-seed, AAA or APCA
+  branch is caught. It also covers what those rules build on, sampled at fixed seeds: every helper
+  scope's tokens (the pools, `inks`, `accentSeeds`), the preset's extras (slide-deck's fonts,
+  radius and shadows), the pools each generator makes, and the rules at seeds either side of the
+  achromatic threshold (flyingrobots/theme-book#24). Tests mutate a copy of `src/` and check that
+  each of these changes the fingerprint. The fingerprint was widened before any release recorded
+  one, so no extension was ever checked against the narrower one, and the rules versions stay at
+  1.0.0.
 - **Strict extension headers.** Versions follow semver's core form, so `01.0.0` is refused;
   an explicitly empty `--book=` is refused rather than ignored. The recipe command quotes
   the `--book` path as a POSIX shell word, so it replays literally.
-- **The hash names the code that ran.** An extension is imported from a private copy of the
-  bytes it was hashed from, so reloading a rewritten file in one process applies the new rules,
-  never a cached module, and a path with a backslash, quote, `#` or `?` loads. An extension must
-  therefore import nothing.
+- **The hash names the extension module, which may import nothing; an extension that reads
+  files at runtime is outside the contract** (flyingrobots/theme-book#24). An extension is imported
+  from a private copy of the bytes it was hashed from, so reloading a rewritten file in one process
+  applies the new rules, never a cached module, and a path with a backslash, quote, `#` or `?`
+  loads. Before importing, theme-book scans those bytes: a static import, a re-export, `import()`
+  and `require` of any form, and `import.meta` are refused with exit `2`, naming the import, before
+  any of the extension's code runs. Type-only imports are erased and allowed. A runtime API that
+  reads a file (`Bun.file`, `Bun.spawn`, `fetch`) cannot be refused by scanning; that is why such
+  an extension is outside the contract rather than refused. The extension loader does not make
+  `design-book` resolvable.
+- **`--book-sha256 <hex>`** refuses an extension whose SHA-256 differs, with exit `2`, before
+  importing it. The recipe `command` records it ahead of `--book`, so replaying the command
+  refuses a rewritten extension. A bare `--book` verifies nothing; it records the hash of whatever
+  it loaded.
 - **`recipe.book`** in `--format json`: the preset, its rules version and, with `--book`, the
-  extension's name, version and SHA-256. The recipe `command` includes `--book`.
+  extension's name, version and SHA-256. The recipe `command` includes `--book-sha256` and
+  `--book`.
+- **Extension errors exit `2` and name the extension.** An `apply` that returns a promise is
+  refused, and `set()` throws once `apply` has returned, so no rule lands after the theme is
+  built. An error thrown by `apply`, or by resolving the rules once an extension has set them,
+  exits `2` with the extension's name, version and path.
+  Loading a module runs its top-level code, so an extension's top-level code runs before its
+  header is checked; the README and skill say so.
 
 ### Fixed
 
+- **`--native` and `w3-tokens` emitted tokens the preset does not have** (a regression in
+  v0.3.0, fixed in c97dcc8). Both render the whole book, and v0.3.0 registered tokens in presets
+  that do not emit them: `shadcn` emitted `light-`/`dark-destructive-foreground`, and
+  `slide-deck` emitted the eight `sidebar-*` tokens in each mode (`sidebar`,
+  `sidebar-foreground`, `sidebar-primary`, `sidebar-primary-foreground`, `sidebar-accent`,
+  `sidebar-accent-foreground`, `sidebar-border`, `sidebar-ring`). Each preset now registers only
+  the tokens it emits. Plain `css` and `--format json` were not affected, and `semantic` was not
+  affected in any format.
+- **The audit checks `sidebar-ring` and `sidebar-border` without a page background** (c97dcc8).
+  In v0.3.0 these pairs were only added when the file also defined `background` or `surface`, so a
+  file with sidebar tokens alone passed with its sidebar ring unchecked. `sidebar-ring` on
+  `sidebar` is now a required ui-graphic pair and `sidebar-border` on `sidebar` a border advisory
+  whenever `sidebar` is defined.
 - The README and skill said theme-book was "paired with skill.color-expert, plus culori", which
   read as if culori were paired. culori is a runtime dependency like design-book, poline and
   rampensau; color-expert is the separate skill theme-book pairs with.

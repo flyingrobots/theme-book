@@ -196,7 +196,7 @@ function buildRecipeCommand(opts: {
   standard: AuditStandard;
   hex: boolean;
   native: boolean;
-  book?: string;
+  book?: { path: string; sha256: string };
 }): string {
   const parts = ["theme-book theme"];
   for (const s of opts.rawSeeds) {
@@ -208,7 +208,8 @@ function buildRecipeCommand(opts: {
   parts.push(`--standard ${opts.standard}`);
   if (opts.hex) parts.push("--hex");
   if (opts.native) parts.push("--native");
-  if (opts.book) parts.push(`--book ${shellWord(opts.book)}`);
+  // The hash first, so a replay refuses a rewritten extension before running any of it.
+  if (opts.book) parts.push(`--book-sha256 ${opts.book.sha256} --book ${shellWord(opts.book.path)}`);
   return parts.join(" ");
 }
 
@@ -228,27 +229,62 @@ function applyExtension(
   light: ReturnType<DesignBook["addScope"]>,
   dark: ReturnType<DesignBook["addScope"]>,
 ): void {
-  const id = `${ext.name}@${ext.version}`;
+  const where = extensionWhere(ext);
   if (ext.extends.preset !== preset) {
-    throw new ExtensionError(`${id} extends ${ext.extends.preset}, but the theme is being built with --preset ${preset}`);
+    throw new ExtensionError(`${where} extends ${ext.extends.preset}, but the theme is being built with --preset ${preset}`);
   }
   const installed = PRESET_RULES_VERSION[preset];
   if (ext.extends.version !== installed) {
     throw new ExtensionError(
-      `${id} extends ${preset}@${ext.extends.version}, but this theme-book's ${preset} rules are ${installed}; update the extension to name ${preset}@${installed}`,
+      `${where} extends ${preset}@${ext.extends.version}, but this theme-book's ${preset} rules are ${installed}; update the extension to name ${preset}@${installed}`,
     );
   }
   const allowed = new Set(keys);
+  let open = true; // the guards close when apply returns, so a rule set later is refused
   const guard = (scope: ReturnType<DesignBook["addScope"]>) => ({
     set(token: string, rule: unknown) {
+      if (!open) {
+        throw new ExtensionError(`${where}: set() after apply returned; an extension sets every rule inside apply, synchronously`);
+      }
       if (!allowed.has(token)) {
-        throw new ExtensionError(`${id}: "${token}" is not a ${preset} token; an extension may only override the tokens the preset emits`);
+        throw new ExtensionError(`${where}: "${token}" is not a ${preset} token; an extension may only override the tokens the preset emits`);
       }
       scope.set(token, rule as Parameters<typeof scope.set>[1]);
     },
   });
-  ext.apply({ light: guard(light), dark: guard(dark), rules: RULES });
+  let returned: unknown;
+  try {
+    returned = ext.apply({ light: guard(light), dark: guard(dark), rules: RULES });
+  } catch (err) {
+    if (err instanceof ExtensionError) throw err;
+    throw new ExtensionError(`${where}: apply threw: ${errorMessage(err)}`);
+  } finally {
+    open = false;
+  }
+  // Inspecting the returned value can run the extension's code too (a `then` getter): keep its
+  // errors inside the boundary, named like any other error from the extension.
+  let thenable: boolean;
+  try {
+    thenable = isThenable(returned);
+  } catch (err) {
+    throw new ExtensionError(`${where}: apply returned a value that threw when inspected: ${errorMessage(err)}`);
+  }
+  if (thenable) {
+    // Its later set() calls now throw; keep that rejection from surfacing as an unhandled one.
+    try {
+      (returned as PromiseLike<unknown>).then(undefined, () => {});
+    } catch {
+      // a thenable whose then throws: nothing more to silence
+    }
+    throw new ExtensionError(`${where}: apply must return nothing; it returned a promise, so its rules would land after the theme was built`);
+  }
 }
+
+const errorMessage = (err: unknown) => (err instanceof Error ? err.message : String(err));
+const isThenable = (v: unknown): v is PromiseLike<unknown> =>
+  (typeof v === "object" || typeof v === "function") && v !== null && typeof (v as { then?: unknown }).then === "function";
+/** How an error names the extension it came from: name, version and path. */
+const extensionWhere = (ext: BookExtension) => `extension ${ext.name}@${ext.version} (${ext.path})`;
 
 /** Seed sets that drive each kind of rule branch: one chromatic seed, an achromatic seed, two seeds. */
 export const FINGERPRINT_SEEDS: Record<"chromatic" | "achromatic" | "two-seed", string[]> = {
@@ -278,9 +314,65 @@ export function presetRulesLines(preset: ThemePreset, seedSets: Record<string, s
   return lines;
 }
 
-/** A hash of presetRulesLines, recorded per rules version so a rule change forces a version bump. */
+/**
+ * Fixed seeds just either side of the achromatic threshold (chroma 0.015), so moving the threshold
+ * in either direction flips a branch the fingerprint sees.
+ */
+const THRESHOLD_SEEDS: Record<string, string[]> = {
+  "just-chromatic": ["oklch(0.6 0.016 200)"],
+  "just-achromatic": ["oklch(0.6 0.014 200)"],
+};
+
+// The helper lines depend on nothing but the code, and take seconds to compute.
+const helperLinesCache = new Map<ThemePreset, string[]>();
+/**
+ * Numbers rounded to six decimals: the pools hold raw OKLCH floats (the seeds' l, c, h, the primary
+ * hue) whose last bits differ between platforms' math libraries, which must not move a fingerprint.
+ */
+const quantized = (_: string, v: unknown) => (typeof v === "number" && !Number.isInteger(v) ? Number(v.toFixed(6)) : v);
+const sha256 = (s: string) => new Bun.CryptoHasher("sha256").update(s).digest("hex");
+
+/**
+ * Everything else an extension builds on, sampled at fixed seeds so it follows the code and not
+ * the caller's seeds: every helper scope's tokens (the pools, `inks`, `accentSeeds`), the preset's
+ * extras, the pools `generatePools` makes with each generator, and the rules at seeds either side
+ * of the achromatic threshold.
+ */
+export function presetHelperLines(preset: ThemePreset): string[] {
+  const cached = helperLinesCache.get(preset);
+  if (cached) return [...cached];
+  const lines: string[] = [];
+  for (const mood of Object.keys(MOOD_PROFILES) as Mood[]) {
+    for (const standard of ["wcag-aa", "wcag-aaa", "apca"] as const) {
+      for (const [kind, seeds] of Object.entries({ ...FINGERPRINT_SEEDS, ...THRESHOLD_SEEDS })) {
+        const config = `${mood}/${standard}/${kind}`;
+        const built = buildThemeBook({ seeds, preset, mood, generator: "oklch", standard });
+        for (const scope of built.book.getAllScopes()) {
+          if (scope.name === "light" || scope.name === "dark") continue;
+          for (const key of built.book.getAllKeysForScope(scope.name)) {
+            lines.push(`${config} ${scope.name}.${key}=${formatAstArg(built.book.getTokenByKey(`${scope.name}.${key}`))}`);
+          }
+        }
+        for (const [k, v] of Object.entries(built.extras ?? {})) lines.push(`${config} extra ${k}=${v}`);
+        for (const generator of ["oklch", "poline", "rampensau"] as const) {
+          lines.push(`${config} pools/${generator}=${sha256(JSON.stringify(generatePools(seeds, mood, generator, standard), quantized))}`);
+        }
+        if (kind in THRESHOLD_SEEDS) {
+          for (const k of built.lightKeys) lines.push(`${config} ${k}=${built.light[k]!.rule}|${built.dark[k]!.rule}`);
+        }
+      }
+    }
+  }
+  helperLinesCache.set(preset, lines);
+  return [...lines];
+}
+
+/**
+ * A hash of presetRulesLines and presetHelperLines, recorded per rules version so a change to any
+ * rule, helper scope, extra or pool generation forces a version bump.
+ */
 export function presetRulesFingerprint(preset: ThemePreset, seedSets: Record<string, string[]> = FINGERPRINT_SEEDS): string {
-  return new Bun.CryptoHasher("sha256").update(presetRulesLines(preset, seedSets).join("\n")).digest("hex");
+  return sha256([...presetRulesLines(preset, seedSets), ...presetHelperLines(preset)].join("\n"));
 }
 
 /** One POSIX shell word that replays as exactly `s`: plain when safe, otherwise single-quoted. */
@@ -706,8 +798,14 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
   const darkSerialized: Record<string, string> = {};
 
   for (const k of keys) {
-    lightResolved[k] = describeInspection(book, `light.${k}`);
-    darkResolved[k] = describeInspection(book, `dark.${k}`);
+    try {
+      lightResolved[k] = describeInspection(book, `light.${k}`);
+      darkResolved[k] = describeInspection(book, `dark.${k}`);
+    } catch (err) {
+      // With an extension, a rule that fails to resolve is the extension's: name it, and exit 2.
+      if (!opts.extension || err instanceof ExtensionError) throw err;
+      throw new ExtensionError(`${extensionWhere(opts.extension)}: its rules failed to resolve: ${errorMessage(err)}`);
+    }
     lightSerialized[k] = opts.hexOutput ? lightResolved[k]!.hex : lightResolved[k]!.oklch;
     darkSerialized[k] = opts.hexOutput ? darkResolved[k]!.hex : darkResolved[k]!.oklch;
   }
@@ -740,7 +838,7 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
       standard,
       hex: hexFlag,
       native: nativeFlag,
-      book: opts.extension?.path,
+      book: opts.extension && { path: opts.extension.path, sha256: opts.extension.sha256 },
     }),
     book: {
       preset: opts.preset,

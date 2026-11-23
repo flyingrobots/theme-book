@@ -16,11 +16,26 @@ Versions track the tool's releases.
 - **Section 5, book extensions.** When a site needs some preset rules changed, the skill now says
   to write a `--book` extension naming its parent preset and rules version, never to fork the
   preset or hand-edit emitted tokens, and to keep the extension with the site's private theme
-  material. An extension must import nothing, since it is loaded from a copy of the bytes
-  theme-book hashed.
+  material.
+- **What the extension's hash names** (flyingrobots/theme-book#24). The hash names the extension
+  module, which may import nothing; an extension that reads files at runtime is outside the
+  contract. The skill says theme-book refuses every import form (exit `2`) before the extension
+  runs, and that runtime file reads (`Bun.file`, `fetch`) cannot be refused, so an agent never
+  writes one.
+- **Extensions set every rule inside `apply`, synchronously**, since an async `apply` is
+  refused and `set()` throws after `apply` returns. Top-level code stays limited to the
+  `export default`, because it runs before the header is checked. An error from the extension's
+  own code exits `2` naming the extension and its path.
+- **Replay with the recipe `command`.** It carries `--book-sha256`, which refuses an extension
+  whose bytes changed; a bare `--book` verifies nothing.
 
 ### Fixed
 
+- The v0.3.0 tool emitted `destructive-foreground` for `shadcn` and the eight `sidebar-*` tokens
+  for `slide-deck` in `--native` and `w3-tokens` output, though neither preset defines them. The
+  audit also skipped `sidebar-ring` and `sidebar-border` in a file with no page background. Both
+  are fixed in the tool (see the [repository changelog](../../CHANGELOG.md)). The skill's
+  guidance did not change, but output it told an agent to trust was wrong in v0.3.0.
 - The description no longer reads as if culori were paired with theme-book; it is a dependency.
 
 ## [0.2.1] — 2026-11-21

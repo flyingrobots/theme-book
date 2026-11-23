@@ -46,7 +46,7 @@ Usage:
                      [--generator oklch|poline|rampensau]
                      [--standard wcag-aa|wcag-aaa|apca]
                      [--format css|json|w3-tokens|svg] [--hex | --native]
-                     [--audit] [--out <path>] [--book <extension.ts>]
+                     [--audit] [--out <path>] [--book <extension.ts> [--book-sha256 <hex>]]
 
   theme-book audit   <file.css|file.json> [--standard wcag-aa|wcag-aaa|apca]
                      [--fix] [--strict-borders] [--format text|json]
@@ -77,7 +77,7 @@ const COMMAND_SCHEMAS: Record<string, FlagSchema> = {
     boolFlags: new Set(["help", "h"]),
   },
   theme: {
-    valueFlags: new Set(["seed", "preset", "mood", "generator", "standard", "format", "out", "book"]),
+    valueFlags: new Set(["seed", "preset", "mood", "generator", "standard", "format", "out", "book", "book-sha256"]),
     boolFlags: new Set(["hex", "native", "audit", "help", "h"]),
   },
   audit: {
@@ -247,11 +247,16 @@ async function main() {
     if (seeds.length === 0) fail("theme requires at least one --seed <color>");
 
     const bookPath = getOne(flags, "book");
+    const bookSha256 = getOne(flags, "book-sha256");
+    if (bookSha256 !== undefined) {
+      if (bookPath === undefined) fail("--book-sha256 requires --book");
+      if (!/^[0-9a-f]{64}$/i.test(bookSha256)) fail(`--book-sha256 must be 64 hex digits, got ${JSON.stringify(bookSha256)}`);
+    }
     let extension: BookExtension | undefined;
     if (bookPath !== undefined) {
       if (bookPath.trim() === "") fail("--book requires a file path");
       try {
-        extension = await loadBookExtension(bookPath);
+        extension = await loadBookExtension(bookPath, { sha256: bookSha256 });
       } catch (e) {
         fail(e instanceof Error ? e.message : String(e));
       }

@@ -399,7 +399,7 @@ describe("theme-book Commit 2: generator charts, exact seeds, AA/AAA/APCA matrix
       expect(hc.light.foreground!.hex).not.toBe(hc.light["muted-foreground"]!.hex);
       expect(hc.dark.foreground!.hex).not.toBe(hc.dark["muted-foreground"]!.hex);
     }
-  });
+  }, 60_000); // 140 theme builds, each audited: seconds of work, well past the 5 s default on a loaded host
 
   test("suggest honors --count 10 and reports shortage warning when pool is exhausted", () => {
     const ten = suggestCompanionColors({
