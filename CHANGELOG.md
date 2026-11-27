@@ -6,6 +6,14 @@ may change between minor versions.
 
 ## [Unreleased]
 
+### Changed
+
+- **design-book is a vendored build of `main` at `2d80b33`**, nine commits past the 0.26.0
+  release: a book that measures APCA itself, contrast thresholds given as text styles, and
+  selectors rendered as `var()`. No release contains them yet (meodai/design-book#5). Recipes
+  record `designBookVersion` as `0.26.0+main.2d80b33`. `install.sh` stages `vendor/`. See
+  [`vendor/README.md`](vendor/README.md).
+
 ## [0.4.0] — 2026-11-23
 
 ### Added

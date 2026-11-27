@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "culori": "^4.0.2",
-    "design-book": "^0.26.0",
+    "design-book": "file:./vendor/design-book-0.26.0+main.2d80b33.tgz",
     "poline": "^0.13.1",
     "rampensau": "^2.4.0"
   },

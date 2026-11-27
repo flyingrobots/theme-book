@@ -151,6 +151,8 @@ fi
 cp -R "$REPO_DIR/bin" "$STAGE_DIR/bin"
 cp -R "$REPO_DIR/src" "$STAGE_DIR/src"
 cp -R "$REPO_DIR/skills" "$STAGE_DIR/skills"
+# design-book is installed from a vendored build (see vendor/README.md).
+cp -R "$REPO_DIR/vendor" "$STAGE_DIR/vendor"
 printf 'theme-book-install-v1\n' > "$STAGE_DIR/.theme-book-install"
 chmod 755 "$STAGE_DIR" "$STAGE_DIR/bin/theme-book" "$STAGE_DIR/src/cli.ts"
 
