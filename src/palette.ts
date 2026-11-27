@@ -16,7 +16,7 @@ import {
   type ExactRgb,
 } from "./audit";
 
-export type Mood = "neutral" | "muted" | "vivid" | "editorial" | "high-contrast";
+export type Mood = "neutral" | "muted" | "vivid" | "editorial" | "high-contrast" | "freak";
 export type GeneratorKind = "oklch" | "poline" | "rampensau";
 
 export interface MoodProfile {
@@ -80,6 +80,16 @@ export const MOOD_PROFILES: Record<Mood, MoodProfile> = {
     minTextContrast: 17.0,
     minMutedContrast: 7.4,
     description: "Maximum legibility targeting AAA (7:1) / APCA 75+ reading comfort",
+  },
+  freak: {
+    neutralChroma: 0.012,
+    accentChromaMin: 0.12,
+    accentChromaMax: 0.24,
+    secondaryChroma: 0.04,
+    statusChroma: 0.2,
+    minTextContrast: 14.0,
+    minMutedContrast: 4.8,
+    description: "Spends the whole palette: seed-tinted surfaces in both modes, the seeds as fills and charts",
   },
 };
 

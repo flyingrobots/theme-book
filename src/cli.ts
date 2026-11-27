@@ -26,7 +26,7 @@ import {
 } from "./render";
 import type { GeneratorKind, Mood } from "./palette";
 
-const VALID_MOODS = new Set<Mood>(["neutral", "muted", "vivid", "editorial", "high-contrast"]);
+const VALID_MOODS = new Set<Mood>(["neutral", "muted", "vivid", "editorial", "high-contrast", "freak"]);
 const VALID_GENERATORS = new Set<GeneratorKind>(["oklch", "poline", "rampensau"]);
 const VALID_PRESETS = new Set<ThemePreset>(["shadcn", "semantic", "slide-deck"]);
 const VALID_FORMATS = new Set<RenderOutputFormat>(["css", "json", "w3-tokens", "svg"]);
