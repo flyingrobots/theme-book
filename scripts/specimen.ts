@@ -79,32 +79,38 @@ function textBox(
   };
 }
 
-export const BAR_HEIGHTS = [54, 78, 42, 66, 36];
+export const BAR_HEIGHTS = [40, 56, 30, 48, 24];
+/** The chart's baseline, in panel coordinates. */
+const AXIS_Y = 340;
+/** Bars are centred: 5 × 72 wide with 30 between them. */
+const BAR_W = 72;
+const BAR_GAP = 30;
 
 /** Every element of one panel, in panel coordinates. */
 export function panelLayout(w: number, h: number, t: PanelText): LayoutBox[] {
-  const card = { x: 24, y: 70, w: w - 48, h: 180 };
-  const chart = { x: 24, y: 262, w: w - 48, h: h - 262 - 8 };
+  const card = { x: 24, y: 70, w: w - 48, h: 172 };
+  const chart = { x: 24, y: 254, w: w - 48, h: h - 254 - 16 };
+  const barsLeft = (w - (BAR_HEIGHTS.length * BAR_W + (BAR_HEIGHTS.length - 1) * BAR_GAP)) / 2;
   const boxes: LayoutBox[] = [
     { id: "card", parent: "panel", kind: "rect", ...card },
     { id: "chart", parent: "panel", kind: "rect", ...chart },
     textBox("title", "panel", 24, 34, t.title, 16, { bold: true }),
     textBox("subtitle", "panel", 24, 54, t.subtitle, 11.5),
     { id: "audit-pill", parent: "panel", kind: "rect", x: w - 134, y: 18, w: 110, h: 24 },
-    textBox("card-title", "card", 40, 96, "Release Summary", 13.5, { bold: true }),
-    textBox("card-body", "card", 40, 114, "Body & muted copy, focus input, primary/secondary actions, and accent hover.", 11.5),
+    textBox("card-title", "card", 40, 96, "Release v0.4.0", 13.5, { bold: true }),
+    textBox("card-body", "card", 40, 114, "Three tokens changed since v0.3.0. Review them before publishing.", 11.5),
     { id: "input", parent: "card", kind: "rect", x: 40, y: 128, w: 236, h: 32 },
     { id: "accent", parent: "card", kind: "rect", x: 288, y: 128, w: 136, h: 32 },
-    { id: "primary", parent: "card", kind: "rect", x: 40, y: 174, w: 116, h: 32 },
-    { id: "secondary", parent: "card", kind: "rect", x: 166, y: 174, w: 108, h: 32 },
-    { id: "destructive", parent: "card", kind: "rect", x: 288, y: 174, w: 240, h: 32 },
-    textBox("tokens", "card", 40, 234, t.tokens, 10.5, { mono: true }),
-    textBox("chart-title", "chart", 24, 274, t.chartTitle, 11.5, { bold: true }),
+    { id: "primary", parent: "card", kind: "rect", x: 40, y: 172, w: 116, h: 32 },
+    { id: "secondary", parent: "card", kind: "rect", x: 166, y: 172, w: 108, h: 32 },
+    { id: "destructive", parent: "card", kind: "rect", x: 288, y: 172, w: 236, h: 32 },
+    textBox("tokens", "card", 40, 226, t.tokens, 10.5, { mono: true }),
+    textBox("chart-title", "chart", 24, 272, t.chartTitle, 11.5, { bold: true }),
   ];
   BAR_HEIGHTS.forEach((bh, i) => {
-    const bx = 34 + i * 102;
-    boxes.push({ id: `bar-${i + 1}`, parent: "chart", kind: "rect", x: bx, y: 352 - bh, w: 72, h: bh });
-    boxes.push(textBox(`bar-label-${i + 1}`, "chart", bx + 36, 366, `chart-${i + 1}`, 10, { mono: true, anchor: "middle" }));
+    const bx = barsLeft + i * (BAR_W + BAR_GAP);
+    boxes.push({ id: `bar-${i + 1}`, parent: "chart", kind: "rect", x: bx, y: AXIS_Y - bh, w: BAR_W, h: bh });
+    boxes.push(textBox(`bar-label-${i + 1}`, "chart", bx + BAR_W / 2, AXIS_Y + 14, `chart-${i + 1}`, 10, { mono: true, anchor: "middle" }));
   });
   return boxes;
 }
@@ -165,11 +171,11 @@ function renderPanel(
 
     <!-- Accent hover badge beside input -->
     <rect x="${r("accent").x}" y="${r("accent").y}" width="${r("accent").w}" height="${r("accent").h}" rx="6" fill="${c("accent")}" stroke="${c("border")}" stroke-width="1"/>
-    <text x="${cx("accent")}" y="${cy("accent")}" text-anchor="middle" font-size="11.5" font-weight="500" fill="${c("accent-foreground")}">Accent / Hover</text>
+    <text x="${cx("accent")}" y="${cy("accent")}" text-anchor="middle" font-size="11.5" font-weight="500" fill="${c("accent-foreground")}">Draft</text>
 
     <!-- Primary + Secondary Buttons -->
     <rect x="${r("primary").x}" y="${r("primary").y}" width="${r("primary").w}" height="${r("primary").h}" rx="6" fill="${c("primary")}"/>
-    <text x="${cx("primary")}" y="${cy("primary")}" text-anchor="middle" font-size="12" font-weight="600" fill="${c("primary-foreground")}">Save Theme</text>
+    <text x="${cx("primary")}" y="${cy("primary")}" text-anchor="middle" font-size="12" font-weight="600" fill="${c("primary-foreground")}">Publish</text>
 
     <rect x="${r("secondary").x}" y="${r("secondary").y}" width="${r("secondary").w}" height="${r("secondary").h}" rx="6" fill="${c("secondary")}" stroke="${c("border")}" stroke-width="1"/>
     <text x="${cx("secondary")}" y="${cy("secondary")}" text-anchor="middle" font-size="12" font-weight="500" fill="${c("secondary-foreground")}">Preview</text>
@@ -178,14 +184,14 @@ function renderPanel(
          (bg-destructive/10 in light, /20 in dark). Stock shadcn has no destructive-foreground. -->
     <rect x="${r("destructive").x}" y="${r("destructive").y}" width="${r("destructive").w}" height="${r("destructive").h}" rx="6" fill="${c("background")}"/>
     <rect x="${r("destructive").x}" y="${r("destructive").y}" width="${r("destructive").w}" height="${r("destructive").h}" rx="6" fill="${c("destructive")}" fill-opacity="${polarity === "dark" ? 0.2 : 0.1}"/>
-    <text x="${cx("destructive")}" y="${cy("destructive")}" text-anchor="middle" font-size="11.5" font-weight="600" fill="${c("destructive")}">Destructive: Revoke token</text>
+    <text x="${cx("destructive")}" y="${cy("destructive")}" text-anchor="middle" font-size="11.5" font-weight="600" fill="${c("destructive")}">Revoke token</text>
 
     <!-- Inline token footer inside card -->
     <text x="${r("tokens").x}" y="${r("tokens").baseline}" font-size="10.5" font-family="${MONO}" fill="${c("muted-foreground")}">${esc(text.tokens)}</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
     <text x="${r("chart-title").x}" y="${r("chart-title").baseline}" font-size="11.5" font-weight="600" fill="${c("foreground")}">${esc(text.chartTitle)}</text>
-    <line x1="${r("chart").x}" y1="352" x2="${r("chart").x + r("chart").w}" y2="352" stroke="${c("border")}" stroke-width="1"/>
+    <line x1="${r("chart").x}" y1="${AXIS_Y}" x2="${r("chart").x + r("chart").w}" y2="${AXIS_Y}" stroke="${c("border")}" stroke-width="1"/>
     ${BAR_HEIGHTS.map((_, idx) => {
       const bar = r(`bar-${idx + 1}`);
       const label = r(`bar-label-${idx + 1}`);
