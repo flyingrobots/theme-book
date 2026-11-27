@@ -3,11 +3,14 @@
  * Generate a deterministic, browser-free SVG UI specimen (docs/specimen.svg)
  * rendered directly from `buildThemeBook()`. Shows an ordinary shadcn interface
  * (heading, body text, muted text, card, input + focus ring, primary/secondary
- * buttons, accent chip, destructive alert, and 5-bar chart) across two moods
+ * buttons, accent chip, destructive action, and 5-bar chart) across two moods
  * and both light & dark polarities.
+ *
+ * Geometry lives in `panelLayout()`, one box per element, so a test can check that
+ * no two elements overlap and every element stays inside its container.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { dirname, resolve } from "node:path";
 import { buildThemeBook, type BuiltTheme } from "../src/books";
 
 function esc(s: string): string {
@@ -16,6 +19,115 @@ function esc(s: string): string {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+const MONO = "ui-monospace, SFMono-Regular, Menlo, monospace";
+
+/** One element of a panel. `parent` names the box it must sit inside; siblings must not overlap. */
+export interface LayoutBox {
+  id: string;
+  parent: "panel" | "card" | "chart";
+  kind: "rect" | "text";
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  /** For text: the baseline, the string and the font, so the box can be estimated. */
+  baseline?: number;
+  text?: string;
+  fontSize?: number;
+  mono?: boolean;
+}
+
+/** The text a panel shows. Only the strings that change between panels. */
+export interface PanelText {
+  title: string;
+  subtitle: string;
+  audit: string;
+  seed: string;
+  tokens: string;
+  chartTitle: string;
+}
+
+// A generous width estimate: average advance per character as a fraction of the font size.
+// Sans-serif UI faces average about 0.55em; monospace is 0.6em. Bold adds a little.
+function textBox(
+  id: string,
+  parent: LayoutBox["parent"],
+  x: number,
+  baseline: number,
+  text: string,
+  fontSize: number,
+  opts: { mono?: boolean; bold?: boolean; anchor?: "start" | "middle" } = {},
+): LayoutBox {
+  const per = opts.mono ? 0.62 : opts.bold ? 0.6 : 0.56;
+  const w = text.length * fontSize * per;
+  const left = opts.anchor === "middle" ? x - w / 2 : x;
+  // Ascent ~0.9em above the baseline, descent ~0.25em below it.
+  return {
+    id,
+    parent,
+    kind: "text",
+    x: left,
+    y: baseline - fontSize * 0.9,
+    w,
+    h: fontSize * 1.15,
+    baseline,
+    text,
+    fontSize,
+    mono: opts.mono,
+  };
+}
+
+export const BAR_HEIGHTS = [40, 56, 30, 48, 24];
+/** The chart's baseline, in panel coordinates. */
+const AXIS_Y = 340;
+/** Bars are centred: 5 × 72 wide with 30 between them. */
+const BAR_W = 72;
+const BAR_GAP = 30;
+
+/** Every element of one panel, in panel coordinates. */
+export function panelLayout(w: number, h: number, t: PanelText): LayoutBox[] {
+  const card = { x: 24, y: 70, w: w - 48, h: 172 };
+  const chart = { x: 24, y: 254, w: w - 48, h: h - 254 - 16 };
+  const barsLeft = (w - (BAR_HEIGHTS.length * BAR_W + (BAR_HEIGHTS.length - 1) * BAR_GAP)) / 2;
+  const boxes: LayoutBox[] = [
+    { id: "card", parent: "panel", kind: "rect", ...card },
+    { id: "chart", parent: "panel", kind: "rect", ...chart },
+    textBox("title", "panel", 24, 34, t.title, 16, { bold: true }),
+    textBox("subtitle", "panel", 24, 54, t.subtitle, 11.5),
+    { id: "audit-pill", parent: "panel", kind: "rect", x: w - 134, y: 18, w: 110, h: 24 },
+    textBox("card-title", "card", 40, 96, "Release v0.4.0", 13.5, { bold: true }),
+    textBox("card-body", "card", 40, 114, "Three tokens changed since v0.3.0. Review them before publishing.", 11.5),
+    { id: "input", parent: "card", kind: "rect", x: 40, y: 128, w: 236, h: 32 },
+    { id: "accent", parent: "card", kind: "rect", x: 288, y: 128, w: 136, h: 32 },
+    { id: "primary", parent: "card", kind: "rect", x: 40, y: 172, w: 116, h: 32 },
+    { id: "secondary", parent: "card", kind: "rect", x: 166, y: 172, w: 108, h: 32 },
+    { id: "destructive", parent: "card", kind: "rect", x: 288, y: 172, w: 236, h: 32 },
+    textBox("tokens", "card", 40, 226, t.tokens, 10.5, { mono: true }),
+    textBox("chart-title", "chart", 24, 272, t.chartTitle, 11.5, { bold: true }),
+  ];
+  BAR_HEIGHTS.forEach((bh, i) => {
+    const bx = barsLeft + i * (BAR_W + BAR_GAP);
+    boxes.push({ id: `bar-${i + 1}`, parent: "chart", kind: "rect", x: bx, y: AXIS_Y - bh, w: BAR_W, h: bh });
+    boxes.push(textBox(`bar-label-${i + 1}`, "chart", bx + BAR_W / 2, AXIS_Y + 14, `chart-${i + 1}`, 10, { mono: true, anchor: "middle" }));
+  });
+  return boxes;
+}
+
+function panelText(theme: BuiltTheme, polarity: "light" | "dark", subtitle: string): PanelText {
+  const t = polarity === "light" ? theme.light : theme.dark;
+  const c = (name: string) => t[name]!.hex;
+  const auditPairs = theme.audit.pairs.filter((p) => p.mode === polarity && p.required);
+  const auditPass = auditPairs.every((p) => p.pass);
+  return {
+    title: `${theme.mood} · ${polarity === "light" ? "Light" : "Dark"}`,
+    subtitle,
+    audit: auditPass ? `✓ ${auditPairs.length}/${auditPairs.length} ${theme.standard}` : "Audit fail",
+    seed: `theme-book --seed ${theme.rawSeeds[0]!}`,
+    tokens: `primary=${c("primary")} · accent=${c("accent")} · ring=${c("ring")}`,
+    chartTitle: `Chart series (chart-1..5 · min OKLab Δ=${theme.chartDiagnostics[polarity].minOklabDist})`,
+  };
 }
 
 function renderPanel(
@@ -29,10 +141,11 @@ function renderPanel(
 ): string {
   const t = polarity === "light" ? theme.light : theme.dark;
   const c = (name: string) => t[name]!.hex;
-  const modeLabel = polarity === "light" ? "Light" : "Dark";
-  const auditPairs = theme.audit.pairs.filter((p) => p.mode === polarity && p.required);
-  const auditPass = auditPairs.every((p) => p.pass);
-  const barHeights = [54, 78, 42, 66, 36];
+  const text = panelText(theme, polarity, subtitle);
+  const box = Object.fromEntries(panelLayout(w, h, text).map((b) => [b.id, b]));
+  const r = (id: string) => box[id]!;
+  const cx = (id: string) => r(id).x + r(id).w / 2;
+  const cy = (id: string) => r(id).y + r(id).h / 2 + 4;
 
   return `
   <g transform="translate(${x}, ${y})">
@@ -40,59 +153,58 @@ function renderPanel(
     <rect x="0" y="0" width="${w}" height="${h}" rx="14" fill="${c("background")}" stroke="${c("border")}" stroke-width="1.5"/>
 
     <!-- Top header row -->
-    <text x="24" y="34" font-size="16" font-weight="700" fill="${c("foreground")}">${esc(`${theme.mood} · ${modeLabel}`)}</text>
-    <text x="24" y="54" font-size="11.5" fill="${c("muted-foreground")}">${esc(subtitle)}</text>
+    <text x="${r("title").x}" y="${r("title").baseline}" font-size="16" font-weight="700" fill="${c("foreground")}">${esc(text.title)}</text>
+    <text x="${r("subtitle").x}" y="${r("subtitle").baseline}" font-size="11.5" fill="${c("muted-foreground")}">${esc(text.subtitle)}</text>
 
     <!-- Audit pill -->
-    <rect x="${w - 134}" y="18" width="110" height="24" rx="12" fill="${c("muted")}" stroke="${c("border")}" stroke-width="1"/>
-    <text x="${w - 79}" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="${c("muted-foreground")}">${auditPass ? `✓ ${auditPairs.length}/${auditPairs.length} ${theme.standard}` : "Audit fail"}</text>
+    <rect x="${r("audit-pill").x}" y="${r("audit-pill").y}" width="${r("audit-pill").w}" height="${r("audit-pill").h}" rx="12" fill="${c("muted")}" stroke="${c("border")}" stroke-width="1"/>
+    <text x="${cx("audit-pill")}" y="${cy("audit-pill")}" text-anchor="middle" font-size="11" font-weight="600" fill="${c("muted-foreground")}">${esc(text.audit)}</text>
 
     <!-- Nested Card -->
-    <rect x="24" y="70" width="${w - 48}" height="180" rx="10" fill="${c("card")}" stroke="${c("border")}" stroke-width="1"/>
-    <text x="40" y="96" font-size="13.5" font-weight="600" fill="${c("card-foreground")}">Release Summary</text>
-    <text x="40" y="114" font-size="11.5" fill="${c("muted-foreground")}">Body &amp; muted copy, focus input, primary/secondary actions, and accent hover.</text>
+    <rect x="${r("card").x}" y="${r("card").y}" width="${r("card").w}" height="${r("card").h}" rx="10" fill="${c("card")}" stroke="${c("border")}" stroke-width="1"/>
+    <text x="${r("card-title").x}" y="${r("card-title").baseline}" font-size="13.5" font-weight="600" fill="${c("card-foreground")}">${esc(r("card-title").text!)}</text>
+    <text x="${r("card-body").x}" y="${r("card-body").baseline}" font-size="11.5" fill="${c("muted-foreground")}">${esc(r("card-body").text!)}</text>
 
     <!-- Input with focus ring -->
-    <rect x="40" y="128" width="236" height="32" rx="6" fill="${c("background")}" stroke="${c("ring")}" stroke-width="2"/>
-    <text x="52" y="148" font-size="11.5" fill="${c("foreground")}">theme-book --seed ${esc(theme.rawSeeds[0]!)}</text>
+    <rect x="${r("input").x}" y="${r("input").y}" width="${r("input").w}" height="${r("input").h}" rx="6" fill="${c("background")}" stroke="${c("ring")}" stroke-width="2"/>
+    <text x="${r("input").x + 12}" y="${cy("input")}" font-size="11.5" fill="${c("foreground")}">${esc(text.seed)}</text>
 
     <!-- Accent hover badge beside input -->
-    <rect x="288" y="128" width="136" height="32" rx="6" fill="${c("accent")}" stroke="${c("border")}" stroke-width="1"/>
-    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="${c("accent-foreground")}">Accent / Hover</text>
+    <rect x="${r("accent").x}" y="${r("accent").y}" width="${r("accent").w}" height="${r("accent").h}" rx="6" fill="${c("accent")}" stroke="${c("border")}" stroke-width="1"/>
+    <text x="${cx("accent")}" y="${cy("accent")}" text-anchor="middle" font-size="11.5" font-weight="500" fill="${c("accent-foreground")}">Draft</text>
 
     <!-- Primary + Secondary Buttons -->
-    <rect x="40" y="174" width="116" height="32" rx="6" fill="${c("primary")}"/>
-    <text x="98" y="194" text-anchor="middle" font-size="12" font-weight="600" fill="${c("primary-foreground")}">Save Theme</text>
+    <rect x="${r("primary").x}" y="${r("primary").y}" width="${r("primary").w}" height="${r("primary").h}" rx="6" fill="${c("primary")}"/>
+    <text x="${cx("primary")}" y="${cy("primary")}" text-anchor="middle" font-size="12" font-weight="600" fill="${c("primary-foreground")}">Publish</text>
 
-    <rect x="166" y="174" width="108" height="32" rx="6" fill="${c("secondary")}" stroke="${c("border")}" stroke-width="1"/>
-    <text x="220" y="194" text-anchor="middle" font-size="12" font-weight="500" fill="${c("secondary-foreground")}">Preview</text>
+    <rect x="${r("secondary").x}" y="${r("secondary").y}" width="${r("secondary").w}" height="${r("secondary").h}" rx="6" fill="${c("secondary")}" stroke="${c("border")}" stroke-width="1"/>
+    <text x="${cx("secondary")}" y="${cy("secondary")}" text-anchor="middle" font-size="12" font-weight="500" fill="${c("secondary-foreground")}">Preview</text>
 
     <!-- Destructive button, drawn as stock shadcn draws it: destructive text on a destructive tint
          (bg-destructive/10 in light, /20 in dark). Stock shadcn has no destructive-foreground. -->
-    <rect x="288" y="174" width="240" height="32" rx="6" fill="${c("background")}"/>
-    <rect x="288" y="174" width="240" height="32" rx="6" fill="${c("destructive")}" fill-opacity="${polarity === "dark" ? 0.2 : 0.1}"/>
-    <text x="408" y="194" text-anchor="middle" font-size="11.5" font-weight="600" fill="${c("destructive")}">Destructive: Revoke token</text>
+    <rect x="${r("destructive").x}" y="${r("destructive").y}" width="${r("destructive").w}" height="${r("destructive").h}" rx="6" fill="${c("background")}"/>
+    <rect x="${r("destructive").x}" y="${r("destructive").y}" width="${r("destructive").w}" height="${r("destructive").h}" rx="6" fill="${c("destructive")}" fill-opacity="${polarity === "dark" ? 0.2 : 0.1}"/>
+    <text x="${cx("destructive")}" y="${cy("destructive")}" text-anchor="middle" font-size="11.5" font-weight="600" fill="${c("destructive")}">Revoke token</text>
 
     <!-- Inline token footer inside card -->
-    <text x="40" y="234" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="${c("muted-foreground")}">primary=${c("primary")} · accent=${c("accent")} · ring=${c("ring")}</text>
+    <text x="${r("tokens").x}" y="${r("tokens").baseline}" font-size="10.5" font-family="${MONO}" fill="${c("muted-foreground")}">${esc(text.tokens)}</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="274" font-size="11.5" font-weight="600" fill="${c("foreground")}">Chart series (chart-1..5 · min OKLab Δ=${theme.chartDiagnostics[polarity].minOklabDist})</text>
-    <line x1="24" y1="352" x2="${w - 24}" y2="352" stroke="${c("border")}" stroke-width="1"/>
-    ${barHeights
-      .map((bh, idx) => {
-        const bx = 34 + idx * 102;
-        const by = 352 - bh;
-        const tok = `chart-${idx + 1}`;
-        return `
-    <rect x="${bx}" y="${by}" width="72" height="${bh}" rx="5" fill="${c(tok)}"/>
-    <text x="${bx + 36}" y="366" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="${c("muted-foreground")}">${tok}</text>`;
-      })
-      .join("")}
+    <text x="${r("chart-title").x}" y="${r("chart-title").baseline}" font-size="11.5" font-weight="600" fill="${c("foreground")}">${esc(text.chartTitle)}</text>
+    <line x1="${r("chart").x}" y1="${AXIS_Y}" x2="${r("chart").x + r("chart").w}" y2="${AXIS_Y}" stroke="${c("border")}" stroke-width="1"/>
+    ${BAR_HEIGHTS.map((_, idx) => {
+      const bar = r(`bar-${idx + 1}`);
+      const label = r(`bar-label-${idx + 1}`);
+      return `
+    <rect x="${bar.x}" y="${bar.y}" width="${bar.w}" height="${bar.h}" rx="5" fill="${c(`chart-${idx + 1}`)}"/>
+    <text x="${label.x + label.w / 2}" y="${label.baseline}" text-anchor="middle" font-size="10" font-family="${MONO}" fill="${c("muted-foreground")}">${esc(label.text!)}</text>`;
+    }).join("")}
   </g>`;
 }
 
-export function generateSpecimenSvg(): string {
+export const SPECIMEN_PANEL = { w: 564, h: 380 } as const;
+
+export function specimenThemes(): { theme: BuiltTheme; subtitle: string }[] {
   const editorial = buildThemeBook({
     seeds: ["#2563eb"],
     preset: "shadcn",
@@ -100,7 +212,6 @@ export function generateSpecimenSvg(): string {
     generator: "poline",
     standard: "wcag-aa",
   });
-
   const vividDual = buildThemeBook({
     seeds: ["#c2410c", "#0f766e"],
     preset: "shadcn",
@@ -108,12 +219,28 @@ export function generateSpecimenSvg(): string {
     generator: "rampensau",
     standard: "wcag-aa",
   });
+  return [
+    { theme: editorial, subtitle: 'seed="#2563eb" · generator=poline · preset=shadcn' },
+    { theme: vividDual, subtitle: 'seeds="#c2410c, #0f766e" · generator=rampensau · preset=shadcn' },
+  ];
+}
 
+/** The layout of every panel the specimen draws, for the overlap test. */
+export function specimenLayouts(): { name: string; boxes: LayoutBox[] }[] {
+  const { w, h } = SPECIMEN_PANEL;
+  return specimenThemes().flatMap(({ theme, subtitle }) =>
+    (["light", "dark"] as const).map((p) => ({
+      name: `${theme.mood} ${p}`,
+      boxes: panelLayout(w, h, panelText(theme, p, subtitle)),
+    })),
+  );
+}
+
+export function generateSpecimenSvg(): string {
+  const [editorial, vividDual] = specimenThemes();
   const W = 1200;
-  const PW = 564;
-  const PH = 380;
-  // One gutter everywhere. The horizontal rhythm was already 24 (24+564+24+564+24=1200);
-  // the vertical was 20/16/20, which read as uneven. 24+380+24+380+24 = 832.
+  const { w: PW, h: PH } = SPECIMEN_PANEL;
+  // One gutter everywhere: 24+564+24+564+24 = 1200 across, 24+380+24+380+24 = 832 down.
   const G = 24;
   const H = G * 3 + PH * 2;
   const ROW2 = G * 2 + PH;
@@ -122,10 +249,10 @@ export function generateSpecimenSvg(): string {
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
   </style>
-  ${renderPanel(editorial, "light", G, G, PW, PH, 'seed="#2563eb" · generator=poline · preset=shadcn')}
-  ${renderPanel(editorial, "dark", G * 2 + PW, G, PW, PH, 'seed="#2563eb" · generator=poline · preset=shadcn')}
-  ${renderPanel(vividDual, "light", G, ROW2, PW, PH, 'seeds="#c2410c, #0f766e" · generator=rampensau · preset=shadcn')}
-  ${renderPanel(vividDual, "dark", G * 2 + PW, ROW2, PW, PH, 'seeds="#c2410c, #0f766e" · generator=rampensau · preset=shadcn')}
+  ${renderPanel(editorial!.theme, "light", G, G, PW, PH, editorial!.subtitle)}
+  ${renderPanel(editorial!.theme, "dark", G * 2 + PW, G, PW, PH, editorial!.subtitle)}
+  ${renderPanel(vividDual!.theme, "light", G, ROW2, PW, PH, vividDual!.subtitle)}
+  ${renderPanel(vividDual!.theme, "dark", G * 2 + PW, ROW2, PW, PH, vividDual!.subtitle)}
 </svg>
 `;
 }
