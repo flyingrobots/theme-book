@@ -68,8 +68,9 @@ primary is moved to the nearest lightness that holds its text and clears the pag
 theme-book reads the palette by role and computes each color. Most colors in the book record an origin: a light
 color its seed (text on a fill, and the base ramp, name the base seed), a dark accent its light version;
 destructive names none. The values themselves are computed in TypeScript and stored fixed, so a record is an
-origin, not a live dependency. The diagram below draws those
-records from the book theme-book built for Listing 1 (`bun scripts/benchmark/sankey.ts`), not by hand.
+origin, not a live dependency. The diagram below is drawn from
+the book theme-book built for Listing 1 (`bun scripts/benchmark/sankey.ts`), not by hand: seed-to-light flows
+follow those records, and each light role group flows to its dark counterpart.
 
 ```mermaid
 sankey-beta
@@ -109,7 +110,7 @@ The rules, in OKLCH:
 | **Accents move together** | dark L = (1 − b)(L + s) + b · 0.76, dark C = k · C, hue kept: `corporate` uses s 0.12, b 0.6, k 0.85; `freak` uses 0, 0, 1 | Table 3 |
 | **Contrast is a floor in each mode** | after the move, a dark accent is lifted further until it clears 3:1 (4.5:1 for text it carries); never pushed the other way | |
 | **Red is fixed** | destructive is one red, not the palette's; it holds white text (shadcn draws white on it), stands apart from a red primary, and in dark is set so that shadcn's 60% over the page lands as near light's red as sRGB allows (see Limits) | |
-| **Status hues stay off actions** | secondary and accent never take a red, yellow or green palette color; the primary may, so a red brand stays red | |
+| **Status hues stay off actions** | secondary and accent never take a red, yellow or green palette color; the primary may, so a red brand stays red, and when the palette has no other color, secondary and accent are tints of that primary | |
 | **Charts run light to dark** | three or more accents are the charts; fewer, steps of the primary's hue. Every bar clears 3:1 on the pages of its mode, and bars floored to one lightness are spaced apart. A palette with no hue gets stock shadcn's greys, the same in both modes, audited as advisory | |
 
 _Table 2. The rules of the derived moods, as built in [`src/derived.ts`](../../../src/derived.ts)._

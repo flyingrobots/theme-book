@@ -16,7 +16,7 @@ may change between minor versions.
   (s 0.12, b 0.6, k 0.85) and `freak` unchanged, with the palette's own colors as flat fills;
   contrast is a floor in each mode. Destructive is a fixed red that holds white text and, in dark,
   is set for shadcn's 60% over the page; secondary and accent never take a red, yellow or green
-  palette color; charts run light to dark, each bar clearing 3:1 on its mode's pages. The first
+  palette color (with no other color, they tint a status-hued primary); charts run light to dark, each bar clearing 3:1 on its mode's pages. The first
   colored seed is primary, whatever its lightness. Both are built for WCAG AA; `--generator` has
   no effect, and `--standard wcag-aaa|apca` audits without changing the colors. See
   [docs/topics/derived-moods](docs/topics/derived-moods/README.md).
