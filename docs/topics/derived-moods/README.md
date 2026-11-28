@@ -74,6 +74,11 @@ follow those records; a dark color flows from the light role it derives from (th
 the rings, from light primary), and otherwise from its own seed (the surfaces, text and borders).
 
 ```mermaid
+---
+config:
+  sankey:
+    linkColor: gradient
+---
 sankey-beta
 
 fixed status red,light destructive,1

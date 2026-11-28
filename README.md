@@ -135,6 +135,11 @@ The move is the part fitted to the famous themes. Every accent keeps its hue, an
 <summary>Where Owl Coral's colors come from, traced through the book</summary>
 
 ```mermaid
+---
+config:
+  sankey:
+    linkColor: gradient
+---
 sankey-beta
 
 fixed status red,light destructive,1
