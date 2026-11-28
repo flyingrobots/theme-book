@@ -118,7 +118,7 @@ test("the CLI builds with --book, and refuses a stale parent with exit 2", async
   const stale = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--preset", "shadcn", "--book", school("0.0.1")]);
   expect(stale.exitCode).toBe(2);
   expect(stale.stderr.toString()).toMatch(/extends shadcn@0\.0\.1, but this theme-book's shadcn rules are/);
-});
+}, 30_000); // spawns the CLI twice
 
 test("the CLI refuses an empty --book and a leading-zero version with exit 2", () => {
   const empty = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--book="]);

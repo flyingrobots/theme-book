@@ -237,7 +237,7 @@ describe("theme-book Commit 1: audit integrity, precision, alpha, parser & CLI",
     expect(ev.stdout.toString().trim()).toBe("#111111");
     const after = readdirSync(tmpdir()).filter((f) => f.startsWith("theme-book-eval-") && !before.has(f));
     expect(after.length).toBe(0);
-  });
+  }, 30_000); // spawns the CLI twice; a cold start is about a second, more under load
 });
 
 describe("theme-book Commit 2: generator charts, exact seeds, AA/AAA/APCA matrix, count & safe installer", () => {
@@ -478,7 +478,7 @@ describe("theme-book Commit 2: generator charts, exact seeds, AA/AAA/APCA matrix
     expect(refused.exitCode).toBe(1);
     expect(refused.stderr.toString()).toContain("refusing to overwrite");
     expect(existsSync(join(unrelatedDir, "precious.txt"))).toBe(true);
-  });
+  }, 120_000); // runs install.sh four times; each stages a runtime
 });
 
 describe("theme-book Commit 3: full rule provenance, reproducible recipe & deterministic SVG specimen", () => {
