@@ -89,7 +89,7 @@ export const MOOD_PROFILES: Record<Mood, MoodProfile> = {
     statusChroma: 0.2,
     minTextContrast: 14.0,
     minMutedContrast: 4.8,
-    description: "Post-modern Memphis: cream page, hard outlines, the seeds as flat clashing fills and charts",
+    description: "Derived (shadcn): the palette's own colors as flat fills, accents unchanged in dark; see src/derived.ts",
   },
   corporate: {
     neutralChroma: 0.008,
@@ -99,7 +99,7 @@ export const MOOD_PROFILES: Record<Mood, MoodProfile> = {
     statusChroma: 0.16,
     minTextContrast: 14.0,
     minMutedContrast: 4.8,
-    description: "Corporate grey and blue: cool slate surfaces, one blue doing the work, quiet hairlines",
+    description: "Derived (shadcn): soft tints, accents lifted together in dark by the fitted move; see src/derived.ts",
   },
 };
 

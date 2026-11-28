@@ -39,9 +39,9 @@ theme-book theme --seed "#2563eb" --preset shadcn --format svg --out theme-graph
 ```
 
 Options:
-- `--seed <color>` (repeatable; opaque in-gamut 8-bit sRGB hex seeds are preserved verbatim when readable; `seed-1` tints `--accent`)
+- `--seed <color>` (repeatable; opaque in-gamut 8-bit sRGB hex seeds are preserved verbatim when readable; `seed-1` tints `--accent` in the existing moods; in `corporate` and `freak` the first colored seed is primary and the next non-status colors fill `--secondary`, then `--accent`)
 - `--preset shadcn|semantic|slide-deck`
-- `--mood neutral|muted|vivid|editorial|high-contrast|corporate|freak`. `corporate` and `freak` (shadcn only) build light and dark from one palette, with rules fitted to famous themes: give the whole palette as seeds, primary first, including its page and ink colors if it has them. `corporate` is quiet (soft tints, accents lifted in dark); `freak` puts the palette's own colors on show as flat fills, the same in both modes. See `docs/topics/derived-moods` in the theme-book repository.
+- `--mood neutral|muted|vivid|editorial|high-contrast|corporate|freak`. `corporate` and `freak` (shadcn only) build light and dark from one palette, with rules fitted to famous themes: give the whole palette as seeds, primary first (a grey seed is read as page or ink, not as primary), including its page and ink colors if it has them. `corporate` is quiet (soft tints, accents lifted in dark); `freak` puts the palette's own colors on show as flat fills, the same in both modes when they carry text. Every chart bar of a hued palette clears 3:1. They are built for WCAG AA: `--generator` has no effect, and `--standard wcag-aaa|apca` audits without changing the colors, so expect failures. A `--book` extension sees only their `seeds` and `palette` scopes (no `neutrals`). A hueless palette's charts are advisory; audit its file with `theme-book audit --charts-advisory`. See `docs/topics/derived-moods` in the theme-book repository.
 - `--generator oklch|poline|rampensau` (drives `chart-1..5` with legibility-wins pentagon supplementation when needed)
 - `--standard wcag-aa|wcag-aaa|apca` (defaults to `wcag-aaa` for `high-contrast`, `wcag-aa` otherwise)
 - `--format css|json|w3-tokens|svg` (`json` includes full rule expressions, `chartDiagnostics`, and a versioned `recipe`)

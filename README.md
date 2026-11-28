@@ -96,6 +96,9 @@ export default {
 };
 ```
 
+The `corporate` and `freak` moods build only the `seeds` and `palette` helper scopes, and their `dark` does
+not extend `light`, so this extension, which refers to `neutrals`, exits `2` under them.
+
 ```bash
 theme-book theme --book school.book.ts --seed "#0f766e" --mood editorial --standard wcag-aaa --audit
 ```
@@ -138,8 +141,8 @@ theme-book theme --book school.book.ts --seed "#0f766e" --mood editorial --stand
 
 `--mood corporate` and `--mood freak` (shadcn only) build both modes from one palette, with rules fitted to
 seven famous light/dark pairs: Solarized, Gruvbox, Tokyo Night, One, Catppuccin, Rosé Pine and GitHub. Every
-color is a rule on where it came from, so this diagram is traced from the book theme-book built for Owl
-Coral's palette, not drawn by hand:
+color records the seed or light color it was derived from, and this diagram draws those records from the book
+theme-book built for Owl Coral's palette, not by hand:
 
 ```mermaid
 sankey-beta
@@ -169,7 +172,7 @@ seed violet,light secondary and accent,2
 
 The three findings it rests on, each measured against the famous themes:
 
-- **The dark page takes the light theme's ink hue** (within 2-16° in six of the seven), at about L 0.24, never black.
+- **The dark page takes the light theme's ink hue** (within 1.4–16.4° in six of the seven), at about L 0.24, never black.
 - **Accents keep their hue and move together:** dark L = (1 − b)(L + s) + b · 0.76, chroma × k. One setting
   lands within OKLab 0.080 of the official accents on average, against 0.124 for Material's tone table and
   0.319 for flipping OKLCH lightness.

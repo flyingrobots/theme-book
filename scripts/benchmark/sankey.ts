@@ -1,8 +1,8 @@
 #!/usr/bin/env bun
 /**
  * A Mermaid sankey-beta of how a derived theme is built: each seed flows into the light roles made
- * from it, and each light role group into its dark counterpart. Traced through the book's own
- * references, so it shows what the engine did, not what we say it does.
+ * from it, and each light role group into its dark counterpart. Drawn from the origin each color
+ * records in the book; the values themselves are computed in TypeScript and stored fixed.
  * `bun scripts/benchmark/sankey.ts` prints the block for the README.
  */
 import { buildThemeBook } from "../../src/books";

@@ -19,6 +19,10 @@ Versions track the tool's releases.
   the target, write an extension or say a preset is needed.
 - **The `corporate` and `freak` moods** (shadcn only): light and dark from one palette, with the
   rules fitted to famous themes; and shadcn's rules version 1.1.0 in the extension example.
+  The skill says what they do not read (`--generator`; `--standard` beyond WCAG AA only audits),
+  that the first colored seed is primary and the next colors fill secondary then accent, that an
+  extension sees only their `seeds` and `palette` scopes, and that a hueless palette's charts are
+  audited with `theme-book audit --charts-advisory`.
 
 ## [0.4.0] — 2026-11-23
 

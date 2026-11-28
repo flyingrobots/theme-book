@@ -27,9 +27,9 @@
  * Chart bars clear 3:1 on every page in both modes, except a palette with no hue, which keeps stock
  * shadcn's greys, one set for both modes, and audits them as advisory, as stock shadcn would.
  *
- * Every color is a rule on where it came from: a palette color is `relativeTo` its seed, and each
- * dark accent is `relativeTo` its light version, so the book (and a flow view of it) reads seeds ->
- * light -> dark.
+ * Every color records where it was derived from: a palette color is `relativeTo` its seed, and each
+ * dark accent `relativeTo` its light version, with the computed values stored fixed, so the book (and
+ * a flow view of it) reads seeds -> light -> dark as origins, not live dependencies.
  */
 import { type DesignBook, color, ref, relativeTo } from "design-book";
 import { converter, differenceEuclidean, formatHex, parse } from "culori";

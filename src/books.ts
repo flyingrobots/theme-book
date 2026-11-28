@@ -290,12 +290,12 @@ const isThenable = (v: unknown): v is PromiseLike<unknown> =>
 /** How an error names the extension it came from: name, version and path. */
 const extensionWhere = (ext: BookExtension) => `extension ${ext.name}@${ext.version} (${ext.path})`;
 
-/** Seed sets that drive each kind of rule branch: one chromatic seed, an achromatic seed, two seeds. */
-/** The moods a preset has rules for: freak has rules for shadcn only (see src/freak.ts). */
+/** The moods a preset has rules for: the derived moods (corporate, freak) have rules for shadcn only (see src/derived.ts). */
 export function presetMoods(preset: ThemePreset): Mood[] {
   return (Object.keys(MOOD_PROFILES) as Mood[]).filter((m) => !isDerived(m) || preset === "shadcn");
 }
 
+/** Seed sets that drive each kind of rule branch: one chromatic seed, an achromatic seed, two seeds. */
 export const FINGERPRINT_SEEDS: Record<"chromatic" | "achromatic" | "two-seed", string[]> = {
   chromatic: ["#0f766e"],
   achromatic: ["#777777"],
