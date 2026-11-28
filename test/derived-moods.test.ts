@@ -2,9 +2,9 @@ import { describe, expect, test } from "bun:test";
 import { SPECIMEN_THEMES } from "../scripts/specimen";
 import { METHODS, meanDistance } from "../scripts/benchmark/score";
 import { buildThemeBook, type BuiltTheme } from "../src/books";
-import { wcagRatio } from "../src/audit";
+import { evaluateAudit, parseCssColorExact, wcagRatioExact } from "../src/audit";
 import { statusHue } from "../src/derived";
-import { parseToOklch } from "../src/palette";
+import { oklabDistance, parseToOklch } from "../src/palette";
 
 // The derived moods (corporate, freak): a light and a dark theme that read as one, from a palette.
 // The rules are fitted to famous light/dark pairs; see docs/topics/derived-moods.
@@ -14,11 +14,24 @@ const ok = (hex: string) => {
   return { l: c.l, c: c.c, h: c.h ?? 0 };
 };
 const hueGap = (a: number, b: number) => Math.abs(((a - b + 540) % 360) - 180);
+/** WCAG ratio at full precision, as the audit measures it (the display-rounded one hides 2.996 < 3). */
+const exact = (a: string, b: string) => {
+  const x = parseCssColorExact(a), y = parseCssColorExact(b);
+  if (!x.ok || !y.ok) throw new Error(`not a color: ${a} ${b}`);
+  return wcagRatioExact(x.rgb, y.rgb);
+};
 
 const CASES = [
   ...SPECIMEN_THEMES.map(({ name, seeds, mood }) => ({ name, seeds, mood })),
   { name: "one seed", seeds: ["#2563eb"], mood: "corporate" as const },
   { name: "two seeds", seeds: ["#0f766e", "#c2410c"], mood: "freak" as const },
+  // Palettes whose floors land within rounding of 3:1 or 4.5:1 (found by a random sweep).
+  { name: "rounding edge, one seed", seeds: ["#29da7e"], mood: "corporate" as const },
+  { name: "rounding edge, freak", seeds: ["#be66e5"], mood: "freak" as const },
+  { name: "rounding edge, six seeds", seeds: ["#041edd", "#a8caf8", "#27f51b", "#8de542", "#33822b", "#32fdd9"], mood: "corporate" as const },
+  // Palettes whose charts fell below 3:1 (stress set).
+  { name: "Solarized, freak", seeds: ["#268bd2", "#2aa198", "#d33682", "#6c71c4", "#b58900", "#cb4b16", "#fdf6e3", "#657b83"], mood: "freak" as const },
+  { name: "violet, pink, cyan, freak", seeds: ["#7c3aed", "#db2777", "#0891b2"], mood: "freak" as const },
 ];
 const build = (seeds: string[], mood: "corporate" | "freak"): BuiltTheme =>
   buildThemeBook({ seeds, preset: "shadcn", mood, generator: "oklch" });
@@ -65,7 +78,23 @@ describe("derived moods", () => {
 
       test("destructive is the fixed red, holds white text, and stands apart from primary", () => {
         expect(statusHue(l("destructive"))).toBe("red");
-        expect(wcagRatio("#ffffff", l("destructive"))).toBeGreaterThanOrEqual(4.5);
+        expect(exact("#ffffff", l("destructive"))).toBeGreaterThanOrEqual(4.5);
+        if (!hueless) expect(oklabDistance(l("destructive"), l("primary"))).toBeGreaterThanOrEqual(0.1);
+      });
+
+      test("chart bars clear 3:1 on every page in both modes, unless the palette has no hue", () => {
+        if (hueless) return;
+        for (const [m, mode] of [["light", t.light], ["dark", t.dark]] as const) {
+          for (let i = 1; i <= 5; i++) {
+            for (const bg of ["background", "card", "sidebar"]) {
+              const r = exact(mode[`chart-${i}`]!.hex, mode[bg]!.hex);
+              expect([m, `chart-${i}`, bg, r >= 3]).toEqual([m, `chart-${i}`, bg, true]);
+            }
+          }
+          const bars = [1, 2, 3, 4, 5].map((i) => mode[`chart-${i}`]!.hex);
+          for (let i = 0; i < bars.length; i++)
+            for (let j = i + 1; j < bars.length; j++) expect(oklabDistance(bars[i]!, bars[j]!)).toBeGreaterThanOrEqual(0.03);
+        }
       });
 
       test("secondary and accent never take a status hue (red, yellow, green) from the palette", () => {
@@ -93,6 +122,25 @@ describe("derived moods", () => {
       });
     });
   }
+
+  test("the first colored seed is primary, whatever its lightness; a grey first seed is base material", () => {
+    const primarySource = (t: BuiltTheme) => t.book.inspect("palette.primary-light")?.dependencies ?? [];
+    for (const mood of ["corporate", "freak"] as const) {
+      expect(primarySource(build(["#0b1f3a", "#f59e0b"], mood))).toContain("seeds.seed-0");
+    }
+    const yellow = build(["#ffff00", "#2563eb"], "corporate");
+    expect(primarySource(yellow)).toContain("seeds.seed-0");
+    expect(ok(yellow.light.background!.hex).c).toBeLessThan(0.03);
+    expect(primarySource(build(["#8a8f98", "#2563eb"], "corporate"))).toContain("seeds.seed-1");
+    expect(primarySource(build(["#292c2f", "#e88e8d"], "corporate"))).toContain("seeds.seed-1");
+    expect(primarySource(build(["#dc2626", "#2563eb"], "corporate"))).toContain("seeds.seed-0");
+  });
+
+  test("an audit that does not opt into chartsAdvisory still requires chart bars", () => {
+    const t = build(["#ffffff", "#000000"], "corporate");
+    const report = evaluateAudit({ light: Object.fromEntries(t.lightKeys.map((k) => [k, t.light[k]!.hex])), dark: Object.fromEntries(t.darkKeys.map((k) => [k, t.dark[k]!.hex])), skippedTokens: [], assumptions: [] }, { standard: "wcag-aa" });
+    expect(report.pairs.some((p) => /^chart-/.test(p.fgToken) && p.required)).toBe(true);
+  });
 
   test("a palette with no hue keeps none, apart from one red for errors", () => {
     const t = build(["#ffffff", "#000000"], "corporate");

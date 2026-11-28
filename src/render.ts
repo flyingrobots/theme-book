@@ -21,7 +21,7 @@ export function renderThemeCss(
     `/* ${theme.recipe.command} */`,
   );
   lines.push(
-    `/* theme-book v${theme.recipe.toolVersion} · design-book v${theme.recipe.designBookVersion} · audit=${theme.audit.status} (${theme.standard}) */`,
+    `/* theme-book v${theme.recipe.toolVersion} · design-book v${theme.recipe.designBookVersion} · audit=${theme.audit.status} (${theme.standard}${theme.audit.chartsAdvisory ? ", charts advisory" : ""}) */`,
   );
   lines.push(":root {");
   for (const k of theme.lightKeys) {

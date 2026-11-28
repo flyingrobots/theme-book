@@ -139,6 +139,16 @@ export function apcaContrastExact(textRgb: ExactRgb, bgRgb: ExactRgb): number {
   return output * 100;
 }
 
+/**
+ * WCAG ratio of two CSS colors at full precision, as the audit measures it. Use this for any
+ * threshold decision: the display-rounded `wcagRatio` reads 2.996 as 3.00 and passes it.
+ */
+export function wcagRatioExactCss(colorA: string, colorB: string): number {
+  const a = parseCssColorExact(colorA);
+  const b = parseCssColorExact(colorB);
+  return a.ok && b.ok ? wcagRatioExact(a.rgb, b.rgb) : 1;
+}
+
 /** Convenience wrappers for opaque CSS color strings (returns display-rounded values). */
 export function wcagRatio(colorA: string, colorB: string): number {
   const a = parseCssColorExact(colorA);
@@ -307,6 +317,8 @@ export interface AuditReport {
   exitCode: 0 | 1 | 3;
   standard: AuditStandard;
   strictBorders: boolean;
+  /** Chart bars were audited as advisory (`--charts-advisory`, or a hueless derived mood). */
+  chartsAdvisory: boolean;
   passed: number;
   failed: number;
   advisoryCount: number;
@@ -1149,6 +1161,7 @@ export function evaluateAudit(
     exitCode,
     standard,
     strictBorders,
+    chartsAdvisory: opts.chartsAdvisory ?? false,
     passed,
     failed,
     advisoryCount: advisoryPairs.length,

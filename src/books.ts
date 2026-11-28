@@ -36,7 +36,7 @@ import {
 
 import { existsSync, readFileSync } from "node:fs";
 import { ExtensionError, RULES, type BookExtension } from "./extension";
-import { DERIVED_VARIANT, derivedShadcnRules, type DerivedMood } from "./derived";
+import { DERIVED_VARIANT, derivedShadcnRules, readPalette, type DerivedMood } from "./derived";
 const isDerived = (m: Mood): m is DerivedMood => m in DERIVED_VARIANT;
 import { resolve } from "node:path";
 import pkgJson from "../package.json";
@@ -858,8 +858,9 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
 
   const audit = evaluateAudit(
     { light: lightSerialized, dark: darkSerialized, skippedTokens: [], assumptions: [] },
-    // Derived moods use stock shadcn's chart colors: one set for both modes, light to dark.
-    { standard, withFixes: false, chartsAdvisory: isDerived(opts.mood) },
+    // A hueless derived mood keeps stock shadcn's chart greys, one set for both modes, which stock
+    // shadcn does not hold to 3:1 either: those bars are advisory. Every other derived chart is floored.
+    { standard, withFixes: false, chartsAdvisory: isDerived(opts.mood) && readPalette(opts.seeds).hueless },
   );
 
   const hexFlag = opts.hexOutput ?? false;

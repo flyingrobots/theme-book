@@ -523,6 +523,30 @@ describe("theme-book Commit 3: full rule provenance, reproducible recipe & deter
   });
 });
 
+describe("derived moods: the build's audit verdict agrees with theme-book audit", () => {
+  const dir = mkdtempSync(join(tmpdir(), "theme-book-derived-audit-"));
+  const build = (seeds: string[]) => {
+    const out = join(dir, `${seeds.join("-").replace(/#/g, "")}.css`);
+    const args = [CLI_BIN, "theme", ...seeds.flatMap((s) => ["--seed", s]), "--preset", "shadcn", "--mood", "corporate", "--out", out];
+    const r = Bun.spawnSync(args, { stdout: "pipe", stderr: "pipe" });
+    expect(r.exitCode).toBe(0);
+    return out;
+  };
+  const audit = (file: string, ...extra: string[]) =>
+    Bun.spawnSync([CLI_BIN, "audit", file, "--standard", "wcag-aa", ...extra], { stdout: "pipe", stderr: "pipe" }).exitCode;
+
+  test("a palette with hue passes the standalone audit as built", () => {
+    expect(audit(build(["#2563eb"]))).toBe(0);
+  }, 30_000);
+
+  test("a hueless palette's charts are advisory: said in the header, and audit agrees only with --charts-advisory", () => {
+    const file = build(["#ffffff", "#000000"]);
+    expect(readFileSync(file, "utf8")).toContain("charts advisory");
+    expect(audit(file)).toBe(1);
+    expect(audit(file, "--charts-advisory")).toBe(0);
+  }, 30_000);
+});
+
 describe("polarity advisory", () => {
   // WCAG 2.x is symmetric, so a dark theme can clear AAA while reading materially worse
   // than its light counterpart. The advisory surfaces that without touching conformance.

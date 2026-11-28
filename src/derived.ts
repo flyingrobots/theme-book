@@ -2,15 +2,15 @@
  * Derived moods: a light and a dark theme that read as one, from a palette.
  *
  * The rules are fitted to famous light/dark pairs (Solarized, Gruvbox, Tokyo Night, One, Catppuccin,
- * Rosé Pine, GitHub; see docs/topics/light-dark-derivation). In OKLCH:
+ * Rosé Pine, GitHub; see docs/topics/derived-moods). In OKLCH:
  *
  * - The base is one ramp. The light page is the palette's pale end; the dark page takes the light
- *   theme's ink hue (within 2-16 degrees in six of the seven) at L about 0.24, never black; each
+ *   theme's ink hue (within 1-16 degrees in six of the seven) at L about 0.24, never black; each
  *   mode's text comes from the other end.
  * - Accents keep their hue and move together. Dark L = (1 - b)(L + s) + b * 0.76 and dark C = k * C:
  *   s lifts every accent by the same amount (Gruvbox, Catppuccin: s = 0.23), b pulls them into one
  *   band (Tokyo, GitHub), k sets the character (pastel below 1, vivid above). One global setting
- *   (s 0.12, b 0.6, k 0.85) lands within OKLab 0.08 of the official accents on average, against 0.125
+ *   (s 0.12, b 0.6, k 0.85) lands within OKLab 0.08 of the official accents on average, against 0.124
  *   for Material's tone table and 0.32 for flipping OKLCH lightness.
  * - Contrast is a floor in each mode, never an equality across modes.
  *
@@ -21,7 +21,11 @@
  *
  * Fixed by convention, never derived: red is error and destroy (destructive), and a non-status role
  * never takes a palette color in the red, yellow or green ranges, so a button does not read as an
- * error, a caution or a success. The first seed is always primary, a red brand included.
+ * error, a caution or a success. The first colored seed (OKLCH chroma 0.04 or more) is primary,
+ * whatever its lightness, a red brand included; grey seeds before it are base material.
+ *
+ * Chart bars clear 3:1 on every page in both modes, except a palette with no hue, which keeps stock
+ * shadcn's greys, one set for both modes, and audits them as advisory, as stock shadcn would.
  *
  * Every color is a rule on where it came from: a palette color is `relativeTo` its seed, and each
  * dark accent is `relativeTo` its light version, so the book (and a flow view of it) reads seeds ->
@@ -29,7 +33,7 @@
  */
 import { type DesignBook, color, ref, relativeTo } from "design-book";
 import { converter, differenceEuclidean, formatHex, parse } from "culori";
-import { wcagRatio } from "./audit";
+import { wcagRatioExactCss as wcagRatio } from "./audit";
 import { gamutSafeOklch, normalizeHue, parseToOklch, toSafeHex } from "./palette";
 
 type Scope = ReturnType<DesignBook["addScope"]>;
@@ -151,8 +155,11 @@ export interface Reading {
 }
 
 export function readPalette(seeds: string[]): Reading {
-  const accents = seeds.filter(isAccent);
-  const base = seeds.filter((s) => !isAccent(s));
+  // The first colored seed is primary whatever its lightness: a navy or a yellow brand is the brand,
+  // not the dark page or the light page. Grey seeds before it stay base material.
+  const first = seeds.find((s) => ok(s).c >= 0.04);
+  const accents = [...(first ? [first] : []), ...seeds.filter((s) => s !== first && isAccent(s))];
+  const base = seeds.filter((s) => s !== first && !isAccent(s));
   const byL = (xs: string[]) => [...xs].sort((a, b) => ok(a).l - ok(b).l);
   const pale = byL(base.filter((s) => ok(s).l >= 0.85)).at(-1);
   // The deep end: the darkest base color (an ink, a dark page); else the palette's darkest color.
@@ -203,7 +210,8 @@ export function derivedShadcnRules(
   const lightCard = lp.l >= 0.985 ? lightPage : mk(Math.min(0.995, lp.l + 0.025), lp.c * 0.4, paleHue);
   const lightSidebar = mk(lp.l - 0.015, lp.c, paleHue);
   const deepL = r.deep ? ok(r.deep).l : 0;
-  const darkPage = r.deep && deepL >= 0.16 && deepL <= 0.32 ? r.deep : mk(r.hueless ? 0.16 : DARK_PAGE_L, deepC, inkHue);
+  // The dark page is the deep seed itself only when it is base material, never the primary brand.
+  const darkPage = r.deep && r.deep !== r.accents[0] && deepL >= 0.16 && deepL <= 0.32 ? r.deep : mk(r.hueless ? 0.16 : DARK_PAGE_L, deepC, inkHue);
   const dp = ok(darkPage);
   const darkCard = mk(dp.l + 0.05, dp.c, dp.h);
   const darkSidebar = mk(dp.l + 0.025, dp.c, dp.h);
@@ -256,7 +264,7 @@ export function derivedShadcnRules(
     return { lightHex, darkHex };
   };
 
-  // Primary: the first seed, always. A palette with no hue takes its ink, as stock shadcn does.
+  // Primary: the first colored seed. A palette with no hue takes its ink, as stock shadcn does.
   if (r.accents[0]) {
     const p = pair("primary", r.accents[0], fillOn);
     light.set("primary-foreground", put("light-on-primary", inkFor(p.lightHex, "light"), from));
@@ -323,7 +331,8 @@ export function derivedShadcnRules(
   dark.set("destructive", put("destructive-dark", underSixty(red, darkPage), "palette.destructive-light"));
 
   // Charts: three or more accents are the accents themselves, light to dark; fewer, steps of the
-  // primary's hue; none, stock shadcn's greys, the same in both modes. Dark's are light's, moved.
+  // primary's hue; none, stock shadcn's greys, the same in both modes (audited as advisory). Every
+  // hued bar clears 3:1 on the pages of its mode. Dark's are light's, moved, and lifted to the floor.
   if (r.hueless) {
     [0.87, 0.556, 0.439, 0.371, 0.269].forEach((l, n) => {
       const hex = mk(l, 0, 0);
@@ -333,18 +342,42 @@ export function derivedShadcnRules(
   } else {
     const sources = r.accents.length >= 3 ? r.accents.slice(0, 5) : [];
     const p0 = ok(r.accents[0] ?? seeds[0]!);
-    const steps = [0.78, 0.66, 0.56, 0.46, 0.36].map((l) => mk(l, p0.c, p0.h));
+    // Steps span the lightnesses that clear 3:1 on the light pages: from the lightest that does, down.
+    let lMax = 0.95;
+    while (lMax > 0.35 && !markOn("light")(mk(lMax, p0.c, p0.h))) lMax -= 0.01;
+    const lMin = Math.max(0.25, lMax - 0.4);
+    const steps = [0, 1, 2, 3, 4].map((i) => mk(lMax - ((lMax - lMin) * i) / 4, p0.c, p0.h));
     const lights = [...sources.map((s) => nearestPassing(s, markOn("light"))), ...steps.slice(sources.length)]
       .slice(0, 5)
-      .sort((a, b) => ok(b).l - ok(a).l);
+      .sort((a, b) => ok(b).l - ok(a).l)
+      // Bars floored to the same lightness bunch; each steps at least 0.05 below the one before. On a
+      // light page darker only gains contrast, so the floor still holds.
+      .reduce<string[]>((out, hex) => {
+        const c = ok(hex);
+        const prev = out.at(-1);
+        out.push(prev && c.l > ok(prev).l - 0.05 ? mk(ok(prev).l - 0.05, c.c, c.h) : hex);
+        return out;
+      }, []);
     // Steps of one hue separate by lightness only, so they lift together without the band's squeeze.
     const chartSet = sources.length >= 3 ? set : { ...set, b: 0, s: set.s || 0.12 };
+    // Dark: each bar moved, then lifted to the floor. Lifting alone can bunch bars at the floor, so
+    // the bars are spread over the passing range, keeping their order, and only ever lifted.
+    const moved = lights.map((hex) => darkOf(hex, chartSet, () => true));
+    let dMin = 0.3;
+    while (dMin < 0.95 && !moved.every((h) => markOn("dark")(mk(dMin, ok(h).c, ok(h).h)))) dMin += 0.01;
+    const top = Math.min(0.93, Math.max(ok(moved[0]!).l, dMin + 0.3));
+    const darks = moved.map((h, n) => {
+      const c = ok(h);
+      const spread = top - ((top - dMin) * n) / Math.max(1, moved.length - 1);
+      const l = Math.max(c.l, spread, ok(lights[n]!).l);
+      return darkOf(mk(l, c.c, c.h), { s: 0, b: 0, k: 1, fills: set.fills }, markOn("dark"));
+    });
     lights.forEach((hex, n) => {
       const key = `chart-${n + 1}`;
       // The seed it came from: the nearest hue (moving to a legible lightness can nudge hue slightly).
       const src = sources.length ? sources.reduce((x, y) => (gap(ok(y).h, ok(hex).h) < gap(ok(x).h, ok(hex).h) ? y : x)) : undefined;
       light.set(key, put(`${key}-light`, hex, src ? seedKey(src) : r.accents[0] ? seedKey(r.accents[0]) : from));
-      dark.set(key, put(`${key}-dark`, darkOf(hex, chartSet, () => true), `palette.${key}-light`));
+      dark.set(key, put(`${key}-dark`, darks[n]!, `palette.${key}-light`));
     });
   }
 }

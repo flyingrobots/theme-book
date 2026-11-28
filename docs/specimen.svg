@@ -13,7 +13,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#e4e8ed" stroke="#d1d6dc" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#585e64">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#585e64">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#fcfeff" stroke="#d1d6dc" stroke-width="1"/>
@@ -46,18 +46,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">primary=#c97272 · accent=#dfccea · ring=#c97272</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#292e34">Chart series (chart-1..5 · min OKLab Δ=0.0964)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#292e34">Chart series (chart-1..5 · min OKLab Δ=0.102)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#d1d6dc" stroke-width="1"/>
     
     <rect x="42" y="300" width="72" height="40" rx="5" fill="#c97272"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#a678bd"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#986aae"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#ae823c"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#92681e"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#4296ab"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#0b6e82"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#3b9a6f"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#006541"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-5</text>
   </g>
   
@@ -71,7 +71,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#3d4044" stroke="#4a4e52" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a7abaf">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a7abaf">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#36393c" stroke="#4a4e52" stroke-width="1"/>
@@ -104,18 +104,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">primary=#e89a99 · accent=#574561 · ring=#e89a99</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d0d5d9">Chart series (chart-1..5 · min OKLab Δ=0.0815)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d0d5d9">Chart series (chart-1..5 · min OKLab Δ=0.0792)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#4a4e52" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#e89a99"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#ffdad9"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#c8a0dc"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#e3baf8"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#d0a970"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#d3ae74"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#78bcce"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#68abbd"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#75c19a"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#67aa87"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-5</text>
   </g>
   
@@ -129,7 +129,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#e4e8ed" stroke="#d1d6dc" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#585e64">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#585e64">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#fcfeff" stroke="#d1d6dc" stroke-width="1"/>
@@ -162,18 +162,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">primary=#c97272 · accent=#cfa0e8 · ring=#c97272</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#292e34">Chart series (chart-1..5 · min OKLab Δ=0.0964)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#292e34">Chart series (chart-1..5 · min OKLab Δ=0.102)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#d1d6dc" stroke-width="1"/>
     
     <rect x="42" y="300" width="72" height="40" rx="5" fill="#c97272"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#a678bd"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#986aae"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#ae823c"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#92681e"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#4296ab"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#0b6e82"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#3b9a6f"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#006541"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-5</text>
   </g>
   
@@ -187,7 +187,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#3d4044" stroke="#4a4e52" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a7abaf">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a7abaf">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#36393c" stroke="#4a4e52" stroke-width="1"/>
@@ -220,18 +220,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">primary=#c97272 · accent=#cfa0e8 · ring=#c97272</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d0d5d9">Chart series (chart-1..5 · min OKLab Δ=0.0964)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d0d5d9">Chart series (chart-1..5 · min OKLab Δ=0.1164)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#4a4e52" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#c97272"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#ffdad9"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#a678bd"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#e7b6ff"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#ae823c"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#d9ac66"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#4296ab"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#58aabf"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#3b9a6f"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#479971"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-5</text>
   </g>
   
@@ -245,7 +245,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#f0f0f0" stroke="#dedede" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#575f63">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#575f63">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#ffffff" stroke="#dedede" stroke-width="1"/>
@@ -278,18 +278,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#575f63">primary=#3b93f1 · accent=#b6d8ff · ring=#3b93f1</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#272f32">Chart series (chart-1..5 · min OKLab Δ=0.099)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#272f32">Chart series (chart-1..5 · min OKLab Δ=0.0993)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#dedede" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#81bbff"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#3991ef"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#575f63">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#3c94f2"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#0e72cd"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#575f63">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#1475d0"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#00559f"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#575f63">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#0058a3"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#003a70"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#575f63">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#003d75"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#002245"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#575f63">chart-5</text>
   </g>
   
@@ -303,7 +303,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#2c3537" stroke="#374245" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#9da6aa">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#9da6aa">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#252d2f" stroke="#374245" stroke-width="1"/>
@@ -336,18 +336,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">primary=#79b7ff · accent=#2e4f74 · ring=#79b7ff</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#ccd6da">Chart series (chart-1..5 · min OKLab Δ=0.1003)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#ccd6da">Chart series (chart-1..5 · min OKLab Δ=0.0753)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#374245" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#c7e0ff"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#b1d4ff"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#81bbff"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#84bdff"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#549beb"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#6aa5e9"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#427dbf"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#628ec1"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#346091"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#58779a"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-5</text>
   </g>
   
@@ -361,7 +361,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#dad7ce" stroke="#c9c5bb" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#605d56">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#605d56">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#efeeeb" stroke="#c9c5bb" stroke-width="1"/>
@@ -394,18 +394,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">primary=#0274bd · accent=#b7d9f8 · ring=#0274bd</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#302e27">Chart series (chart-1..5 · min OKLab Δ=0.1001)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#302e27">Chart series (chart-1..5 · min OKLab Δ=0.0866)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#c9c5bb" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#76beff"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#2485d0"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#3b98e4"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#006baf"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#0f79c2"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#005287"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#005b97"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#003a62"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#00406b"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#00233f"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-5</text>
   </g>
   
@@ -419,7 +419,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#35332c" stroke="#423f37" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a7a49c">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a7a49c">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#2d2b25" stroke="#423f37" stroke-width="1"/>
@@ -452,18 +452,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">primary=#127ac4 · accent=#2f506e · ring=#127ac4</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d7d4cb">Chart series (chart-1..5 · min OKLab Δ=0.1013)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d7d4cb">Chart series (chart-1..5 · min OKLab Δ=0.0752)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#423f37" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#c4e2ff"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#abd6ff"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#76beff"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#79c0ff"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#429eea"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#64a8e3"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#347fbe"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#5d90be"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#2b628f"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#55789a"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-5</text>
   </g>
   
@@ -477,7 +477,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#e6dfce" stroke="#d5cdb9" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#4e606d">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#4e606d">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#f9f7f0" stroke="#d5cdb9" stroke-width="1"/>
@@ -510,18 +510,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4e606d">primary=#5d8ba5 · accent=#c5d7e3 · ring=#5d8ba5</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#1f303b">Chart series (chart-1..5 · min OKLab Δ=0.0992)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#1f303b">Chart series (chart-1..5 · min OKLab Δ=0.0881)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#d5cdb9" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#8fbfda"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#5c8aa4"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4e606d">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#6b99b3"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#426f88"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4e606d">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#4e7b94"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#28556d"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4e606d">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#315e76"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#0c3d54"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4e606d">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#134259"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#002537"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4e606d">chart-5</text>
   </g>
   
@@ -535,7 +535,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#1b3647" stroke="#214459" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#aba494">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#aba494">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#132e3f" stroke="#214459" stroke-width="1"/>
@@ -568,18 +568,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aba494">primary=#8cb4cb · accent=#3e505a · ring=#8cb4cb</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#dbd4c3">Chart series (chart-1..5 · min OKLab Δ=0.0995)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#dbd4c3">Chart series (chart-1..5 · min OKLab Δ=0.074)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#214459" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#bce5fd"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#afd8ef"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aba494">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#96bed5"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#98bfd6"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aba494">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#789eb5"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#80a8be"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aba494">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#5a8096"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#6a91a7"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aba494">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#3e6377"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#5b798b"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aba494">chart-5</text>
   </g>
   
@@ -593,7 +593,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#e7e7ed" stroke="#d5d5dc" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#5b5c6e">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#5b5c6e">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#fdfdff" stroke="#d5d5dc" stroke-width="1"/>
@@ -626,18 +626,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5b5c6e">primary=#6f86d6 · accent=#c7d3f6 · ring=#6f86d6</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#2c2c3c">Chart series (chart-1..5 · min OKLab Δ=0.0984)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#2c2c3c">Chart series (chart-1..5 · min OKLab Δ=0.0961)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#d5d5dc" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#9cb4ff"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#6f87d7"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5b5c6e">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#758dde"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#546ab7"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5b5c6e">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#596fbd"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#3a4d97"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5b5c6e">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#3e519c"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#223179"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5b5c6e">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#25357d"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#0e145b"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5b5c6e">chart-5</text>
   </g>
   
@@ -651,7 +651,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#1f1c3e" stroke="#2b2752" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a4a4a9">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a4a4a9">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#181536" stroke="#2b2752" stroke-width="1"/>
@@ -684,18 +684,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a9">primary=#97adf4 · accent=#414c6c · ring=#97adf4</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d3d4d9">Chart series (chart-1..5 · min OKLab Δ=0.0984)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d3d4d9">Chart series (chart-1..5 · min OKLab Δ=0.0743)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#2b2752" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#d2ddff"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#adc2ff"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a9">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#9db4fb"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#92a9ef"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a9">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#7f95da"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#7c92d5"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a9">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#6276b8"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#667bbe"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a9">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#475999"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#5165a5"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a9">chart-5</text>
   </g>
   
@@ -709,7 +709,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#e9e7ec" stroke="#d7d5db" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#5f5c64">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#5f5c64">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#fefdff" stroke="#d7d5db" stroke-width="1"/>
@@ -742,18 +742,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5f5c64">primary=#af7d87 · accent=#e4ced2 · ring=#af7d87</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#2f2c33">Chart series (chart-1..5 · min OKLab Δ=0.0275)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#2f2c33">Chart series (chart-1..5 · min OKLab Δ=0.0568)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#d7d5db" stroke-width="1"/>
     
     <rect x="42" y="300" width="72" height="40" rx="5" fill="#bf7969"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5f5c64">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#c0767a"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#b0676b"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5f5c64">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#b08269"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#91616b"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5f5c64">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#af7d87"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#82573f"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5f5c64">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#592e38"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#39121d"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5f5c64">chart-5</text>
   </g>
   
@@ -767,7 +767,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#343138" stroke="#413e46" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a5a3a9">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a5a3a9">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#2c2a30" stroke="#413e46" stroke-width="1"/>
@@ -800,18 +800,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">primary=#d0a4ac · accent=#5b474b · ring=#d0a4ac</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d5d3d9">Chart series (chart-1..5 · min OKLab Δ=0.0217)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d5d3d9">Chart series (chart-1..5 · min OKLab Δ=0.0451)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#413e46" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#dfa092"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#ffc4b7"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#e09ea0"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#eba8ab"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#d1a892"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#c498a0"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#d0a4ac"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#be9580"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#ac8189"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#9e747d"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-5</text>
   </g>
   
@@ -941,7 +941,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#e9e7ed" stroke="#d7d5dc" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#605a6c">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#605a6c">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#fefdff" stroke="#d7d5dc" stroke-width="1"/>
@@ -974,18 +974,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605a6c">primary=#f31685 · accent=#8c16f3 · ring=#f31685</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#302b3b">Chart series (chart-1..5 · min OKLab Δ=0.134)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#302b3b">Chart series (chart-1..5 · min OKLab Δ=0.1369)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#d7d5dc" stroke-width="1"/>
     
     <rect x="42" y="300" width="72" height="40" rx="5" fill="#a68700"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605a6c">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#f31685"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#de0078"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605a6c">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#f33416"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#c81e00"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605a6c">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#009a8c"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#006e64"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605a6c">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#8c16f3"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#6800b9"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605a6c">chart-5</text>
   </g>
   
@@ -999,7 +999,7 @@
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#362e46" stroke="#433958" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a5a3a9">✓ 13/13 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a5a3a9">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#2e263e" stroke="#433958" stroke-width="1"/>
@@ -1032,18 +1032,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">primary=#f31685 · accent=#8c16f3 · ring=#f31685</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d5d3d9">Chart series (chart-1..5 · min OKLab Δ=0.134)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d5d3d9">Chart series (chart-1..5 · min OKLab Δ=0.1162)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#433958" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#a68700"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#f9d86f"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#f31685"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#ffa3c1"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#f33416"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#ff8069"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#009a8c"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#4ea59a"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#8c16f3"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#954cef"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-5</text>
   </g>
 </svg>

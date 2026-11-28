@@ -49,7 +49,7 @@ Usage:
                      [--audit] [--out <path>] [--book <extension.ts> [--book-sha256 <hex>]]
 
   theme-book audit   <file.css|file.json> [--standard wcag-aa|wcag-aaa|apca]
-                     [--fix] [--strict-borders] [--format text|json]
+                     [--fix] [--strict-borders] [--charts-advisory] [--format text|json]
 
   theme-book eval    <script.ts | -> [-- ...args]
 
@@ -82,7 +82,7 @@ const COMMAND_SCHEMAS: Record<string, FlagSchema> = {
   },
   audit: {
     valueFlags: new Set(["standard", "format"]),
-    boolFlags: new Set(["fix", "strict-borders", "help", "h"]),
+    boolFlags: new Set(["fix", "strict-borders", "charts-advisory", "help", "h"]),
   },
 };
 
@@ -343,6 +343,7 @@ async function main() {
       standard,
       withFixes: booleans.has("fix"),
       strictBorders: booleans.has("strict-borders"),
+      chartsAdvisory: booleans.has("charts-advisory"),
     });
 
     if (outFormat === "json") {
