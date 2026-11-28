@@ -141,8 +141,8 @@ theme-book theme --book school.book.ts --seed "#0f766e" --mood editorial --stand
 
 `--mood corporate` and `--mood freak` (shadcn only) build both modes from one palette, with rules fitted to
 seven famous light/dark pairs: Solarized, Gruvbox, Tokyo Night, One, Catppuccin, Rosé Pine and GitHub. Every
-color records the seed or light color it was derived from, and this diagram draws those records from the book
-theme-book built for Owl Coral's palette, not by hand:
+color records an origin (a seed, or for a dark accent its light version), and this diagram draws those records
+from the book theme-book built for Owl Coral's palette, not by hand:
 
 ```mermaid
 sankey-beta

@@ -860,7 +860,7 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
     { light: lightSerialized, dark: darkSerialized, skippedTokens: [], assumptions: [] },
     // A hueless derived mood keeps stock shadcn's chart greys, one set for both modes, which stock
     // shadcn does not hold to 3:1 either: those bars are advisory. Every other derived chart is floored.
-    { standard, withFixes: false, chartsAdvisory: isDerived(opts.mood) && readPalette(opts.seeds).hueless },
+    { standard, withFixes: false, chartsAdvisory: isDerived(opts.mood) && readPalette(pools.seedHexes).hueless },
   );
 
   const hexFlag = opts.hexOutput ?? false;

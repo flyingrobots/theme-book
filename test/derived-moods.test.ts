@@ -125,6 +125,11 @@ describe("derived moods", () => {
 
   test("the first colored seed is primary, whatever its lightness; a grey first seed is base material", () => {
     const primarySource = (t: BuiltTheme) => t.book.inspect("palette.primary-light")?.dependencies ?? [];
+    // Independent of the recorded origin: the light primary keeps the brand seed's hue.
+    const keepsHue = (t: BuiltTheme, seed: string) => hueGap(ok(t.light.primary!.hex).h, ok(seed).h) <= 8;
+    expect(keepsHue(build(["#0b1f3a", "#f59e0b"], "corporate"), "#0b1f3a")).toBe(true);
+    expect(keepsHue(build(["#ffff00", "#2563eb"], "corporate"), "#ffff00")).toBe(true);
+    expect(keepsHue(build(["#8a8f98", "#2563eb"], "corporate"), "#2563eb")).toBe(true);
     for (const mood of ["corporate", "freak"] as const) {
       expect(primarySource(build(["#0b1f3a", "#f59e0b"], mood))).toContain("seeds.seed-0");
     }

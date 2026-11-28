@@ -57,15 +57,18 @@ The two moods differ in how they treat the palette's colors:
 | Mood | Accents in dark | Secondary and accent | Character |
 | --- | --- | --- | --- |
 | `corporate` | lifted together by the fitted average move | soft tints of the palette | quiet, one accent doing the work |
-| `freak` | unchanged (Solarized's move), unless one must be lifted to clear the dark page | the palette's own colors, flat and the same in both modes when they carry text; a color that cannot becomes a tint | loud, every color on show |
+| `freak` | unchanged (Solarized's move), unless one must be lifted to clear the dark page | the palette's own colors, flat and the same in both modes; a role left with no non-status palette color that can carry text becomes a tint | loud, every color on show |
 
-_Table 1. The two derived moods. Both share the base ramp, the fixed status red and the chart rules._
+_Table 1. The two derived moods. Both share the base ramp, the fixed status red and the chart rules. In both, the
+primary is moved to the nearest lightness that holds its text and clears the page, so it can differ from its seed
+(Listing 2: coral `#e88e8d` becomes `#c97272`)._
 
 ## How a palette becomes a theme
 
-theme-book reads the palette by role and computes each color. Every color in the book records where it was
-derived from: a light color its seed, a dark accent its light version. The values themselves are computed in
-TypeScript and stored fixed, so a record is an origin, not a live dependency. The diagram below draws those
+theme-book reads the palette by role and computes each color. Most colors in the book record an origin: a light
+color its seed (text on a fill, and the base ramp, name the base seed), a dark accent its light version;
+destructive names none. The values themselves are computed in TypeScript and stored fixed, so a record is an
+origin, not a live dependency. The diagram below draws those
 records from the book theme-book built for Listing 1 (`bun scripts/benchmark/sankey.ts`), not by hand.
 
 ```mermaid
@@ -101,7 +104,7 @@ The rules, in OKLCH:
 
 | Rule | What it does | Evidence |
 | --- | --- | --- |
-| **The palette is read by role** | the first colored seed is primary, whatever its lightness; a near-grey seed is base material: the palest tints the light page, the darkest sets the ink; another colored seed is an accent | |
+| **The palette is read by role** | the first colored seed is primary, whatever its lightness; a near-grey seed, or a later colored seed that is very dark or very pale (OKLCH L ≤ 0.25 or ≥ 0.93), is base material: the palest tints the light page, the darkest sets the ink; any other colored seed is an accent | |
 | **The base is one ramp** | the dark page takes the light theme's ink hue, at L about 0.24 (never black); each mode's text comes from the other end | the dark page's hue sits within 1.4–16.4° of the light ink's in six of the seven famous themes (Table 3) |
 | **Accents move together** | dark L = (1 − b)(L + s) + b · 0.76, dark C = k · C, hue kept: `corporate` uses s 0.12, b 0.6, k 0.85; `freak` uses 0, 0, 1 | Table 3 |
 | **Contrast is a floor in each mode** | after the move, a dark accent is lifted further until it clears 3:1 (4.5:1 for text it carries); never pushed the other way | |

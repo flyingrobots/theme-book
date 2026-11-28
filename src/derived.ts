@@ -5,7 +5,7 @@
  * Rosé Pine, GitHub; see docs/topics/derived-moods). In OKLCH:
  *
  * - The base is one ramp. The light page is the palette's pale end; the dark page takes the light
- *   theme's ink hue (within 1-16 degrees in six of the seven) at L about 0.24, never black; each
+ *   theme's ink hue (within 1.4-16.4 degrees in six of the seven) at L about 0.24, never black; each
  *   mode's text comes from the other end.
  * - Accents keep their hue and move together. Dark L = (1 - b)(L + s) + b * 0.76 and dark C = k * C:
  *   s lifts every accent by the same amount (Gruvbox, Catppuccin: s = 0.23), b pulls them into one
@@ -27,9 +27,10 @@
  * Chart bars clear 3:1 on every page in both modes, except a palette with no hue, which keeps stock
  * shadcn's greys, one set for both modes, and audits them as advisory, as stock shadcn would.
  *
- * Every color records where it was derived from: a palette color is `relativeTo` its seed, and each
- * dark accent `relativeTo` its light version, with the computed values stored fixed, so the book (and
- * a flow view of it) reads seeds -> light -> dark as origins, not live dependencies.
+ * Most colors record an origin: a palette color is `relativeTo` a seed (text on a fill, and the base
+ * ramp, name the base seed), each dark accent `relativeTo` its light version, and destructive names
+ * none. The computed values are stored fixed, so the book (and a flow view of it) reads seeds ->
+ * light -> dark as recorded origins, not live dependencies.
  */
 import { type DesignBook, color, ref, relativeTo } from "design-book";
 import { converter, differenceEuclidean, formatHex, parse } from "culori";
