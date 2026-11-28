@@ -74,7 +74,7 @@ theme-book audit path/to/theme.json --format json
 theme-book audit path/to/tokens.css --charts-advisory
 ```
 
-_Listing 3. Common `audit` runs. `--charts-advisory` reports chart bars without requiring them, as a hueless `corporate` or `freak` theme's header asks._
+_Listing 3. Common `audit` runs (illustrative: `path/to/tokens.css` and `path/to/theme.json` stand for your own files). `--charts-advisory` reports chart bars without requiring them, as a hueless `corporate` or `freak` theme's header asks._
 
 [Contrast auditing](../contrast-auditing/README.md) explains which standard to ask for and how to read the result.
 
@@ -89,6 +89,8 @@ theme-book suggest --seed "#d97706" --surface "#0f172a" --generator rampensau --
 
 _Listing 4. Common `suggest` runs._
 
+`suggest` proposes colors to choose from; to build them into a theme, pass the ones you choose to `theme` as seeds.
+
 ### Run your own design-book scripts
 
 `eval` runs a script with theme-book's libraries already resolved, so a private experiment needs no install of its own.
@@ -98,7 +100,7 @@ theme-book eval my-book.ts
 theme-book eval - < my-book.ts
 ```
 
-_Listing 5. Running a script from a file or from stdin._
+_Listing 5. Running a script from a file or from stdin (illustrative: `my-book.ts` stands for your own script)._
 
 These four commands cover building, checking, choosing and experimenting.
 
@@ -172,7 +174,7 @@ These decisions are why a classic theme's colors can be traced to a rule and rep
 
 ## The audit contract and exit codes
 
-Every command exits with one of four codes, and the audit reports one of four statuses. Table 5 maps them.
+`theme`, `audit` and `suggest` exit with one of four codes, and the audit reports one of four statuses; Table 5 maps them. `eval` exits with its script's own code, so its `1` is not an audit failure.
 
 | Status | Meaning | Exit code |
 | --- | --- | --- |

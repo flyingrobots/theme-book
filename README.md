@@ -33,13 +33,13 @@ The hardest test for a theme generator is to give it one side of a theme a desig
 
 | Tokyo Night Day: the input | theme-book's dark, from the light side only | Tokyo Night: the designers' dark |
 | --- | --- | --- |
-| ![Tokyo Night Day: a pale grey page with blue, violet, teal, green, orange and pink accents](docs/topics/derived-moods/tokyo-night-input.svg) | ![theme-book's generated dark: a deep navy page with the same six hues lifted to light pastels, plus the fixed red it uses for errors](docs/topics/derived-moods/tokyo-night-ours.svg) | ![Tokyo Night: a near-black navy page with the same six hues as light pastels](docs/topics/derived-moods/tokyo-night-official.svg) |
+| ![Tokyo Night Day: a pale grey page with blue, violet, teal, green, orange and pink accents](docs/topics/derived-moods/tokyo-night-input.svg) | ![theme-book's generated dark: a deep navy page with the primary blue, then five chart colors lifted to light pastels (violet, blue, orange, green and teal), and the fixed red it uses for errors](docs/topics/derived-moods/tokyo-night-ours.svg) | ![Tokyo Night: a near-black navy page with the same six hues as light pastels](docs/topics/derived-moods/tokyo-night-official.svg) |
 
-_Figure 2. Tokyo Night Day goes in, theme-book's dark comes out, beside the designers' own Tokyo Night. The generated dark is the full theme, with its chart colors ordered from light to dark._
+_Figure 2. Tokyo Night Day goes in, theme-book's dark comes out, beside the designers' own Tokyo Night. The generated dark is the full theme: the primary, five chart colors ordered from light to dark, and the fixed error red. Charts take the palette's first five colors, so Tokyo's sixth, the pink, has no chart slot; Figure 3 and Table 3 cover all six._
 
 ![For each Tokyo Night Day accent, an × at its color, a solid arrow to a square at the official Tokyo Night color, and a dashed arrow to a circle at theme-book's color; most circles land beside their squares, and the teal and green ones fall short in lightness](docs/topics/derived-moods/tokyo-night-moves.svg)
 
-_Figure 3. Each accent's move from light to dark, in OKLCH: lightness from bottom to top, hue from left to right. An × is the light theme's color, a □ the designers' dark color, an ○ theme-book's; the solid arrow is the designers' move and the dashed arrow is theme-book's. The gap between an ○ and its □ is the miss in Table 3._
+_Figure 3. Each accent's move from light to dark, in OKLCH: lightness from bottom to top, hue from left to right. An × is the light theme's color, a □ the designers' dark color, an ○ theme-book's; the solid arrow is the designers' move and the dashed arrow is theme-book's. The gap between an ○ and its □ shows the miss in lightness and hue; the miss in Table 3 also counts chroma, which this chart does not plot, so the violet's overlapping marks still miss by 0.021._
 
 Table 3 states each miss as a number: the distance in OKLab, the perceptual color space theme-book works in, where under 0.02 is indistinguishable.
 
@@ -53,7 +53,7 @@ Table 3 states each miss as a number: the distance in OKLab, the perceptual colo
 | accent 5 | `#f52a65` | `#f7768e` | `#ff8598` | 0.036 |
 | **mean** | | | | **0.060** |
 
-_Table 3. Observed output of `bun scripts/benchmark/score.ts --accents Tokyo`. The primary and the violet land almost on the designers' colors; the teal and the green, which the designers lifted furthest, are where theme-book falls short._
+_Table 3. The table from the observed output of `bun scripts/benchmark/score.ts --accents Tokyo`, which prints the method summary first. The primary and the violet land almost on the designers' colors; the teal and the green, which the designers lifted furthest, are where theme-book falls short._
 
 Table 4 runs the same test on all seven themes, against two common alternatives: a Material-style tone table, and flipping each color's lightness.
 
@@ -67,7 +67,7 @@ Table 4 runs the same test on all seven themes, against two common alternatives:
 | Rosé Pine | **0.078** | 0.099 | 0.383 |
 | GitHub | **0.069** | 0.173 | 0.224 |
 
-_Table 4. Observed output of `bun scripts/benchmark/score.ts --per-theme`: mean OKLab distance from the designers' dark accents, lower is better, the best in bold. The Material-style tones are CIELAB lightness 40 and 80, an approximation: Material's own tones use HCT._
+_Table 4. The table from the observed output of `bun scripts/benchmark/score.ts --per-theme`: mean OKLab distance from the designers' dark accents, lower is better, the best in bold. The Material-style tones are CIELAB lightness 40 and 80, an approximation: Material's own tones use HCT._
 
 theme-book comes closest on six of the seven. Catppuccin is the loss: its dark accents are pastels, softer than the fitted move makes them. Solarized is the widest miss in absolute terms, because Solarized keeps its accents the same in both modes, which is what `--mood freak` does and `--mood corporate` does not. The [derived moods page](docs/topics/derived-moods/README.md) has the fit, a leave-one-out test, and the [full scoreboard](docs/topics/derived-moods/scoreboard.svg) of every theme in both directions.
 
