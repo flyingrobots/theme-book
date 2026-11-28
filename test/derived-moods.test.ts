@@ -29,6 +29,8 @@ const CASES = [
   { name: "rounding edge, one seed", seeds: ["#29da7e"], mood: "corporate" as const },
   { name: "rounding edge, freak", seeds: ["#be66e5"], mood: "freak" as const },
   { name: "rounding edge, six seeds", seeds: ["#041edd", "#a8caf8", "#27f51b", "#8de542", "#33822b", "#32fdd9"], mood: "corporate" as const },
+  // A floor met on hex, lost when the default output rounds OKLCH to 4 decimals (sidebar-ring at 2.9996).
+  { name: "rounding edge, OKLCH output", seeds: ["#d967a8"], mood: "corporate" as const },
   // Palettes whose charts fell below 3:1 (stress set).
   { name: "Solarized, freak", seeds: ["#268bd2", "#2aa198", "#d33682", "#6c71c4", "#b58900", "#cb4b16", "#fdf6e3", "#657b83"], mood: "freak" as const },
   { name: "violet, pink, cyan, freak", seeds: ["#7c3aed", "#db2777", "#0891b2"], mood: "freak" as const },
