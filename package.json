@@ -1,0 +1,31 @@
+{
+  "name": "theme-book",
+  "version": "0.4.0",
+  "description": "Rule-based color theme compiler, contrast auditor, and AI agent skill built on David Aerne's (@meodai) design-book, poline, rampensau, and culori.",
+  "type": "module",
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flyingrobots/theme-book.git"
+  },
+  "bin": {
+    "theme-book": "./bin/theme-book"
+  },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "bun x tsc --noEmit",
+    "specimen": "bun scripts/specimen.ts",
+    "install:local": "./install.sh"
+  },
+  "dependencies": {
+    "culori": "^4.0.2",
+    "design-book": "^0.26.0",
+    "poline": "^0.13.1",
+    "rampensau": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.5",
+    "@types/culori": "^4.0.1",
+    "typescript": "^5.8.0"
+  }
+}
