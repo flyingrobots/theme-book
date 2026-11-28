@@ -32,6 +32,21 @@ const CASES = [
   // Palettes whose charts fell below 3:1 (stress set).
   { name: "Solarized, freak", seeds: ["#268bd2", "#2aa198", "#d33682", "#6c71c4", "#b58900", "#cb4b16", "#fdf6e3", "#657b83"], mood: "freak" as const },
   { name: "violet, pink, cyan, freak", seeds: ["#7c3aed", "#db2777", "#0891b2"], mood: "freak" as const },
+  // A stress set of edge palettes, in both moods.
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: single teal", seeds: ["#0f766e"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: single red", seeds: ["#d32f2f"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: grey", seeds: ["#777777"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: teal and amber", seeds: ["#0f766e", "#f59e0b"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: yellow only", seeds: ["#facc15"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: pale first", seeds: ["#f5f0e6", "#2563eb", "#9333ea"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: grey first", seeds: ["#6b7280", "#2563eb"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: deep navy brand", seeds: ["#0b1f4d", "#f97316"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: neon lime", seeds: ["#ccff00", "#ff00ff", "#00ffff"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: dark only", seeds: ["#111111", "#1a1a2e"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: low-chroma red", seeds: ["#2563eb", "#b07a78"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: black and white", seeds: ["#000000", "#ffffff"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: cream and ink", seeds: ["#fdf6e3", "#002b36", "#268bd2", "#d33682", "#859900"], mood })),
+  ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: vivid, status-heavy", seeds: ["#7c3aed", "#eab308", "#ef4444", "#22c55e"], mood })),
 ];
 const build = (seeds: string[], mood: "corporate" | "freak"): BuiltTheme =>
   buildThemeBook({ seeds, preset: "shadcn", mood, generator: "oklch" });
@@ -71,7 +86,9 @@ describe("derived moods", () => {
 
       test("each dark accent is a rule on its light version", () => {
         if (hueless) return;
-        for (const k of ["primary", "chart-1", "destructive"]) {
+        // A palette with no colored seed takes its ink as primary, so primary has no palette entry.
+        const colored = seeds.some((s) => ok(s).c >= 0.04);
+        for (const k of [...(colored ? ["primary"] : []), "chart-1", "destructive"]) {
           expect(t.book.inspect(`palette.${k}-dark`)?.dependencies).toContain(`palette.${k}-light`);
         }
       });
