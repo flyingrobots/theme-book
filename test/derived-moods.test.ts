@@ -34,8 +34,8 @@ const CASES = [
   // Palettes whose charts fell below 3:1 (stress set).
   { name: "Solarized, freak", seeds: ["#268bd2", "#2aa198", "#d33682", "#6c71c4", "#b58900", "#cb4b16", "#fdf6e3", "#657b83"], mood: "freak" as const },
   { name: "violet, pink, cyan, freak", seeds: ["#7c3aed", "#db2777", "#0891b2"], mood: "freak" as const },
-  // The same color three times, in two spellings: one accent, not three identical chart bars.
-  { name: "duplicate seeds", seeds: ["#2563eb", "#2563EB", "#2563eb"], mood: "corporate" as const },
+  // A later color three times, in two spellings: two accents, not four with identical chart bars.
+  { name: "duplicate seeds", seeds: ["#0f766e", "#2563eb", "#2563EB", "#2563eb"], mood: "corporate" as const },
   // A stress set of edge palettes, in both moods.
   ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: single teal", seeds: ["#0f766e"], mood })),
   ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: single red", seeds: ["#d32f2f"], mood })),
@@ -201,6 +201,9 @@ describe("derived moods", () => {
     // Dark surfaces come from the seed, as light's do; dark primary derives from light primary.
     expect(out).not.toMatch(/^light surfaces,dark surfaces,/m);
     expect(out).toMatch(/^light primary,dark primary,\d+$/m);
+    // A flow is labelled by the light role it reaches: dark rings follow the primary, not light lines.
+    expect(out).toMatch(/^light primary,dark lines,2$/m);
+    expect(out).not.toMatch(/^light lines,dark lines,/m);
   }, 30_000);
 
   test("a palette counts each distinct color once", () => {
