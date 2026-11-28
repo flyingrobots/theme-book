@@ -8,6 +8,7 @@ archived; git history is the archive.
 | Page | Job |
 | --- | --- |
 | [Documentation standards](DOCUMENTATION_STANDARDS.md) | How pages in this corpus are written and maintained |
+| [The theme-book CLI](topics/cli/README.md) | Install, every command and option, extensions, design decisions, the audit contract and exit codes |
 | [Contrast auditing](topics/contrast-auditing/README.md) | What `theme-book audit` checks, which standard to ask for, and how to read the result |
 | [Contrast auditing test plan](topics/contrast-auditing/test-plan.md) | Requirements and evidence for the above |
 | [Derived moods](topics/derived-moods/README.md) | How `corporate` and `freak` build light and dark from one palette, and how the rules were fitted to famous themes |

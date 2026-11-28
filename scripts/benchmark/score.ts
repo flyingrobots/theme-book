@@ -55,4 +55,33 @@ if (import.meta.main) {
     console.log(name.padEnd(52), meanDistance(m, true).toFixed(3).padStart(10), meanDistance(m, false).toFixed(3).padStart(10));
   }
   console.log(`\nleave-one-out (fit on six themes, score the seventh, both directions): ${leaveOneOut().toFixed(3)}`);
+  const accentsFor = process.argv.indexOf("--accents");
+  if (accentsFor > 0) {
+    // One theme's accents, light to dark: the source, the official dark color, theme-book's move, and the miss.
+    const name = process.argv[accentsFor + 1]!;
+    const t = FAMOUS_THEMES.find((x) => x.name === name)!;
+    const ours = METHODS["theme-book corporate (s 0.12, b 0.6, k 0.85)"]!;
+    const src = accentsOf(t.light), dst = accentsOf(t.dark);
+    console.log(`\n| Accent | ${t.lightName} (×) | ${t.darkName} (□) | theme-book (○) | Miss (OKLab) |`);
+    console.log("| --- | --- | --- | --- | --- |");
+    src.forEach((h, i) => {
+      const o = ours(h, true);
+      console.log(`| ${i === 0 ? "primary" : `accent ${i}`} | \`${h}\` | \`${dst[i]}\` | \`${o}\` | ${dE(o, dst[i]!).toFixed(3)} |`);
+    });
+    console.log(`| **mean** | | | | **${meanDistance(ours, true, [name]).toFixed(3)}** |`);
+  }
+  if (process.argv.includes("--per-theme")) {
+    // Light to dark, per theme, as a Markdown table: theme-book, the Material-style tones, and lightness inversion.
+    const ours = METHODS["theme-book corporate (s 0.12, b 0.6, k 0.85)"]!;
+    const material = METHODS["Material-style tones (CIELAB L* 40 / 80, not HCT)"]!;
+    const flip = METHODS["OKLCH lightness inversion"]!;
+    console.log("\n| Theme | theme-book | Material-style tones | Flipping OKLCH lightness |");
+    console.log("| --- | --- | --- | --- |");
+    for (const t of FAMOUS_THEMES) {
+      const [a, b, c] = [ours, material, flip].map((m) => meanDistance(m, true, [t.name]));
+      const best = Math.min(a!, b!, c!);
+      const cell = (v: number) => (v === best ? `**${v.toFixed(3)}**` : v.toFixed(3));
+      console.log(`| ${t.name} | ${cell(a!)} | ${cell(b!)} | ${cell(c!)} |`);
+    }
+  }
 }

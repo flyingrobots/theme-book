@@ -3,12 +3,14 @@
  * The famous-themes scoreboard: give theme-book one side of a famous theme, compare the side it
  * generates with the official other side. Writes an interactive page (three views of the fourth
  * chart) and a static SVG of the "both moves" view for the README.
- * `bun scripts/benchmark/scoreboard.ts` -> docs/topics/derived-moods/scoreboard.{html,svg}
+ * Also writes the README's Tokyo Night comparison as four transparent, text-free images.
+ * `bun scripts/benchmark/scoreboard.ts` -> docs/topics/derived-moods/scoreboard.{html,svg} and tokyo-night-{input,ours,official,moves}.svg
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { buildThemeBook } from "../../src/books";
 import { FAMOUS_THEMES, type Side } from "./famous-themes";
+import { DERIVED_SETTINGS, accentMove } from "../../src/derived";
 import { converter, parse } from "culori";
 const oklch = converter("oklch");
 
@@ -178,6 +180,69 @@ writeFileSync(
   resolve(outDir, "scoreboard.svg"),
   svg.replace(">", `><style>.cmp-ours, .cmp-official { display: none; }</style>`),
 );
+// The README's hero, as four separate images for layout: the official light side given as input, the dark
+// side theme-book generates from it, the official dark side, and both moves in OKLCH (lightness against hue).
+// Transparent and text-free, so each sits on any page, light or dark; the titles and the caption are prose in
+// the README. Chrome lines use a translucent mid-grey that reads on both. Theme colors are 6-digit hex and
+// never change; chrome colors are 3- or 4-digit.
+{
+  const p = PAIRS.find((t) => t.name === "Tokyo")!;
+  const o = ours(p.light, "dark");
+  const bare = (inner: string) =>
+    inner
+      .replace(/<text[^>]*>[\s\S]*?<\/text>/g, "")
+      .replace(/ fill="#fff"/g, ' fill="none"')
+      .replace(/stroke="#000"/g, 'stroke="#8889"')
+      .replace(/stroke="#0001"/g, 'stroke="#8883"');
+  const svg = (inner: string) =>
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><style>.cmp-ours, .cmp-official { display: none; }</style>${bare(inner)}</svg>\n`;
+  const files: [string, string][] = [
+    ["tokyo-night-input.svg", panel(0, 0, "", p.light.page, p.light.ink, officialChips(p.light), "")],
+    ["tokyo-night-ours.svg", panel(0, 0, "", o.page, o.ink, o.chips, "")],
+    ["tokyo-night-official.svg", panel(0, 0, "", p.dark.page, p.dark.ink, officialChips(p.dark), "")],
+  ];
+  for (const [name, inner] of files) writeFileSync(resolve(outDir, name), svg(inner));
+  // The moves chart, exact pairs. For each light accent: an × at the source (the light theme's color), a □
+  // at the official dark color, an ○ at theme-book's move of that same accent (the move the benchmark scores),
+  // and two arrows from the ×: the designers' move (solid, in the official color) and ours (dashed, in our
+  // color). Lightness (OKLCH L, 0.4 to 0.9) runs bottom to top, hue (0 to 360) left to right; the README's
+  // table gives each miss. Casing (design-book's bestContrastWith against GitHub's two pages, see the docs):
+  // a #222222 core outline carries a mark on the light page, an #eeeeee ring carries a dark one on the dark.
+  {
+    const MW = 760, MH = 340, M = 30, CORE = "#222222", CASING = "#eeeeee";
+    const at = (hex: string) => { const c = oklch(parse(hex)!)!; return { x: M + ((c.h ?? 0) / 360) * (MW - 2 * M), y: M + (1 - ((c.l - 0.4) / 0.5)) * (MH - 2 * M) }; };
+    const src = [p.light.primary, ...p.light.accents], off = [p.dark.primary, ...p.dark.accents];
+    const ourMoves = src.map((h) => accentMove(h, DERIVED_SETTINGS.corporate, true));
+    const parts: string[] = [];
+    for (const l of [0.5, 0.6, 0.7, 0.8]) { const y = M + (1 - (l - 0.4) / 0.5) * (MH - 2 * M); parts.push(`<line x1="${M}" y1="${y}" x2="${MW - M}" y2="${y}" stroke="#8884" stroke-width="1"/>`); }
+    // An arrow from a to b that stops short of the mark at b, with its head drawn as a triangle.
+    const arrow = (a: { x: number; y: number }, b: { x: number; y: number }, color: string, dashed: boolean) => {
+      const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1, ux = dx / len, uy = dy / len;
+      const tip = { x: b.x - ux * 12, y: b.y - uy * 12 }, base = { x: tip.x - ux * 11, y: tip.y - uy * 11 };
+      const head = `M ${tip.x} ${tip.y} L ${base.x - uy * 6} ${base.y + ux * 6} L ${base.x + uy * 6} ${base.y - ux * 6} Z`;
+      const start = { x: a.x + ux * 10, y: a.y + uy * 10 };
+      const dash = dashed ? ' stroke-dasharray="7 5"' : "";
+      return [
+        `<line x1="${start.x}" y1="${start.y}" x2="${base.x}" y2="${base.y}" stroke="${CORE}" stroke-width="5"${dash} stroke-linecap="round"/>`,
+        `<path d="${head}" fill="${CORE}" stroke="${CORE}" stroke-width="3" stroke-linejoin="round"/>`,
+        `<line x1="${start.x}" y1="${start.y}" x2="${base.x}" y2="${base.y}" stroke="${color}" stroke-width="3"${dash} stroke-linecap="round"/>`,
+        `<path d="${head}" fill="${color}"/>`,
+      ].join("");
+    };
+    src.forEach((s0, i) => {
+      const a = at(s0);
+      parts.push(arrow(a, at(off[i]!), off[i]!, false), arrow(a, at(ourMoves[i]!), ourMoves[i]!, true));
+    });
+    src.forEach((s0, i) => {
+      const a = at(s0), t = at(off[i]!), o2 = at(ourMoves[i]!), k = 7;
+      const x = (w: number, c: string) => `<path d="M ${a.x - k} ${a.y - k} L ${a.x + k} ${a.y + k} M ${a.x + k} ${a.y - k} L ${a.x - k} ${a.y + k}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;
+      parts.push(x(9, CASING), x(6.5, CORE), x(3.5, s0));
+      parts.push(`<rect x="${t.x - 8}" y="${t.y - 8}" width="16" height="16" rx="2" fill="${off[i]}" stroke="${CORE}" stroke-width="2"/>`);
+      parts.push(`<circle cx="${o2.x}" cy="${o2.y}" r="8" fill="none" stroke="${CORE}" stroke-width="6"/>`, `<circle cx="${o2.x}" cy="${o2.y}" r="8" fill="none" stroke="${ourMoves[i]}" stroke-width="3"/>`);
+    });
+    writeFileSync(resolve(outDir, "tokyo-night-moves.svg"), `<svg xmlns="http://www.w3.org/2000/svg" width="${MW}" height="${MH}" viewBox="0 0 ${MW} ${MH}">${parts.join("")}</svg>\n`);
+  }
+}
 writeFileSync(resolve(outDir, "scoreboard.html"), `<!doctype html><meta charset="utf-8"><title>Famous themes</title>
 <style>
   body { margin: 0; background: #fff; font-family: -apple-system, "Segoe UI", Roboto, sans-serif; }

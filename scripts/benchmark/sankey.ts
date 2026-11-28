@@ -65,7 +65,8 @@ for (const k of t.darkKeys) {
   add(role ? `light ${groupOf(role)}` : origin(`dark.${k}`), `dark ${groupOf(k)}`);
 }
 const csv = (s: string) => (/[,"]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s);
-console.log("```mermaid\nsankey-beta\n");
+// linkColor gradient: each flow takes its nodes' colors, so it shows on light and dark pages alike.
+console.log("```mermaid\n---\nconfig:\n  sankey:\n    linkColor: gradient\n---\nsankey-beta\n");
 for (const [k, v] of [...flows].sort()) {
   const [a, b] = k.split("\u0000");
   console.log(`${csv(a!)},${csv(b!)},${v}`);
