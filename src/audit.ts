@@ -1171,7 +1171,7 @@ export function evaluateAudit(
       assessedPairs: {
         text: pairs.filter((p) => p.kind === "text").length,
         uiGraphic: pairs.filter((p) => p.kind === "ui-graphic").length,
-        borderAdvisory: advisoryPairs.length,
+        borderAdvisory: advisoryPairs.filter((p) => p.kind === "border-advisory").length,
       },
       unverifiedPairs,
       skippedTokens: parsedModes.skippedTokens,
