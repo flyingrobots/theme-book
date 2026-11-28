@@ -1,6 +1,8 @@
 import { describe, expect, test } from "bun:test";
 import { SPECIMEN_THEMES } from "../scripts/specimen";
 import { METHODS, meanDistance } from "../scripts/benchmark/score";
+import { fitTheme } from "../scripts/benchmark/fit";
+import { FAMOUS_THEMES } from "../scripts/benchmark/famous-themes";
 import { buildThemeBook, type BuiltTheme } from "../src/books";
 import { evaluateAudit, parseCssColorExact, wcagRatioExact } from "../src/audit";
 import { readPalette, statusHue } from "../src/derived";
@@ -36,6 +38,11 @@ const CASES = [
   { name: "violet, pink, cyan, freak", seeds: ["#7c3aed", "#db2777", "#0891b2"], mood: "freak" as const },
   // A later color three times, in two spellings (the unit test below asserts the count; this case runs the full suite on it).
   { name: "duplicate seeds", seeds: ["#0f766e", "#2563eb", "#2563EB", "#2563eb"], mood: "corporate" as const },
+  // A near-black colored seed: its dark version must be lifted all the way to the floor (CodeRabbit, round 7).
+  { name: "near-black seed", seeds: ["#000009"], mood: "freak" as const },
+  { name: "near-black seed", seeds: ["#000009"], mood: "corporate" as const },
+  // Five steps of one slate: lifted dark bars must not bunch.
+  { name: "five steps of one slate", seeds: ["#788aa8", "#697b98", "#5b6d89", "#4d5e7a", "#40506c"], mood: "corporate" as const },
   // A stress set of edge palettes, in both moods.
   ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: single teal", seeds: ["#0f766e"], mood })),
   ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: single red", seeds: ["#d32f2f"], mood })),
@@ -224,6 +231,12 @@ describe("derived moods", () => {
       expect([mood, r.exitCode]).toEqual([mood, 2]);
     }
   }, 30_000);
+
+  test("the fit reports no page-hue gap when the dark page or the light ink has no hue", () => {
+    const gruvbox = FAMOUS_THEMES.find((t) => t.name === "Gruvbox")!;
+    expect(fitTheme(gruvbox).pageHueGap).toBeNull(); // #282828 is achromatic
+    expect(fitTheme(FAMOUS_THEMES.find((t) => t.name === "Solarized")!).pageHueGap).toBeCloseTo(2.1, 1);
+  });
 
   test("is refused for a preset it has no rules for", () => {
     expect(() => buildThemeBook({ seeds: ["#2563eb"], preset: "semantic", mood: "freak", generator: "oklch" })).toThrow(/freak/);
