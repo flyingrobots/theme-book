@@ -11,6 +11,8 @@ Versions track the tool's releases.
 
 ## [Unreleased]
 
+## [0.5.0] — 2026-11-28
+
 ### Added
 
 - **Generate, never hand-pick and audit.** The skill now says a theme must come from

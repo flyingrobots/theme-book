@@ -6,6 +6,8 @@ may change between minor versions.
 
 ## [Unreleased]
 
+## [0.5.0] — 2026-11-28
+
 ### Added
 
 - **`--mood corporate` and `--mood freak`: light and dark from one palette** (shadcn only;
