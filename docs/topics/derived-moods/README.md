@@ -70,8 +70,8 @@ color its seed (text on a fill, and the base ramp, name the base seed), a dark a
 destructive names none. The values themselves are computed in TypeScript and stored fixed, so a record is an
 origin, not a live dependency. The diagram below is drawn from
 the book theme-book built for Listing 1 (`bun scripts/benchmark/sankey.ts`), not by hand: seed-to-light flows
-follow those records; a dark color flows from light only where it derives from a light color (the accents, destructive
-and the charts), and otherwise from its own seed (the surfaces, text and lines).
+follow those records; a dark color flows from the light role it derives from (the accents, destructive and the charts;
+the rings, from light primary), and otherwise from its own seed (the surfaces, text and borders).
 
 ```mermaid
 sankey-beta
@@ -79,7 +79,7 @@ sankey-beta
 fixed status red,light destructive,1
 light charts,dark charts,5
 light destructive,dark destructive,1
-light lines,dark lines,2
+light primary,dark lines,2
 light primary,dark primary,2
 light secondary and accent,dark secondary and accent,3
 seed blue,light charts,1
@@ -103,7 +103,7 @@ seed violet,light secondary and accent,2
 
 _Figure 1. Where Owl Coral's colors come from. The charcoal seed is the base ramp (surfaces, text, lines) in both
 modes; coral is the primary; each chart is one seed; destructive is the fixed status red, from no seed; dark
-accents, destructive and charts derive from their light versions._
+accents, destructive and charts derive from their light versions, and the dark rings from light primary._
 
 The rules, in OKLCH:
 
