@@ -49,7 +49,8 @@ function plot(x: number, y: number, ours: { page: string; ink: string; chips: st
   const hueOf = (hex: string) => oklch(parse(hex)!)!.h ?? 0;
   const hueGap = (a: string, b: string) => Math.abs(((hueOf(a) - hueOf(b) + 540) % 360) - 180);
   const pairs: [string, string][] = [[ours.page, theirs.page], [ours.ink, theirs.ink], [ours.chips[0]!, theirs.primary]];
-  const mine = ours.chips.slice(1);
+  // Charts only: destructive (the last chip) is a fixed red, derived from no palette color.
+  const mine = ours.chips.slice(1, 6);
   const yours = [...theirs.accents];
   const candidates = mine.flatMap((m, i) => yours.map((t, j) => ({ i, j, d: hueGap(m, t) }))).sort((a, b) => a.d - b.d);
   const usedM = new Set<number>(), usedT = new Set<number>();
@@ -99,7 +100,7 @@ function plot(x: number, y: number, ours: { page: string; ink: string; chips: st
   // role; the rest one-to-one by nearest hue.
   const oursFrom: [string, string][] = [[input.page, ours.page], [input.ink, ours.ink], [input.primary, ours.chips[0]!]];
   {
-    const mine2 = ours.chips.slice(1);
+    const mine2 = ours.chips.slice(1, 6); // charts only; destructive is fixed
     const src = [...input.accents];
     const cand = mine2.flatMap((m, i) => src.map((t, j) => ({ i, j, d: hueGap(m, t) }))).sort((a, b) => a.d - b.d);
     const um = new Set<number>(), ut = new Set<number>();

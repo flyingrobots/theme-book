@@ -527,7 +527,7 @@ describe("derived moods: the build's audit verdict agrees with theme-book audit"
   const dir = mkdtempSync(join(tmpdir(), "theme-book-derived-audit-"));
   const build = (seeds: string[]) => {
     const out = join(dir, `${seeds.join("-").replace(/#/g, "")}.css`);
-    const args = [CLI_BIN, "theme", ...seeds.flatMap((s) => ["--seed", s]), "--preset", "shadcn", "--mood", "corporate", "--out", out];
+    const args = [CLI_BIN, "theme", ...seeds.flatMap((s) => ["--seed", s]), "--preset", "shadcn", "--mood", "corporate", "--audit", "--out", out];
     const r = Bun.spawnSync(args, { stdout: "pipe", stderr: "pipe" });
     expect(r.exitCode).toBe(0);
     return out;

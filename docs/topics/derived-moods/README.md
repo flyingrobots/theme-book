@@ -45,7 +45,7 @@ gives the same verdict._
 What the moods do not read:
 
 - **`--generator` has no effect.** The palette is the seeds; no ramp is generated from them.
-- **`--standard wcag-aaa` and `--standard apca` audit, but do not change the colors.** The rules solve for
+- **With `--audit`, `--standard wcag-aaa` and `--standard apca` audit against that standard, but do not change the colors.** The rules solve for
   WCAG AA, so expect failures: Listing 1's palette fails 10 pairs under `wcag-aaa` and 7 under `apca`.
 - **`suggest` refuses `--mood corporate|freak`** (exit `2`): these moods build a whole theme, so they belong to
   `theme`.
@@ -131,7 +131,7 @@ mean hue change of an accent; the last column is the base-ramp rule, the dark pa
 | Theme | Slope | Offset | R² | Mean lift | Chroma × | Hue drift | Dark page vs light ink hue |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Solarized | 1.00 | +0.00 | 1.00 | +0.00 | 1.00 | 0° | 2.1° |
-| Gruvbox | 0.97 | +0.23 | 1.00 | +0.22 | 1.08 | 18° | 48.5° |
+| Gruvbox | 0.97 | +0.23 | 1.00 | +0.22 | 1.08 | 18° | no hue |
 | Tokyo | −0.81 | +1.23 | 0.87 | +0.19 | 0.83 | 3° | 16.4° |
 | One | 0.57 | +0.39 | 0.24 | +0.13 | 0.73 | 17° | 10.2° |
 | Catppuccin | 0.97 | +0.24 | 0.90 | +0.22 | 0.55 | 11° | 4.6° |
@@ -143,8 +143,8 @@ _Table 3. Observed output of `bun scripts/benchmark/fit.ts`._
 Two laws and a knob read from it. Gruvbox and Catppuccin lift every accent by one amount (slope near 1, lift
 +0.22); that is `s`. Tokyo and GitHub pull their accents into one band whatever their light lightness (slope
 negative or near 0); that is `b`. Chroma × runs from 0.55 (Catppuccin, pastel) to 1.08; that is `k`. Solarized
-shares its accents outright. Gruvbox is the exception to the base-ramp rule and the largest hue drift: it pulls
-every hue toward amber, a lever not built (see Limits).
+shares its accents outright. Gruvbox's dark page, `#282828`, has no hue, so the base-ramp hue rule says nothing
+about it; it has the largest hue drift, because it pulls every hue toward amber, a lever not built (see Limits).
 
 Scored against the official accents (mean OKLab distance, lower is better; under 0.02 is indistinguishable):
 

@@ -7,7 +7,8 @@
  * - Mean lift: mean of dark L − light L.
  * - Chroma ×: mean dark C / mean light C.
  * - Hue drift: mean absolute hue change, degrees.
- * - Page hue: the dark page's hue against the light ink's, degrees (the base-ramp rule).
+ * - Page hue: the dark page's hue against the light ink's, degrees (the base-ramp rule); "no hue" when
+ *   either is achromatic (OKLCH C < 0.005, as for a hueless palette).
  */
 import { FAMOUS_THEMES } from "./famous-themes";
 import { parseToOklch } from "../../src/palette";
@@ -27,7 +28,8 @@ export interface Fit {
   lift: number;
   chroma: number;
   hueDrift: number;
-  pageHueGap: number;
+  /** Null when the dark page or the light ink has no hue (OKLCH C < 0.005, as for a hueless palette): there is no hue to compare. */
+  pageHueGap: number | null;
 }
 
 export function fitTheme(t: (typeof FAMOUS_THEMES)[number]): Fit {
@@ -51,7 +53,7 @@ export function fitTheme(t: (typeof FAMOUS_THEMES)[number]): Fit {
     lift: mean(y.map((v, i) => v - x[i]!)),
     chroma: mean(dark.map((c) => c.c)) / mean(light.map((c) => c.c)),
     hueDrift: mean(light.map((c, i) => gap(c.h, dark[i]!.h))),
-    pageHueGap: gap(ok(t.dark.page).h, ok(t.light.ink).h),
+    pageHueGap: ok(t.dark.page).c < 0.005 || ok(t.light.ink).c < 0.005 ? null : gap(ok(t.dark.page).h, ok(t.light.ink).h),
   };
 }
 
@@ -63,7 +65,7 @@ if (import.meta.main) {
   for (const t of FAMOUS_THEMES) {
     const r = fitTheme(t);
     console.log(
-      `| ${r.name} | ${f(r.slope)} | ${sign(r.offset)} | ${f(r.r2)} | ${sign(r.lift)} | ${f(r.chroma)} | ${r.hueDrift.toFixed(0)}° | ${r.pageHueGap.toFixed(1)}° |`,
+      `| ${r.name} | ${f(r.slope)} | ${sign(r.offset)} | ${f(r.r2)} | ${sign(r.lift)} | ${f(r.chroma)} | ${r.hueDrift.toFixed(0)}° | ${r.pageHueGap === null ? "no hue" : r.pageHueGap.toFixed(1) + "°"} |`,
     );
   }
 }

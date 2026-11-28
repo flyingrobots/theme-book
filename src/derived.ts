@@ -140,7 +140,8 @@ function darkOf(lightHex: string, set: DerivedSetting, pass: (h: string) => bool
   const moved = mk(l, c.c * set.k, c.h);
   if (pass(moved)) return moved;
   // Only ever lifted further, never pushed the other way, so the move keeps its direction.
-  for (let d = 0.01; d <= 0.5; d += 0.01) {
+  // As far as the top of the lightness range: a near-black accent needs most of it (CodeRabbit, round 7).
+  for (let d = 0.01; l + d <= 0.995; d += 0.01) {
     const cand = mk(l + d, c.c * set.k, c.h);
     if (pass(cand)) return cand;
   }
@@ -384,6 +385,12 @@ export function derivedShadcnRules(
       const l = Math.max(c.l, spread, ok(lights[n]!).l);
       return darkOf(mk(l, c.c, c.h), { s: 0, b: 0, k: 1, fills: set.fills }, markOn("dark"));
     });
+    // Bars lifted to the floor can still bunch (five steps of one hue): from the darkest up, each sits at
+    // least 0.05 above the one below. Only ever a lift, so each still clears the dark pages.
+    for (let n = darks.length - 2; n >= 0; n--) {
+      const c = ok(darks[n]!), below = ok(darks[n + 1]!).l;
+      if (c.l < below + 0.05) darks[n] = mk(Math.min(0.97, below + 0.05), c.c, c.h);
+    }
     lights.forEach((hex, n) => {
       const key = `chart-${n + 1}`;
       // The seed it came from: the nearest hue (moving to a legible lightness can nudge hue slightly).
