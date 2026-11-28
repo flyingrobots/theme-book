@@ -3,7 +3,7 @@ import { SPECIMEN_THEMES } from "../scripts/specimen";
 import { METHODS, meanDistance } from "../scripts/benchmark/score";
 import { buildThemeBook, type BuiltTheme } from "../src/books";
 import { evaluateAudit, parseCssColorExact, wcagRatioExact } from "../src/audit";
-import { statusHue } from "../src/derived";
+import { readPalette, statusHue } from "../src/derived";
 import { oklabDistance, parseToOklch } from "../src/palette";
 
 // The derived moods (corporate, freak): a light and a dark theme that read as one, from a palette.
@@ -34,6 +34,8 @@ const CASES = [
   // Palettes whose charts fell below 3:1 (stress set).
   { name: "Solarized, freak", seeds: ["#268bd2", "#2aa198", "#d33682", "#6c71c4", "#b58900", "#cb4b16", "#fdf6e3", "#657b83"], mood: "freak" as const },
   { name: "violet, pink, cyan, freak", seeds: ["#7c3aed", "#db2777", "#0891b2"], mood: "freak" as const },
+  // The same color three times, in two spellings: one accent, not three identical chart bars.
+  { name: "duplicate seeds", seeds: ["#2563eb", "#2563EB", "#2563eb"], mood: "corporate" as const },
   // A stress set of edge palettes, in both moods.
   ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: single teal", seeds: ["#0f766e"], mood })),
   ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: single red", seeds: ["#d32f2f"], mood })),
@@ -63,6 +65,7 @@ describe("derived moods", () => {
 
       test("conforms to WCAG AA in both modes (chart bars are advisory, as in stock shadcn)", () => {
         expect(t.standard).toBe("wcag-aa");
+        expect(t.audit.status).toBe("pass"); // an incomplete audit drops unverified pairs from the list below
         expect(t.audit.pairs.filter((p) => p.required && !p.pass).map((p) => `${p.mode} ${p.fgToken}/${p.bgToken}`)).toEqual([]);
       });
 
@@ -192,6 +195,24 @@ describe("derived moods", () => {
     expect(meanDistance(ours, true)).toBeLessThan(meanDistance(material, true));
     expect(meanDistance(ours, false)).toBeLessThan(meanDistance(material, false));
   });
+
+  test("the sankey draws a light-to-dark flow only where a dark token derives from a light one", () => {
+    const out = Bun.spawnSync(["bun", "scripts/benchmark/sankey.ts"], { stdout: "pipe" }).stdout.toString();
+    // Dark surfaces come from the seed, as light's do; dark primary derives from light primary.
+    expect(out).not.toMatch(/^light surfaces,dark surfaces,/m);
+    expect(out).toMatch(/^light primary,dark primary,\d+$/m);
+  }, 30_000);
+
+  test("a palette counts each distinct color once", () => {
+    expect(readPalette(["#0f766e", "#2563eb", "#2563EB", "#2563eb"]).accents).toEqual(["#0f766e", "#2563eb"]);
+  });
+
+  test("suggest refuses the derived moods, which only theme builds", () => {
+    for (const mood of ["corporate", "freak"]) {
+      const r = Bun.spawnSync(["./bin/theme-book", "suggest", "--seed", "#2563eb", "--mood", mood], { stdout: "pipe", stderr: "pipe" });
+      expect([mood, r.exitCode]).toEqual([mood, 2]);
+    }
+  }, 30_000);
 
   test("is refused for a preset it has no rules for", () => {
     expect(() => buildThemeBook({ seeds: ["#2563eb"], preset: "semantic", mood: "freak", generator: "oklch" })).toThrow(/freak/);
