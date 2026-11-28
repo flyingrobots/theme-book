@@ -187,9 +187,9 @@ describe("derived moods", () => {
     }
   });
 
-  test("the accent move lands within OKLab 0.085 of seven famous themes, and beats Material's tone table", () => {
+  test("the accent move lands within OKLab 0.085 of seven famous themes, and beats a Material-style tone table", () => {
     const ours = METHODS["theme-book corporate (s 0.12, b 0.6, k 0.85)"]!;
-    const material = METHODS["Material tone table (40 / 80)"]!;
+    const material = METHODS["Material-style tones (CIELAB L* 40 / 80, not HCT)"]!;
     expect(meanDistance(ours, true)).toBeLessThanOrEqual(0.085);
     expect(meanDistance(ours, false)).toBeLessThanOrEqual(0.07);
     expect(meanDistance(ours, true)).toBeLessThan(meanDistance(material, true));
