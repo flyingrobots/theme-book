@@ -67,16 +67,16 @@
 
     <!-- Top header row -->
     <text x="24" y="34" font-size="16" font-weight="700" fill="#d0d5d9">Owl Coral · Dark</text>
-    <text x="24" y="54" font-size="11.5" fill="#a7abaf">coral, blue, ochre, green, violet, charcoal · mood=corporate</text>
+    <text x="24" y="54" font-size="11.5" fill="#aaaeb2">coral, blue, ochre, green, violet, charcoal · mood=corporate</text>
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#3d4044" stroke="#4a4e52" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a7abaf">✓ 18/18 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#aaaeb2">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#36393c" stroke="#4a4e52" stroke-width="1"/>
     <text x="40" y="96" font-size="13.5" font-weight="600" fill="#d0d5d9">Release v0.4.0</text>
-    <text x="40" y="114" font-size="11.5" fill="#a7abaf">Three tokens changed since v0.3.0. Review them before publishing.</text>
+    <text x="40" y="114" font-size="11.5" fill="#aaaeb2">Three tokens changed since v0.3.0. Review them before publishing.</text>
 
     <!-- Input with focus ring -->
     <rect x="40" y="128" width="236" height="32" rx="6" fill="#292c2f" stroke="#e89a99" stroke-width="2"/>
@@ -101,22 +101,22 @@
     <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
 
     <!-- Inline token footer inside card -->
-    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">primary=#e89a99 · accent=#574561 · ring=#e89a99</text>
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aaaeb2">primary=#e89a99 · accent=#574561 · ring=#e89a99</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
     <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d0d5d9">Chart series (chart-1..5 · min OKLab Δ=0.0792)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#4a4e52" stroke-width="1"/>
     
     <rect x="42" y="300" width="72" height="40" rx="5" fill="#ffdad9"/>
-    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-1</text>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aaaeb2">chart-1</text>
     <rect x="144" y="284" width="72" height="56" rx="5" fill="#e3baf8"/>
-    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-2</text>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aaaeb2">chart-2</text>
     <rect x="246" y="310" width="72" height="30" rx="5" fill="#d3ae74"/>
-    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-3</text>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aaaeb2">chart-3</text>
     <rect x="348" y="292" width="72" height="48" rx="5" fill="#68abbd"/>
-    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-4</text>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aaaeb2">chart-4</text>
     <rect x="450" y="316" width="72" height="24" rx="5" fill="#67aa87"/>
-    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-5</text>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aaaeb2">chart-5</text>
   </g>
   
   <g transform="translate(24, 428)">
@@ -183,16 +183,16 @@
 
     <!-- Top header row -->
     <text x="24" y="34" font-size="16" font-weight="700" fill="#d0d5d9">Owl Coral, loud · Dark</text>
-    <text x="24" y="54" font-size="11.5" fill="#a7abaf">the same palette, as fidelity · mood=freak</text>
+    <text x="24" y="54" font-size="11.5" fill="#aaaeb2">the same palette, as fidelity · mood=freak</text>
 
     <!-- Audit pill -->
     <rect x="430" y="18" width="110" height="24" rx="12" fill="#3d4044" stroke="#4a4e52" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a7abaf">✓ 18/18 wcag-aa</text>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#aaaeb2">✓ 18/18 wcag-aa</text>
 
     <!-- Nested Card -->
     <rect x="24" y="70" width="516" height="172" rx="10" fill="#36393c" stroke="#4a4e52" stroke-width="1"/>
     <text x="40" y="96" font-size="13.5" font-weight="600" fill="#d0d5d9">Release v0.4.0</text>
-    <text x="40" y="114" font-size="11.5" fill="#a7abaf">Three tokens changed since v0.3.0. Review them before publishing.</text>
+    <text x="40" y="114" font-size="11.5" fill="#aaaeb2">Three tokens changed since v0.3.0. Review them before publishing.</text>
 
     <!-- Input with focus ring -->
     <rect x="40" y="128" width="236" height="32" rx="6" fill="#292c2f" stroke="#c97272" stroke-width="2"/>
@@ -217,22 +217,22 @@
     <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
 
     <!-- Inline token footer inside card -->
-    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">primary=#c97272 · accent=#cfa0e8 · ring=#c97272</text>
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aaaeb2">primary=#c97272 · accent=#cfa0e8 · ring=#c97272</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
     <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d0d5d9">Chart series (chart-1..5 · min OKLab Δ=0.1164)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#4a4e52" stroke-width="1"/>
     
     <rect x="42" y="300" width="72" height="40" rx="5" fill="#ffdad9"/>
-    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-1</text>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aaaeb2">chart-1</text>
     <rect x="144" y="284" width="72" height="56" rx="5" fill="#e7b6ff"/>
-    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-2</text>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aaaeb2">chart-2</text>
     <rect x="246" y="310" width="72" height="30" rx="5" fill="#d9ac66"/>
-    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-3</text>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aaaeb2">chart-3</text>
     <rect x="348" y="292" width="72" height="48" rx="5" fill="#58aabf"/>
-    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-4</text>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aaaeb2">chart-4</text>
     <rect x="450" y="316" width="72" height="24" rx="5" fill="#479971"/>
-    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-5</text>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aaaeb2">chart-5</text>
   </g>
   
   <g transform="translate(24, 832)">
@@ -336,18 +336,18 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">primary=#79b7ff · accent=#2e4f74 · ring=#79b7ff</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#ccd6da">Chart series (chart-1..5 · min OKLab Δ=0.0753)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#ccd6da">Chart series (chart-1..5 · min OKLab Δ=0.0763)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#374245" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#b1d4ff"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#b6d8ff"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#84bdff"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#8bc0ff"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#6aa5e9"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#6da8ed"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#628ec1"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#6591c4"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#58779a"/>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#5b7a9d"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-5</text>
   </g>
   
@@ -394,16 +394,16 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">primary=#0274bd · accent=#b7d9f8 · ring=#0274bd</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#302e27">Chart series (chart-1..5 · min OKLab Δ=0.0866)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#302e27">Chart series (chart-1..5 · min OKLab Δ=0.0841)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#c9c5bb" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#2485d0"/>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#2082cc"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#006baf"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#0069ab"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#005287"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#005085"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#003a62"/>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#003961"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-4</text>
     <rect x="450" y="316" width="72" height="24" rx="5" fill="#00233f"/>
     <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-5</text>
@@ -452,14 +452,14 @@
     <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">primary=#127ac4 · accent=#2f506e · ring=#127ac4</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d7d4cb">Chart series (chart-1..5 · min OKLab Δ=0.0752)</text>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d7d4cb">Chart series (chart-1..5 · min OKLab Δ=0.0743)</text>
     <line x1="24" y1="340" x2="540" y2="340" stroke="#423f37" stroke-width="1"/>
     
     <rect x="42" y="300" width="72" height="40" rx="5" fill="#abd6ff"/>
     <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#79c0ff"/>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#78c0ff"/>
     <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#64a8e3"/>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#65a8e3"/>
     <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-3</text>
     <rect x="348" y="292" width="72" height="48" rx="5" fill="#5d90be"/>
     <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-4</text>

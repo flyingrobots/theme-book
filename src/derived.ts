@@ -94,7 +94,15 @@ const isAccent = (hex: string) => {
   return c.c >= 0.04 && c.l > 0.25 && c.l < 0.93;
 };
 
-const holdsText = (fill: string) => Math.max(wcagRatio("#000000", fill), wcagRatio("#ffffff", fill)) >= 4.5;
+/**
+ * The floors, with a margin: they are measured here on hex, but the default output is OKLCH rounded to
+ * 4 decimals, which can move a ratio by about 0.001 (a pair at 3.000 on hex audited at 2.9996).
+ */
+const MARGIN = 0.01;
+const TEXT = 4.5 + MARGIN;
+const MARK = 3 + MARGIN;
+
+const holdsText = (fill: string) => Math.max(wcagRatio("#000000", fill), wcagRatio("#ffffff", fill)) >= TEXT;
 
 /** A color at the lightness nearest its own that passes a test, keeping its hue and chroma. */
 function nearestPassing(hex: string, pass: (h: string) => boolean): string {
@@ -229,7 +237,7 @@ export function derivedShadcnRules(
   // Muted text is a floor (4.5:1) on every surface it sits on: the page, the card and muted itself.
   for (const m of ["light", "dark"] as const) {
     const b = modes[m];
-    b.mutedInk = nearestPassing(b.mutedInk, (h) => [b.page, b.card, b.muted].every((bg) => wcagRatio(h, bg) >= 4.5));
+    b.mutedInk = nearestPassing(b.mutedInk, (h) => [b.page, b.card, b.muted].every((bg) => wcagRatio(h, bg) >= TEXT));
   }
   const pagesOf = (m: "light" | "dark") => [modes[m].page, modes[m].card, modes[m].sidebar];
 
@@ -252,9 +260,9 @@ export function derivedShadcnRules(
   const inkFor = (fill: string, m: "light" | "dark") => {
     const [d, l] = [modes.light.ink, modes.dark.ink];
     const best = wcagRatio(d, fill) >= wcagRatio(l, fill) ? d : l;
-    return wcagRatio(best, fill) >= 4.5 ? best : wcagRatio("#000000", fill) >= wcagRatio("#ffffff", fill) ? "#000000" : "#ffffff";
+    return wcagRatio(best, fill) >= TEXT ? best : wcagRatio("#000000", fill) >= wcagRatio("#ffffff", fill) ? "#000000" : "#ffffff";
   };
-  const markOn = (m: "light" | "dark") => (h: string) => pagesOf(m).every((p) => wcagRatio(h, p) >= 3);
+  const markOn = (m: "light" | "dark") => (h: string) => pagesOf(m).every((p) => wcagRatio(h, p) >= MARK);
   const fillOn = (m: "light" | "dark") => (h: string) => markOn(m)(h) && holdsText(h);
 
   const pair = (key: string, seed: string, pass: (m: "light" | "dark") => (h: string) => boolean) => {
@@ -324,7 +332,7 @@ export function derivedShadcnRules(
   let red = mk(STATUS.red.l, STATUS.red.c, STATUS.red.h);
   for (let l = STATUS.red.l; l >= 0.35; l -= 0.01) {
     const cand = mk(l, STATUS.red.c, STATUS.red.h);
-    if (wcagRatio("#ffffff", cand) < 4.5) continue;
+    if (wcagRatio("#ffffff", cand) < TEXT) continue;
     red = cand;
     if (!primaryLight || deltaE(cand, mk(primaryLight.l, primaryLight.c, primaryLight.h)) >= 0.12) break;
   }
