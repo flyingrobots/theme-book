@@ -6,6 +6,47 @@ may change between minor versions.
 
 ## [Unreleased]
 
+### Added
+
+- **`--mood corporate` and `--mood freak`: light and dark from one palette** (shadcn only;
+  another preset is refused, exit `2`). The rules are fitted to seven famous light/dark pairs
+  (Solarized, Gruvbox, Tokyo Night, One, Catppuccin, Rosé Pine, GitHub): the dark page takes the
+  light theme's ink hue at about OKLCH L 0.24, never black; accents keep their hue and move
+  together (dark L = (1 − b)(L + s) + b · 0.76, chroma × k), `corporate` at the fitted average
+  (s 0.12, b 0.6, k 0.85) and `freak` unchanged, with the palette's own colors as flat fills;
+  contrast is a floor in each mode. Destructive is a fixed red that holds white text and, in dark,
+  is set for shadcn's 60% over the page; secondary and accent
+  take the next palette colors that are not red, yellow or green, and a role left without one is a
+  tint of the primary (so it carries a status-hued primary's hue); charts run light to dark, each bar clearing 3:1 on its mode's pages. The first
+  colored seed is primary, whatever its lightness. Both are built for WCAG AA; `--generator` has
+  no effect, and `--standard wcag-aaa|apca` sets the standard the theme is audited against, not its colors: the CSS header records the verdict (`audit=fail`), and `--audit` also prints the report and exits 1. See
+  [docs/topics/derived-moods](docs/topics/derived-moods/README.md).
+- **A benchmark against famous themes** (`scripts/benchmark/`): their verified palettes with
+  sources, a method scorer (theme-book's move lands within OKLab 0.080 of the official accents,
+  against 0.124 for a Material-style tone table (CIELAB L* 40 / 80, an approximation: Material's own tones are HCT)), a per-theme fit (`fit.ts`), a scoreboard page with a
+  static SVG, and a Mermaid sankey drawn from a built book (each flow follows recorded references: dark accents
+  from light ones, dark surfaces from the seed). The test suite
+  fails if the move gets worse.
+- **`suggest` refuses `--mood corporate|freak`** (exit `2`): those moods build a whole shadcn
+  theme, so they belong to `theme`.
+- **`chartsAdvisory`** in `evaluateAudit`, and **`theme-book audit --charts-advisory`**: chart
+  bars against the page are reported but not required. Off by default. A derived mood turns it on
+  only for a palette with no hue (stock shadcn's greys), and the theme's header then reads
+  `audit=pass (wcag-aa, charts advisory)`, so `audit --charts-advisory` reproduces its verdict.
+  The report gains a `chartsAdvisory` field.
+- **The README specimen is a stack of light/dark pairs**, one row per theme, and a test fails if
+  any two of its elements overlap.
+
+### Changed
+
+- **The `shadcn` preset's rules version is 1.1.0**, for the two new moods; every other mood's
+  rules are unchanged. An extension naming `shadcn@1.0.0` is refused, as for any version change.
+- **design-book is a vendored build of `main` at `2d80b33`**, nine commits past the 0.26.0
+  release: a book that measures APCA itself, contrast thresholds given as text styles, and
+  selectors rendered as `var()`. No release contains them yet (meodai/design-book#5). Recipes
+  record `designBookVersion` as `0.26.0+main.2d80b33`. `install.sh` stages `vendor/`. See
+  [`vendor/README.md`](vendor/README.md).
+
 ## [0.4.0] — 2026-11-23
 
 ### Added

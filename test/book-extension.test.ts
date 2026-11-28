@@ -42,8 +42,8 @@ test("a preset's fingerprint depends on its rules, not on the seeds", () => {
 test("the fingerprint covers the achromatic, second-seed, AAA and APCA rule branches", () => {
   const lines = presetRulesLines("shadcn");
   const configs = new Set(lines.map((l) => l.split(" ")[0]));
-  // 5 moods x 3 standards x 3 kinds of seed set.
-  expect(configs.size).toBe(45);
+  // 7 moods (freak and corporate included) x 3 standards x 3 kinds of seed set.
+  expect(configs.size).toBe(63);
   for (const part of ["/achromatic", "/two-seed", "/wcag-aaa/", "/apca/", "high-contrast/"]) {
     expect([part, [...configs].some((c) => c.includes(part))]).toEqual([part, true]);
   }
@@ -118,7 +118,7 @@ test("the CLI builds with --book, and refuses a stale parent with exit 2", async
   const stale = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--preset", "shadcn", "--book", school("0.0.1")]);
   expect(stale.exitCode).toBe(2);
   expect(stale.stderr.toString()).toMatch(/extends shadcn@0\.0\.1, but this theme-book's shadcn rules are/);
-});
+}, 30_000); // spawns the CLI twice
 
 test("the CLI refuses an empty --book and a leading-zero version with exit 2", () => {
   const empty = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--book="]);
@@ -126,7 +126,7 @@ test("the CLI refuses an empty --book and a leading-zero version with exit 2", (
   const zero = extension("leading-zero", { name: "x", version: "01.0.0", extends: { preset: "shadcn", version: PRESET_RULES_VERSION.shadcn } }, "");
   const bad = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--book", zero]);
   expect([bad.exitCode, bad.stderr.toString()]).toEqual([2, expect.stringMatching(/version "01\.0\.0" must be semver/)]);
-});
+}, 30_000); // spawns the CLI
 
 test("the recipe command replays the --book path literally in a POSIX shell", async () => {
   const loaded = await loadBookExtension(school());
@@ -160,7 +160,7 @@ test("reloading a rewritten extension applies the new rules, and the hash descri
 });
 
 // flyingrobots/theme-book#24: the hash names the extension module, which may import nothing.
-const HEADER = `name: "x", version: "1.0.0", extends: { preset: "shadcn", version: "1.0.0" }`;
+const HEADER = `name: "x", version: "1.0.0", extends: { preset: "shadcn", version: "${PRESET_RULES_VERSION.shadcn}" }`;
 const module = (name: string, source: string) => {
   const path = join(dir, `${name}.ts`);
   writeFileSync(path, source);
@@ -198,7 +198,7 @@ test("the CLI refuses an extension that imports, with exit 2", () => {
   const path = module("cli-import", `import "design-book";\nexport default { ${HEADER}, apply() {} };\n`);
   const r = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--book", path]);
   expect([r.exitCode, r.stderr.toString()]).toEqual([2, expect.stringMatching(/must import nothing, but imports "design-book"/)]);
-});
+}, 30_000); // spawns the CLI
 
 test("an async apply is refused, in the library and the CLI with exit 2", async () => {
   const path = module("async-apply", `export default { ${HEADER}, async apply({ dark, rules }) { await 0; dark.set("background", rules.color("#f00")); } };\n`);
@@ -207,7 +207,7 @@ test("an async apply is refused, in the library and the CLI with exit 2", async 
   expect(() => build({ extension: loaded })).toThrow(/x@1\.0\.0 .*apply must return nothing; it returned a promise/);
   const r = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--book", path]);
   expect([r.exitCode, r.stderr.toString()]).toEqual([2, expect.stringMatching(/apply must return nothing; it returned a promise/)]);
-});
+}, 30_000); // spawns the CLI
 
 test("set() after apply returns throws", async () => {
   const path = module("late-set", `export default { ${HEADER}, apply(ctx) { globalThis.__lateCtx = ctx; } };\n`);
@@ -229,7 +229,7 @@ test.each([
   const stderr = r.stderr.toString();
   expect([r.exitCode, stderr.includes(`extension x@1.0.0 (${path})`)]).toEqual([2, true]);
   expect(stderr).toMatch(message);
-});
+}, 30_000); // spawns the CLI
 
 test("--book-sha256 accepts the extension's hash and refuses any other before running it, with exit 2", () => {
   const path = school();
@@ -272,4 +272,4 @@ test("an apply whose return value throws when inspected exits 2 naming the exten
   const stderr = r.stderr.toString();
   expect([r.exitCode, stderr.includes(`extension x@1.0.0 (${path})`)]).toEqual([2, true]);
   expect(stderr).toMatch(/apply returned a value that threw when inspected: boom/);
-});
+}, 30_000); // spawns the CLI

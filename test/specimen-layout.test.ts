@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { SPECIMEN_PANEL, specimenLayouts, type LayoutBox } from "../scripts/specimen";
+import { SPECIMEN_PANEL, SPECIMEN_THEMES, specimenLayouts, type LayoutBox } from "../scripts/specimen";
 
 // The README's specimen is the first thing a reader sees. Its geometry comes from
 // panelLayout(), so overlap is checked here rather than by eye.
@@ -23,8 +23,8 @@ function inside(child: LayoutBox, parent: { x: number; y: number; w: number; h: 
 describe("specimen layout", () => {
   const layouts = specimenLayouts();
 
-  test("draws four panels", () => {
-    expect(layouts.map((l) => l.name)).toEqual(["editorial light", "editorial dark", "vivid light", "vivid dark"]);
+  test("draws every specimen theme as a light and dark pair", () => {
+    expect(layouts.map((l) => l.name)).toEqual(SPECIMEN_THEMES.flatMap(({ name }) => [`${name} light`, `${name} dark`]));
   });
 
   for (const { name, boxes } of layouts) {

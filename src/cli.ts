@@ -26,7 +26,7 @@ import {
 } from "./render";
 import type { GeneratorKind, Mood } from "./palette";
 
-const VALID_MOODS = new Set<Mood>(["neutral", "muted", "vivid", "editorial", "high-contrast"]);
+const VALID_MOODS = new Set<Mood>(["neutral", "muted", "vivid", "editorial", "high-contrast", "freak", "corporate"]);
 const VALID_GENERATORS = new Set<GeneratorKind>(["oklch", "poline", "rampensau"]);
 const VALID_PRESETS = new Set<ThemePreset>(["shadcn", "semantic", "slide-deck"]);
 const VALID_FORMATS = new Set<RenderOutputFormat>(["css", "json", "w3-tokens", "svg"]);
@@ -42,14 +42,14 @@ Usage:
                      [--generator oklch|poline|rampensau] [--count 8] [--format text|json]
 
   theme-book theme   --seed <color> [--seed <color>...] [--preset shadcn|semantic|slide-deck]
-                     [--mood neutral|muted|vivid|editorial|high-contrast]
+                     [--mood neutral|muted|vivid|editorial|high-contrast|corporate|freak]
                      [--generator oklch|poline|rampensau]
                      [--standard wcag-aa|wcag-aaa|apca]
                      [--format css|json|w3-tokens|svg] [--hex | --native]
                      [--audit] [--out <path>] [--book <extension.ts> [--book-sha256 <hex>]]
 
   theme-book audit   <file.css|file.json> [--standard wcag-aa|wcag-aaa|apca]
-                     [--fix] [--strict-borders] [--format text|json]
+                     [--fix] [--strict-borders] [--charts-advisory] [--format text|json]
 
   theme-book eval    <script.ts | -> [-- ...args]
 
@@ -82,7 +82,7 @@ const COMMAND_SCHEMAS: Record<string, FlagSchema> = {
   },
   audit: {
     valueFlags: new Set(["standard", "format"]),
-    boolFlags: new Set(["fix", "strict-borders", "help", "h"]),
+    boolFlags: new Set(["fix", "strict-borders", "charts-advisory", "help", "h"]),
   },
 };
 
@@ -210,6 +210,9 @@ async function main() {
 
     const mood = (getOne(flags, "mood") ?? "neutral") as Mood;
     if (!VALID_MOODS.has(mood)) fail(`invalid --mood "${mood}"`);
+    if (mood === "corporate" || mood === "freak") {
+      fail(`--mood ${mood} builds a whole shadcn theme from a palette; use \`theme-book theme --preset shadcn --mood ${mood}\`, not suggest`);
+    }
 
     const generator = (getOne(flags, "generator") ?? "oklch") as GeneratorKind;
     if (!VALID_GENERATORS.has(generator)) fail(`invalid --generator "${generator}"`);
@@ -268,6 +271,7 @@ async function main() {
 
     const mood = (getOne(flags, "mood") ?? "neutral") as Mood;
     if (!VALID_MOODS.has(mood)) fail(`invalid --mood "${mood}"`);
+    if ((mood === "freak" || mood === "corporate") && preset !== "shadcn") fail(`--mood ${mood} has rules for --preset shadcn only, not "${preset}"`);
 
     const generator = (getOne(flags, "generator") ?? "oklch") as GeneratorKind;
     if (!VALID_GENERATORS.has(generator)) fail(`invalid --generator "${generator}"`);
@@ -342,6 +346,7 @@ async function main() {
       standard,
       withFixes: booleans.has("fix"),
       strictBorders: booleans.has("strict-borders"),
+      chartsAdvisory: booleans.has("charts-advisory"),
     });
 
     if (outFormat === "json") {

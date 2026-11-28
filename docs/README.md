@@ -10,6 +10,7 @@ archived; git history is the archive.
 | [Documentation standards](DOCUMENTATION_STANDARDS.md) | How pages in this corpus are written and maintained |
 | [Contrast auditing](topics/contrast-auditing/README.md) | What `theme-book audit` checks, which standard to ask for, and how to read the result |
 | [Contrast auditing test plan](topics/contrast-auditing/test-plan.md) | Requirements and evidence for the above |
+| [Derived moods](topics/derived-moods/README.md) | How `corporate` and `freak` build light and dark from one palette, and how the rules were fitted to famous themes |
 
 ## Elsewhere in the repository
 

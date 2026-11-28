@@ -115,13 +115,13 @@ export function panelLayout(w: number, h: number, t: PanelText): LayoutBox[] {
   return boxes;
 }
 
-function panelText(theme: BuiltTheme, polarity: "light" | "dark", subtitle: string): PanelText {
+function panelText(theme: BuiltTheme, polarity: "light" | "dark", subtitle: string, name: string): PanelText {
   const t = polarity === "light" ? theme.light : theme.dark;
   const c = (name: string) => t[name]!.hex;
   const auditPairs = theme.audit.pairs.filter((p) => p.mode === polarity && p.required);
   const auditPass = auditPairs.every((p) => p.pass);
   return {
-    title: `${theme.mood} · ${polarity === "light" ? "Light" : "Dark"}`,
+    title: `${name} · ${polarity === "light" ? "Light" : "Dark"}`,
     subtitle,
     audit: auditPass ? `✓ ${auditPairs.length}/${auditPairs.length} ${theme.standard}` : "Audit fail",
     seed: `theme-book --seed ${theme.rawSeeds[0]!}`,
@@ -138,10 +138,11 @@ function renderPanel(
   w: number,
   h: number,
   subtitle: string,
+  name: string,
 ): string {
   const t = polarity === "light" ? theme.light : theme.dark;
-  const c = (name: string) => t[name]!.hex;
-  const text = panelText(theme, polarity, subtitle);
+  const c = (key: string) => t[key]!.hex;
+  const text = panelText(theme, polarity, subtitle, name);
   const box = Object.fromEntries(panelLayout(w, h, text).map((b) => [b.id, b]));
   const r = (id: string) => box[id]!;
   const cx = (id: string) => r(id).x + r(id).w / 2;
@@ -180,11 +181,12 @@ function renderPanel(
     <rect x="${r("secondary").x}" y="${r("secondary").y}" width="${r("secondary").w}" height="${r("secondary").h}" rx="6" fill="${c("secondary")}" stroke="${c("border")}" stroke-width="1"/>
     <text x="${cx("secondary")}" y="${cy("secondary")}" text-anchor="middle" font-size="12" font-weight="500" fill="${c("secondary-foreground")}">Preview</text>
 
-    <!-- Destructive button, drawn as stock shadcn draws it: destructive text on a destructive tint
-         (bg-destructive/10 in light, /20 in dark). Stock shadcn has no destructive-foreground. -->
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
     <rect x="${r("destructive").x}" y="${r("destructive").y}" width="${r("destructive").w}" height="${r("destructive").h}" rx="6" fill="${c("background")}"/>
-    <rect x="${r("destructive").x}" y="${r("destructive").y}" width="${r("destructive").w}" height="${r("destructive").h}" rx="6" fill="${c("destructive")}" fill-opacity="${polarity === "dark" ? 0.2 : 0.1}"/>
-    <text x="${cx("destructive")}" y="${cy("destructive")}" text-anchor="middle" font-size="11.5" font-weight="600" fill="${c("destructive")}">Revoke token</text>
+    <rect x="${r("destructive").x}" y="${r("destructive").y}" width="${r("destructive").w}" height="${r("destructive").h}" rx="6" fill="${c("destructive")}" fill-opacity="${polarity === "dark" ? 0.6 : 1}"/>
+    <text x="${cx("destructive")}" y="${cy("destructive")}" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
 
     <!-- Inline token footer inside card -->
     <text x="${r("tokens").x}" y="${r("tokens").baseline}" font-size="10.5" font-family="${MONO}" fill="${c("muted-foreground")}">${esc(text.tokens)}</text>
@@ -204,55 +206,64 @@ function renderPanel(
 
 export const SPECIMEN_PANEL = { w: 564, h: 380 } as const;
 
-export function specimenThemes(): { theme: BuiltTheme; subtitle: string }[] {
-  const editorial = buildThemeBook({
-    seeds: ["#2563eb"],
-    preset: "shadcn",
-    mood: "editorial",
-    generator: "poline",
-    standard: "wcag-aa",
-  });
-  const vividDual = buildThemeBook({
-    seeds: ["#c2410c", "#0f766e"],
-    preset: "shadcn",
-    mood: "vivid",
-    generator: "rampensau",
-    standard: "wcag-aa",
-  });
-  return [
-    { theme: editorial, subtitle: 'seed="#2563eb" · generator=poline · preset=shadcn' },
-    { theme: vividDual, subtitle: 'seeds="#c2410c, #0f766e" · generator=rampensau · preset=shadcn' },
-  ];
+/** A theme the specimen shows: its palette, the mood it is built in, and a name for its row. */
+interface SpecimenTheme {
+  name: string;
+  seeds: string[];
+  mood: "corporate" | "freak";
+  note: string;
+}
+
+export const SPECIMEN_THEMES: SpecimenTheme[] = [
+  { name: "Owl Coral", seeds: ["#e88e8d", "#79cce2", "#d1a45f", "#60bd90", "#cfa0e8", "#292c2f"], mood: "corporate", note: "coral, blue, ochre, green, violet, charcoal" },
+  { name: "Owl Coral, loud", seeds: ["#e88e8d", "#79cce2", "#d1a45f", "#60bd90", "#cfa0e8", "#292c2f"], mood: "freak", note: "the same palette, as fidelity" },
+  { name: "Corporate", seeds: ["#ffffff", "#edeeeb", "#ccc7bf", "#31393c", "#3e96f4"], mood: "corporate", note: "white, fog, stone, charcoal, one blue" },
+  { name: "Paper & ink", seeds: ["#0274bd", "#e9e6dd", "#c4ad9d", "#000000", "#f57251"], mood: "freak", note: "blue, paper, taupe, black, coral" },
+  { name: "Merino", seeds: ["#f5eedd", "#84b3ce", "#16587b"], mood: "corporate", note: "Merino, Rock Blue, Venice Blue" },
+  { name: "Vista & Oxford", seeds: ["#92acff", "#0e0929"], mood: "corporate", note: "a duotone: Vista Blue, Blue Oxford" },
+  { name: "Dusty rose", seeds: ["#6d6875", "#b5838d", "#e5989b", "#ffb4a2", "#ffcdb2"], mood: "corporate", note: "Salt Box to Romantic, five dusty roses" },
+  { name: "Black & white", seeds: ["#ffffff", "#000000"], mood: "corporate", note: "no hue at all" },
+  { name: "Memphis", seeds: ["#f31685", "#f3c716", "#16f3dd", "#f33416", "#8c16f3"], mood: "freak", note: "pink, yellow, turquoise, tomato, violet" },
+];
+
+export function specimenThemes(): { theme: BuiltTheme; name: string; subtitle: string }[] {
+  return SPECIMEN_THEMES.map(({ name, seeds, mood, note }) => ({
+    theme: buildThemeBook({ seeds, preset: "shadcn", mood, generator: "rampensau" }),
+    name,
+    subtitle: `${note} · mood=${mood}`,
+  }));
 }
 
 /** The layout of every panel the specimen draws, for the overlap test. */
 export function specimenLayouts(): { name: string; boxes: LayoutBox[] }[] {
   const { w, h } = SPECIMEN_PANEL;
-  return specimenThemes().flatMap(({ theme, subtitle }) =>
+  return specimenThemes().flatMap(({ theme, name, subtitle }) =>
     (["light", "dark"] as const).map((p) => ({
-      name: `${theme.mood} ${p}`,
-      boxes: panelLayout(w, h, panelText(theme, p, subtitle)),
+      name: `${name} ${p}`,
+      boxes: panelLayout(w, h, panelText(theme, p, subtitle, name)),
     })),
   );
 }
 
+/** Every theme as a pair: light on the left, dark on the right, one row each. */
 export function generateSpecimenSvg(): string {
-  const [editorial, vividDual] = specimenThemes();
+  const rows = specimenThemes();
   const W = 1200;
   const { w: PW, h: PH } = SPECIMEN_PANEL;
-  // One gutter everywhere: 24+564+24+564+24 = 1200 across, 24+380+24+380+24 = 832 down.
+  // One gutter everywhere: 24+564+24+564+24 = 1200 across, and 24 between and around rows.
   const G = 24;
-  const H = G * 3 + PH * 2;
-  const ROW2 = G * 2 + PH;
+  const H = G + rows.length * (PH + G);
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="theme-book UI specimen across editorial and vivid moods in light and dark modes">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="theme-book UI specimen: ${rows.length} themes, each as a light and dark pair">
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
   </style>
-  ${renderPanel(editorial!.theme, "light", G, G, PW, PH, editorial!.subtitle)}
-  ${renderPanel(editorial!.theme, "dark", G * 2 + PW, G, PW, PH, editorial!.subtitle)}
-  ${renderPanel(vividDual!.theme, "light", G, ROW2, PW, PH, vividDual!.subtitle)}
-  ${renderPanel(vividDual!.theme, "dark", G * 2 + PW, ROW2, PW, PH, vividDual!.subtitle)}
+${rows
+  .map(({ theme, name, subtitle }, i) => {
+    const y = G + i * (PH + G);
+    return `  ${renderPanel(theme, "light", G, y, PW, PH, subtitle, name)}\n  ${renderPanel(theme, "dark", G * 2 + PW, y, PW, PH, subtitle, name)}`;
+  })
+  .join("\n")}
 </svg>
 `;
 }

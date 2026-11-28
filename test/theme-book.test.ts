@@ -237,7 +237,7 @@ describe("theme-book Commit 1: audit integrity, precision, alpha, parser & CLI",
     expect(ev.stdout.toString().trim()).toBe("#111111");
     const after = readdirSync(tmpdir()).filter((f) => f.startsWith("theme-book-eval-") && !before.has(f));
     expect(after.length).toBe(0);
-  });
+  }, 30_000); // spawns the CLI twice; a cold start is about a second, more under load
 });
 
 describe("theme-book Commit 2: generator charts, exact seeds, AA/AAA/APCA matrix, count & safe installer", () => {
@@ -478,7 +478,7 @@ describe("theme-book Commit 2: generator charts, exact seeds, AA/AAA/APCA matrix
     expect(refused.exitCode).toBe(1);
     expect(refused.stderr.toString()).toContain("refusing to overwrite");
     expect(existsSync(join(unrelatedDir, "precious.txt"))).toBe(true);
-  });
+  }, 120_000); // runs install.sh four times; each stages a runtime
 });
 
 describe("theme-book Commit 3: full rule provenance, reproducible recipe & deterministic SVG specimen", () => {
@@ -518,9 +518,33 @@ describe("theme-book Commit 3: full rule provenance, reproducible recipe & deter
     const generated = generateSpecimenSvg();
     expect(onDisk).toBe(generated);
     expect(onDisk).toContain("<svg");
-    expect(onDisk).toContain("editorial");
-    expect(onDisk).toContain("vivid");
+    expect(onDisk).toContain("corporate");
+    expect(onDisk).toContain("freak");
   });
+});
+
+describe("derived moods: the build's audit verdict agrees with theme-book audit", () => {
+  const dir = mkdtempSync(join(tmpdir(), "theme-book-derived-audit-"));
+  const build = (seeds: string[]) => {
+    const out = join(dir, `${seeds.join("-").replace(/#/g, "")}.css`);
+    const args = [CLI_BIN, "theme", ...seeds.flatMap((s) => ["--seed", s]), "--preset", "shadcn", "--mood", "corporate", "--audit", "--out", out];
+    const r = Bun.spawnSync(args, { stdout: "pipe", stderr: "pipe" });
+    expect(r.exitCode).toBe(0);
+    return out;
+  };
+  const audit = (file: string, ...extra: string[]) =>
+    Bun.spawnSync([CLI_BIN, "audit", file, "--standard", "wcag-aa", ...extra], { stdout: "pipe", stderr: "pipe" }).exitCode;
+
+  test("a palette with hue passes the standalone audit as built", () => {
+    expect(audit(build(["#2563eb"]))).toBe(0);
+  }, 30_000);
+
+  test("a hueless palette's charts are advisory: said in the header, and audit agrees only with --charts-advisory", () => {
+    const file = build(["#ffffff", "#000000"]);
+    expect(readFileSync(file, "utf8")).toContain("charts advisory");
+    expect(audit(file)).toBe(1);
+    expect(audit(file, "--charts-advisory")).toBe(0);
+  }, 30_000);
 });
 
 describe("polarity advisory", () => {

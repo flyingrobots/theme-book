@@ -36,6 +36,8 @@ import {
 
 import { existsSync, readFileSync } from "node:fs";
 import { ExtensionError, RULES, type BookExtension } from "./extension";
+import { DERIVED_VARIANT, derivedShadcnRules, readPalette, type DerivedMood } from "./derived";
+const isDerived = (m: Mood): m is DerivedMood => m in DERIVED_VARIANT;
 import { resolve } from "node:path";
 import pkgJson from "../package.json";
 
@@ -62,7 +64,7 @@ export type ThemePreset = "shadcn" | "semantic" | "slide-deck";
  * fingerprint test in test/book-extension.test.ts fails until you do.
  */
 export const PRESET_RULES_VERSION: Record<ThemePreset, string> = {
-  shadcn: "1.0.0",
+  shadcn: "1.1.0",
   semantic: "1.0.0",
   "slide-deck": "1.0.0",
 };
@@ -215,6 +217,8 @@ function buildRecipeCommand(opts: {
 
 export function resolveEffectiveStandard(mood: Mood, explicit?: AuditStandard): AuditStandard {
   if (explicit) return explicit;
+  // Derived moods conform to WCAG AA; their APCA numbers are reported alongside (src/derived.ts).
+  if (isDerived(mood)) return "wcag-aa";
   return mood === "high-contrast" ? "wcag-aaa" : "wcag-aa";
 }
 
@@ -286,6 +290,11 @@ const isThenable = (v: unknown): v is PromiseLike<unknown> =>
 /** How an error names the extension it came from: name, version and path. */
 const extensionWhere = (ext: BookExtension) => `extension ${ext.name}@${ext.version} (${ext.path})`;
 
+/** The moods a preset has rules for: the derived moods (corporate, freak) have rules for shadcn only (see src/derived.ts). */
+export function presetMoods(preset: ThemePreset): Mood[] {
+  return (Object.keys(MOOD_PROFILES) as Mood[]).filter((m) => !isDerived(m) || preset === "shadcn");
+}
+
 /** Seed sets that drive each kind of rule branch: one chromatic seed, an achromatic seed, two seeds. */
 export const FINGERPRINT_SEEDS: Record<"chromatic" | "achromatic" | "two-seed", string[]> = {
   chromatic: ["#0f766e"],
@@ -301,7 +310,7 @@ export const FINGERPRINT_SEEDS: Record<"chromatic" | "achromatic" | "two-seed", 
 export function presetRulesLines(preset: ThemePreset, seedSets: Record<string, string[]> = FINGERPRINT_SEEDS): string[] {
   const rule = (r: string) => r.split(" -> ")[0];
   const lines: string[] = [];
-  for (const mood of Object.keys(MOOD_PROFILES) as Mood[]) {
+  for (const mood of presetMoods(preset)) {
     for (const standard of ["wcag-aa", "wcag-aaa", "apca"] as const) {
       for (const [kind, seeds] of Object.entries(seedSets)) {
         const built = buildThemeBook({ seeds, preset, mood, generator: "oklch", standard });
@@ -342,7 +351,7 @@ export function presetHelperLines(preset: ThemePreset): string[] {
   const cached = helperLinesCache.get(preset);
   if (cached) return [...cached];
   const lines: string[] = [];
-  for (const mood of Object.keys(MOOD_PROFILES) as Mood[]) {
+  for (const mood of presetMoods(preset)) {
     for (const standard of ["wcag-aa", "wcag-aaa", "apca"] as const) {
       for (const [kind, seeds] of Object.entries({ ...FINGERPRINT_SEEDS, ...THRESHOLD_SEEDS })) {
         const config = `${mood}/${standard}/${kind}`;
@@ -380,7 +389,74 @@ function shellWord(s: string): string {
   return /^[A-Za-z0-9_./:@%+=,-]+$/.test(s) ? s : `'${s.replace(/'/g, `'\\''`)}'`;
 }
 
+/** Chart diagnostics measured from resolved bars, for rules that pick chart colors themselves. */
+function chartDiagnosticsOf(
+  resolved: Record<string, TokenProvenance>,
+  syntheticKeys: string[],
+): ChartPolarityDiagnostics {
+  const bars = [1, 2, 3, 4, 5].map((i) => resolved[`chart-${i}`]!.hex);
+  let min = Infinity;
+  for (let i = 0; i < bars.length; i++)
+    for (let j = i + 1; j < bars.length; j++) min = Math.min(min, oklabDistance(bars[i]!, bars[j]!));
+  const chroma = bars.reduce((sum, b) => sum + parseToOklch(b).c, 0) / bars.length;
+  return {
+    minOklabDist: Number(min.toFixed(4)),
+    effectiveChroma: Number(chroma.toFixed(4)),
+    thresholdRatio: 0,
+    syntheticCount: syntheticKeys.length,
+    syntheticKeys,
+  };
+}
+
+/** The tokens a preset emits in every mood. */
+function presetKeys(preset: ThemePreset): string[] {
+  const keys = [
+    "background",
+    "foreground",
+    "card",
+    "card-foreground",
+    "popover",
+    "popover-foreground",
+    "primary",
+    "primary-foreground",
+    "secondary",
+    "secondary-foreground",
+    "muted",
+    "muted-foreground",
+    "accent",
+    "accent-foreground",
+    "destructive",
+    "destructive-foreground",
+    "border",
+    "input",
+    "ring",
+    "chart-1",
+    "chart-2",
+    "chart-3",
+    "chart-4",
+    "chart-5",
+  ];
+  // Stock shadcn's token set (flyingrobots/theme-book#19): current shadcn has no
+  // destructive-foreground and has eight sidebar tokens. slide-deck keeps its own set.
+  if (preset === "shadcn") {
+    return keys.filter((k) => k !== "destructive-foreground").concat([
+      "sidebar",
+      "sidebar-foreground",
+      "sidebar-primary",
+      "sidebar-primary-foreground",
+      "sidebar-accent",
+      "sidebar-accent-foreground",
+      "sidebar-border",
+      "sidebar-ring",
+    ]);
+  }
+  return keys;
+}
+
 export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
+  if (isDerived(opts.mood) && opts.preset !== "shadcn") {
+    throw new Error(`the ${opts.mood} mood has rules for the shadcn preset only, not "${opts.preset}"`);
+  }
   const standard = resolveEffectiveStandard(opts.mood, opts.standard);
   const pools = generatePools(opts.seeds, opts.mood, opts.generator, standard);
   const profile = MOOD_PROFILES[opts.mood];
@@ -405,35 +481,39 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
         : profile.minMutedContrast;
 
   const book = new DesignBook(`theme-book-${opts.preset}`);
-  populateScope(book, "neutrals", pools.neutrals);
-  populateScope(book, "brand", pools.brand);
-  populateScope(book, "brandSolvableLight", pools.brandSolvableLight);
-  populateScope(book, "brandSolvableDark", pools.brandSolvableDark);
-  populateScope(book, "candidates", pools.candidates);
-  populateScope(book, "statusTargets", pools.statusTargets);
-  populateScope(book, "dangerLightPool", pools.statusPools.dangerLight);
-  populateScope(book, "dangerDarkPool", pools.statusPools.dangerDark);
-  populateScope(book, "successLightPool", pools.statusPools.successLight);
-  populateScope(book, "successDarkPool", pools.statusPools.successDark);
-  populateScope(book, "warningLightPool", pools.statusPools.warningLight);
-  populateScope(book, "warningDarkPool", pools.statusPools.warningDark);
-  populateScope(book, "chartsLight", pools.chartsLight);
-  populateScope(book, "chartsDark", pools.chartsDark);
+  // Derived moods build their own palettes (src/derived.ts) and read none of these pools.
+  if (!isDerived(opts.mood)) {
+    populateScope(book, "neutrals", pools.neutrals);
+    populateScope(book, "brand", pools.brand);
+    populateScope(book, "brandSolvableLight", pools.brandSolvableLight);
+    populateScope(book, "brandSolvableDark", pools.brandSolvableDark);
+    populateScope(book, "candidates", pools.candidates);
+    populateScope(book, "statusTargets", pools.statusTargets);
+    populateScope(book, "dangerLightPool", pools.statusPools.dangerLight);
+    populateScope(book, "dangerDarkPool", pools.statusPools.dangerDark);
+    populateScope(book, "successLightPool", pools.statusPools.successLight);
+    populateScope(book, "successDarkPool", pools.statusPools.successDark);
+    populateScope(book, "warningLightPool", pools.statusPools.warningLight);
+    populateScope(book, "warningDarkPool", pools.statusPools.warningDark);
+    populateScope(book, "chartsLight", pools.chartsLight);
+    populateScope(book, "chartsDark", pools.chartsDark);
 
-  // Pure ink endpoints so bestContrastWith always maximizes contrast for button/badge text
-  const inks = book.addScope("inks");
-  inks.set("white", color("#ffffff"));
-  inks.set("black", color("#000000"));
+    // Pure ink endpoints so bestContrastWith always maximizes contrast for button/badge text
+    const inks = book.addScope("inks");
+    inks.set("white", color("#ffffff"));
+    inks.set("black", color("#000000"));
 
-  // Helper scope holding secondary-seed accent target only when seed-1 is explicitly supplied
-  const accentSeeds = book.addScope("accentSeeds");
-  accentSeeds.set("seed-0", ref("brand.seed-0"));
-  if (hasSecondarySeed) {
-    accentSeeds.set("seed-1", ref("candidates.seed-1"));
+    // Helper scope holding secondary-seed accent target only when seed-1 is explicitly supplied
+    const accentSeeds = book.addScope("accentSeeds");
+    accentSeeds.set("seed-0", ref("brand.seed-0"));
+    if (hasSecondarySeed) {
+      accentSeeds.set("seed-1", ref("candidates.seed-1"));
+    }
   }
 
   const light = book.addScope("light");
-  const dark = book.addScope("dark", { extends: "light" });
+  // Derived moods set both modes from the palettes, so dark is light's sibling, not its child.
+  const dark = book.addScope("dark", isDerived(opts.mood) ? {} : { extends: "light" });
 
   // Primary fill vs background stays at >= 4.5:1 (even under AAA, because primary is a fill,
   // not body copy — while primary-foreground on primary enforces the full active standard
@@ -444,7 +524,12 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
   let keys: string[];
   let extras: Record<string, string> | undefined;
 
-  if (opts.preset === "semantic") {
+  let freakSynthetic: string[] | undefined;
+  if (isDerived(opts.mood)) {
+    keys = presetKeys(opts.preset);
+    derivedShadcnRules(book, light, dark, pools.seedHexes, opts.mood);
+    freakSynthetic = [];
+  } else if (opts.preset === "semantic") {
     keys = [
       "surface",
       "surface-raised",
@@ -543,46 +628,7 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
     dark.set("danger", closest(ref("statusTargets.danger-dark"), ref("dangerDarkPool")));
     dark.set("danger-ink", bestContrastWith(ref("dark.danger"), ref("inks")));
   } else {
-    keys = [
-      "background",
-      "foreground",
-      "card",
-      "card-foreground",
-      "popover",
-      "popover-foreground",
-      "primary",
-      "primary-foreground",
-      "secondary",
-      "secondary-foreground",
-      "muted",
-      "muted-foreground",
-      "accent",
-      "accent-foreground",
-      "destructive",
-      "destructive-foreground",
-      "border",
-      "input",
-      "ring",
-      "chart-1",
-      "chart-2",
-      "chart-3",
-      "chart-4",
-      "chart-5",
-    ];
-    // Stock shadcn's token set (flyingrobots/theme-book#19): current shadcn has no
-    // destructive-foreground and has eight sidebar tokens. slide-deck keeps its own set.
-    if (opts.preset === "shadcn") {
-      keys = keys.filter((k) => k !== "destructive-foreground").concat([
-        "sidebar",
-        "sidebar-foreground",
-        "sidebar-primary",
-        "sidebar-primary-foreground",
-        "sidebar-accent",
-        "sidebar-accent-foreground",
-        "sidebar-border",
-        "sidebar-ring",
-      ]);
-    }
+    keys = presetKeys(opts.preset);
 
     // Light shadcn / slide-deck rules
     light.set("background", nth(ref("neutrals"), 0));
@@ -812,7 +858,9 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
 
   const audit = evaluateAudit(
     { light: lightSerialized, dark: darkSerialized, skippedTokens: [], assumptions: [] },
-    { standard, withFixes: false },
+    // A hueless derived mood keeps stock shadcn's chart greys, one set for both modes, which stock
+    // shadcn does not hold to 3:1 either: those bars are advisory. Every other derived chart is floored.
+    { standard, withFixes: false, chartsAdvisory: isDerived(opts.mood) && readPalette(pools.seedHexes).hueless },
   );
 
   const hexFlag = opts.hexOutput ?? false;
@@ -863,7 +911,12 @@ export function buildThemeBook(opts: ThemeBuildOptions): BuiltTheme {
     light: lightResolved,
     dark: darkResolved,
     audit,
-    chartDiagnostics: pools.chartDiagnostics,
+    chartDiagnostics: freakSynthetic
+      ? {
+          light: chartDiagnosticsOf(lightResolved, freakSynthetic),
+          dark: chartDiagnosticsOf(darkResolved, freakSynthetic),
+        }
+      : pools.chartDiagnostics,
     extras,
   };
 }

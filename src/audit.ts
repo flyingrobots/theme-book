@@ -139,6 +139,16 @@ export function apcaContrastExact(textRgb: ExactRgb, bgRgb: ExactRgb): number {
   return output * 100;
 }
 
+/**
+ * WCAG ratio of two CSS colors at full precision, as the audit measures it. Use this for any
+ * threshold decision: the display-rounded `wcagRatio` reads 2.996 as 3.00 and passes it.
+ */
+export function wcagRatioExactCss(colorA: string, colorB: string): number {
+  const a = parseCssColorExact(colorA);
+  const b = parseCssColorExact(colorB);
+  return a.ok && b.ok ? wcagRatioExact(a.rgb, b.rgb) : 1;
+}
+
 /** Convenience wrappers for opaque CSS color strings (returns display-rounded values). */
 export function wcagRatio(colorA: string, colorB: string): number {
   const a = parseCssColorExact(colorA);
@@ -307,6 +317,8 @@ export interface AuditReport {
   exitCode: 0 | 1 | 3;
   standard: AuditStandard;
   strictBorders: boolean;
+  /** Chart bars were audited as advisory (`--charts-advisory`, or a hueless derived mood). */
+  chartsAdvisory: boolean;
   passed: number;
   failed: number;
   advisoryCount: number;
@@ -442,6 +454,12 @@ export interface AuditOptions {
   standard?: AuditStandard;
   withFixes?: boolean;
   strictBorders?: boolean;
+  /**
+   * Chart bars against the page are reported but not required. Stock shadcn's chart colors are one
+   * set for both modes, spread from light to dark, so some bars cannot clear 3:1 on both pages; a
+   * theme built that way opts in. Off by default: every other audit holds charts to 3:1.
+   */
+  chartsAdvisory?: boolean;
 }
 
 const COLOR_TOKEN_NAME_RE =
@@ -980,7 +998,8 @@ export function evaluateAudit(
   }
 
   for (const item of rawPairs) {
-    const required = item.kind !== "border-advisory" || strictBorders;
+    const isChart = /^chart-\d+$/.test(item.fgToken);
+    const required = (item.kind !== "border-advisory" || strictBorders) && !(isChart && (opts.chartsAdvisory ?? false));
     const { requiredWcag, requiredApca } = pairThresholds(item.kind, standard);
 
     const fgParsed = parseMaybeErrorToken(item.fgRaw);
@@ -1142,6 +1161,7 @@ export function evaluateAudit(
     exitCode,
     standard,
     strictBorders,
+    chartsAdvisory: opts.chartsAdvisory ?? false,
     passed,
     failed,
     advisoryCount: advisoryPairs.length,
@@ -1151,7 +1171,7 @@ export function evaluateAudit(
       assessedPairs: {
         text: pairs.filter((p) => p.kind === "text").length,
         uiGraphic: pairs.filter((p) => p.kind === "ui-graphic").length,
-        borderAdvisory: advisoryPairs.length,
+        borderAdvisory: advisoryPairs.filter((p) => p.kind === "border-advisory").length,
       },
       unverifiedPairs,
       skippedTokens: parsedModes.skippedTokens,

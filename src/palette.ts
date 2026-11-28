@@ -16,7 +16,7 @@ import {
   type ExactRgb,
 } from "./audit";
 
-export type Mood = "neutral" | "muted" | "vivid" | "editorial" | "high-contrast";
+export type Mood = "neutral" | "muted" | "vivid" | "editorial" | "high-contrast" | "freak" | "corporate";
 export type GeneratorKind = "oklch" | "poline" | "rampensau";
 
 export interface MoodProfile {
@@ -80,6 +80,26 @@ export const MOOD_PROFILES: Record<Mood, MoodProfile> = {
     minTextContrast: 17.0,
     minMutedContrast: 7.4,
     description: "Maximum legibility targeting AAA (7:1) / APCA 75+ reading comfort",
+  },
+  freak: {
+    neutralChroma: 0.012,
+    accentChromaMin: 0.12,
+    accentChromaMax: 0.24,
+    secondaryChroma: 0.04,
+    statusChroma: 0.2,
+    minTextContrast: 14.0,
+    minMutedContrast: 4.8,
+    description: "Derived (shadcn): the palette's own colors as flat fills, accents unchanged in dark; see src/derived.ts",
+  },
+  corporate: {
+    neutralChroma: 0.008,
+    accentChromaMin: 0.06,
+    accentChromaMax: 0.16,
+    secondaryChroma: 0.015,
+    statusChroma: 0.16,
+    minTextContrast: 14.0,
+    minMutedContrast: 4.8,
+    description: "Derived (shadcn): soft tints, accents lifted together in dark by the fitted move; see src/derived.ts",
   },
 };
 
