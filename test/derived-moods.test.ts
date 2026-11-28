@@ -34,7 +34,7 @@ const CASES = [
   // Palettes whose charts fell below 3:1 (stress set).
   { name: "Solarized, freak", seeds: ["#268bd2", "#2aa198", "#d33682", "#6c71c4", "#b58900", "#cb4b16", "#fdf6e3", "#657b83"], mood: "freak" as const },
   { name: "violet, pink, cyan, freak", seeds: ["#7c3aed", "#db2777", "#0891b2"], mood: "freak" as const },
-  // A later color three times, in two spellings: two accents, not four with identical chart bars.
+  // A later color three times, in two spellings (the unit test below asserts the count; this case runs the full suite on it).
   { name: "duplicate seeds", seeds: ["#0f766e", "#2563eb", "#2563EB", "#2563eb"], mood: "corporate" as const },
   // A stress set of edge palettes, in both moods.
   ...(["corporate", "freak"] as const).map((mood) => ({ name: "stress: single teal", seeds: ["#0f766e"], mood })),
@@ -167,6 +167,14 @@ describe("derived moods", () => {
     const t = build(["#ffffff", "#000000"], "corporate");
     const report = evaluateAudit({ light: Object.fromEntries(t.lightKeys.map((k) => [k, t.light[k]!.hex])), dark: Object.fromEntries(t.darkKeys.map((k) => [k, t.dark[k]!.hex])), skippedTokens: [], assumptions: [] }, { standard: "wcag-aa" });
     expect(report.pairs.some((p) => /^chart-/.test(p.fgToken) && p.required)).toBe(true);
+  });
+
+  test("advisory charts are not counted as border advisories in the audit's coverage", () => {
+    const t = build(["#ffffff", "#000000"], "corporate");
+    const modes = { light: Object.fromEntries(t.lightKeys.map((k) => [k, t.light[k]!.hex])), dark: Object.fromEntries(t.darkKeys.map((k) => [k, t.dark[k]!.hex])), skippedTokens: [], assumptions: [] };
+    const borders = evaluateAudit(modes, { standard: "wcag-aa" }).coverage.assessedPairs.borderAdvisory;
+    expect(evaluateAudit(modes, { standard: "wcag-aa", chartsAdvisory: true }).coverage.assessedPairs.borderAdvisory).toBe(borders);
+    expect(evaluateAudit(modes, { standard: "wcag-aa", chartsAdvisory: true, strictBorders: true }).coverage.assessedPairs.borderAdvisory).toBe(0);
   });
 
   test("a palette with no hue keeps none, apart from one red for errors", () => {
