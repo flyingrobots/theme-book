@@ -1,0 +1,7 @@
+Contrast Audit [FAIL] (wcag-aa): 0 passed, 1 failed, 0 unverified, 0 advisory
+Coverage: 1 text, 0 ui-graphic, 0 border-advisory
+
+[FAIL] (light · text) foreground (#647a86) on background (#ffffff) — WCAG 4.5:1 (exact 4.4969) | APCA Lc 71.2
+
+Assumptions:
+- sRGB gamut policy: WCAG 2.x ratios are evaluated at full floating-point precision without pre-comparison rounding; colors outside sRGB gamut are marked unverified

@@ -1,0 +1,9 @@
+Contrast Audit [INCOMPLETE] (wcag-aa): 0 passed, 0 failed, 1 unverified, 0 advisory
+Coverage: 0 text, 0 ui-graphic, 0 border-advisory
+
+
+Unverified pairs:
+[UNVERIFIED] (light · text) foreground (#000000) on background (rgba(255, 255, 255, 0.5)) — translucent-backdrop-unknown
+
+Assumptions:
+- sRGB gamut policy: WCAG 2.x ratios are evaluated at full floating-point precision without pre-comparison rounding; colors outside sRGB gamut are marked unverified
