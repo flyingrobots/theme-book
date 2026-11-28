@@ -19,9 +19,10 @@
  * - `freak`: s = 0, b = 0, k = 1 (Solarized's move: accents unchanged); the palette's own colors are
  *   flat fills, the same in both modes.
  *
- * Fixed by convention, never derived: red is error and destroy (destructive), and a non-status role
- * never takes a palette color in the red, yellow or green ranges, so a button does not read as an
- * error, a caution or a success. The first colored seed (OKLCH chroma 0.04 or more) is primary,
+ * Fixed by convention, never derived: red is error and destroy (destructive), and secondary and
+ * accent take the next palette colors outside the red, yellow and green ranges, so a button does not
+ * read as an error, a caution or a success; a role left without one is a tint of the primary, which
+ * carries the primary's hue even when that is a status hue. The first colored seed (OKLCH chroma 0.04 or more) is primary,
  * whatever its lightness, a red brand included; grey seeds before it are base material.
  *
  * Chart bars clear 3:1 on every page in both modes, except a palette with no hue, which keeps stock
@@ -29,8 +30,8 @@
  *
  * Most colors record an origin: a palette color is `relativeTo` a seed (text on a fill, and the base
  * ramp, name the base seed), each dark accent `relativeTo` its light version, and destructive names
- * none. The computed values are stored fixed, so the book (and a flow view of it) reads seeds ->
- * light -> dark as recorded origins, not live dependencies.
+ * none. The computed values are stored fixed, so the recorded seed -> light origins are origins,
+ * not live dependencies; a flow view pairs light and dark by role.
  */
 import { type DesignBook, color, ref, relativeTo } from "design-book";
 import { converter, differenceEuclidean, formatHex, parse } from "culori";

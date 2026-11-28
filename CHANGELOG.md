@@ -15,15 +15,17 @@ may change between minor versions.
   together (dark L = (1 − b)(L + s) + b · 0.76, chroma × k), `corporate` at the fitted average
   (s 0.12, b 0.6, k 0.85) and `freak` unchanged, with the palette's own colors as flat fills;
   contrast is a floor in each mode. Destructive is a fixed red that holds white text and, in dark,
-  is set for shadcn's 60% over the page; secondary and accent never take a red, yellow or green
-  palette color (with no other color, they tint a status-hued primary); charts run light to dark, each bar clearing 3:1 on its mode's pages. The first
+  is set for shadcn's 60% over the page; secondary and accent
+  take the next palette colors that are not red, yellow or green, and a role left without one is a
+  tint of the primary (so it carries a status-hued primary's hue); charts run light to dark, each bar clearing 3:1 on its mode's pages. The first
   colored seed is primary, whatever its lightness. Both are built for WCAG AA; `--generator` has
   no effect, and `--standard wcag-aaa|apca` audits without changing the colors. See
   [docs/topics/derived-moods](docs/topics/derived-moods/README.md).
 - **A benchmark against famous themes** (`scripts/benchmark/`): their verified palettes with
   sources, a method scorer (theme-book's move lands within OKLab 0.080 of the official accents,
   against 0.124 for Material's tone table), a per-theme fit (`fit.ts`), a scoreboard page with a
-  static SVG, and a Mermaid sankey drawn from a built book's recorded origins. The test suite
+  static SVG, and a Mermaid sankey drawn from a built book (seed-to-light flows follow recorded origins;
+  light-to-dark flows pair role groups). The test suite
   fails if the move gets worse.
 - **`chartsAdvisory`** in `evaluateAudit`, and **`theme-book audit --charts-advisory`**: chart
   bars against the page are reported but not required. Off by default. A derived mood turns it on
