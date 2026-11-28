@@ -19,7 +19,7 @@ may change between minor versions.
   take the next palette colors that are not red, yellow or green, and a role left without one is a
   tint of the primary (so it carries a status-hued primary's hue); charts run light to dark, each bar clearing 3:1 on its mode's pages. The first
   colored seed is primary, whatever its lightness. Both are built for WCAG AA; `--generator` has
-  no effect, and with `--audit`, `--standard wcag-aaa|apca` audits against that standard without changing the colors. See
+  no effect, and `--standard wcag-aaa|apca` sets the standard the theme is audited against, not its colors: the CSS header records the verdict (`audit=fail`), and `--audit` also prints the report and exits 1. See
   [docs/topics/derived-moods](docs/topics/derived-moods/README.md).
 - **A benchmark against famous themes** (`scripts/benchmark/`): their verified palettes with
   sources, a method scorer (theme-book's move lands within OKLab 0.080 of the official accents,

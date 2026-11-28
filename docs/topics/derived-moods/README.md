@@ -45,7 +45,7 @@ gives the same verdict._
 What the moods do not read:
 
 - **`--generator` has no effect.** The palette is the seeds; no ramp is generated from them.
-- **With `--audit`, `--standard wcag-aaa` and `--standard apca` audit against that standard, but do not change the colors.** The rules solve for
+- **`--standard wcag-aaa` and `--standard apca` set the standard the theme is audited against, not its colors.** The CSS header records the verdict (`audit=fail`), and `--audit` also prints the report and exits 1. The rules solve for
   WCAG AA, so expect failures: Listing 1's palette fails 10 pairs under `wcag-aaa` and 7 under `apca`.
 - **`suggest` refuses `--mood corporate|freak`** (exit `2`): these moods build a whole theme, so they belong to
   `theme`.
