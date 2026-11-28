@@ -1,0 +1,54 @@
+corporate ["#b18cec"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99979<3
+freak ["#b18cec"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99979<3
+corporate ["#97dcb6","#ecc3a8","#b2fa64","#9627c8"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99927<3
+freak ["#97dcb6","#ecc3a8","#b2fa64","#9627c8"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99927<3
+corporate ["#2fe32e"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99939<3
+freak ["#2fe32e"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99939<3
+corporate ["#d6cc86","#68668e","#f5b244","#15b089","#408871","#d5d7f3","#9b9699"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99998<3
+freak ["#d6cc86","#68668e","#f5b244","#15b089","#408871","#d5d7f3","#9b9699"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99998<3
+corporate ["#65dd57","#0649da","#0ca944","#04397e","#f654cd"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99991<3
+freak ["#65dd57","#0649da","#0ca944","#04397e","#f654cd"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99991<3
+corporate ["#6f366e","#f50f42","#19e83d"] oklch=fail hex=pass | dark:primary-foreground/primary 4.49959<4.5, dark:sidebar-primary-foreground/sidebar-primary 4.49959<4.5
+corporate ["#03bf22","#171286","#2ef875"] oklch=fail hex=pass | dark:muted-foreground/muted 4.49920<4.5
+freak ["#03bf22","#171286","#2ef875"] oklch=fail hex=pass | dark:muted-foreground/muted 4.49920<4.5
+corporate ["#174f2c","#362636","#68a8f9","#60cec7"] oklch=fail hex=pass | dark:primary-foreground/primary 4.49897<4.5, dark:sidebar-primary-foreground/sidebar-primary 4.49897<4.5
+corporate ["#b9cd62","#53295d","#837695","#d0507f","#d838ec","#9fb46c"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99971<3
+freak ["#b9cd62","#53295d","#837695","#d0507f","#d838ec","#9fb46c"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99971<3
+corporate ["#ba0921","#2db4a8","#b64bc3","#176675","#1b0dd7","#86f788","#b55a53"] oklch=fail hex=pass | light:primary-foreground/primary 4.49907<4.5, light:sidebar-primary-foreground/sidebar-primary 4.49907<4.5
+freak ["#ba0921","#2db4a8","#b64bc3","#176675","#1b0dd7","#86f788","#b55a53"] oklch=fail hex=pass | light:primary-foreground/primary 4.49907<4.5, light:sidebar-primary-foreground/sidebar-primary 4.49907<4.5
+corporate ["#62484d","#05bad5","#262e20"] oklch=fail hex=pass | dark:muted-foreground/muted 4.49991<4.5
+freak ["#62484d","#05bad5","#262e20"] oklch=fail hex=pass | dark:muted-foreground/muted 4.49991<4.5
+corporate ["#b97fae"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99950<3
+freak ["#b97fae"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99950<3
+corporate ["#2c5241","#8dc472"] oklch=fail hex=pass | dark:primary-foreground/primary 4.49941<4.5, dark:sidebar-primary-foreground/sidebar-primary 4.49941<4.5
+corporate ["#15ccd3","#109c77","#7ca460"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99991<3
+freak ["#15ccd3","#109c77","#7ca460"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99991<3
+corporate ["#ddfe27","#67cdac","#daa350","#aa2da6","#95aea1"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99958<3
+freak ["#ddfe27","#67cdac","#daa350","#aa2da6","#95aea1"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99958<3
+corporate ["#148ff2","#86d881","#8c17e3"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99970<3
+freak ["#148ff2","#86d881","#8c17e3"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99970<3
+corporate ["#47d31f","#37c94e","#9d58ab","#5c8ed6","#8bd2f3","#d2aa76"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99950<3
+freak ["#47d31f","#37c94e","#9d58ab","#5c8ed6","#8bd2f3","#d2aa76"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99950<3
+corporate ["#d967a8"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99964<3
+freak ["#d967a8"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99964<3
+corporate ["#31e662","#33cbfe","#3fcd5f"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99966<3
+freak ["#31e662","#33cbfe","#3fcd5f"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99966<3
+corporate ["#6f6fe8","#90ac61","#3d095c"] oklch=fail hex=pass | dark:muted-foreground/muted 4.49961<4.5
+freak ["#6f6fe8","#90ac61","#3d095c"] oklch=fail hex=pass | dark:muted-foreground/muted 4.49961<4.5
+corporate ["#2369fb","#1c2f2b","#7b4ec7"] oklch=fail hex=pass | dark:muted-foreground/muted 4.49985<4.5
+freak ["#2369fb","#1c2f2b","#7b4ec7"] oklch=fail hex=pass | dark:muted-foreground/muted 4.49985<4.5
+corporate ["#6ea264","#212806","#959dde"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99993<3
+freak ["#6ea264","#212806","#959dde"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99993<3
+corporate ["#eef28d","#93da10","#0be3fc"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99987<3
+freak ["#eef28d","#93da10","#0be3fc"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99987<3
+corporate ["#a4b022","#d678fa","#1157c2","#ef28a0","#bc82f2","#376fdd"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99999<3
+freak ["#a4b022","#d678fa","#1157c2","#ef28a0","#bc82f2","#376fdd"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99999<3
+corporate ["#eaa4dc","#b13cd1","#6d495c","#c4e40f","#3cb4e0","#65d638"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99995<3
+freak ["#eaa4dc","#b13cd1","#6d495c","#c4e40f","#3cb4e0","#65d638"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99995<3
+corporate ["#c065f7","#7e2c78"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99956<3
+freak ["#c065f7","#7e2c78"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99956<3
+freak ["#17b6c3","#939851","#4e8906","#6b56bc","#7c4cda","#49ba7a"] oklch=fail hex=pass | light:secondary-foreground/secondary 4.49995<4.5, dark:secondary-foreground/secondary 4.49995<4.5
+corporate ["#eb2aec","#da1416","#436e1f","#10264e","#e2f474"] oklch=fail hex=pass | dark:muted-foreground/muted 4.49995<4.5
+freak ["#eb2aec","#da1416","#436e1f","#10264e","#e2f474"] oklch=fail hex=pass | dark:muted-foreground/muted 4.49995<4.5
+corporate ["#b09551","#a58f24","#59193b"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99951<3
+freak ["#b09551","#a58f24","#59193b"] oklch=fail hex=pass | light:sidebar-ring/sidebar 2.99951<3

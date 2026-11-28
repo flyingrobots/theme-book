@@ -1,0 +1,24 @@
+== native: is every var() defined?
+exit 0
+Contrast Audit [INCOMPLETE] (wcag-aa): 0 passed, 0 failed, 20 unverified, 0 advisory
+Contrast Audit [INCOMPLETE] (wcag-aa): 12 passed, 0 failed, 6 unverified, 0 advisory
+== formats
+json exit 0 bytes    43855
+w3-tokens exit 0 bytes    14023
+svg exit 0 bytes    79226
+== suggest
+suggest corporate exit 0
+Suggestions for seeds=#2563eb on light surface oklch(0.9943 0.0013 286.38) (#fdfdfe) [mood=corporate, generator=oklch]
+
+- primary-accent     #2563eb  oklch(0.5461 0.2152 262.88)   WCAG  5.08:1  APCA   73.7  [mostVivid(pool, { readableOn: surface, readableContrast: 4.5 })]
+suggest freak exit 0
+Suggestions for seeds=#2563eb on light surface oklch(0.9946 0.0026 286.35) (#fdfdff) [mood=freak, generator=oklch]
+
+- primary-accent     #1d5ae2  oklch(0.5194 0.2159 262.94)   WCAG  5.72:1  APCA   77.1  [mostVivid(pool, { readableOn: surface, readableContrast: 4.5 })]
+== default preset with derived
+exit 0
+slide-deck exit 2: theme-book: --mood freak has rules for --preset shadcn only, not "slide-deck"
+== red brand only: secondary/accent hue
+  --primary: #dc2626;   --secondary: #ffe0db;   --accent: #ffc4bc;   --destructive: #a30018;   --primary: #ff7c6f;   --secondary: #532b27;   --accent: #733a34;   --destructive: #ee001b;  [corporate]
+  --primary: #dc2626;   --secondary: #ffe0db;   --accent: #ffc4bc;   --destructive: #a30018;   --primary: #e02b29;   --secondary: #532b27;   --accent: #733a34;   --destructive: #ee001b;  [freak]
+  --primary: #0da047;   --secondary: #d2f2d6;   --accent: #b6e1bc;  [green brand + yellow, freak]

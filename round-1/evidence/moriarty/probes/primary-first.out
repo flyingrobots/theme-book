@@ -1,0 +1,12 @@
+{"seeds":["#dc2626","#2563eb"],"mood":"corporate","seed0_oklch":["0.577","0.215"],"lightPrimary":"#dc2626","darkPrimary":"#ff7c6f","primaryDeps":["seeds.seed-0"],"darkBg":"#141f35","status":"pass"}
+{"seeds":["#dc2626","#2563eb"],"mood":"freak","seed0_oklch":["0.577","0.215"],"lightPrimary":"#dc2626","darkPrimary":"#e02b29","primaryDeps":["seeds.seed-0"],"darkBg":"#141f35","status":"pass"}
+{"seeds":["#0b1f3a","#f59e0b"],"mood":"corporate","seed0_oklch":["0.239","0.058"],"lightPrimary":"#c07a00","darkPrimary":"#e1a358","primaryDeps":["seeds.seed-1"],"darkBg":"#0b1f3a","status":"pass"}
+{"seeds":["#0b1f3a","#f59e0b"],"mood":"freak","seed0_oklch":["0.239","0.058"],"lightPrimary":"#c07a00","darkPrimary":"#c07a00","primaryDeps":["seeds.seed-1"],"darkBg":"#0b1f3a","status":"pass"}
+{"seeds":["#1e1b4b","#14b8a6"],"mood":"corporate","seed0_oklch":["0.257","0.086"],"lightPrimary":"#1e1b4b","darkPrimary":"#7a7dae","primaryDeps":["seeds.seed-0"],"darkBg":"#1e1b4b","status":"pass"}
+{"seeds":["#1e1b4b","#14b8a6"],"mood":"freak","seed0_oklch":["0.257","0.086"],"lightPrimary":"#1e1b4b","darkPrimary":"#7173ab","primaryDeps":["seeds.seed-0"],"darkBg":"#1e1b4b","status":"pass"}
+{"seeds":["#fde68a","#2563eb"],"mood":"corporate","seed0_oklch":["0.924","0.115"],"lightPrimary":"#a08929","darkPrimary":"#c3b065","primaryDeps":["seeds.seed-0"],"darkBg":"#141f35","status":"pass"}
+{"seeds":["#fde68a","#2563eb"],"mood":"freak","seed0_oklch":["0.924","0.115"],"lightPrimary":"#a08929","darkPrimary":"#a08929","primaryDeps":["seeds.seed-0"],"darkBg":"#141f35","status":"pass"}
+{"seeds":["#8a8f98","#2563eb"],"mood":"corporate","seed0_oklch":["0.649","0.015"],"lightPrimary":"#2563eb","darkPrimary":"#75a3ff","primaryDeps":["seeds.seed-1"],"darkBg":"#141f35","status":"pass"}
+{"seeds":["#8a8f98","#2563eb"],"mood":"freak","seed0_oklch":["0.649","0.015"],"lightPrimary":"#2563eb","darkPrimary":"#2e6df6","primaryDeps":["seeds.seed-1"],"darkBg":"#141f35","status":"pass"}
+{"seeds":["#292c2f","#e88e8d"],"mood":"corporate","seed0_oklch":["0.291","0.007"],"lightPrimary":"#c97272","darkPrimary":"#e89a99","primaryDeps":["seeds.seed-1"],"darkBg":"#292c2f","status":"pass"}
+{"seeds":["#292c2f","#e88e8d"],"mood":"freak","seed0_oklch":["0.291","0.007"],"lightPrimary":"#c97272","darkPrimary":"#c97272","primaryDeps":["seeds.seed-1"],"darkBg":"#292c2f","status":"pass"}

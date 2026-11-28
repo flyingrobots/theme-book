@@ -1,0 +1,10 @@
+Suggestions for seeds=#2563eb on light surface oklch(0.9943 0.0013 286.38) (#fdfdfe) [mood=corporate, generator=oklch]
+
+- primary-accent     #2563eb  oklch(0.5461 0.2152 262.88)   WCAG  5.08:1  APCA   73.7  [mostVivid(pool, { readableOn: surface, readableContrast: 4.5 })]
+- complementary      #8b6000  oklch(0.5213 0.1086 78.16)    WCAG  5.48:1  APCA   76.4  [closest(relativeTo(seed, oklch, [null, null, +180]), pool, { readableOn: surface, readableContrast: 4.5 })]
+- distinct-companion #00081f  oklch(0.1417 0.0535 258.45)   WCAG 19.59:1  APCA  104.6  [furthestFrom(primary-accent, pool, { readableOn: surface, readableContrast: 4.5, not: [primary-accent] })]
+- muted-companion    #2c1c00  oklch(0.2407 0.05 78.89)      WCAG 16.23:1  APCA  102.2  [leastVivid(pool, { readableOn: surface, readableContrast: 4.5, not: [primary-accent] })]
+- readable-ink       #000000  oklch(0 0 0)                  WCAG 20.66:1  APCA  104.9  [bestContrastWith(surface, neutrals)]
+- muted-ink          #53555a  oklch(0.4495 0.0085 268.46)   WCAG  7.34:1  APCA   84.8  [minContrastWith(surface, neutrals, { minContrast: 4.8 })]
+- soft-tint-surface  #e8e9fd  oklch(0.9392 0.0269 283.58)   WCAG  1.18:1  APCA    8.6  [colorMix(surface, primary-accent, { ratio: 0.12, colorSpace: oklch })]
+- adaptive-border    #d5d5d6  oklch(0.8733 0.0014 286.37)   WCAG  1.44:1  APCA     21  [shade(surface, { amount: 0.12 })]

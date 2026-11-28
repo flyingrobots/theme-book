@@ -1,0 +1,12 @@
+rule light-on-primary: "ref(palette.light-on-primary)"
+deps palette.light-on-primary: [ "seeds.seed-5" ]
+palette.light-page           #f3f7fc -> #f3f7fc
+palette.light-on-primary     #000000 -> #000000
+palette.primary-light        #c97272 -> #c97272
+palette.primary-dark         #e89a99 -> #e89a99
+light.primary                #c97272 -> #c97272
+dark.primary                 #e89a99 -> #e89a99
+light.primary-foreground     #000000 -> #000000
+control seeds.seed-0 now: #00ff00
+control relativeTo [0.5,0.1,null] of seed-0 (#00ff00): #3f713b
+control after seed-0 -> #0000ff: #46619c | primary-light still #c97272

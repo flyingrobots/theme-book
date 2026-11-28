@@ -1,0 +1,12 @@
+fmt=[] exit 1
+Contrast Audit [FAIL] (wcag-aa): 35 passed, 1 failed, 0 unverified, 6 advisory
+/* theme-book v0.4.0 · design-book v0.26.0+main.2d80b33 · audit=fail (wcag-aa) */
+Contrast Audit [FAIL] (wcag-aa): 35 passed, 1 failed, 0 unverified, 6 advisory
+fmt=[--hex] exit 0
+Contrast Audit [PASS] (wcag-aa): 36 passed, 0 failed, 0 unverified, 6 advisory
+/* theme-book v0.4.0 · design-book v0.26.0+main.2d80b33 · audit=pass (wcag-aa) */
+Contrast Audit [PASS] (wcag-aa): 36 passed, 0 failed, 0 unverified, 6 advisory
+fmt=[--native] exit 1
+Contrast Audit [FAIL] (wcag-aa): 35 passed, 1 failed, 0 unverified, 6 advisory
+  --light-background: var(--palette-light-page);
+Contrast Audit [INCOMPLETE] (wcag-aa): 0 passed, 0 failed, 20 unverified, 0 advisory

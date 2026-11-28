@@ -1,0 +1,1535 @@
+{
+  "recipe": {
+    "version": 1,
+    "toolVersion": "0.4.0",
+    "designBookVersion": "0.26.0+main.2d80b33",
+    "rawSeeds": [
+      "#2563eb"
+    ],
+    "preset": "shadcn",
+    "mood": "freak",
+    "generator": "oklch",
+    "standard": "wcag-aa",
+    "formatOptions": {
+      "hex": false,
+      "native": false
+    },
+    "command": "theme-book theme --seed \"#2563eb\" --preset shadcn --mood freak --generator oklch --standard wcag-aa",
+    "book": {
+      "preset": "shadcn",
+      "rulesVersion": "1.1.0"
+    }
+  },
+  "preset": "shadcn",
+  "mood": "freak",
+  "generator": "oklch",
+  "standard": "wcag-aa",
+  "seeds": [
+    "#2563eb"
+  ],
+  "light": {
+    "background": {
+      "hex": "#f4f7fc",
+      "oklch": "oklch(0.9753 0.0074 260.73)",
+      "rule": "ref(palette.light-page)",
+      "dependencies": [
+        "palette.light-page"
+      ]
+    },
+    "foreground": {
+      "hex": "#262e3d",
+      "oklch": "oklch(0.3004 0.0295 262.8)",
+      "rule": "ref(palette.light-ink)",
+      "dependencies": [
+        "palette.light-ink"
+      ]
+    },
+    "card": {
+      "hex": "#fdfdff",
+      "oklch": "oklch(0.9946 0.0026 286.35)",
+      "rule": "ref(palette.light-card)",
+      "dependencies": [
+        "palette.light-card"
+      ]
+    },
+    "card-foreground": {
+      "hex": "#262e3d",
+      "oklch": "oklch(0.3004 0.0295 262.8)",
+      "rule": "ref(palette.light-ink)",
+      "dependencies": [
+        "palette.light-ink"
+      ]
+    },
+    "popover": {
+      "hex": "#fdfdff",
+      "oklch": "oklch(0.9946 0.0026 286.35)",
+      "rule": "ref(light.card)",
+      "dependencies": [
+        "light.card"
+      ]
+    },
+    "popover-foreground": {
+      "hex": "#262e3d",
+      "oklch": "oklch(0.3004 0.0295 262.8)",
+      "rule": "ref(palette.light-ink)",
+      "dependencies": [
+        "palette.light-ink"
+      ]
+    },
+    "primary": {
+      "hex": "#2563eb",
+      "oklch": "oklch(0.5461 0.2152 262.88)",
+      "rule": "ref(palette.primary-light)",
+      "dependencies": [
+        "palette.primary-light"
+      ]
+    },
+    "primary-foreground": {
+      "hex": "#ffffff",
+      "oklch": "oklch(1 0 0)",
+      "rule": "ref(palette.light-on-primary)",
+      "dependencies": [
+        "palette.light-on-primary"
+      ]
+    },
+    "secondary": {
+      "hex": "#dce8ff",
+      "oklch": "oklch(0.929 0.0338 263.58)",
+      "rule": "ref(palette.secondary-light)",
+      "dependencies": [
+        "palette.secondary-light"
+      ]
+    },
+    "secondary-foreground": {
+      "hex": "#262e3d",
+      "oklch": "oklch(0.3004 0.0295 262.8)",
+      "rule": "ref(light.foreground)",
+      "dependencies": [
+        "light.foreground"
+      ]
+    },
+    "muted": {
+      "hex": "#e5e8ed",
+      "oklch": "oklch(0.9301 0.0075 260.73)",
+      "rule": "ref(palette.light-muted)",
+      "dependencies": [
+        "palette.light-muted"
+      ]
+    },
+    "muted-foreground": {
+      "hex": "#555e6f",
+      "oklch": "oklch(0.4805 0.0297 263.16)",
+      "rule": "ref(palette.light-muted-ink)",
+      "dependencies": [
+        "palette.light-muted-ink"
+      ]
+    },
+    "accent": {
+      "hex": "#bed5ff",
+      "oklch": "oklch(0.8699 0.0636 262.44)",
+      "rule": "ref(palette.accent-light)",
+      "dependencies": [
+        "palette.accent-light"
+      ]
+    },
+    "accent-foreground": {
+      "hex": "#262e3d",
+      "oklch": "oklch(0.3004 0.0295 262.8)",
+      "rule": "ref(light.foreground)",
+      "dependencies": [
+        "light.foreground"
+      ]
+    },
+    "destructive": {
+      "hex": "#df202e",
+      "oklch": "oklch(0.58 0.2202 24.96)",
+      "rule": "ref(palette.destructive-light)",
+      "dependencies": [
+        "palette.destructive-light"
+      ]
+    },
+    "border": {
+      "hex": "#d3d6dc",
+      "oklch": "oklch(0.8755 0.0089 264.52)",
+      "rule": "ref(palette.light-border)",
+      "dependencies": [
+        "palette.light-border"
+      ]
+    },
+    "input": {
+      "hex": "#d3d6dc",
+      "oklch": "oklch(0.8755 0.0089 264.52)",
+      "rule": "ref(light.border)",
+      "dependencies": [
+        "light.border"
+      ]
+    },
+    "ring": {
+      "hex": "#2563eb",
+      "oklch": "oklch(0.5461 0.2152 262.88)",
+      "rule": "ref(light.primary)",
+      "dependencies": [
+        "light.primary"
+      ]
+    },
+    "chart-1": {
+      "hex": "#4a85ff",
+      "oklch": "oklch(0.6407 0.1919 262.79)",
+      "rule": "ref(palette.chart-1-light)",
+      "dependencies": [
+        "palette.chart-1-light"
+      ]
+    },
+    "chart-2": {
+      "hex": "#2462ea",
+      "oklch": "oklch(0.5431 0.2153 262.87)",
+      "rule": "ref(palette.chart-2-light)",
+      "dependencies": [
+        "palette.chart-2-light"
+      ]
+    },
+    "chart-3": {
+      "hex": "#0441c8",
+      "oklch": "oklch(0.445 0.2155 262.93)",
+      "rule": "ref(palette.chart-3-light)",
+      "dependencies": [
+        "palette.chart-3-light"
+      ]
+    },
+    "chart-4": {
+      "hex": "#002b91",
+      "oklch": "oklch(0.3473 0.1723 262.84)",
+      "rule": "ref(palette.chart-4-light)",
+      "dependencies": [
+        "palette.chart-4-light"
+      ]
+    },
+    "chart-5": {
+      "hex": "#00185c",
+      "oklch": "oklch(0.2511 0.1245 262.84)",
+      "rule": "ref(palette.chart-5-light)",
+      "dependencies": [
+        "palette.chart-5-light"
+      ]
+    },
+    "sidebar": {
+      "hex": "#eff2f7",
+      "oklch": "oklch(0.9603 0.0074 260.73)",
+      "rule": "ref(palette.light-sidebar)",
+      "dependencies": [
+        "palette.light-sidebar"
+      ]
+    },
+    "sidebar-foreground": {
+      "hex": "#262e3d",
+      "oklch": "oklch(0.3004 0.0295 262.8)",
+      "rule": "ref(palette.light-ink)",
+      "dependencies": [
+        "palette.light-ink"
+      ]
+    },
+    "sidebar-primary": {
+      "hex": "#2563eb",
+      "oklch": "oklch(0.5461 0.2152 262.88)",
+      "rule": "ref(light.primary)",
+      "dependencies": [
+        "light.primary"
+      ]
+    },
+    "sidebar-primary-foreground": {
+      "hex": "#ffffff",
+      "oklch": "oklch(1 0 0)",
+      "rule": "ref(light.primary-foreground)",
+      "dependencies": [
+        "light.primary-foreground"
+      ]
+    },
+    "sidebar-accent": {
+      "hex": "#bed5ff",
+      "oklch": "oklch(0.8699 0.0636 262.44)",
+      "rule": "ref(light.accent)",
+      "dependencies": [
+        "light.accent"
+      ]
+    },
+    "sidebar-accent-foreground": {
+      "hex": "#262e3d",
+      "oklch": "oklch(0.3004 0.0295 262.8)",
+      "rule": "ref(light.accent-foreground)",
+      "dependencies": [
+        "light.accent-foreground"
+      ]
+    },
+    "sidebar-border": {
+      "hex": "#d3d6dc",
+      "oklch": "oklch(0.8755 0.0089 264.52)",
+      "rule": "ref(light.border)",
+      "dependencies": [
+        "light.border"
+      ]
+    },
+    "sidebar-ring": {
+      "hex": "#2563eb",
+      "oklch": "oklch(0.5461 0.2152 262.88)",
+      "rule": "ref(light.primary)",
+      "dependencies": [
+        "light.primary"
+      ]
+    }
+  },
+  "dark": {
+    "background": {
+      "hex": "#141f35",
+      "oklch": "oklch(0.2412 0.0452 263.22)",
+      "rule": "ref(palette.dark-page)",
+      "dependencies": [
+        "palette.dark-page"
+      ]
+    },
+    "foreground": {
+      "hex": "#d1d4da",
+      "oklch": "oklch(0.8694 0.0089 264.52)",
+      "rule": "ref(palette.dark-ink)",
+      "dependencies": [
+        "palette.dark-ink"
+      ]
+    },
+    "card": {
+      "hex": "#202b42",
+      "oklch": "oklch(0.2904 0.045 264.23)",
+      "rule": "ref(palette.dark-card)",
+      "dependencies": [
+        "palette.dark-card"
+      ]
+    },
+    "card-foreground": {
+      "hex": "#d1d4da",
+      "oklch": "oklch(0.8694 0.0089 264.52)",
+      "rule": "ref(palette.dark-ink)",
+      "dependencies": [
+        "palette.dark-ink"
+      ]
+    },
+    "popover": {
+      "hex": "#202b42",
+      "oklch": "oklch(0.2904 0.045 264.23)",
+      "rule": "ref(dark.card)",
+      "dependencies": [
+        "dark.card"
+      ]
+    },
+    "popover-foreground": {
+      "hex": "#d1d4da",
+      "oklch": "oklch(0.8694 0.0089 264.52)",
+      "rule": "ref(palette.dark-ink)",
+      "dependencies": [
+        "palette.dark-ink"
+      ]
+    },
+    "primary": {
+      "hex": "#2e6df6",
+      "oklch": "oklch(0.5768 0.2156 262.89)",
+      "rule": "ref(palette.primary-dark)",
+      "dependencies": [
+        "palette.primary-dark"
+      ]
+    },
+    "primary-foreground": {
+      "hex": "#000000",
+      "oklch": "oklch(0 0 0)",
+      "rule": "ref(palette.dark-on-primary)",
+      "dependencies": [
+        "palette.dark-on-primary"
+      ]
+    },
+    "secondary": {
+      "hex": "#273757",
+      "oklch": "oklch(0.3389 0.0605 263.3)",
+      "rule": "ref(palette.secondary-dark)",
+      "dependencies": [
+        "palette.secondary-dark"
+      ]
+    },
+    "secondary-foreground": {
+      "hex": "#d1d4da",
+      "oklch": "oklch(0.8694 0.0089 264.52)",
+      "rule": "ref(dark.foreground)",
+      "dependencies": [
+        "dark.foreground"
+      ]
+    },
+    "muted": {
+      "hex": "#27334a",
+      "oklch": "oklch(0.3212 0.0444 262.91)",
+      "rule": "ref(palette.dark-muted)",
+      "dependencies": [
+        "palette.dark-muted"
+      ]
+    },
+    "muted-foreground": {
+      "hex": "#a2a5aa",
+      "oklch": "oklch(0.721 0.008 260.73)",
+      "rule": "ref(palette.dark-muted-ink)",
+      "dependencies": [
+        "palette.dark-muted-ink"
+      ]
+    },
+    "accent": {
+      "hex": "#354c79",
+      "oklch": "oklch(0.4198 0.0807 262.83)",
+      "rule": "ref(palette.accent-dark)",
+      "dependencies": [
+        "palette.accent-dark"
+      ]
+    },
+    "accent-foreground": {
+      "hex": "#d1d4da",
+      "oklch": "oklch(0.8694 0.0089 264.52)",
+      "rule": "ref(dark.foreground)",
+      "dependencies": [
+        "dark.foreground"
+      ]
+    },
+    "destructive": {
+      "hex": "#ff2129",
+      "oklch": "oklch(0.6383 0.2472 26.92)",
+      "rule": "ref(palette.destructive-dark)",
+      "dependencies": [
+        "palette.destructive-dark"
+      ]
+    },
+    "border": {
+      "hex": "#31405d",
+      "oklch": "oklch(0.3719 0.0539 263.01)",
+      "rule": "ref(palette.dark-border)",
+      "dependencies": [
+        "palette.dark-border"
+      ]
+    },
+    "input": {
+      "hex": "#31405d",
+      "oklch": "oklch(0.3719 0.0539 263.01)",
+      "rule": "ref(dark.border)",
+      "dependencies": [
+        "dark.border"
+      ]
+    },
+    "ring": {
+      "hex": "#2e6df6",
+      "oklch": "oklch(0.5768 0.2156 262.89)",
+      "rule": "ref(dark.primary)",
+      "dependencies": [
+        "dark.primary"
+      ]
+    },
+    "chart-1": {
+      "hex": "#bfd5ff",
+      "oklch": "oklch(0.8706 0.0632 263.3)",
+      "rule": "ref(palette.chart-1-dark)",
+      "dependencies": [
+        "palette.chart-1-dark"
+      ]
+    },
+    "chart-2": {
+      "hex": "#99bcff",
+      "oklch": "oklch(0.7948 0.1032 262.95)",
+      "rule": "ref(palette.chart-2-dark)",
+      "dependencies": [
+        "palette.chart-2-dark"
+      ]
+    },
+    "chart-3": {
+      "hex": "#73a2ff",
+      "oklch": "oklch(0.7193 0.1454 262.93)",
+      "rule": "ref(palette.chart-3-dark)",
+      "dependencies": [
+        "palette.chart-3-dark"
+      ]
+    },
+    "chart-4": {
+      "hex": "#5388f5",
+      "oklch": "oklch(0.6441 0.1726 262.95)",
+      "rule": "ref(palette.chart-4-dark)",
+      "dependencies": [
+        "palette.chart-4-dark"
+      ]
+    },
+    "chart-5": {
+      "hex": "#4f75c0",
+      "oklch": "oklch(0.5697 0.1241 262.76)",
+      "rule": "ref(palette.chart-5-dark)",
+      "dependencies": [
+        "palette.chart-5-dark"
+      ]
+    },
+    "sidebar": {
+      "hex": "#1a253c",
+      "oklch": "oklch(0.2664 0.046 264.06)",
+      "rule": "ref(palette.dark-sidebar)",
+      "dependencies": [
+        "palette.dark-sidebar"
+      ]
+    },
+    "sidebar-foreground": {
+      "hex": "#d1d4da",
+      "oklch": "oklch(0.8694 0.0089 264.52)",
+      "rule": "ref(palette.dark-ink)",
+      "dependencies": [
+        "palette.dark-ink"
+      ]
+    },
+    "sidebar-primary": {
+      "hex": "#2e6df6",
+      "oklch": "oklch(0.5768 0.2156 262.89)",
+      "rule": "ref(dark.primary)",
+      "dependencies": [
+        "dark.primary"
+      ]
+    },
+    "sidebar-primary-foreground": {
+      "hex": "#000000",
+      "oklch": "oklch(0 0 0)",
+      "rule": "ref(dark.primary-foreground)",
+      "dependencies": [
+        "dark.primary-foreground"
+      ]
+    },
+    "sidebar-accent": {
+      "hex": "#354c79",
+      "oklch": "oklch(0.4198 0.0807 262.83)",
+      "rule": "ref(dark.accent)",
+      "dependencies": [
+        "dark.accent"
+      ]
+    },
+    "sidebar-accent-foreground": {
+      "hex": "#d1d4da",
+      "oklch": "oklch(0.8694 0.0089 264.52)",
+      "rule": "ref(dark.accent-foreground)",
+      "dependencies": [
+        "dark.accent-foreground"
+      ]
+    },
+    "sidebar-border": {
+      "hex": "#31405d",
+      "oklch": "oklch(0.3719 0.0539 263.01)",
+      "rule": "ref(dark.border)",
+      "dependencies": [
+        "dark.border"
+      ]
+    },
+    "sidebar-ring": {
+      "hex": "#2e6df6",
+      "oklch": "oklch(0.5768 0.2156 262.89)",
+      "rule": "ref(dark.primary)",
+      "dependencies": [
+        "dark.primary"
+      ]
+    }
+  },
+  "chartDiagnostics": {
+    "light": {
+      "minOklabDist": 0.0981,
+      "effectiveChroma": 0.1839,
+      "thresholdRatio": 0,
+      "syntheticCount": 0,
+      "syntheticKeys": []
+    },
+    "dark": {
+      "minOklabDist": 0.0799,
+      "effectiveChroma": 0.1217,
+      "thresholdRatio": 0,
+      "syntheticCount": 0,
+      "syntheticKeys": []
+    }
+  },
+  "audit": {
+    "polarityAdvisories": [
+      {
+        "mode": "light",
+        "fgToken": "muted-foreground",
+        "bgToken": "muted",
+        "wcagExact": 5.314411045015841,
+        "apcaLc": 68.6,
+        "requiredApca": 75,
+        "note": "passes wcag-aa at 5.31:1 but APCA rates it Lc 68.6, below the Lc 75 needed for fluent body reading"
+      },
+      {
+        "mode": "dark",
+        "fgToken": "primary-foreground",
+        "bgToken": "primary",
+        "wcagExact": 4.6334884249600305,
+        "apcaLc": 33.3,
+        "requiredApca": 75,
+        "note": "passes wcag-aa at 4.63:1 but APCA rates it Lc 33.3, below the Lc 75 needed for fluent body reading"
+      },
+      {
+        "mode": "dark",
+        "fgToken": "secondary-foreground",
+        "bgToken": "secondary",
+        "wcagExact": 7.989761866629389,
+        "apcaLc": -73.2,
+        "requiredApca": 75,
+        "note": "passes wcag-aa at 7.99:1 but APCA rates it Lc 73.2, below the Lc 75 needed for fluent body reading"
+      },
+      {
+        "mode": "dark",
+        "fgToken": "muted-foreground",
+        "bgToken": "muted",
+        "wcagExact": 5.122504857836015,
+        "apcaLc": -47.5,
+        "requiredApca": 75,
+        "note": "passes wcag-aa at 5.12:1 but APCA rates it Lc 47.5, below the Lc 75 needed for fluent body reading"
+      },
+      {
+        "mode": "dark",
+        "fgToken": "muted-foreground",
+        "bgToken": "background",
+        "wcagExact": 6.652944620168342,
+        "apcaLc": -51.3,
+        "requiredApca": 75,
+        "note": "passes wcag-aa at 6.65:1 but APCA rates it Lc 51.3, below the Lc 75 needed for fluent body reading"
+      },
+      {
+        "mode": "dark",
+        "fgToken": "accent-foreground",
+        "bgToken": "accent",
+        "wcagExact": 5.744857474798171,
+        "apcaLc": -66.3,
+        "requiredApca": 75,
+        "note": "passes wcag-aa at 5.74:1 but APCA rates it Lc 66.3, below the Lc 75 needed for fluent body reading"
+      },
+      {
+        "mode": "dark",
+        "fgToken": "sidebar-primary-foreground",
+        "bgToken": "sidebar-primary",
+        "wcagExact": 4.6334884249600305,
+        "apcaLc": 33.3,
+        "requiredApca": 75,
+        "note": "passes wcag-aa at 4.63:1 but APCA rates it Lc 33.3, below the Lc 75 needed for fluent body reading"
+      },
+      {
+        "mode": "dark",
+        "fgToken": "sidebar-accent-foreground",
+        "bgToken": "sidebar-accent",
+        "wcagExact": 5.744857474798171,
+        "apcaLc": -66.3,
+        "requiredApca": 75,
+        "note": "passes wcag-aa at 5.74:1 but APCA rates it Lc 66.3, below the Lc 75 needed for fluent body reading"
+      }
+    ],
+    "status": "pass",
+    "exitCode": 0,
+    "standard": "wcag-aa",
+    "strictBorders": false,
+    "chartsAdvisory": false,
+    "passed": 36,
+    "failed": 0,
+    "advisoryCount": 6,
+    "unverifiedCount": 0,
+    "pairs": [
+      {
+        "mode": "light",
+        "kind": "text",
+        "required": true,
+        "fgToken": "foreground",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.3004 0.0295 262.8)",
+        "bgRaw": "oklch(0.9753 0.0074 260.73)",
+        "fgHex": "#262e3d",
+        "bgHex": "#f4f7fc",
+        "fgOklch": "oklch(0.3004 0.0295 262.8)",
+        "bgOklch": "oklch(0.9753 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 12.693068302252279,
+        "wcag": 12.69,
+        "apcaExact": 95.2068713767884,
+        "apcaLc": 95.2,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "text",
+        "required": true,
+        "fgToken": "card-foreground",
+        "bgToken": "card",
+        "fgRaw": "oklch(0.3004 0.0295 262.8)",
+        "bgRaw": "oklch(0.9946 0.0026 286.35)",
+        "fgHex": "#262e3d",
+        "bgHex": "#fdfdff",
+        "fgOklch": "oklch(0.3004 0.0295 262.8)",
+        "bgOklch": "oklch(0.9946 0.0026 286.35)",
+        "composited": false,
+        "wcagExact": 13.415447472024406,
+        "wcag": 13.42,
+        "apcaExact": 99.02938074084634,
+        "apcaLc": 99,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "text",
+        "required": true,
+        "fgToken": "popover-foreground",
+        "bgToken": "popover",
+        "fgRaw": "oklch(0.3004 0.0295 262.8)",
+        "bgRaw": "oklch(0.9946 0.0026 286.35)",
+        "fgHex": "#262e3d",
+        "bgHex": "#fdfdff",
+        "fgOklch": "oklch(0.3004 0.0295 262.8)",
+        "bgOklch": "oklch(0.9946 0.0026 286.35)",
+        "composited": false,
+        "wcagExact": 13.415447472024406,
+        "wcag": 13.42,
+        "apcaExact": 99.02938074084634,
+        "apcaLc": 99,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "text",
+        "required": true,
+        "fgToken": "primary-foreground",
+        "bgToken": "primary",
+        "fgRaw": "oklch(1 0 0)",
+        "bgRaw": "oklch(0.5461 0.2152 262.88)",
+        "fgHex": "#ffffff",
+        "bgHex": "#2563eb",
+        "fgOklch": "oklch(1 0 0)",
+        "bgOklch": "oklch(0.5461 0.2152 262.88)",
+        "composited": false,
+        "wcagExact": 5.169639380421439,
+        "wcag": 5.17,
+        "apcaExact": -80.25397779583555,
+        "apcaLc": -80.3,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "text",
+        "required": true,
+        "fgToken": "secondary-foreground",
+        "bgToken": "secondary",
+        "fgRaw": "oklch(0.3004 0.0295 262.8)",
+        "bgRaw": "oklch(0.929 0.0338 263.58)",
+        "fgHex": "#262e3d",
+        "bgHex": "#dce8ff",
+        "fgOklch": "oklch(0.3004 0.0295 262.8)",
+        "bgOklch": "oklch(0.929 0.0338 263.58)",
+        "composited": false,
+        "wcagExact": 11.053099814199511,
+        "wcag": 11.05,
+        "apcaExact": 86.14717879563118,
+        "apcaLc": 86.1,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "text",
+        "required": true,
+        "fgToken": "muted-foreground",
+        "bgToken": "muted",
+        "fgRaw": "oklch(0.4805 0.0297 263.16)",
+        "bgRaw": "oklch(0.9301 0.0075 260.73)",
+        "fgHex": "#555e6f",
+        "bgHex": "#e5e8ed",
+        "fgOklch": "oklch(0.4805 0.0297 263.16)",
+        "bgOklch": "oklch(0.9301 0.0075 260.73)",
+        "composited": false,
+        "wcagExact": 5.314411045015841,
+        "wcag": 5.31,
+        "apcaExact": 68.60150443446341,
+        "apcaLc": 68.6,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "text",
+        "required": true,
+        "fgToken": "muted-foreground",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.4805 0.0297 263.16)",
+        "bgRaw": "oklch(0.9753 0.0074 260.73)",
+        "fgHex": "#555e6f",
+        "bgHex": "#f4f7fc",
+        "fgOklch": "oklch(0.4805 0.0297 263.16)",
+        "bgOklch": "oklch(0.9753 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 6.079854814237251,
+        "wcag": 6.08,
+        "apcaExact": 77.42790090374102,
+        "apcaLc": 77.4,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "text",
+        "required": true,
+        "fgToken": "accent-foreground",
+        "bgToken": "accent",
+        "fgRaw": "oklch(0.3004 0.0295 262.8)",
+        "bgRaw": "oklch(0.8699 0.0636 262.44)",
+        "fgHex": "#262e3d",
+        "bgHex": "#bed5ff",
+        "fgOklch": "oklch(0.3004 0.0295 262.8)",
+        "bgOklch": "oklch(0.8699 0.0636 262.44)",
+        "composited": false,
+        "wcagExact": 9.184785952146719,
+        "wcag": 9.18,
+        "apcaExact": 75.04919422456652,
+        "apcaLc": 75,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "text",
+        "required": true,
+        "fgToken": "sidebar-foreground",
+        "bgToken": "sidebar",
+        "fgRaw": "oklch(0.3004 0.0295 262.8)",
+        "bgRaw": "oklch(0.9603 0.0074 260.73)",
+        "fgHex": "#262e3d",
+        "bgHex": "#eff2f7",
+        "fgOklch": "oklch(0.3004 0.0295 262.8)",
+        "bgOklch": "oklch(0.9603 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 12.14588801105062,
+        "wcag": 12.15,
+        "apcaExact": 92.24500647240347,
+        "apcaLc": 92.2,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "text",
+        "required": true,
+        "fgToken": "sidebar-primary-foreground",
+        "bgToken": "sidebar-primary",
+        "fgRaw": "oklch(1 0 0)",
+        "bgRaw": "oklch(0.5461 0.2152 262.88)",
+        "fgHex": "#ffffff",
+        "bgHex": "#2563eb",
+        "fgOklch": "oklch(1 0 0)",
+        "bgOklch": "oklch(0.5461 0.2152 262.88)",
+        "composited": false,
+        "wcagExact": 5.169639380421439,
+        "wcag": 5.17,
+        "apcaExact": -80.25397779583555,
+        "apcaLc": -80.3,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "text",
+        "required": true,
+        "fgToken": "sidebar-accent-foreground",
+        "bgToken": "sidebar-accent",
+        "fgRaw": "oklch(0.3004 0.0295 262.8)",
+        "bgRaw": "oklch(0.8699 0.0636 262.44)",
+        "fgHex": "#262e3d",
+        "bgHex": "#bed5ff",
+        "fgOklch": "oklch(0.3004 0.0295 262.8)",
+        "bgOklch": "oklch(0.8699 0.0636 262.44)",
+        "composited": false,
+        "wcagExact": 9.184785952146719,
+        "wcag": 9.18,
+        "apcaExact": 75.04919422456652,
+        "apcaLc": 75,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "sidebar-ring",
+        "bgToken": "sidebar",
+        "fgRaw": "oklch(0.5461 0.2152 262.88)",
+        "bgRaw": "oklch(0.9603 0.0074 260.73)",
+        "fgHex": "#2563eb",
+        "bgHex": "#eff2f7",
+        "fgOklch": "oklch(0.5461 0.2152 262.88)",
+        "bgOklch": "oklch(0.9603 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 4.606929295342786,
+        "wcag": 4.61,
+        "apcaExact": 66.9651916298792,
+        "apcaLc": 67,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "border-advisory",
+        "required": false,
+        "fgToken": "sidebar-border",
+        "bgToken": "sidebar",
+        "fgRaw": "oklch(0.8755 0.0089 264.52)",
+        "bgRaw": "oklch(0.9603 0.0074 260.73)",
+        "fgHex": "#d3d6dc",
+        "bgHex": "#eff2f7",
+        "fgOklch": "oklch(0.8755 0.0089 264.52)",
+        "bgOklch": "oklch(0.9603 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 1.2977303022412299,
+        "wcag": 1.3,
+        "apcaExact": 13.821036000224868,
+        "apcaLc": 13.8,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": false
+      },
+      {
+        "mode": "light",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "ring",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.5461 0.2152 262.88)",
+        "bgRaw": "oklch(0.9753 0.0074 260.73)",
+        "fgHex": "#2563eb",
+        "bgHex": "#f4f7fc",
+        "fgOklch": "oklch(0.5461 0.2152 262.88)",
+        "bgOklch": "oklch(0.9753 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 4.814474508264033,
+        "wcag": 4.81,
+        "apcaExact": 69.92705653426412,
+        "apcaLc": 69.9,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "chart-1",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.6407 0.1919 262.79)",
+        "bgRaw": "oklch(0.9753 0.0074 260.73)",
+        "fgHex": "#4a85ff",
+        "bgHex": "#f4f7fc",
+        "fgOklch": "oklch(0.6407 0.1919 262.79)",
+        "bgOklch": "oklch(0.9753 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 3.2116381857080487,
+        "wcag": 3.21,
+        "apcaExact": 56.668879268115646,
+        "apcaLc": 56.7,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "chart-2",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.5431 0.2153 262.87)",
+        "bgRaw": "oklch(0.9753 0.0074 260.73)",
+        "fgHex": "#2462ea",
+        "bgHex": "#f4f7fc",
+        "fgOklch": "oklch(0.5431 0.2153 262.87)",
+        "bgOklch": "oklch(0.9753 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 4.877701881932074,
+        "wcag": 4.88,
+        "apcaExact": 70.31325337700261,
+        "apcaLc": 70.3,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "chart-3",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.445 0.2155 262.93)",
+        "bgRaw": "oklch(0.9753 0.0074 260.73)",
+        "fgHex": "#0441c8",
+        "bgHex": "#f4f7fc",
+        "fgOklch": "oklch(0.445 0.2155 262.93)",
+        "bgOklch": "oklch(0.9753 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 7.535923889147208,
+        "wcag": 7.54,
+        "apcaExact": 81.90302033461097,
+        "apcaLc": 81.9,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "chart-4",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.3473 0.1723 262.84)",
+        "bgRaw": "oklch(0.9753 0.0074 260.73)",
+        "fgHex": "#002b91",
+        "bgHex": "#f4f7fc",
+        "fgOklch": "oklch(0.3473 0.1723 262.84)",
+        "bgOklch": "oklch(0.9753 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 11.148872518085042,
+        "wcag": 11.15,
+        "apcaExact": 91.33382312930598,
+        "apcaLc": 91.3,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "chart-5",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.2511 0.1245 262.84)",
+        "bgRaw": "oklch(0.9753 0.0074 260.73)",
+        "fgHex": "#00185c",
+        "bgHex": "#f4f7fc",
+        "fgOklch": "oklch(0.2511 0.1245 262.84)",
+        "bgOklch": "oklch(0.9753 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 15.218672692399208,
+        "wcag": 15.22,
+        "apcaExact": 97.67641889706535,
+        "apcaLc": 97.7,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "light",
+        "kind": "border-advisory",
+        "required": false,
+        "fgToken": "border",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.8755 0.0089 264.52)",
+        "bgRaw": "oklch(0.9753 0.0074 260.73)",
+        "fgHex": "#d3d6dc",
+        "bgHex": "#f4f7fc",
+        "fgOklch": "oklch(0.8755 0.0089 264.52)",
+        "bgOklch": "oklch(0.9753 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 1.3561939109979972,
+        "wcag": 1.36,
+        "apcaExact": 16.78290090460979,
+        "apcaLc": 16.8,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": false
+      },
+      {
+        "mode": "light",
+        "kind": "border-advisory",
+        "required": false,
+        "fgToken": "input",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.8755 0.0089 264.52)",
+        "bgRaw": "oklch(0.9753 0.0074 260.73)",
+        "fgHex": "#d3d6dc",
+        "bgHex": "#f4f7fc",
+        "fgOklch": "oklch(0.8755 0.0089 264.52)",
+        "bgOklch": "oklch(0.9753 0.0074 260.73)",
+        "composited": false,
+        "wcagExact": 1.3561939109979972,
+        "wcag": 1.36,
+        "apcaExact": 16.78290090460979,
+        "apcaLc": 16.8,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": false
+      },
+      {
+        "mode": "dark",
+        "kind": "text",
+        "required": true,
+        "fgToken": "foreground",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.8694 0.0089 264.52)",
+        "bgRaw": "oklch(0.2412 0.0452 263.22)",
+        "fgHex": "#d1d4da",
+        "bgHex": "#141f35",
+        "fgOklch": "oklch(0.8694 0.0089 264.52)",
+        "bgOklch": "oklch(0.2412 0.0452 263.22)",
+        "composited": false,
+        "wcagExact": 11.071952190045003,
+        "wcag": 11.07,
+        "apcaExact": -78.30883265716115,
+        "apcaLc": -78.3,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "text",
+        "required": true,
+        "fgToken": "card-foreground",
+        "bgToken": "card",
+        "fgRaw": "oklch(0.8694 0.0089 264.52)",
+        "bgRaw": "oklch(0.2904 0.045 264.23)",
+        "fgHex": "#d1d4da",
+        "bgHex": "#202b42",
+        "fgOklch": "oklch(0.8694 0.0089 264.52)",
+        "bgOklch": "oklch(0.2904 0.045 264.23)",
+        "composited": false,
+        "wcagExact": 9.520609663258544,
+        "wcag": 9.52,
+        "apcaExact": -76.27143873724526,
+        "apcaLc": -76.3,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "text",
+        "required": true,
+        "fgToken": "popover-foreground",
+        "bgToken": "popover",
+        "fgRaw": "oklch(0.8694 0.0089 264.52)",
+        "bgRaw": "oklch(0.2904 0.045 264.23)",
+        "fgHex": "#d1d4da",
+        "bgHex": "#202b42",
+        "fgOklch": "oklch(0.8694 0.0089 264.52)",
+        "bgOklch": "oklch(0.2904 0.045 264.23)",
+        "composited": false,
+        "wcagExact": 9.520609663258544,
+        "wcag": 9.52,
+        "apcaExact": -76.27143873724526,
+        "apcaLc": -76.3,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "text",
+        "required": true,
+        "fgToken": "primary-foreground",
+        "bgToken": "primary",
+        "fgRaw": "oklch(0 0 0)",
+        "bgRaw": "oklch(0.5768 0.2156 262.89)",
+        "fgHex": "#000000",
+        "bgHex": "#2e6df6",
+        "fgOklch": "oklch(0 0 0)",
+        "bgOklch": "oklch(0.5768 0.2156 262.89)",
+        "composited": false,
+        "wcagExact": 4.6334884249600305,
+        "wcag": 4.63,
+        "apcaExact": 33.27260109315417,
+        "apcaLc": 33.3,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "text",
+        "required": true,
+        "fgToken": "secondary-foreground",
+        "bgToken": "secondary",
+        "fgRaw": "oklch(0.8694 0.0089 264.52)",
+        "bgRaw": "oklch(0.3389 0.0605 263.3)",
+        "fgHex": "#d1d4da",
+        "bgHex": "#273757",
+        "fgOklch": "oklch(0.8694 0.0089 264.52)",
+        "bgOklch": "oklch(0.3389 0.0605 263.3)",
+        "composited": false,
+        "wcagExact": 7.989761866629389,
+        "wcag": 7.99,
+        "apcaExact": -73.21643420103757,
+        "apcaLc": -73.2,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "text",
+        "required": true,
+        "fgToken": "muted-foreground",
+        "bgToken": "muted",
+        "fgRaw": "oklch(0.721 0.008 260.73)",
+        "bgRaw": "oklch(0.3212 0.0444 262.91)",
+        "fgHex": "#a2a5aa",
+        "bgHex": "#27334a",
+        "fgOklch": "oklch(0.721 0.008 260.73)",
+        "bgOklch": "oklch(0.3212 0.0444 262.91)",
+        "composited": false,
+        "wcagExact": 5.122504857836015,
+        "wcag": 5.12,
+        "apcaExact": -47.50672844921024,
+        "apcaLc": -47.5,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "text",
+        "required": true,
+        "fgToken": "muted-foreground",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.721 0.008 260.73)",
+        "bgRaw": "oklch(0.2412 0.0452 263.22)",
+        "fgHex": "#a2a5aa",
+        "bgHex": "#141f35",
+        "fgOklch": "oklch(0.721 0.008 260.73)",
+        "bgOklch": "oklch(0.2412 0.0452 263.22)",
+        "composited": false,
+        "wcagExact": 6.652944620168342,
+        "wcag": 6.65,
+        "apcaExact": -51.31120353571911,
+        "apcaLc": -51.3,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "text",
+        "required": true,
+        "fgToken": "accent-foreground",
+        "bgToken": "accent",
+        "fgRaw": "oklch(0.8694 0.0089 264.52)",
+        "bgRaw": "oklch(0.4198 0.0807 262.83)",
+        "fgHex": "#d1d4da",
+        "bgHex": "#354c79",
+        "fgOklch": "oklch(0.8694 0.0089 264.52)",
+        "bgOklch": "oklch(0.4198 0.0807 262.83)",
+        "composited": false,
+        "wcagExact": 5.744857474798171,
+        "wcag": 5.74,
+        "apcaExact": -66.26556392867806,
+        "apcaLc": -66.3,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "text",
+        "required": true,
+        "fgToken": "sidebar-foreground",
+        "bgToken": "sidebar",
+        "fgRaw": "oklch(0.8694 0.0089 264.52)",
+        "bgRaw": "oklch(0.2664 0.046 264.06)",
+        "fgHex": "#d1d4da",
+        "bgHex": "#1a253c",
+        "fgOklch": "oklch(0.8694 0.0089 264.52)",
+        "bgOklch": "oklch(0.2664 0.046 264.06)",
+        "composited": false,
+        "wcagExact": 10.292901401036396,
+        "wcag": 10.29,
+        "apcaExact": -77.36868650659538,
+        "apcaLc": -77.4,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "text",
+        "required": true,
+        "fgToken": "sidebar-primary-foreground",
+        "bgToken": "sidebar-primary",
+        "fgRaw": "oklch(0 0 0)",
+        "bgRaw": "oklch(0.5768 0.2156 262.89)",
+        "fgHex": "#000000",
+        "bgHex": "#2e6df6",
+        "fgOklch": "oklch(0 0 0)",
+        "bgOklch": "oklch(0.5768 0.2156 262.89)",
+        "composited": false,
+        "wcagExact": 4.6334884249600305,
+        "wcag": 4.63,
+        "apcaExact": 33.27260109315417,
+        "apcaLc": 33.3,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "text",
+        "required": true,
+        "fgToken": "sidebar-accent-foreground",
+        "bgToken": "sidebar-accent",
+        "fgRaw": "oklch(0.8694 0.0089 264.52)",
+        "bgRaw": "oklch(0.4198 0.0807 262.83)",
+        "fgHex": "#d1d4da",
+        "bgHex": "#354c79",
+        "fgOklch": "oklch(0.8694 0.0089 264.52)",
+        "bgOklch": "oklch(0.4198 0.0807 262.83)",
+        "composited": false,
+        "wcagExact": 5.744857474798171,
+        "wcag": 5.74,
+        "apcaExact": -66.26556392867806,
+        "apcaLc": -66.3,
+        "requiredWcag": 4.5,
+        "requiredApca": 60,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "sidebar-ring",
+        "bgToken": "sidebar",
+        "fgRaw": "oklch(0.5768 0.2156 262.89)",
+        "bgRaw": "oklch(0.2664 0.046 264.06)",
+        "fgHex": "#2e6df6",
+        "bgHex": "#1a253c",
+        "fgOklch": "oklch(0.5768 0.2156 262.89)",
+        "bgOklch": "oklch(0.2664 0.046 264.06)",
+        "composited": false,
+        "wcagExact": 3.3723422720118066,
+        "wcag": 3.37,
+        "apcaExact": -27.845499127445272,
+        "apcaLc": -27.8,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "border-advisory",
+        "required": false,
+        "fgToken": "sidebar-border",
+        "bgToken": "sidebar",
+        "fgRaw": "oklch(0.3719 0.0539 263.01)",
+        "bgRaw": "oklch(0.2664 0.046 264.06)",
+        "fgHex": "#31405d",
+        "bgHex": "#1a253c",
+        "fgOklch": "oklch(0.3719 0.0539 263.01)",
+        "bgOklch": "oklch(0.2664 0.046 264.06)",
+        "composited": false,
+        "wcagExact": 1.4716351166066242,
+        "wcag": 1.47,
+        "apcaExact": 0,
+        "apcaLc": 0,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": false
+      },
+      {
+        "mode": "dark",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "ring",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.5768 0.2156 262.89)",
+        "bgRaw": "oklch(0.2412 0.0452 263.22)",
+        "fgHex": "#2e6df6",
+        "bgHex": "#141f35",
+        "fgOklch": "oklch(0.5768 0.2156 262.89)",
+        "bgOklch": "oklch(0.2412 0.0452 263.22)",
+        "composited": false,
+        "wcagExact": 3.6275886603191254,
+        "wcag": 3.63,
+        "apcaExact": -28.785645278011035,
+        "apcaLc": -28.8,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "chart-1",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.8706 0.0632 263.3)",
+        "bgRaw": "oklch(0.2412 0.0452 263.22)",
+        "fgHex": "#bfd5ff",
+        "bgHex": "#141f35",
+        "fgOklch": "oklch(0.8706 0.0632 263.3)",
+        "bgOklch": "oklch(0.2412 0.0452 263.22)",
+        "composited": false,
+        "wcagExact": 11.099977644614002,
+        "wcag": 11.1,
+        "apcaExact": -78.49143929143982,
+        "apcaLc": -78.5,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "chart-2",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.7948 0.1032 262.95)",
+        "bgRaw": "oklch(0.2412 0.0452 263.22)",
+        "fgHex": "#99bcff",
+        "bgHex": "#141f35",
+        "fgOklch": "oklch(0.7948 0.1032 262.95)",
+        "bgOklch": "oklch(0.2412 0.0452 263.22)",
+        "composited": false,
+        "wcagExact": 8.604654286167312,
+        "wcag": 8.6,
+        "apcaExact": -64.00484206059758,
+        "apcaLc": -64,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "chart-3",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.7193 0.1454 262.93)",
+        "bgRaw": "oklch(0.2412 0.0452 263.22)",
+        "fgHex": "#73a2ff",
+        "bgHex": "#141f35",
+        "fgOklch": "oklch(0.7193 0.1454 262.93)",
+        "bgOklch": "oklch(0.2412 0.0452 263.22)",
+        "composited": false,
+        "wcagExact": 6.530337500116303,
+        "wcag": 6.53,
+        "apcaExact": -50.67531934097546,
+        "apcaLc": -50.7,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "chart-4",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.6441 0.1726 262.95)",
+        "bgRaw": "oklch(0.2412 0.0452 263.22)",
+        "fgHex": "#5388f5",
+        "bgHex": "#141f35",
+        "fgOklch": "oklch(0.6441 0.1726 262.95)",
+        "bgOklch": "oklch(0.2412 0.0452 263.22)",
+        "composited": false,
+        "wcagExact": 4.8597135291508335,
+        "wcag": 4.86,
+        "apcaExact": -38.63857246530608,
+        "apcaLc": -38.6,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "ui-graphic",
+        "required": true,
+        "fgToken": "chart-5",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.5697 0.1241 262.76)",
+        "bgRaw": "oklch(0.2412 0.0452 263.22)",
+        "fgHex": "#4f75c0",
+        "bgHex": "#141f35",
+        "fgOklch": "oklch(0.5697 0.1241 262.76)",
+        "bgOklch": "oklch(0.2412 0.0452 263.22)",
+        "composited": false,
+        "wcagExact": 3.631983815010259,
+        "wcag": 3.63,
+        "apcaExact": -28.35042408926641,
+        "apcaLc": -28.4,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": true
+      },
+      {
+        "mode": "dark",
+        "kind": "border-advisory",
+        "required": false,
+        "fgToken": "border",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.3719 0.0539 263.01)",
+        "bgRaw": "oklch(0.2412 0.0452 263.22)",
+        "fgHex": "#31405d",
+        "bgHex": "#141f35",
+        "fgOklch": "oklch(0.3719 0.0539 263.01)",
+        "bgOklch": "oklch(0.2412 0.0452 263.22)",
+        "composited": false,
+        "wcagExact": 1.5830204737625497,
+        "wcag": 1.58,
+        "apcaExact": 0,
+        "apcaLc": 0,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": false
+      },
+      {
+        "mode": "dark",
+        "kind": "border-advisory",
+        "required": false,
+        "fgToken": "input",
+        "bgToken": "background",
+        "fgRaw": "oklch(0.3719 0.0539 263.01)",
+        "bgRaw": "oklch(0.2412 0.0452 263.22)",
+        "fgHex": "#31405d",
+        "bgHex": "#141f35",
+        "fgOklch": "oklch(0.3719 0.0539 263.01)",
+        "bgOklch": "oklch(0.2412 0.0452 263.22)",
+        "composited": false,
+        "wcagExact": 1.5830204737625497,
+        "wcag": 1.58,
+        "apcaExact": 0,
+        "apcaLc": 0,
+        "requiredWcag": 3,
+        "requiredApca": 45,
+        "pass": false
+      }
+    ],
+    "coverage": {
+      "assessedPairs": {
+        "text": 22,
+        "uiGraphic": 14,
+        "borderAdvisory": 6
+      },
+      "unverifiedPairs": [],
+      "skippedTokens": [],
+      "thresholds": {
+        "textWcag": 4.5,
+        "textApca": 60,
+        "uiGraphicWcag": 3,
+        "uiGraphicApca": 45,
+        "borderWcag": 3,
+        "borderApca": 45
+      },
+      "assumptions": [
+        "sRGB gamut policy: WCAG 2.x ratios are evaluated at full floating-point precision without pre-comparison rounding; colors outside sRGB gamut are marked unverified"
+      ]
+    }
+  }
+}

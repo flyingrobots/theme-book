@@ -1,0 +1,25 @@
+bun test v1.4.5 (826ef2a6f)
+killed 1 dangling process
+
+test/book-extension.test.ts:
+114 |   const ok = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--preset", "shadcn", "--mood", "editorial", "--standard", "wcag-aaa", "--format", "json", "--book", school()]);
+115 |   expect(ok.exitCode).toBe(0);
+116 |   expect(JSON.parse(ok.stdout.toString()).recipe.book.extension.name).toBe("school");
+117 | 
+118 |   const stale = Bun.spawnSync([CLI, "theme", "--seed", "#0f766e", "--preset", "shadcn", "--book", school("0.0.1")]);
+119 |   expect(stale.exitCode).toBe(2);
+                               ^
+error: expect(received).toBe(expected)
+
+Expected: 2
+Received: null
+
+      at <anonymous> (~/.local/state/baker-street/cases/2026-11-27-theme-book-pr30-r2/subject/test/book-extension.test.ts:119:26)
+(fail) the CLI builds with --book, and refuses a stale parent with exit 2 [5007.40ms]
+  ^ this test timed out after 5000ms.
+
+ 297 pass
+ 1 fail
+ 2154 expect() calls
+Ran 298 tests across 6 files. [49.01s]
+exit 1

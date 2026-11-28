@@ -1,0 +1,7 @@
+subject=~/.local/state/baker-street/cases/2026-11-27-theme-book-pr30-r2/subject seed0=1 palettes=4030 built=8060 chartsAdvisoryRuns=12 failures=6
+corporate ["#b18cec"] status=fail light:sidebar-ring/sidebar=?
+freak ["#b18cec"] status=fail light:sidebar-ring/sidebar=?
+corporate ["#97dcb6","#ecc3a8","#b2fa64","#9627c8"] status=fail light:sidebar-ring/sidebar=?
+freak ["#97dcb6","#ecc3a8","#b2fa64","#9627c8"] status=fail light:sidebar-ring/sidebar=?
+corporate ["#2fe32e"] status=fail light:sidebar-ring/sidebar=?
+freak ["#2fe32e"] status=fail light:sidebar-ring/sidebar=?

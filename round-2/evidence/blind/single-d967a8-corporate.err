@@ -1,0 +1,65 @@
+
+Contrast Audit [FAIL] (wcag-aa): 35 passed, 1 failed, 0 unverified, 6 advisory
+Coverage: 22 text, 14 ui-graphic, 6 border-advisory
+
+[PASS] (light · text) foreground (#392831) on background (#fbf5f8) — WCAG 12.82:1 (exact 12.8232) | APCA Lc 95.3
+[PASS] (light · text) card-foreground (#392831) on card (#fffdfe) — WCAG 13.62:1 (exact 13.6201) | APCA Lc 99.4
+[PASS] (light · text) popover-foreground (#392831) on popover (#fffdfe) — WCAG 13.62:1 (exact 13.6201) | APCA Lc 99.4
+[PASS] (light · text) primary-foreground (#000000) on primary (#d664a5) — WCAG 6.23:1 (exact 6.2259) | APCA Lc 43.4
+[PASS] (light · text) secondary-foreground (#392831) on secondary (#ffdded) — WCAG 11.05:1 (exact 11.0480) | APCA Lc 85.6
+[PASS] (light · text) muted-foreground (#6b5761) on muted (#ece6e9) — WCAG 5.4:1 (exact 5.3969) | APCA Lc 68.9
+[PASS] (light · text) muted-foreground (#6b5761) on background (#fbf5f8) — WCAG 6.17:1 (exact 6.1731) | APCA Lc 77.7
+[PASS] (light · text) accent-foreground (#392831) on accent (#f5c4dc) — WCAG 9.08:1 (exact 9.0751) | APCA Lc 73.9
+[PASS] (light · text) sidebar-foreground (#392831) on sidebar (#f6f0f3) — WCAG 12.27:1 (exact 12.2701) | APCA Lc 92.3
+[PASS] (light · text) sidebar-primary-foreground (#000000) on sidebar-primary (#d664a5) — WCAG 6.23:1 (exact 6.2259) | APCA Lc 43.4
+[PASS] (light · text) sidebar-accent-foreground (#392831) on sidebar-accent (#f5c4dc) — WCAG 9.08:1 (exact 9.0751) | APCA Lc 73.9
+[FAIL] (light · ui-graphic) sidebar-ring (#d664a5) on sidebar (#f6f0f3) — WCAG 3:1 (exact 2.9996) | APCA Lc 52.6
+[INFO] (light · border-advisory) sidebar-border (#dbd4d7) on sidebar (#f6f0f3) — WCAG 1.3:1 (exact 1.2958) | APCA Lc 13.7
+[PASS] (light · ui-graphic) ring (#d664a5) on background (#fbf5f8) — WCAG 3.13:1 (exact 3.1349) | APCA Lc 55.6
+[PASS] (light · ui-graphic) chart-1 (#d664a5) on background (#fbf5f8) — WCAG 3.13:1 (exact 3.1349) | APCA Lc 55.6
+[PASS] (light · ui-graphic) chart-2 (#b44586) on background (#fbf5f8) — WCAG 4.72:1 (exact 4.7194) | APCA Lc 69.3
+[PASS] (light · ui-graphic) chart-3 (#922469) on background (#fbf5f8) — WCAG 7.29:1 (exact 7.2876) | APCA Lc 81
+[PASS] (light · ui-graphic) chart-4 (#6f004c) on background (#fbf5f8) — WCAG 10.96:1 (exact 10.9622) | APCA Lc 90
+[PASS] (light · ui-graphic) chart-5 (#45002e) on background (#fbf5f8) — WCAG 15.1:1 (exact 15.1004) | APCA Lc 97
+[INFO] (light · border-advisory) border (#dbd4d7) on background (#fbf5f8) — WCAG 1.35:1 (exact 1.3543) | APCA Lc 16.7
+[INFO] (light · border-advisory) input (#dbd4d7) on background (#fbf5f8) — WCAG 1.35:1 (exact 1.3543) | APCA Lc 16.7
+[PASS] (dark · text) foreground (#d8d2d5) on background (#2e1623) — WCAG 11.23:1 (exact 11.2311) | APCA Lc -78.3
+[PASS] (dark · text) card-foreground (#d8d2d5) on card (#3b222f) — WCAG 9.69:1 (exact 9.6854) | APCA Lc -76.3
+[PASS] (dark · text) popover-foreground (#d8d2d5) on popover (#3b222f) — WCAG 9.69:1 (exact 9.6854) | APCA Lc -76.3
+[PASS] (dark · text) primary-foreground (#392831) on primary (#f28ec4) — WCAG 6.2:1 (exact 6.2030) | APCA Lc 54.7
+[PASS] (dark · text) secondary-foreground (#d8d2d5) on secondary (#4e2a3e) — WCAG 8.17:1 (exact 8.1737) | APCA Lc -73.4
+[PASS] (dark · text) muted-foreground (#a9a3a5) on muted (#432937) — WCAG 5.26:1 (exact 5.2578) | APCA Lc -47.8
+[PASS] (dark · text) muted-foreground (#a9a3a5) on background (#2e1623) — WCAG 6.75:1 (exact 6.7467) | APCA Lc -51.3
+[PASS] (dark · text) accent-foreground (#d8d2d5) on accent (#693c55) — WCAG 5.93:1 (exact 5.9285) | APCA Lc -66.8
+[PASS] (dark · text) sidebar-foreground (#d8d2d5) on sidebar (#351c29) — WCAG 10.45:1 (exact 10.4482) | APCA Lc -77.4
+[PASS] (dark · text) sidebar-primary-foreground (#392831) on sidebar-primary (#f28ec4) — WCAG 6.2:1 (exact 6.2030) | APCA Lc 54.7
+[PASS] (dark · text) sidebar-accent-foreground (#d8d2d5) on sidebar-accent (#693c55) — WCAG 5.93:1 (exact 5.9285) | APCA Lc -66.8
+[PASS] (dark · ui-graphic) sidebar-ring (#f28ec4) on sidebar (#351c29) — WCAG 7:1 (exact 6.9966) | APCA Lc -55.8
+[INFO] (dark · border-advisory) sidebar-border (#543445) on sidebar (#351c29) — WCAG 1.45:1 (exact 1.4484) | APCA Lc 0
+[PASS] (dark · ui-graphic) ring (#f28ec4) on background (#2e1623) — WCAG 7.52:1 (exact 7.5208) | APCA Lc -56.7
+[PASS] (dark · ui-graphic) chart-1 (#ffc3e1) on background (#2e1623) — WCAG 11.27:1 (exact 11.2693) | APCA Lc -78.6
+[PASS] (dark · ui-graphic) chart-2 (#ff9ad0) on background (#2e1623) — WCAG 8.59:1 (exact 8.5915) | APCA Lc -63.4
+[PASS] (dark · ui-graphic) chart-3 (#e582b9) on background (#2e1623) — WCAG 6.55:1 (exact 6.5533) | APCA Lc -50.4
+[PASS] (dark · ui-graphic) chart-4 (#c96e9f) on background (#2e1623) — WCAG 4.95:1 (exact 4.9513) | APCA Lc -38.9
+[PASS] (dark · ui-graphic) chart-5 (#a26385) on background (#2e1623) — WCAG 3.71:1 (exact 3.7122) | APCA Lc -28.7
+[INFO] (dark · border-advisory) border (#543445) on background (#2e1623) — WCAG 1.56:1 (exact 1.5570) | APCA Lc 0
+[INFO] (dark · border-advisory) input (#543445) on background (#2e1623) — WCAG 1.56:1 (exact 1.5570) | APCA Lc 0
+
+Polarity advisory (WCAG 2.x scores both directions the same; APCA does not):
+[ADVISORY] (light · text) primary-foreground on primary — passes wcag-aa at 6.23:1 but APCA rates it Lc 43.4, below the Lc 75 needed for fluent body reading
+[ADVISORY] (light · text) muted-foreground on muted — passes wcag-aa at 5.40:1 but APCA rates it Lc 68.9, below the Lc 75 needed for fluent body reading
+[ADVISORY] (light · text) accent-foreground on accent — passes wcag-aa at 9.08:1 but APCA rates it Lc 73.9, below the Lc 75 needed for fluent body reading
+[ADVISORY] (light · text) sidebar-primary-foreground on sidebar-primary — passes wcag-aa at 6.23:1 but APCA rates it Lc 43.4, below the Lc 75 needed for fluent body reading
+[ADVISORY] (light · text) sidebar-accent-foreground on sidebar-accent — passes wcag-aa at 9.08:1 but APCA rates it Lc 73.9, below the Lc 75 needed for fluent body reading
+[ADVISORY] (dark · text) primary-foreground on primary — passes wcag-aa at 6.20:1 but APCA rates it Lc 54.7, below the Lc 75 needed for fluent body reading
+[ADVISORY] (dark · text) secondary-foreground on secondary — passes wcag-aa at 8.17:1 but APCA rates it Lc 73.4, below the Lc 75 needed for fluent body reading
+[ADVISORY] (dark · text) muted-foreground on muted — passes wcag-aa at 5.26:1 but APCA rates it Lc 47.8, below the Lc 75 needed for fluent body reading
+[ADVISORY] (dark · text) muted-foreground on background — passes wcag-aa at 6.75:1 but APCA rates it Lc 51.3, below the Lc 75 needed for fluent body reading
+[ADVISORY] (dark · text) accent-foreground on accent — passes wcag-aa at 5.93:1 but APCA rates it Lc 66.8, below the Lc 75 needed for fluent body reading
+[ADVISORY] (dark · text) sidebar-primary-foreground on sidebar-primary — passes wcag-aa at 6.20:1 but APCA rates it Lc 54.7, below the Lc 75 needed for fluent body reading
+[ADVISORY] (dark · text) sidebar-accent-foreground on sidebar-accent — passes wcag-aa at 5.93:1 but APCA rates it Lc 66.8, below the Lc 75 needed for fluent body reading
+- Advisory only: it does not affect the exit code. WCAG is the conformance standard;
+  APCA models readability better, especially for light text on dark backgrounds.
+
+Assumptions:
+- sRGB gamut policy: WCAG 2.x ratios are evaluated at full floating-point precision without pre-comparison rounding; colors outside sRGB gamut are marked unverified

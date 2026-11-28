@@ -1,0 +1,36 @@
+corporate status fail exit 1
+ light background #fbf5f7 L0.975 C0.007 H355
+ light card #fffdfe L0.996 C0.002 H345
+ light sidebar #f6f0f2 L0.960 C0.007 H355
+ light primary #a38945 L0.640 C0.093 H89
+ light primary-foreground #000000 L0.000 C0.000 H0
+ light ring #a38945 L0.640 C0.093 H89
+ light sidebar-ring #a38945 L0.640 C0.093 H89
+  ring/background 3.1352 ring/card 3.3325 ring/sidebar 3.0000 primary-fg/primary 6.2215
+ dark background #2f1622 L0.241 C0.044 H351
+ dark card #3c222e L0.290 C0.044 H351
+ dark sidebar #361c28 L0.266 C0.045 H351
+ dark primary #c5af76 L0.760 C0.079 H89
+ dark primary-foreground #3a2830 L0.301 C0.030 H351
+ dark ring #c5af76 L0.760 C0.079 H89
+ dark sidebar-ring #c5af76 L0.760 C0.079 H89
+  ring/background 7.7599 ring/card 6.6884 ring/sidebar 7.2161 primary-fg/primary 6.4004
+ failing: {"mode":"light","kind":"ui-graphic","required":true,"fgToken":"sidebar-ring","bgToken":"sidebar","fgRaw":"oklch(0.6397 0.0928 88.71)","bgRaw":"oklch(0.9603 0.0069 354.8)","fgHex":"#a38945","bgHex":"#f6f0f2","fgOklch":"oklch(0.6397 0.0928 88.71)","bgOklch":"oklch(0.9603 0.0069 354.8)","composited":false,"wcagExact":2.9995062702463753,"wcag":3,"apcaExact":53.064073690775714,"apcaLc":53.1,"requiredWcag":3,"requiredApca":45,"pass":false}
+freak status fail exit 1
+ light background #fbf5f7 L0.975 C0.007 H355
+ light card #fffdfe L0.996 C0.002 H345
+ light sidebar #f6f0f2 L0.960 C0.007 H355
+ light primary #a38945 L0.640 C0.093 H89
+ light primary-foreground #000000 L0.000 C0.000 H0
+ light ring #a38945 L0.640 C0.093 H89
+ light sidebar-ring #a38945 L0.640 C0.093 H89
+  ring/background 3.1352 ring/card 3.3325 ring/sidebar 3.0000 primary-fg/primary 6.2215
+ dark background #2f1622 L0.241 C0.044 H351
+ dark card #3c222e L0.290 C0.044 H351
+ dark sidebar #361c28 L0.266 C0.045 H351
+ dark primary #a38945 L0.640 C0.093 H89
+ dark primary-foreground #000000 L0.000 C0.000 H0
+ dark ring #a38945 L0.640 C0.093 H89
+ dark sidebar-ring #a38945 L0.640 C0.093 H89
+  ring/background 4.9427 ring/card 4.2602 ring/sidebar 4.5963 primary-fg/primary 6.2215
+ failing: {"mode":"light","kind":"ui-graphic","required":true,"fgToken":"sidebar-ring","bgToken":"sidebar","fgRaw":"oklch(0.6397 0.0928 88.71)","bgRaw":"oklch(0.9603 0.0069 354.8)","fgHex":"#a38945","bgHex":"#f6f0f2","fgOklch":"oklch(0.6397 0.0928 88.71)","bgOklch":"oklch(0.9603 0.0069 354.8)","composited":false,"wcagExact":2.9995062702463753,"wcag":3,"apcaExact":53.064073690775714,"apcaLc":53.1,"requiredWcag":3,"requiredApca":45,"pass":false}

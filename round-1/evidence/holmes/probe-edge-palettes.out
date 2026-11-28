@@ -1,0 +1,105 @@
+== mood=corporate seeds=#ccff00 #ff00ff #00ffff
+/* theme-book v0.4.0 · design-book v0.26.0+main.2d80b33 · audit=pass (wcag-aa) */
+  --background: #ccff00;
+  --foreground: #362935;
+  --primary: #e700e7;
+  --primary-foreground: #000000;
+  --chart-1: #ff7cfc;
+  --chart-2: #eb00eb;
+  --chart-3: #bd00bd;
+  --chart-4: #910091;
+  --chart-5: #670067;
+.dark {
+  --background: #2b172a;
+  --foreground: #d0d8c2;
+  --primary: #ff6efc;
+  --primary-foreground: #362935;
+  --chart-1: #ffcafc;
+  --chart-2: #ff7bfc;
+  --chart-3: #dd5ada;
+  --chart-4: #b14aaf;
+  --chart-5: #863b85;
+== mood=freak seeds=#ccff00 #ff00ff #00ffff
+/* theme-book v0.4.0 · design-book v0.26.0+main.2d80b33 · audit=pass (wcag-aa) */
+  --background: #ccff00;
+  --foreground: #362935;
+  --primary: #e700e7;
+  --primary-foreground: #000000;
+  --chart-1: #ff7cfc;
+  --chart-2: #eb00eb;
+  --chart-3: #bd00bd;
+  --chart-4: #910091;
+  --chart-5: #670067;
+.dark {
+  --background: #2b172a;
+  --foreground: #d0d8c2;
+  --primary: #e700e7;
+  --primary-foreground: #000000;
+  --chart-1: #ffcafc;
+  --chart-2: #ff7bfc;
+  --chart-3: #e746e5;
+  --chart-4: #b93cb7;
+  --chart-5: #8d318b;
+== mood=corporate seeds=#ffff00 #2563eb
+/* theme-book v0.4.0 · design-book v0.26.0+main.2d80b33 · audit=pass (wcag-aa) */
+  --background: #ffff01;
+  --foreground: #262e3d;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --chart-1: #91b7ff;
+  --chart-2: #548cff;
+  --chart-3: #2968f0;
+  --chart-4: #0946cd;
+  --chart-5: #002d99;
+.dark {
+  --background: #141f35;
+  --foreground: #d5d6c0;
+  --primary: #75a3ff;
+  --primary-foreground: #262e3d;
+  --chart-1: #cddfff;
+  --chart-2: #91b7ff;
+  --chart-3: #5f94ff;
+  --chart-4: #3c72e5;
+  --chart-5: #2c57b2;
+== mood=corporate seeds=#fdf6e3 #002b36 #268bd2 #d33682 #859900
+/* theme-book v0.4.0 · design-book v0.26.0+main.2d80b33 · audit=pass (wcag-aa) */
+  --background: #fdf6e3;
+  --foreground: #1d3138;
+  --primary: #002b36;
+  --primary-foreground: #dbd4c1;
+  --chart-1: #7f9300;
+  --chart-2: #268bd2;
+  --chart-3: #d33682;
+  --chart-4: #1b434f;
+  --chart-5: #002b36;
+.dark {
+  --background: #002b36;
+  --foreground: #dbd4c1;
+  --primary: #688a95;
+  --primary-foreground: #000000;
+  --chart-1: #a7ba5a;
+  --chart-2: #69b5f4;
+  --chart-3: #fd77af;
+  --chart-4: #7395a0;
+  --chart-5: #688a95;
+== mood=freak seeds=#fdf6e3 #002b36 #268bd2 #d33682 #859900
+/* theme-book v0.4.0 · design-book v0.26.0+main.2d80b33 · audit=pass (wcag-aa) */
+  --background: #fdf6e3;
+  --foreground: #1d3138;
+  --primary: #002b36;
+  --primary-foreground: #dbd4c1;
+  --chart-1: #7f9300;
+  --chart-2: #268bd2;
+  --chart-3: #d33682;
+  --chart-4: #1b434f;
+  --chart-5: #002b36;
+.dark {
+  --background: #002b36;
+  --foreground: #dbd4c1;
+  --primary: #5b8491;
+  --primary-foreground: #000000;
+  --chart-1: #7f9300;
+  --chart-2: #268bd2;
+  --chart-3: #d33682;
+  --chart-4: #1b434f;
+  --chart-5: #002b36;

@@ -1,0 +1,974 @@
+[
+ {
+  "mood": "corporate",
+  "name": "owlCoral",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [],
+  "light": {
+   "primary": "#c97272",
+   "secondary": "#cfeef7",
+   "accent": "#dfccea",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f3f7fc"
+  },
+  "dark": {
+   "primary": "#e89a99",
+   "secondary": "#1e3d45",
+   "accent": "#574561",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff182d",
+   "whiteOnDestructive": 3.87,
+   "bg": "#292c2f"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "singleTeal",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.8",
+   "light:chart-2=2.8",
+   "dark:chart-5=2.55"
+  ],
+  "light": {
+   "primary": "#0f766e",
+   "secondary": "#cff0eb",
+   "accent": "#bcdcd8",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f1f9f7"
+  },
+  "dark": {
+   "primary": "#69b0a8",
+   "secondary": "#1e3f3b",
+   "accent": "#345450",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff1c36",
+   "whiteOnDestructive": 3.84,
+   "bg": "#002622"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "singleRed",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.95",
+   "dark:chart-5=2.41"
+  ],
+  "light": {
+   "primary": "#d32f2f",
+   "secondary": "#ffdfdb",
+   "accent": "#ffc3bc",
+   "secStatus": null,
+   "accStatus": "red",
+   "destructive": "#9e0017",
+   "whiteOnDestructive": 8.52,
+   "bg": "#fcf5f4"
+  },
+  "dark": {
+   "primary": "#ff796f",
+   "secondary": "#532b27",
+   "accent": "#733a35",
+   "secStatus": "red",
+   "accStatus": "red",
+   "destructive": "#e60019",
+   "whiteOnDestructive": 4.8,
+   "bg": "#321614"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "grey",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.38",
+   "dark:chart-3=2.49",
+   "dark:chart-4=1.87",
+   "dark:chart-5=1.28"
+  ],
+  "light": {
+   "primary": "#2e2e2e",
+   "secondary": "#e8e8e8",
+   "accent": "#d4d4d4",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f7f7f7"
+  },
+  "dark": {
+   "primary": "#d4d4d4",
+   "secondary": "#383838",
+   "accent": "#4d4d4d",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2d44",
+   "whiteOnDestructive": 3.68,
+   "bg": "#0d0d0d"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "twoSeed",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.8",
+   "light:chart-2=2.8",
+   "dark:chart-5=2.55"
+  ],
+  "light": {
+   "primary": "#0f766e",
+   "secondary": "#cff0eb",
+   "accent": "#bcdcd8",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f1f9f7"
+  },
+  "dark": {
+   "primary": "#69b0a8",
+   "secondary": "#1e3f3b",
+   "accent": "#345450",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff1c36",
+   "whiteOnDestructive": 3.84,
+   "bg": "#002622"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "yellowOnly",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.87",
+   "light:chart-2=2.92",
+   "dark:chart-5=2.51"
+  ],
+  "light": {
+   "primary": "#a58600",
+   "secondary": "#f4e8c3",
+   "accent": "#e4d4a0",
+   "secStatus": null,
+   "accStatus": "yellow",
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f9f7f1"
+  },
+  "dark": {
+   "primary": "#c8ae59",
+   "secondary": "#43370d",
+   "accent": "#5c4b10",
+   "secStatus": "yellow",
+   "accStatus": "yellow",
+   "destructive": "#ff214b",
+   "whiteOnDestructive": 3.77,
+   "bg": "#271e03"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "paleFirst",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.77",
+   "light:chart-2=2.81",
+   "dark:chart-5=2.44"
+  ],
+  "light": {
+   "primary": "#2563eb",
+   "secondary": "#ede2ff",
+   "accent": "#bed5ff",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f5f0e6"
+  },
+  "dark": {
+   "primary": "#75a3ff",
+   "secondary": "#3e3052",
+   "accent": "#354c79",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2129",
+   "whiteOnDestructive": 3.82,
+   "bg": "#141f35"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "greyFirst",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.88",
+   "light:chart-2=2.98",
+   "dark:chart-5=2.44"
+  ],
+  "light": {
+   "primary": "#2563eb",
+   "secondary": "#dce8ff",
+   "accent": "#bed5ff",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f4f7fc"
+  },
+  "dark": {
+   "primary": "#75a3ff",
+   "secondary": "#273757",
+   "accent": "#354c79",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2133",
+   "whiteOnDestructive": 3.81,
+   "bg": "#1c1f26"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "deepNavyBrand",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.88",
+   "light:chart-2=2.91",
+   "dark:chart-5=2.42"
+  ],
+  "light": {
+   "primary": "#0b1f4d",
+   "secondary": "#dde8ff",
+   "accent": "#c8d5ec",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f4f7fc"
+  },
+  "dark": {
+   "primary": "#6b82b0",
+   "secondary": "#2d384d",
+   "accent": "#424d63",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2119",
+   "whiteOnDestructive": 3.83,
+   "bg": "#0b1f4d"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "neonLime",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.87",
+   "dark:chart-5=2.37"
+  ],
+  "light": {
+   "primary": "#e700e7",
+   "secondary": "#c2f3f2",
+   "accent": "#fbddf9",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#ccff00"
+  },
+  "dark": {
+   "primary": "#ff6efc",
+   "secondary": "#004141",
+   "accent": "#492c47",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2631",
+   "whiteOnDestructive": 3.77,
+   "bg": "#2b172a"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "darkOnly",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.87",
+   "light:chart-2=2.9",
+   "dark:chart-5=2.87"
+  ],
+  "light": {
+   "primary": "#2b2e34",
+   "secondary": "#e8e8e8",
+   "accent": "#d4d4d4",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f4f7fc"
+  },
+  "dark": {
+   "primary": "#d2d4da",
+   "secondary": "#383838",
+   "accent": "#4d4d4d",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2a41",
+   "whiteOnDestructive": 3.71,
+   "bg": "#111111"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "lowChromaRed",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.88",
+   "light:chart-2=2.98",
+   "dark:chart-5=2.44"
+  ],
+  "light": {
+   "primary": "#2563eb",
+   "secondary": "#dce8ff",
+   "accent": "#bed5ff",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f4f7fc"
+  },
+  "dark": {
+   "primary": "#75a3ff",
+   "secondary": "#273757",
+   "accent": "#354c79",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2129",
+   "whiteOnDestructive": 3.82,
+   "bg": "#141f35"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "blackWhite",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.48",
+   "dark:chart-3=2.49",
+   "dark:chart-4=1.87",
+   "dark:chart-5=1.28"
+  ],
+  "light": {
+   "primary": "#2e2e2e",
+   "secondary": "#e8e8e8",
+   "accent": "#d4d4d4",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#ffffff"
+  },
+  "dark": {
+   "primary": "#d4d4d4",
+   "secondary": "#383838",
+   "accent": "#4d4d4d",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2d44",
+   "whiteOnDestructive": 3.68,
+   "bg": "#0d0d0d"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "creamInk",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [],
+  "light": {
+   "primary": "#002b36",
+   "secondary": "#d5ebff",
+   "accent": "#ffc0d6",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#fdf6e3"
+  },
+  "dark": {
+   "primary": "#688a95",
+   "secondary": "#1a3b55",
+   "accent": "#6f394f",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff1929",
+   "whiteOnDestructive": 3.87,
+   "bg": "#002b36"
+  }
+ },
+ {
+  "mood": "corporate",
+  "name": "vividYellowPurple",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [],
+  "light": {
+   "primary": "#7c3aed",
+   "secondary": "#e8e4ff",
+   "accent": "#d5ccff",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f7f6fc"
+  },
+  "dark": {
+   "primary": "#aa8fff",
+   "secondary": "#393254",
+   "accent": "#4f4475",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff232b",
+   "whiteOnDestructive": 3.8,
+   "bg": "#201b33"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "owlCoral",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [],
+  "light": {
+   "primary": "#c97272",
+   "secondary": "#79cce2",
+   "accent": "#cfa0e8",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f3f7fc"
+  },
+  "dark": {
+   "primary": "#c97272",
+   "secondary": "#79cce2",
+   "accent": "#cfa0e8",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff182d",
+   "whiteOnDestructive": 3.87,
+   "bg": "#292c2f"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "singleTeal",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.8",
+   "light:chart-2=2.8",
+   "dark:chart-5=2.58"
+  ],
+  "light": {
+   "primary": "#0f766e",
+   "secondary": "#cff0eb",
+   "accent": "#bcdcd8",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f1f9f7"
+  },
+  "dark": {
+   "primary": "#27857d",
+   "secondary": "#1e3f3b",
+   "accent": "#345450",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff1c36",
+   "whiteOnDestructive": 3.84,
+   "bg": "#002622"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "singleRed",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.95",
+   "dark:chart-5=2.37"
+  ],
+  "light": {
+   "primary": "#d32f2f",
+   "secondary": "#ffdfdb",
+   "accent": "#ffc3bc",
+   "secStatus": null,
+   "accStatus": "red",
+   "destructive": "#9e0017",
+   "whiteOnDestructive": 8.52,
+   "bg": "#fcf5f4"
+  },
+  "dark": {
+   "primary": "#d73332",
+   "secondary": "#532b27",
+   "accent": "#733a35",
+   "secStatus": "red",
+   "accStatus": "red",
+   "destructive": "#e60019",
+   "whiteOnDestructive": 4.8,
+   "bg": "#321614"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "grey",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.38",
+   "dark:chart-3=2.49",
+   "dark:chart-4=1.87",
+   "dark:chart-5=1.28"
+  ],
+  "light": {
+   "primary": "#2e2e2e",
+   "secondary": "#e8e8e8",
+   "accent": "#d4d4d4",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f7f7f7"
+  },
+  "dark": {
+   "primary": "#d4d4d4",
+   "secondary": "#383838",
+   "accent": "#4d4d4d",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2d44",
+   "whiteOnDestructive": 3.68,
+   "bg": "#0d0d0d"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "twoSeed",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.8",
+   "light:chart-2=2.8",
+   "dark:chart-5=2.58"
+  ],
+  "light": {
+   "primary": "#0f766e",
+   "secondary": "#cff0eb",
+   "accent": "#bcdcd8",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f1f9f7"
+  },
+  "dark": {
+   "primary": "#27857d",
+   "secondary": "#1e3f3b",
+   "accent": "#345450",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff1c36",
+   "whiteOnDestructive": 3.84,
+   "bg": "#002622"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "yellowOnly",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.87",
+   "light:chart-2=2.92",
+   "dark:chart-5=2.52"
+  ],
+  "light": {
+   "primary": "#a58600",
+   "secondary": "#f4e8c3",
+   "accent": "#e4d4a0",
+   "secStatus": null,
+   "accStatus": "yellow",
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f9f7f1"
+  },
+  "dark": {
+   "primary": "#a58600",
+   "secondary": "#43370d",
+   "accent": "#5c4b10",
+   "secStatus": "yellow",
+   "accStatus": "yellow",
+   "destructive": "#ff214b",
+   "whiteOnDestructive": 3.77,
+   "bg": "#271e03"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "paleFirst",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.77",
+   "light:chart-2=2.81",
+   "dark:chart-5=2.41"
+  ],
+  "light": {
+   "primary": "#2563eb",
+   "secondary": "#9333ea",
+   "accent": "#bed5ff",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f5f0e6"
+  },
+  "dark": {
+   "primary": "#2e6df6",
+   "secondary": "#9333ea",
+   "accent": "#354c79",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2129",
+   "whiteOnDestructive": 3.82,
+   "bg": "#141f35"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "greyFirst",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.88",
+   "light:chart-2=2.98",
+   "dark:chart-5=2.41"
+  ],
+  "light": {
+   "primary": "#2563eb",
+   "secondary": "#dce8ff",
+   "accent": "#bed5ff",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f4f7fc"
+  },
+  "dark": {
+   "primary": "#2b6af2",
+   "secondary": "#273757",
+   "accent": "#354c79",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2133",
+   "whiteOnDestructive": 3.81,
+   "bg": "#1c1f26"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "deepNavyBrand",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.88",
+   "light:chart-2=2.91",
+   "dark:chart-5=2.4"
+  ],
+  "light": {
+   "primary": "#0b1f4d",
+   "secondary": "#dde8ff",
+   "accent": "#c8d5ec",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f4f7fc"
+  },
+  "dark": {
+   "primary": "#5e78ae",
+   "secondary": "#2d384d",
+   "accent": "#424d63",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2119",
+   "whiteOnDestructive": 3.83,
+   "bg": "#0b1f4d"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "neonLime",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.87",
+   "dark:chart-5=2.34"
+  ],
+  "light": {
+   "primary": "#e700e7",
+   "secondary": "#00ffff",
+   "accent": "#fbddf9",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#ccff00"
+  },
+  "dark": {
+   "primary": "#e700e7",
+   "secondary": "#00ffff",
+   "accent": "#492c47",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2631",
+   "whiteOnDestructive": 3.77,
+   "bg": "#2b172a"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "darkOnly",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.87",
+   "light:chart-2=2.9",
+   "dark:chart-5=2.87"
+  ],
+  "light": {
+   "primary": "#2b2e34",
+   "secondary": "#e8e8e8",
+   "accent": "#d4d4d4",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f4f7fc"
+  },
+  "dark": {
+   "primary": "#d2d4da",
+   "secondary": "#383838",
+   "accent": "#4d4d4d",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2a41",
+   "whiteOnDestructive": 3.71,
+   "bg": "#111111"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "lowChromaRed",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.88",
+   "light:chart-2=2.98",
+   "dark:chart-5=2.41"
+  ],
+  "light": {
+   "primary": "#2563eb",
+   "secondary": "#dce8ff",
+   "accent": "#bed5ff",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f4f7fc"
+  },
+  "dark": {
+   "primary": "#2e6df6",
+   "secondary": "#273757",
+   "accent": "#354c79",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2129",
+   "whiteOnDestructive": 3.82,
+   "bg": "#141f35"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "blackWhite",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "light:chart-1=1.48",
+   "dark:chart-3=2.49",
+   "dark:chart-4=1.87",
+   "dark:chart-5=1.28"
+  ],
+  "light": {
+   "primary": "#2e2e2e",
+   "secondary": "#e8e8e8",
+   "accent": "#d4d4d4",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#ffffff"
+  },
+  "dark": {
+   "primary": "#d4d4d4",
+   "secondary": "#383838",
+   "accent": "#4d4d4d",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff2d44",
+   "whiteOnDestructive": 3.68,
+   "bg": "#0d0d0d"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "creamInk",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "dark:chart-4=1.4",
+   "dark:chart-5=1"
+  ],
+  "light": {
+   "primary": "#002b36",
+   "secondary": "#268bd2",
+   "accent": "#d33682",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#fdf6e3"
+  },
+  "dark": {
+   "primary": "#5b8491",
+   "secondary": "#268bd2",
+   "accent": "#d33682",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff1929",
+   "whiteOnDestructive": 3.87,
+   "bg": "#002b36"
+  }
+ },
+ {
+  "mood": "freak",
+  "name": "vividYellowPurple",
+  "status": "pass",
+  "passed": 26,
+  "failed": 0,
+  "reqFail": [],
+  "chartFail": [
+   "dark:chart-4=2.91",
+   "dark:chart-5=1.37"
+  ],
+  "light": {
+   "primary": "#7c3aed",
+   "secondary": "#e8e4ff",
+   "accent": "#d5ccff",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#df202e",
+   "whiteOnDestructive": 4.79,
+   "bg": "#f7f6fc"
+  },
+  "dark": {
+   "primary": "#8a4dff",
+   "secondary": "#393254",
+   "accent": "#4f4475",
+   "secStatus": null,
+   "accStatus": null,
+   "destructive": "#ff232b",
+   "whiteOnDestructive": 3.8,
+   "bg": "#201b33"
+  }
+ }
+]

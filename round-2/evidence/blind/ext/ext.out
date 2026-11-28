@@ -1,0 +1,10 @@
+school editorial exit 0: 
+school corporate exit 2: theme-book: extension school@1.0.0 (~/.local/state/baker-street/cases/2026-11-27-theme-book-pr30-r2/evidence/blind/ext/school.book.ts): its rules failed to resolve: "neutrals" names no scope to search
+school freak exit 2: theme-book: extension school@1.0.0 (~/.local/state/baker-street/cases/2026-11-27-theme-book-pr30-r2/evidence/blind/ext/school.book.ts): its rules failed to resolve: "neutrals" names no scope to search
+stale exit 2: theme-book: extension school@1.0.0 (~/.local/state/baker-street/cases/2026-11-27-theme-book-pr30-r2/evidence/blind/ext/stale.book.ts) extends shadcn@1.0.0, but this theme-book's shadcn rule
+lightonly editorial exit 0
+22:  --chart-1: #123456;
+56:  --chart-1: #af97ff;
+lightonly corporate exit 0
+22:  --chart-1: #123456;
+56:  --chart-1: #ffc9b8;

@@ -1,0 +1,24 @@
+subject=~/.local/state/baker-street/cases/2026-11-27-theme-book-pr30-r2/subject seed0=4 palettes=4030 built=8060 chartsAdvisoryRuns=12 failures=23
+corporate ["#62484d","#05bad5","#262e20"] status=fail dark:muted-foreground/muted=?
+freak ["#62484d","#05bad5","#262e20"] status=fail dark:muted-foreground/muted=?
+corporate ["#b97fae"] status=fail light:sidebar-ring/sidebar=?
+freak ["#b97fae"] status=fail light:sidebar-ring/sidebar=?
+corporate ["#2c5241","#8dc472"] status=fail dark:primary-foreground/primary=? dark:sidebar-primary-foreground/sidebar-primary=?
+corporate ["#15ccd3","#109c77","#7ca460"] status=fail light:sidebar-ring/sidebar=?
+freak ["#15ccd3","#109c77","#7ca460"] status=fail light:sidebar-ring/sidebar=?
+corporate ["#ddfe27","#67cdac","#daa350","#aa2da6","#95aea1"] status=fail light:sidebar-ring/sidebar=?
+freak ["#ddfe27","#67cdac","#daa350","#aa2da6","#95aea1"] status=fail light:sidebar-ring/sidebar=?
+corporate ["#148ff2","#86d881","#8c17e3"] status=fail light:sidebar-ring/sidebar=?
+freak ["#148ff2","#86d881","#8c17e3"] status=fail light:sidebar-ring/sidebar=?
+corporate ["#47d31f","#37c94e","#9d58ab","#5c8ed6","#8bd2f3","#d2aa76"] status=fail light:sidebar-ring/sidebar=?
+freak ["#47d31f","#37c94e","#9d58ab","#5c8ed6","#8bd2f3","#d2aa76"] status=fail light:sidebar-ring/sidebar=?
+corporate ["#d967a8"] status=fail light:sidebar-ring/sidebar=?
+freak ["#d967a8"] status=fail light:sidebar-ring/sidebar=?
+corporate ["#31e662","#33cbfe","#3fcd5f"] status=fail light:sidebar-ring/sidebar=?
+freak ["#31e662","#33cbfe","#3fcd5f"] status=fail light:sidebar-ring/sidebar=?
+corporate ["#6f6fe8","#90ac61","#3d095c"] status=fail dark:muted-foreground/muted=?
+freak ["#6f6fe8","#90ac61","#3d095c"] status=fail dark:muted-foreground/muted=?
+corporate ["#2369fb","#1c2f2b","#7b4ec7"] status=fail dark:muted-foreground/muted=?
+freak ["#2369fb","#1c2f2b","#7b4ec7"] status=fail dark:muted-foreground/muted=?
+corporate ["#6ea264","#212806","#959dde"] status=fail light:sidebar-ring/sidebar=?
+freak ["#6ea264","#212806","#959dde"] status=fail light:sidebar-ring/sidebar=?

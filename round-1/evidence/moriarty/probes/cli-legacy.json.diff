@@ -1,0 +1,8 @@
+5c5
+<     "designBookVersion": "0.26.0",
+---
+>     "designBookVersion": "0.26.0+main.2d80b33",
+21c21
+<       "rulesVersion": "1.0.0"
+---
+>       "rulesVersion": "1.1.0"

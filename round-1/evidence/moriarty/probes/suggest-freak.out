@@ -1,0 +1,6 @@
+Suggestions for seeds=#2563eb on light surface oklch(0.9946 0.0026 286.35) (#fdfdff) [mood=freak, generator=oklch]
+
+- primary-accent     #1d5ae2  oklch(0.5194 0.2159 262.94)   WCAG  5.72:1  APCA   77.1  [mostVivid(pool, { readableOn: surface, readableContrast: 4.5 })]
+- complementary      #8b6000  oklch(0.5213 0.1086 78.16)    WCAG  5.48:1  APCA   76.4  [closest(relativeTo(seed, oklch, [null, null, +180]), pool, { readableOn: surface, readableContrast: 4.5 })]
+- distinct-companion #00081f  oklch(0.1417 0.0535 258.45)   WCAG  19.6:1  APCA  104.6  [furthestFrom(primary-accent, pool, { readableOn: surface, readableContrast: 4.5, not: [primary-accent] })]
+- muted-companion    #2c1c00  oklch(0.2407 0.05 78.89)      WCAG 16.24:1  APCA  102.2  [leastVivid(pool, { readableOn: surface, readableContrast: 4.5, not: [primary-accent] })]

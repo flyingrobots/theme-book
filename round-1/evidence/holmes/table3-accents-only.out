@@ -1,0 +1,7 @@
+Solarized   slope 1.00 offset +0.00 R2 1.00 lift +0.00 k(ratio of means) 1.00 k(mean ratio) 1.00
+Gruvbox     slope 0.98 offset +0.23 R2 1.00 lift +0.22 k(ratio of means) 1.16 k(mean ratio) 1.18
+Tokyo       slope -0.73 offset +1.19 R2 0.95 lift +0.21 k(ratio of means) 0.85 k(mean ratio) 0.96
+One         slope 0.57 offset +0.39 R2 0.24 lift +0.13 k(ratio of means) 0.75 k(mean ratio) 0.75
+Catppuccin  slope 0.99 offset +0.23 R2 0.89 lift +0.22 k(ratio of means) 0.58 k(mean ratio) 0.60
+Rosé Pine   slope 1.24 offset -0.04 R2 0.84 lift +0.11 k(ratio of means) 0.91 k(mean ratio) 0.92
+GitHub      slope -0.37 offset +0.89 R2 0.05 lift +0.13 k(ratio of means) 1.04 k(mean ratio) 1.07

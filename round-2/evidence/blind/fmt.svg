@@ -1,0 +1,700 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1076 978" width="1076" height="978">
+<style>
+svg { --surface: var(--c-surface, #fff); --on-surface: var(--c-surface-on, #292f2f); --on-surface-alt: var(--c-surface-on-alt, #888); --font: var(--font-mono, 'Iosevka Web', 'Iosevka', 'Fira Code', ui-monospace, monospace); }
+.palette-table { fill: var(--surface); stroke: var(--on-surface); stroke-width: 1; }
+.palette-table__row { fill: none; stroke: var(--on-surface); stroke-width: 0.5; }
+.palette-table__row--header { fill: var(--on-surface); }
+text { font-family: var(--font); font-weight: 300; }
+.palette-table__label { fill: var(--on-surface); pointer-events: none; }
+.palette-table__label--inherited { opacity: 0.4; }
+.palette-table__label--header { font-weight: 400; fill: var(--surface); }
+.conn-bg { opacity: 0.6; }
+.conn-fg { opacity: 0.8; }
+.dots circle { transition: r 0.15s ease, stroke-width 0.15s ease; pointer-events: none; }
+.dots rect { pointer-events: none; }
+.dots circle:hover { stroke-width: 2; }
+.dots rect:hover { stroke-width: 2; }
+.conn-label { display: none; }
+</style>
+<g class="connections-group">
+  <g class="connection" data-from="light.background" data-to="palette.light-page" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 661.92 206 L 600.42 206 Q 598.42 206 598.42 204 L 598.42 27 Q 598.42 25 596.42 25 L 222.48 25 Q 220.48 25 220.48 27 L 220.48 132 Q 220.48 134 218.48 134 L 210.48 134" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 206 L 600.42 206 Q 598.42 206 598.42 204 L 598.42 27 Q 598.42 25 596.42 25 L 222.48 25 Q 220.48 25 220.48 27 L 220.48 132 Q 220.48 134 218.48 134 L 210.48 134" fill="none" stroke="#f4f7fc" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.card" data-to="palette.light-card" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 661.92 230 L 615.42 230 Q 613.42 230 613.42 228 L 613.42 19.5 Q 613.42 17.5 611.42 17.5 L 222.48 17.5 Q 220.48 17.5 220.48 19.5 L 220.48 156 Q 220.48 158 218.48 158 L 210.48 158" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 230 L 615.42 230 Q 613.42 230 613.42 228 L 613.42 19.5 Q 613.42 17.5 611.42 17.5 L 222.48 17.5 Q 220.48 17.5 220.48 19.5 L 220.48 156 Q 220.48 158 218.48 158 L 210.48 158" fill="none" stroke="#fdfdff" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.popover" data-to="light.card" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 899.36 254 L 907.36 254 Q 909.36 254 909.36 252 L 909.36 232 Q 909.36 230 907.36 230 L 899.36 230" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 899.36 254 L 907.36 254 Q 909.36 254 909.36 252 L 909.36 232 Q 909.36 230 907.36 230 L 899.36 230" fill="none" stroke="#fdfdff" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.sidebar" data-to="palette.light-sidebar" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 661.92 278 L 605.42 278 Q 603.42 278 603.42 276 L 603.42 27 Q 603.42 25 601.42 25 L 222.48 25 Q 220.48 25 220.48 27 L 220.48 180 Q 220.48 182 218.48 182 L 210.48 182" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 278 L 605.42 278 Q 603.42 278 603.42 276 L 603.42 27 Q 603.42 25 601.42 25 L 222.48 25 Q 220.48 25 220.48 27 L 220.48 180 Q 220.48 182 218.48 182 L 210.48 182" fill="none" stroke="#eff2f7" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.foreground" data-to="palette.light-ink" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 661.92 302 L 625.42 302 Q 623.42 302 623.42 300 L 623.42 12 Q 623.42 10 621.42 10 L 222.48 10 Q 220.48 10 220.48 12 L 220.48 204 Q 220.48 206 218.48 206 L 210.48 206" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 302 L 625.42 302 Q 623.42 302 623.42 300 L 623.42 12 Q 623.42 10 621.42 10 L 222.48 10 Q 220.48 10 220.48 12 L 220.48 204 Q 220.48 206 218.48 206 L 210.48 206" fill="none" stroke="#262e3d" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="623.42" cy="302.00" r="3.00" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="light.card-foreground" data-to="palette.light-ink" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 661.92 326 L 625.42 326 Q 623.42 326 623.42 324 L 623.42 12 Q 623.42 10 621.42 10 L 222.48 10 Q 220.48 10 220.48 12 L 220.48 204 Q 220.48 206 218.48 206 L 210.48 206" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 326 L 625.42 326 Q 623.42 326 623.42 324 L 623.42 12 Q 623.42 10 621.42 10 L 222.48 10 Q 220.48 10 220.48 12 L 220.48 204 Q 220.48 206 218.48 206 L 210.48 206" fill="none" stroke="#262e3d" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="623.42" cy="326.00" r="3.00" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="light.popover-foreground" data-to="palette.light-ink" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 661.92 350 L 625.42 350 Q 623.42 350 623.42 348 L 623.42 12 Q 623.42 10 621.42 10 L 222.48 10 Q 220.48 10 220.48 12 L 220.48 204 Q 220.48 206 218.48 206 L 210.48 206" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 350 L 625.42 350 Q 623.42 350 623.42 348 L 623.42 12 Q 623.42 10 621.42 10 L 222.48 10 Q 220.48 10 220.48 12 L 220.48 204 Q 220.48 206 218.48 206 L 210.48 206" fill="none" stroke="#262e3d" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="623.42" cy="350.00" r="3.00" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="light.sidebar-foreground" data-to="palette.light-ink" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 661.92 374 L 625.42 374 Q 623.42 374 623.42 372 L 623.42 12 Q 623.42 10 621.42 10 L 222.48 10 Q 220.48 10 220.48 12 L 220.48 204 Q 220.48 206 218.48 206 L 210.48 206" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 374 L 625.42 374 Q 623.42 374 623.42 372 L 623.42 12 Q 623.42 10 621.42 10 L 222.48 10 Q 220.48 10 220.48 12 L 220.48 204 Q 220.48 206 218.48 206 L 210.48 206" fill="none" stroke="#262e3d" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.muted" data-to="palette.light-muted" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 661.92 398 L 610.42 398 Q 608.42 398 608.42 396 L 608.42 32 Q 608.42 30 606.42 30 L 222.48 30 Q 220.48 30 220.48 32 L 220.48 228 Q 220.48 230 218.48 230 L 210.48 230" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 398 L 610.42 398 Q 608.42 398 608.42 396 L 608.42 32 Q 608.42 30 606.42 30 L 222.48 30 Q 220.48 30 220.48 32 L 220.48 228 Q 220.48 230 218.48 230 L 210.48 230" fill="none" stroke="#e5e8ed" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.muted-foreground" data-to="palette.light-muted-ink" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 661.92 422 L 620.42 422 Q 618.42 422 618.42 420 L 618.42 24.5 Q 618.42 22.5 616.42 22.5 L 222.48 22.5 Q 220.48 22.5 220.48 24.5 L 220.48 252 Q 220.48 254 218.48 254 L 210.48 254" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 422 L 620.42 422 Q 618.42 422 618.42 420 L 618.42 24.5 Q 618.42 22.5 616.42 22.5 L 222.48 22.5 Q 220.48 22.5 220.48 24.5 L 220.48 252 Q 220.48 254 218.48 254 L 210.48 254" fill="none" stroke="#555e6f" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.border" data-to="palette.light-border" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 661.92 446 L 630.42 446 Q 628.42 446 628.42 448 L 628.42 845 Q 628.42 847 626.42 847 L 222.48 847 Q 220.48 847 220.48 845 L 220.48 280 Q 220.48 278 218.48 278 L 210.48 278" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 446 L 630.42 446 Q 628.42 446 628.42 448 L 628.42 845 Q 628.42 847 626.42 847 L 222.48 847 Q 220.48 847 220.48 845 L 220.48 280 Q 220.48 278 218.48 278 L 210.48 278" fill="none" stroke="#d3d6dc" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.input" data-to="light.border" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 899.36 470 L 907.36 470 Q 909.36 470 909.36 468 L 909.36 448 Q 909.36 446 907.36 446 L 899.36 446" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 899.36 470 L 907.36 470 Q 909.36 470 909.36 468 L 909.36 448 Q 909.36 446 907.36 446 L 899.36 446" fill="none" stroke="#d3d6dc" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.sidebar-border" data-to="light.border" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 899.36 494 L 907.36 494 Q 909.36 494 909.36 492 L 909.36 448 Q 909.36 446 907.36 446 L 899.36 446" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 899.36 494 L 907.36 494 Q 909.36 494 909.36 492 L 909.36 448 Q 909.36 446 907.36 446 L 899.36 446" fill="none" stroke="#d3d6dc" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.primary" data-to="palette.primary-light" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 661.92 518 L 635.42 518 Q 633.42 518 633.42 520 L 633.42 850 Q 633.42 852 631.42 852 L 222.48 852 Q 220.48 852 220.48 850 L 220.48 472 Q 220.48 470 218.48 470 L 210.48 470" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 518 L 635.42 518 Q 633.42 518 633.42 520 L 633.42 850 Q 633.42 852 631.42 852 L 222.48 852 Q 220.48 852 220.48 850 L 220.48 472 Q 220.48 470 218.48 470 L 210.48 470" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.primary-foreground" data-to="palette.light-on-primary" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 661.92 542 L 640.42 542 Q 638.42 542 638.42 544 L 638.42 855 Q 638.42 857 636.42 857 L 222.48 857 Q 220.48 857 220.48 855 L 220.48 520 Q 220.48 518 218.48 518 L 210.48 518" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 542 L 640.42 542 Q 638.42 542 638.42 544 L 638.42 855 Q 638.42 857 636.42 857 L 222.48 857 Q 220.48 857 220.48 855 L 220.48 520 Q 220.48 518 218.48 518 L 210.48 518" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.ring" data-to="light.primary" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 899.36 566 L 912.36 566 Q 914.36 566 914.36 564 L 914.36 520 Q 914.36 518 912.36 518 L 899.36 518" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 899.36 566 L 912.36 566 Q 914.36 566 914.36 564 L 914.36 520 Q 914.36 518 912.36 518 L 899.36 518" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="914.36" cy="566.00" r="3.00" fill="#2563eb" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="light.sidebar-primary" data-to="light.primary" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 899.36 590 L 912.36 590 Q 914.36 590 914.36 588 L 914.36 520 Q 914.36 518 912.36 518 L 899.36 518" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 899.36 590 L 912.36 590 Q 914.36 590 914.36 588 L 914.36 520 Q 914.36 518 912.36 518 L 899.36 518" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="914.36" cy="590.00" r="3.00" fill="#2563eb" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="light.sidebar-primary-foreground" data-to="light.primary-foreground" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 899.36 614 L 907.36 614 Q 909.36 614 909.36 612 L 909.36 544 Q 909.36 542 907.36 542 L 899.36 542" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 899.36 614 L 907.36 614 Q 909.36 614 909.36 612 L 909.36 544 Q 909.36 542 907.36 542 L 899.36 542" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.sidebar-ring" data-to="light.primary" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 899.36 638 L 912.36 638 Q 914.36 638 914.36 636 L 914.36 520 Q 914.36 518 912.36 518 L 899.36 518" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 899.36 638 L 912.36 638 Q 914.36 638 914.36 636 L 914.36 520 Q 914.36 518 912.36 518 L 899.36 518" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.secondary" data-to="palette.secondary-light" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 661.92 662 L 645.42 662 Q 643.42 662 643.42 664 L 643.42 816 Q 643.42 818 641.42 818 L 222.48 818 Q 220.48 818 220.48 816 L 220.48 568 Q 220.48 566 218.48 566 L 210.48 566" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 662 L 645.42 662 Q 643.42 662 643.42 664 L 643.42 816 Q 643.42 818 641.42 818 L 222.48 818 Q 220.48 818 220.48 816 L 220.48 568 Q 220.48 566 218.48 566 L 210.48 566" fill="none" stroke="#dce8ff" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.secondary-foreground" data-to="light.foreground" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 899.36 686 L 935.36 686 Q 937.36 686 937.36 684 L 937.36 304 Q 937.36 302 935.36 302 L 899.36 302" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 899.36 686 L 935.36 686 Q 937.36 686 937.36 684 L 937.36 304 Q 937.36 302 935.36 302 L 899.36 302" fill="none" stroke="#262e3d" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="937.36" cy="686.00" r="3.00" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="light.accent" data-to="palette.accent-light" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 661.92 710 L 650.42 710 Q 648.42 710 648.42 712 L 648.42 868 Q 648.42 870 646.42 870 L 222.48 870 Q 220.48 870 220.48 868 L 220.48 616 Q 220.48 614 218.48 614 L 210.48 614" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 710 L 650.42 710 Q 648.42 710 648.42 712 L 648.42 868 Q 648.42 870 646.42 870 L 222.48 870 Q 220.48 870 220.48 868 L 220.48 616 Q 220.48 614 218.48 614 L 210.48 614" fill="none" stroke="#bed5ff" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.accent-foreground" data-to="light.foreground" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 899.36 734 L 935.36 734 Q 937.36 734 937.36 732 L 937.36 304 Q 937.36 302 935.36 302 L 899.36 302" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 899.36 734 L 935.36 734 Q 937.36 734 937.36 732 L 937.36 304 Q 937.36 302 935.36 302 L 899.36 302" fill="none" stroke="#262e3d" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.sidebar-accent" data-to="light.accent" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 899.36 758 L 907.36 758 Q 909.36 758 909.36 756 L 909.36 712 Q 909.36 710 907.36 710 L 899.36 710" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 899.36 758 L 907.36 758 Q 909.36 758 909.36 756 L 909.36 712 Q 909.36 710 907.36 710 L 899.36 710" fill="none" stroke="#bed5ff" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.sidebar-accent-foreground" data-to="light.accent-foreground" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 899.36 782 L 912.36 782 Q 914.36 782 914.36 780 L 914.36 736 Q 914.36 734 912.36 734 L 899.36 734" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 899.36 782 L 912.36 782 Q 914.36 782 914.36 780 L 914.36 736 Q 914.36 734 912.36 734 L 899.36 734" fill="none" stroke="#262e3d" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="914.36" cy="734.00" r="3.00" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="light.destructive" data-to="palette.destructive-light" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 661.92 806 L 575.92 806 Q 573.92 806 573.92 808 L 573.92 840 Q 573.92 842 571.92 842 L 222.48 842 Q 220.48 842 220.48 840 L 220.48 664 Q 220.48 662 218.48 662 L 210.48 662" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 806 L 575.92 806 Q 573.92 806 573.92 808 L 573.92 840 Q 573.92 842 571.92 842 L 222.48 842 Q 220.48 842 220.48 840 L 220.48 664 Q 220.48 662 218.48 662 L 210.48 662" fill="none" stroke="#df202e" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.chart-1" data-to="palette.chart-1-light" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 661.92 830 L 222.48 830 Q 220.48 830 220.48 828 L 220.48 712 Q 220.48 710 218.48 710 L 210.48 710" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 830 L 222.48 830 Q 220.48 830 220.48 828 L 220.48 712 Q 220.48 710 218.48 710 L 210.48 710" fill="none" stroke="#4a85ff" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.chart-2" data-to="palette.chart-2-light" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 661.92 854 L 312.48 854 Q 310.48 854 310.48 852 L 310.48 760 Q 310.48 758 308.48 758 L 210.48 758" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 854 L 312.48 854 Q 310.48 854 310.48 852 L 310.48 760 Q 310.48 758 308.48 758 L 210.48 758" fill="none" stroke="#2462ea" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.chart-3" data-to="palette.chart-3-light" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 661.92 878 L 306.48 878 Q 304.48 878 304.48 876 L 304.48 808 Q 304.48 806 302.48 806 L 210.48 806" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 878 L 306.48 878 Q 304.48 878 304.48 876 L 304.48 808 Q 304.48 806 302.48 806 L 210.48 806" fill="none" stroke="#0441c8" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.chart-4" data-to="palette.chart-4-light" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 661.92 902 L 222.48 902 Q 220.48 902 220.48 900 L 220.48 856 Q 220.48 854 218.48 854 L 210.48 854" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 902 L 222.48 902 Q 220.48 902 220.48 900 L 220.48 856 Q 220.48 854 218.48 854 L 210.48 854" fill="none" stroke="#002b91" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="light.chart-5" data-to="palette.chart-5-light" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 661.92 926 L 270.48 926 Q 268.48 926 268.48 924 L 268.48 904 Q 268.48 902 266.48 902 L 210.48 902" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 661.92 926 L 270.48 926 Q 268.48 926 268.48 924 L 268.48 904 Q 268.48 902 266.48 902 L 210.48 902" fill="none" stroke="#00185c" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.background" data-to="palette.dark-page" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 76 L 222.48 76 Q 220.48 76 220.48 78 L 220.48 300 Q 220.48 302 218.48 302 L 210.48 302" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 76 L 222.48 76 Q 220.48 76 220.48 78 L 220.48 300 Q 220.48 302 218.48 302 L 210.48 302" fill="none" stroke="#141f35" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.card" data-to="palette.dark-card" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 100 L 224.48 100 Q 222.48 100 222.48 102 L 222.48 324 Q 222.48 326 220.48 326 L 210.48 326" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 100 L 224.48 100 Q 222.48 100 222.48 102 L 222.48 324 Q 222.48 326 220.48 326 L 210.48 326" fill="none" stroke="#202b42" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.popover" data-to="dark.card" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 563.92 124 L 571.92 124 Q 573.92 124 573.92 122 L 573.92 102 Q 573.92 100 571.92 100 L 563.92 100" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 563.92 124 L 571.92 124 Q 573.92 124 573.92 122 L 573.92 102 Q 573.92 100 571.92 100 L 563.92 100" fill="none" stroke="#202b42" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.sidebar" data-to="palette.dark-sidebar" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 148 L 229.48 148 Q 227.48 148 227.48 150 L 227.48 348 Q 227.48 350 225.48 350 L 210.48 350" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 148 L 229.48 148 Q 227.48 148 227.48 150 L 227.48 348 Q 227.48 350 225.48 350 L 210.48 350" fill="none" stroke="#1a253c" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.foreground" data-to="palette.dark-ink" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 326.48 172 L 234.48 172 Q 232.48 172 232.48 174 L 232.48 372 Q 232.48 374 230.48 374 L 210.48 374" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 172 L 234.48 172 Q 232.48 172 232.48 174 L 232.48 372 Q 232.48 374 230.48 374 L 210.48 374" fill="none" stroke="#d1d4da" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.card-foreground" data-to="palette.dark-ink" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 326.48 196 L 234.48 196 Q 232.48 196 232.48 198 L 232.48 372 Q 232.48 374 230.48 374 L 210.48 374" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 196 L 234.48 196 Q 232.48 196 232.48 198 L 232.48 372 Q 232.48 374 230.48 374 L 210.48 374" fill="none" stroke="#d1d4da" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="232.48" cy="196.00" r="3.00" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="dark.popover-foreground" data-to="palette.dark-ink" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 326.48 220 L 234.48 220 Q 232.48 220 232.48 222 L 232.48 372 Q 232.48 374 230.48 374 L 210.48 374" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 220 L 234.48 220 Q 232.48 220 232.48 222 L 232.48 372 Q 232.48 374 230.48 374 L 210.48 374" fill="none" stroke="#d1d4da" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="232.48" cy="220.00" r="3.00" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="dark.sidebar-foreground" data-to="palette.dark-ink" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 326.48 244 L 234.48 244 Q 232.48 244 232.48 246 L 232.48 372 Q 232.48 374 230.48 374 L 210.48 374" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 244 L 234.48 244 Q 232.48 244 232.48 246 L 232.48 372 Q 232.48 374 230.48 374 L 210.48 374" fill="none" stroke="#d1d4da" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="232.48" cy="244.00" r="3.00" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="dark.muted" data-to="palette.dark-muted" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 268 L 239.48 268 Q 237.48 268 237.48 270 L 237.48 396 Q 237.48 398 235.48 398 L 210.48 398" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 268 L 239.48 268 Q 237.48 268 237.48 270 L 237.48 396 Q 237.48 398 235.48 398 L 210.48 398" fill="none" stroke="#27334a" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.muted-foreground" data-to="palette.dark-muted-ink" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 292 L 244.48 292 Q 242.48 292 242.48 294 L 242.48 420 Q 242.48 422 240.48 422 L 210.48 422" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 292 L 244.48 292 Q 242.48 292 242.48 294 L 242.48 420 Q 242.48 422 240.48 422 L 210.48 422" fill="none" stroke="#a2a5aa" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.border" data-to="palette.dark-border" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 316 L 249.48 316 Q 247.48 316 247.48 318 L 247.48 444 Q 247.48 446 245.48 446 L 210.48 446" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 316 L 249.48 316 Q 247.48 316 247.48 318 L 247.48 444 Q 247.48 446 245.48 446 L 210.48 446" fill="none" stroke="#31405d" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.input" data-to="dark.border" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 563.92 340 L 571.92 340 Q 573.92 340 573.92 338 L 573.92 318 Q 573.92 316 571.92 316 L 563.92 316" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 563.92 340 L 571.92 340 Q 573.92 340 573.92 338 L 573.92 318 Q 573.92 316 571.92 316 L 563.92 316" fill="none" stroke="#31405d" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.sidebar-border" data-to="dark.border" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 563.92 364 L 571.92 364 Q 573.92 364 573.92 362 L 573.92 318 Q 573.92 316 571.92 316 L 563.92 316" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 563.92 364 L 571.92 364 Q 573.92 364 573.92 362 L 573.92 318 Q 573.92 316 571.92 316 L 563.92 316" fill="none" stroke="#31405d" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.primary" data-to="palette.primary-dark" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 388 L 254.48 388 Q 252.48 388 252.48 390 L 252.48 492 Q 252.48 494 250.48 494 L 210.48 494" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 388 L 254.48 388 Q 252.48 388 252.48 390 L 252.48 492 Q 252.48 494 250.48 494 L 210.48 494" fill="none" stroke="#2e6df6" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.primary-foreground" data-to="palette.dark-on-primary" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 412 L 259.48 412 Q 257.48 412 257.48 414 L 257.48 540 Q 257.48 542 255.48 542 L 210.48 542" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 412 L 259.48 412 Q 257.48 412 257.48 414 L 257.48 540 Q 257.48 542 255.48 542 L 210.48 542" fill="none" stroke="#000000" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.ring" data-to="dark.primary" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 563.92 436 L 578.42 436 Q 580.42 436 580.42 434 L 580.42 390 Q 580.42 388 578.42 388 L 563.92 388" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 563.92 436 L 578.42 436 Q 580.42 436 580.42 434 L 580.42 390 Q 580.42 388 578.42 388 L 563.92 388" fill="none" stroke="#2e6df6" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="580.42" cy="436.00" r="3.00" fill="#2e6df6" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="dark.sidebar-primary" data-to="dark.primary" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 563.92 460 L 578.42 460 Q 580.42 460 580.42 458 L 580.42 390 Q 580.42 388 578.42 388 L 563.92 388" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 563.92 460 L 578.42 460 Q 580.42 460 580.42 458 L 580.42 390 Q 580.42 388 578.42 388 L 563.92 388" fill="none" stroke="#2e6df6" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="580.42" cy="460.00" r="3.00" fill="#2e6df6" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="dark.sidebar-primary-foreground" data-to="dark.primary-foreground" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 563.92 484 L 571.92 484 Q 573.92 484 573.92 482 L 573.92 414 Q 573.92 412 571.92 412 L 563.92 412" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 563.92 484 L 571.92 484 Q 573.92 484 573.92 482 L 573.92 414 Q 573.92 412 571.92 412 L 563.92 412" fill="none" stroke="#000000" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.sidebar-ring" data-to="dark.primary" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 563.92 508 L 578.42 508 Q 580.42 508 580.42 506 L 580.42 390 Q 580.42 388 578.42 388 L 563.92 388" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 563.92 508 L 578.42 508 Q 580.42 508 580.42 506 L 580.42 390 Q 580.42 388 578.42 388 L 563.92 388" fill="none" stroke="#2e6df6" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.secondary" data-to="palette.secondary-dark" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 532 L 264.48 532 Q 262.48 532 262.48 534 L 262.48 588 Q 262.48 590 260.48 590 L 210.48 590" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 532 L 264.48 532 Q 262.48 532 262.48 534 L 262.48 588 Q 262.48 590 260.48 590 L 210.48 590" fill="none" stroke="#273757" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.secondary-foreground" data-to="dark.foreground" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 563.92 556 L 591.42 556 Q 593.42 556 593.42 554 L 593.42 174 Q 593.42 172 591.42 172 L 563.92 172" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 563.92 556 L 591.42 556 Q 593.42 556 593.42 554 L 593.42 174 Q 593.42 172 591.42 172 L 563.92 172" fill="none" stroke="#d1d4da" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="593.42" cy="556.00" r="3.00" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="dark.accent" data-to="palette.accent-dark" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 580 L 269.48 580 Q 267.48 580 267.48 582 L 267.48 636 Q 267.48 638 265.48 638 L 210.48 638" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 580 L 269.48 580 Q 267.48 580 267.48 582 L 267.48 636 Q 267.48 638 265.48 638 L 210.48 638" fill="none" stroke="#354c79" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.accent-foreground" data-to="dark.foreground" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 563.92 604 L 591.42 604 Q 593.42 604 593.42 602 L 593.42 174 Q 593.42 172 591.42 172 L 563.92 172" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 563.92 604 L 591.42 604 Q 593.42 604 593.42 602 L 593.42 174 Q 593.42 172 591.42 172 L 563.92 172" fill="none" stroke="#d1d4da" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.sidebar-accent" data-to="dark.accent" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 563.92 628 L 571.92 628 Q 573.92 628 573.92 626 L 573.92 582 Q 573.92 580 571.92 580 L 563.92 580" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 563.92 628 L 571.92 628 Q 573.92 628 573.92 626 L 573.92 582 Q 573.92 580 571.92 580 L 563.92 580" fill="none" stroke="#354c79" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.sidebar-accent-foreground" data-to="dark.accent-foreground" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 563.92 652 L 578.42 652 Q 580.42 652 580.42 650 L 580.42 606 Q 580.42 604 578.42 604 L 563.92 604" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 563.92 652 L 578.42 652 Q 580.42 652 580.42 650 L 580.42 606 Q 580.42 604 578.42 604 L 563.92 604" fill="none" stroke="#d1d4da" stroke-width="1.5"/>
+    <circle class="conn-junction" cx="580.42" cy="604.00" r="3.00" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  </g>
+  <g class="connection" data-from="dark.destructive" data-to="palette.destructive-dark" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 676 L 274.48 676 Q 272.48 676 272.48 678 L 272.48 684 Q 272.48 686 270.48 686 L 210.48 686" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 676 L 274.48 676 Q 272.48 676 272.48 678 L 272.48 684 Q 272.48 686 270.48 686 L 210.48 686" fill="none" stroke="#ff2129" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.chart-1" data-to="palette.chart-1-dark" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 326.48 700 L 279.48 700 Q 277.48 700 277.48 702 L 277.48 732 Q 277.48 734 275.48 734 L 210.48 734" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 700 L 279.48 700 Q 277.48 700 277.48 702 L 277.48 732 Q 277.48 734 275.48 734 L 210.48 734" fill="none" stroke="#bfd5ff" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.chart-2" data-to="palette.chart-2-dark" data-flow="start" style="--active-outline: var(--on-surface)">
+    <path class="conn-bg" d="M 326.48 724 L 284.48 724 Q 282.48 724 282.48 726 L 282.48 780 Q 282.48 782 280.48 782 L 210.48 782" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 724 L 284.48 724 Q 282.48 724 282.48 726 L 282.48 780 Q 282.48 782 280.48 782 L 210.48 782" fill="none" stroke="#99bcff" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.chart-3" data-to="palette.chart-3-dark" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 748 L 289.48 748 Q 287.48 748 287.48 750 L 287.48 828 Q 287.48 830 285.48 830 L 210.48 830" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 748 L 289.48 748 Q 287.48 748 287.48 750 L 287.48 828 Q 287.48 830 285.48 830 L 210.48 830" fill="none" stroke="#73a2ff" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.chart-4" data-to="palette.chart-4-dark" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 772 L 294.48 772 Q 292.48 772 292.48 774 L 292.48 876 Q 292.48 878 290.48 878 L 210.48 878" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 772 L 294.48 772 Q 292.48 772 292.48 774 L 292.48 876 Q 292.48 878 290.48 878 L 210.48 878" fill="none" stroke="#5388f5" stroke-width="1.5"/>
+  </g>
+  <g class="connection" data-from="dark.chart-5" data-to="palette.chart-5-dark" data-flow="start" style="--active-outline: var(--surface)">
+    <path class="conn-bg" d="M 326.48 796 L 318.48 796 Q 316.48 796 316.48 798 L 316.48 924 Q 316.48 926 314.48 926 L 210.48 926" fill="none" stroke="var(--on-surface)" stroke-width="2.5"/>
+    <path class="conn-fg" d="M 326.48 796 L 318.48 796 Q 316.48 796 316.48 798 L 316.48 924 Q 316.48 926 314.48 926 L 210.48 926" fill="none" stroke="#4f75c0" stroke-width="1.5"/>
+  </g>
+</g>
+<g class="palette-table-group">
+  <rect class="palette-table" x="661.9200000000001" y="170" width="237.44" height="768" rx="2"/>
+  <rect class="palette-table__row palette-table__row--header" x="661.9200000000001" y="170" width="237.44" height="24" rx="2"/>
+  <text class="palette-table__label palette-table__label--header" x="673.9200000000001" y="186" font-size="12">light</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="194" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="210" font-size="12">background</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="218" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="234" font-size="12">card</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="242" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="258" font-size="12">popover</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="266" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="282" font-size="12">sidebar</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="290" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="306" font-size="12">foreground</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="314" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="330" font-size="12">card-foreground</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="338" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="354" font-size="12">popover-foreground</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="362" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="378" font-size="12">sidebar-foreground</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="386" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="402" font-size="12">muted</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="410" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="426" font-size="12">muted-foreground</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="434" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="450" font-size="12">border</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="458" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="474" font-size="12">input</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="482" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="498" font-size="12">sidebar-border</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="506" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="522" font-size="12">primary</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="530" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="546" font-size="12">primary-foreground</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="554" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="570" font-size="12">ring</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="578" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="594" font-size="12">sidebar-primary</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="602" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="618" font-size="12">sidebar-primary-foreground</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="626" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="642" font-size="12">sidebar-ring</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="650" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="666" font-size="12">secondary</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="674" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="690" font-size="12">secondary-foreground</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="698" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="714" font-size="12">accent</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="722" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="738" font-size="12">accent-foreground</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="746" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="762" font-size="12">sidebar-accent</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="770" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="786" font-size="12">sidebar-accent-foreground</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="794" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="810" font-size="12">destructive</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="818" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="834" font-size="12">chart-1</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="842" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="858" font-size="12">chart-2</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="866" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="882" font-size="12">chart-3</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="890" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="906" font-size="12">chart-4</text>
+  <rect class="palette-table__row" x="661.9200000000001" y="914" width="237.44" height="24"/>
+  <text class="palette-table__label" x="673.9200000000001" y="930" font-size="12">chart-5</text>
+</g>
+<g class="palette-table-group">
+  <rect class="palette-table" x="326.48" y="40" width="237.44" height="768" rx="2"/>
+  <rect class="palette-table__row palette-table__row--header" x="326.48" y="40" width="237.44" height="24" rx="2"/>
+  <text class="palette-table__label palette-table__label--header" x="338.48" y="56" font-size="12">dark</text>
+  <rect class="palette-table__row" x="326.48" y="64" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="80" font-size="12">background</text>
+  <rect class="palette-table__row" x="326.48" y="88" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="104" font-size="12">card</text>
+  <rect class="palette-table__row" x="326.48" y="112" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="128" font-size="12">popover</text>
+  <rect class="palette-table__row" x="326.48" y="136" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="152" font-size="12">sidebar</text>
+  <rect class="palette-table__row" x="326.48" y="160" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="176" font-size="12">foreground</text>
+  <rect class="palette-table__row" x="326.48" y="184" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="200" font-size="12">card-foreground</text>
+  <rect class="palette-table__row" x="326.48" y="208" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="224" font-size="12">popover-foreground</text>
+  <rect class="palette-table__row" x="326.48" y="232" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="248" font-size="12">sidebar-foreground</text>
+  <rect class="palette-table__row" x="326.48" y="256" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="272" font-size="12">muted</text>
+  <rect class="palette-table__row" x="326.48" y="280" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="296" font-size="12">muted-foreground</text>
+  <rect class="palette-table__row" x="326.48" y="304" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="320" font-size="12">border</text>
+  <rect class="palette-table__row" x="326.48" y="328" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="344" font-size="12">input</text>
+  <rect class="palette-table__row" x="326.48" y="352" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="368" font-size="12">sidebar-border</text>
+  <rect class="palette-table__row" x="326.48" y="376" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="392" font-size="12">primary</text>
+  <rect class="palette-table__row" x="326.48" y="400" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="416" font-size="12">primary-foreground</text>
+  <rect class="palette-table__row" x="326.48" y="424" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="440" font-size="12">ring</text>
+  <rect class="palette-table__row" x="326.48" y="448" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="464" font-size="12">sidebar-primary</text>
+  <rect class="palette-table__row" x="326.48" y="472" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="488" font-size="12">sidebar-primary-foreground</text>
+  <rect class="palette-table__row" x="326.48" y="496" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="512" font-size="12">sidebar-ring</text>
+  <rect class="palette-table__row" x="326.48" y="520" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="536" font-size="12">secondary</text>
+  <rect class="palette-table__row" x="326.48" y="544" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="560" font-size="12">secondary-foreground</text>
+  <rect class="palette-table__row" x="326.48" y="568" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="584" font-size="12">accent</text>
+  <rect class="palette-table__row" x="326.48" y="592" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="608" font-size="12">accent-foreground</text>
+  <rect class="palette-table__row" x="326.48" y="616" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="632" font-size="12">sidebar-accent</text>
+  <rect class="palette-table__row" x="326.48" y="640" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="656" font-size="12">sidebar-accent-foreground</text>
+  <rect class="palette-table__row" x="326.48" y="664" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="680" font-size="12">destructive</text>
+  <rect class="palette-table__row" x="326.48" y="688" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="704" font-size="12">chart-1</text>
+  <rect class="palette-table__row" x="326.48" y="712" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="728" font-size="12">chart-2</text>
+  <rect class="palette-table__row" x="326.48" y="736" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="752" font-size="12">chart-3</text>
+  <rect class="palette-table__row" x="326.48" y="760" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="776" font-size="12">chart-4</text>
+  <rect class="palette-table__row" x="326.48" y="784" width="237.44" height="24"/>
+  <text class="palette-table__label" x="338.48" y="800" font-size="12">chart-5</text>
+</g>
+<g class="palette-table-group">
+  <rect class="palette-table" x="947.3600000000001" y="40" width="88.64" height="48" rx="2"/>
+  <rect class="palette-table__row palette-table__row--header" x="947.3600000000001" y="40" width="88.64" height="24" rx="2"/>
+  <text class="palette-table__label palette-table__label--header" x="959.3600000000001" y="56" font-size="12">seeds</text>
+  <rect class="palette-table__row" x="947.3600000000001" y="64" width="88.64" height="24"/>
+  <text class="palette-table__label" x="959.3600000000001" y="80" font-size="12">seed-0</text>
+</g>
+<g class="palette-table-group">
+  <rect class="palette-table" x="40" y="98" width="170.48" height="840" rx="2"/>
+  <rect class="palette-table__row palette-table__row--header" x="40" y="98" width="170.48" height="24" rx="2"/>
+  <text class="palette-table__label palette-table__label--header" x="52" y="114" font-size="12">palette</text>
+  <rect class="palette-table__row" x="40" y="122" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="138" font-size="12">light-page</text>
+  <rect class="palette-table__row" x="40" y="146" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="162" font-size="12">light-card</text>
+  <rect class="palette-table__row" x="40" y="170" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="186" font-size="12">light-sidebar</text>
+  <rect class="palette-table__row" x="40" y="194" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="210" font-size="12">light-ink</text>
+  <rect class="palette-table__row" x="40" y="218" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="234" font-size="12">light-muted</text>
+  <rect class="palette-table__row" x="40" y="242" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="258" font-size="12">light-muted-ink</text>
+  <rect class="palette-table__row" x="40" y="266" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="282" font-size="12">light-border</text>
+  <rect class="palette-table__row" x="40" y="290" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="306" font-size="12">dark-page</text>
+  <rect class="palette-table__row" x="40" y="314" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="330" font-size="12">dark-card</text>
+  <rect class="palette-table__row" x="40" y="338" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="354" font-size="12">dark-sidebar</text>
+  <rect class="palette-table__row" x="40" y="362" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="378" font-size="12">dark-ink</text>
+  <rect class="palette-table__row" x="40" y="386" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="402" font-size="12">dark-muted</text>
+  <rect class="palette-table__row" x="40" y="410" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="426" font-size="12">dark-muted-ink</text>
+  <rect class="palette-table__row" x="40" y="434" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="450" font-size="12">dark-border</text>
+  <rect class="palette-table__row" x="40" y="458" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="474" font-size="12">primary-light</text>
+  <rect class="palette-table__row" x="40" y="482" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="498" font-size="12">primary-dark</text>
+  <rect class="palette-table__row" x="40" y="506" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="522" font-size="12">light-on-primary</text>
+  <rect class="palette-table__row" x="40" y="530" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="546" font-size="12">dark-on-primary</text>
+  <rect class="palette-table__row" x="40" y="554" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="570" font-size="12">secondary-light</text>
+  <rect class="palette-table__row" x="40" y="578" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="594" font-size="12">secondary-dark</text>
+  <rect class="palette-table__row" x="40" y="602" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="618" font-size="12">accent-light</text>
+  <rect class="palette-table__row" x="40" y="626" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="642" font-size="12">accent-dark</text>
+  <rect class="palette-table__row" x="40" y="650" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="666" font-size="12">destructive-light</text>
+  <rect class="palette-table__row" x="40" y="674" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="690" font-size="12">destructive-dark</text>
+  <rect class="palette-table__row" x="40" y="698" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="714" font-size="12">chart-1-light</text>
+  <rect class="palette-table__row" x="40" y="722" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="738" font-size="12">chart-1-dark</text>
+  <rect class="palette-table__row" x="40" y="746" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="762" font-size="12">chart-2-light</text>
+  <rect class="palette-table__row" x="40" y="770" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="786" font-size="12">chart-2-dark</text>
+  <rect class="palette-table__row" x="40" y="794" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="810" font-size="12">chart-3-light</text>
+  <rect class="palette-table__row" x="40" y="818" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="834" font-size="12">chart-3-dark</text>
+  <rect class="palette-table__row" x="40" y="842" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="858" font-size="12">chart-4-light</text>
+  <rect class="palette-table__row" x="40" y="866" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="882" font-size="12">chart-4-dark</text>
+  <rect class="palette-table__row" x="40" y="890" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="906" font-size="12">chart-5-light</text>
+  <rect class="palette-table__row" x="40" y="914" width="170.48" height="24"/>
+  <text class="palette-table__label" x="52" y="930" font-size="12">chart-5-dark</text>
+</g>
+<g class="dots">
+  <circle cx="899.3600000000001" cy="206" r="5" fill="#f4f7fc" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="206" r="5" fill="#f4f7fc" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="230" r="5" fill="#fdfdff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="230" r="5" fill="#fdfdff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="254" r="5" fill="#fdfdff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="278" r="5" fill="#eff2f7" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="278" r="5" fill="#eff2f7" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="302" r="5" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="302" r="5" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="326" r="5" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="326" r="5" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="350" r="5" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="350" r="5" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="374" r="5" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="374" r="5" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="398" r="5" fill="#e5e8ed" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="398" r="5" fill="#e5e8ed" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="422" r="5" fill="#555e6f" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="422" r="5" fill="#555e6f" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="446" r="5" fill="#d3d6dc" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="446" r="5" fill="#d3d6dc" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="470" r="5" fill="#d3d6dc" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="494" r="5" fill="#d3d6dc" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="518" r="5" fill="#2563eb" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="518" r="5" fill="#2563eb" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="542" r="5" fill="#ffffff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="542" r="5" fill="#ffffff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="566" r="5" fill="#2563eb" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="590" r="5" fill="#2563eb" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="614" r="5" fill="#ffffff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="638" r="5" fill="#2563eb" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="662" r="5" fill="#dce8ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="662" r="5" fill="#dce8ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="686" r="5" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="710" r="5" fill="#bed5ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="710" r="5" fill="#bed5ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="734" r="5" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="758" r="5" fill="#bed5ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="782" r="5" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="806" r="5" fill="#df202e" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="806" r="5" fill="#df202e" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="830" r="5" fill="#4a85ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="830" r="5" fill="#4a85ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="854" r="5" fill="#2462ea" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="854" r="5" fill="#2462ea" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="878" r="5" fill="#0441c8" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="878" r="5" fill="#0441c8" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="902" r="5" fill="#002b91" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="902" r="5" fill="#002b91" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="899.3600000000001" cy="926" r="5" fill="#00185c" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="661.9200000000001" cy="926" r="5" fill="#00185c" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="76" r="5" fill="#141f35" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="76" r="5" fill="#141f35" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="100" r="5" fill="#202b42" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="100" r="5" fill="#202b42" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="124" r="5" fill="#202b42" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="148" r="5" fill="#1a253c" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="148" r="5" fill="#1a253c" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="172" r="5" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="172" r="5" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="196" r="5" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="196" r="5" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="220" r="5" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="220" r="5" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="244" r="5" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="244" r="5" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="268" r="5" fill="#27334a" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="268" r="5" fill="#27334a" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="292" r="5" fill="#a2a5aa" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="292" r="5" fill="#a2a5aa" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="316" r="5" fill="#31405d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="316" r="5" fill="#31405d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="340" r="5" fill="#31405d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="364" r="5" fill="#31405d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="388" r="5" fill="#2e6df6" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="388" r="5" fill="#2e6df6" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="412" r="5" fill="#000000" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="412" r="5" fill="#000000" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="436" r="5" fill="#2e6df6" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="460" r="5" fill="#2e6df6" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="484" r="5" fill="#000000" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="508" r="5" fill="#2e6df6" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="532" r="5" fill="#273757" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="532" r="5" fill="#273757" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="556" r="5" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="580" r="5" fill="#354c79" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="580" r="5" fill="#354c79" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="604" r="5" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="628" r="5" fill="#354c79" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="652" r="5" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="676" r="5" fill="#ff2129" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="676" r="5" fill="#ff2129" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="700" r="5" fill="#bfd5ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="700" r="5" fill="#bfd5ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="724" r="5" fill="#99bcff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="724" r="5" fill="#99bcff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="748" r="5" fill="#73a2ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="748" r="5" fill="#73a2ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="772" r="5" fill="#5388f5" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="772" r="5" fill="#5388f5" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="563.9200000000001" cy="796" r="5" fill="#4f75c0" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="326.48" cy="796" r="5" fill="#4f75c0" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="1036.0000000000002" cy="76" r="5" fill="#2563eb" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="134" r="5" fill="#f4f7fc" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="158" r="5" fill="#fdfdff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="182" r="5" fill="#eff2f7" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="206" r="5" fill="#262e3d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="230" r="5" fill="#e5e8ed" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="254" r="5" fill="#555e6f" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="278" r="5" fill="#d3d6dc" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="302" r="5" fill="#141f35" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="326" r="5" fill="#202b42" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="350" r="5" fill="#1a253c" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="374" r="5" fill="#d1d4da" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="398" r="5" fill="#27334a" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="422" r="5" fill="#a2a5aa" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="446" r="5" fill="#31405d" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="470" r="5" fill="#2563eb" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="494" r="5" fill="#2e6df6" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="518" r="5" fill="#ffffff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="542" r="5" fill="#000000" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="566" r="5" fill="#dce8ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="590" r="5" fill="#273757" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="614" r="5" fill="#bed5ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="638" r="5" fill="#354c79" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="662" r="5" fill="#df202e" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="686" r="5" fill="#ff2129" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="710" r="5" fill="#4a85ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="734" r="5" fill="#bfd5ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="758" r="5" fill="#2462ea" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="782" r="5" fill="#99bcff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="806" r="5" fill="#0441c8" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="830" r="5" fill="#73a2ff" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="854" r="5" fill="#002b91" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="878" r="5" fill="#5388f5" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="902" r="5" fill="#00185c" stroke="var(--on-surface)" stroke-width="0.75"/>
+  <circle cx="210.48" cy="926" r="5" fill="#4f75c0" stroke="var(--on-surface)" stroke-width="0.75"/>
+</g>
+<g class="conn-labels">
+  <text class="conn-label" x="472.20" y="21.00" font-size="10" data-from="light.background" data-to="palette.light-page">ref</text>
+  <text class="conn-label" x="472.20" y="13.50" font-size="10" data-from="light.card" data-to="palette.light-card">ref</text>
+  <text class="conn-label" x="909.36" y="238.00" font-size="10" data-from="light.popover" data-to="light.card">ref</text>
+  <text class="conn-label" x="484.20" y="21.00" font-size="10" data-from="light.sidebar" data-to="palette.light-sidebar">ref</text>
+  <text class="conn-label" x="484.20" y="6.00" font-size="10" data-from="light.foreground" data-to="palette.light-ink">ref</text>
+  <text class="conn-label" x="496.20" y="6.00" font-size="10" data-from="light.card-foreground" data-to="palette.light-ink">ref</text>
+  <text class="conn-label" x="508.20" y="6.00" font-size="10" data-from="light.popover-foreground" data-to="palette.light-ink">ref</text>
+  <text class="conn-label" x="520.20" y="6.00" font-size="10" data-from="light.sidebar-foreground" data-to="palette.light-ink">ref</text>
+  <text class="conn-label" x="520.20" y="26.00" font-size="10" data-from="light.muted" data-to="palette.light-muted">ref</text>
+  <text class="conn-label" x="520.20" y="18.50" font-size="10" data-from="light.muted-foreground" data-to="palette.light-muted-ink">ref</text>
+  <text class="conn-label" x="352.20" y="843.00" font-size="10" data-from="light.border" data-to="palette.light-border">ref</text>
+  <text class="conn-label" x="909.36" y="454.00" font-size="10" data-from="light.input" data-to="light.border">ref</text>
+  <text class="conn-label" x="909.36" y="466.00" font-size="10" data-from="light.sidebar-border" data-to="light.border">ref</text>
+  <text class="conn-label" x="412.20" y="848.00" font-size="10" data-from="light.primary" data-to="palette.primary-light">ref</text>
+  <text class="conn-label" x="424.20" y="853.00" font-size="10" data-from="light.primary-foreground" data-to="palette.light-on-primary">ref</text>
+  <text class="conn-label" x="914.36" y="538.00" font-size="10" data-from="light.ring" data-to="light.primary">ref</text>
+  <text class="conn-label" x="914.36" y="550.00" font-size="10" data-from="light.sidebar-primary" data-to="light.primary">ref</text>
+  <text class="conn-label" x="909.36" y="574.00" font-size="10" data-from="light.sidebar-primary-foreground" data-to="light.primary-foreground">ref</text>
+  <text class="conn-label" x="914.36" y="574.00" font-size="10" data-from="light.sidebar-ring" data-to="light.primary">ref</text>
+  <text class="conn-label" x="388.20" y="814.00" font-size="10" data-from="light.secondary" data-to="palette.secondary-light">ref</text>
+  <text class="conn-label" x="937.36" y="490.00" font-size="10" data-from="light.secondary-foreground" data-to="light.foreground">ref</text>
+  <text class="conn-label" x="388.20" y="866.00" font-size="10" data-from="light.accent" data-to="palette.accent-light">ref</text>
+  <text class="conn-label" x="937.36" y="514.00" font-size="10" data-from="light.accent-foreground" data-to="light.foreground">ref</text>
+  <text class="conn-label" x="909.36" y="730.00" font-size="10" data-from="light.sidebar-accent" data-to="light.accent">ref</text>
+  <text class="conn-label" x="914.36" y="754.00" font-size="10" data-from="light.sidebar-accent-foreground" data-to="light.accent-foreground">ref</text>
+  <text class="conn-label" x="364.20" y="838.00" font-size="10" data-from="light.destructive" data-to="palette.destructive-light">ref</text>
+  <text class="conn-label" x="376.20" y="826.00" font-size="10" data-from="light.chart-1" data-to="palette.chart-1-light">ref</text>
+  <text class="conn-label" x="388.20" y="850.00" font-size="10" data-from="light.chart-2" data-to="palette.chart-2-light">ref</text>
+  <text class="conn-label" x="400.20" y="874.00" font-size="10" data-from="light.chart-3" data-to="palette.chart-3-light">ref</text>
+  <text class="conn-label" x="412.20" y="898.00" font-size="10" data-from="light.chart-4" data-to="palette.chart-4-light">ref</text>
+  <text class="conn-label" x="424.20" y="922.00" font-size="10" data-from="light.chart-5" data-to="palette.chart-5-light">ref</text>
+  <text class="conn-label" x="220.48" y="137.00" font-size="10" data-from="dark.background" data-to="palette.dark-page">ref</text>
+  <text class="conn-label" x="222.48" y="163.00" font-size="10" data-from="dark.card" data-to="palette.dark-card">ref</text>
+  <text class="conn-label" x="573.92" y="108.00" font-size="10" data-from="dark.popover" data-to="dark.card">ref</text>
+  <text class="conn-label" x="227.48" y="204.00" font-size="10" data-from="dark.sidebar" data-to="palette.dark-sidebar">ref</text>
+  <text class="conn-label" x="232.48" y="233.00" font-size="10" data-from="dark.foreground" data-to="palette.dark-ink">ref</text>
+  <text class="conn-label" x="232.48" y="245.00" font-size="10" data-from="dark.card-foreground" data-to="palette.dark-ink">ref</text>
+  <text class="conn-label" x="232.48" y="257.00" font-size="10" data-from="dark.popover-foreground" data-to="palette.dark-ink">ref</text>
+  <text class="conn-label" x="232.48" y="269.00" font-size="10" data-from="dark.sidebar-foreground" data-to="palette.dark-ink">ref</text>
+  <text class="conn-label" x="237.48" y="298.00" font-size="10" data-from="dark.muted" data-to="palette.dark-muted">ref</text>
+  <text class="conn-label" x="242.48" y="327.00" font-size="10" data-from="dark.muted-foreground" data-to="palette.dark-muted-ink">ref</text>
+  <text class="conn-label" x="247.48" y="356.00" font-size="10" data-from="dark.border" data-to="palette.dark-border">ref</text>
+  <text class="conn-label" x="573.92" y="324.00" font-size="10" data-from="dark.input" data-to="dark.border">ref</text>
+  <text class="conn-label" x="573.92" y="336.00" font-size="10" data-from="dark.sidebar-border" data-to="dark.border">ref</text>
+  <text class="conn-label" x="252.48" y="421.00" font-size="10" data-from="dark.primary" data-to="palette.primary-dark">ref</text>
+  <text class="conn-label" x="257.48" y="462.00" font-size="10" data-from="dark.primary-foreground" data-to="palette.dark-on-primary">ref</text>
+  <text class="conn-label" x="580.42" y="408.00" font-size="10" data-from="dark.ring" data-to="dark.primary">ref</text>
+  <text class="conn-label" x="580.42" y="420.00" font-size="10" data-from="dark.sidebar-primary" data-to="dark.primary">ref</text>
+  <text class="conn-label" x="573.92" y="444.00" font-size="10" data-from="dark.sidebar-primary-foreground" data-to="dark.primary-foreground">ref</text>
+  <text class="conn-label" x="580.42" y="444.00" font-size="10" data-from="dark.sidebar-ring" data-to="dark.primary">ref</text>
+  <text class="conn-label" x="262.48" y="551.00" font-size="10" data-from="dark.secondary" data-to="palette.secondary-dark">ref</text>
+  <text class="conn-label" x="593.42" y="360.00" font-size="10" data-from="dark.secondary-foreground" data-to="dark.foreground">ref</text>
+  <text class="conn-label" x="267.48" y="604.00" font-size="10" data-from="dark.accent" data-to="palette.accent-dark">ref</text>
+  <text class="conn-label" x="593.42" y="384.00" font-size="10" data-from="dark.accent-foreground" data-to="dark.foreground">ref</text>
+  <text class="conn-label" x="573.92" y="600.00" font-size="10" data-from="dark.sidebar-accent" data-to="dark.accent">ref</text>
+  <text class="conn-label" x="580.42" y="624.00" font-size="10" data-from="dark.sidebar-accent-foreground" data-to="dark.accent-foreground">ref</text>
+  <text class="conn-label" x="272.48" y="681.00" font-size="10" data-from="dark.destructive" data-to="palette.destructive-dark">ref</text>
+  <text class="conn-label" x="277.48" y="722.00" font-size="10" data-from="dark.chart-1" data-to="palette.chart-1-dark">ref</text>
+  <text class="conn-label" x="282.48" y="763.00" font-size="10" data-from="dark.chart-2" data-to="palette.chart-2-dark">ref</text>
+  <text class="conn-label" x="287.48" y="804.00" font-size="10" data-from="dark.chart-3" data-to="palette.chart-3-dark">ref</text>
+  <text class="conn-label" x="292.48" y="845.00" font-size="10" data-from="dark.chart-4" data-to="palette.chart-4-dark">ref</text>
+  <text class="conn-label" x="316.48" y="905.00" font-size="10" data-from="dark.chart-5" data-to="palette.chart-5-dark">ref</text>
+</g>
+</svg>

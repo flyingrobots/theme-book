@@ -1,0 +1,8 @@
+method                                         light→dark dark→light
+Identity (share accents)                            0.152      0.152
+HSL lightness inversion                             0.151      0.175
+OKLCH lightness inversion                           0.319      0.324
+Material tone table (40 / 80)                       0.124      0.114
+theme-book corporate (s 0.12, b 0.6, k 0.85)        0.080      0.066
+
+leave-one-out (fit on six themes, score the seventh, both directions): 0.081

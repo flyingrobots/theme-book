@@ -1,0 +1,49 @@
+
+Contrast Audit [FAIL] (apca): 14 passed, 12 failed, 0 unverified, 16 advisory
+Coverage: 22 text, 14 ui-graphic, 16 border-advisory
+
+[PASS] (light · text) foreground (#292e34) on background (#f3f7fc) — WCAG 12.72:1 (exact 12.7199) | APCA Lc 95.2
+[PASS] (light · text) card-foreground (#292e34) on card (#fcfeff) — WCAG 13.53:1 (exact 13.5272) | APCA Lc 99.4
+[PASS] (light · text) popover-foreground (#292e34) on popover (#fcfeff) — WCAG 13.53:1 (exact 13.5272) | APCA Lc 99.4
+[FAIL] (light · text) primary-foreground (#000000) on primary (#c97272) — WCAG 6.13:1 (exact 6.1334) | APCA Lc 42.6
+[PASS] (light · text) secondary-foreground (#292e34) on secondary (#79cce2) — WCAG 7.52:1 (exact 7.5250) | APCA Lc 64.3
+[PASS] (light · text) muted-foreground (#585e64) on muted (#e4e8ed) — WCAG 5.33:1 (exact 5.3325) | APCA Lc 68.6
+[PASS] (light · text) muted-foreground (#585e64) on background (#f3f7fc) — WCAG 6.1:1 (exact 6.1002) | APCA Lc 77.5
+[FAIL] (light · text) accent-foreground (#292e34) on accent (#cfa0e8) — WCAG 6.42:1 (exact 6.4161) | APCA Lc 56.4
+[PASS] (light · text) sidebar-foreground (#292e34) on sidebar (#eef2f7) — WCAG 12.17:1 (exact 12.1716) | APCA Lc 92.2
+[FAIL] (light · text) sidebar-primary-foreground (#000000) on sidebar-primary (#c97272) — WCAG 6.13:1 (exact 6.1334) | APCA Lc 42.6
+[FAIL] (light · text) sidebar-accent-foreground (#292e34) on sidebar-accent (#cfa0e8) — WCAG 6.42:1 (exact 6.4161) | APCA Lc 56.4
+[PASS] (light · ui-graphic) sidebar-ring (#c97272) on sidebar (#eef2f7) — WCAG 3.05:1 (exact 3.0455) | APCA Lc 53.4
+[INFO] (light · border-advisory) sidebar-border (#d1d6dc) on sidebar (#eef2f7) — WCAG 1.3:1 (exact 1.3005) | APCA Lc 13.9
+[PASS] (light · ui-graphic) ring (#c97272) on background (#f3f7fc) — WCAG 3.18:1 (exact 3.1827) | APCA Lc 56.4
+[INFO] (light · ui-graphic) chart-1 (#c97272) on background (#f3f7fc) — WCAG 3.18:1 (exact 3.1827) | APCA Lc 56.4
+[INFO] (light · ui-graphic) chart-2 (#a678bd) on background (#f3f7fc) — WCAG 3.23:1 (exact 3.2304) | APCA Lc 57.1
+[INFO] (light · ui-graphic) chart-3 (#ae823c) on background (#f3f7fc) — WCAG 3.22:1 (exact 3.2223) | APCA Lc 57
+[INFO] (light · ui-graphic) chart-4 (#4296ab) on background (#f3f7fc) — WCAG 3.16:1 (exact 3.1576) | APCA Lc 56.2
+[INFO] (light · ui-graphic) chart-5 (#3b9a6f) on background (#f3f7fc) — WCAG 3.23:1 (exact 3.2331) | APCA Lc 57
+[INFO] (light · border-advisory) border (#d1d6dc) on background (#f3f7fc) — WCAG 1.36:1 (exact 1.3591) | APCA Lc 16.9
+[INFO] (light · border-advisory) input (#d1d6dc) on background (#f3f7fc) — WCAG 1.36:1 (exact 1.3591) | APCA Lc 16.9
+[PASS] (dark · text) foreground (#d0d5d9) on background (#292c2f) — WCAG 9.5:1 (exact 9.4956) | APCA Lc -76.5
+[PASS] (dark · text) card-foreground (#d0d5d9) on card (#36393c) — WCAG 7.86:1 (exact 7.8577) | APCA Lc -73.2
+[PASS] (dark · text) popover-foreground (#d0d5d9) on popover (#36393c) — WCAG 7.86:1 (exact 7.8577) | APCA Lc -73.2
+[FAIL] (dark · text) primary-foreground (#000000) on primary (#c97272) — WCAG 6.13:1 (exact 6.1334) | APCA Lc 42.6
+[PASS] (dark · text) secondary-foreground (#292e34) on secondary (#79cce2) — WCAG 7.52:1 (exact 7.5250) | APCA Lc 64.3
+[FAIL] (dark · text) muted-foreground (#a7abaf) on muted (#3d4044) — WCAG 4.51:1 (exact 4.5093) | APCA Lc -46.8
+[FAIL] (dark · text) muted-foreground (#a7abaf) on background (#292c2f) — WCAG 6.08:1 (exact 6.0760) | APCA Lc -52.3
+[FAIL] (dark · text) accent-foreground (#292e34) on accent (#cfa0e8) — WCAG 6.42:1 (exact 6.4161) | APCA Lc 56.4
+[PASS] (dark · text) sidebar-foreground (#d0d5d9) on sidebar (#2f3235) — WCAG 8.72:1 (exact 8.7206) | APCA Lc -75.1
+[FAIL] (dark · text) sidebar-primary-foreground (#000000) on sidebar-primary (#c97272) — WCAG 6.13:1 (exact 6.1334) | APCA Lc 42.6
+[FAIL] (dark · text) sidebar-accent-foreground (#292e34) on sidebar-accent (#cfa0e8) — WCAG 6.42:1 (exact 6.4161) | APCA Lc 56.4
+[FAIL] (dark · ui-graphic) sidebar-ring (#c97272) on sidebar (#2f3235) — WCAG 3.77:1 (exact 3.7663) | APCA Lc -34.7
+[INFO] (dark · border-advisory) sidebar-border (#4a4e52) on sidebar (#2f3235) — WCAG 1.54:1 (exact 1.5368) | APCA Lc -7.7
+[FAIL] (dark · ui-graphic) ring (#c97272) on background (#292c2f) — WCAG 4.1:1 (exact 4.1010) | APCA Lc -36.1
+[INFO] (dark · ui-graphic) chart-1 (#c97272) on background (#292c2f) — WCAG 4.1:1 (exact 4.1010) | APCA Lc -36.1
+[INFO] (dark · ui-graphic) chart-2 (#a678bd) on background (#292c2f) — WCAG 4.04:1 (exact 4.0404) | APCA Lc -35.3
+[INFO] (dark · ui-graphic) chart-3 (#ae823c) on background (#292c2f) — WCAG 4.05:1 (exact 4.0506) | APCA Lc -35.5
+[INFO] (dark · ui-graphic) chart-4 (#4296ab) on background (#292c2f) — WCAG 4.13:1 (exact 4.1336) | APCA Lc -36.3
+[INFO] (dark · ui-graphic) chart-5 (#3b9a6f) on background (#292c2f) — WCAG 4.04:1 (exact 4.0370) | APCA Lc -35.5
+[INFO] (dark · border-advisory) border (#4a4e52) on background (#292c2f) — WCAG 1.67:1 (exact 1.6734) | APCA Lc -9.1
+[INFO] (dark · border-advisory) input (#4a4e52) on background (#292c2f) — WCAG 1.67:1 (exact 1.6734) | APCA Lc -9.1
+
+Assumptions:
+- APCA policy uses |Lc| >= 60 for text (content-text baseline; font size & weight determine exact APCA Bronze/Silver requirements) and |Lc| >= 45 for UI graphics

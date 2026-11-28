@@ -1,0 +1,12 @@
+--- ~/.local/state/baker-street/cases/2026-11-27-theme-book-pr30-r1/evidence/moriarty/probes/derived.orig.ts	2026-11-27 18:09:44
++++ src/derived.ts	2026-11-27 18:09:44
+@@ -29,7 +29,8 @@
+  */
+ import { type DesignBook, color, ref, relativeTo } from "design-book";
+ import { converter, differenceEuclidean, formatHex, parse } from "culori";
+-import { wcagRatio } from "./audit";
++import { parseCssColorExact, wcagRatioExact } from "./audit";
++const wcagRatio = (a: string, b: string) => { const x = parseCssColorExact(a), y = parseCssColorExact(b); return x.ok && y.ok ? wcagRatioExact(x.rgb, y.rgb) : 1; };
+ import { gamutSafeOklch, normalizeHue, parseToOklch, toSafeHex } from "./palette";
+ 
+ type Scope = ReturnType<DesignBook["addScope"]>;

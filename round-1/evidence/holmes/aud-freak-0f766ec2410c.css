@@ -1,0 +1,69 @@
+/* theme-book theme --seed "#0f766e" --seed "#c2410c" --preset shadcn --mood freak --generator oklch --standard wcag-aa --hex */
+/* theme-book v0.4.0 · design-book v0.26.0+main.2d80b33 · audit=pass (wcag-aa) */
+:root {
+  --background: #f1f9f7;
+  --foreground: #1b3330;
+  --card: #fbfefe;
+  --card-foreground: #1b3330;
+  --popover: #fbfefe;
+  --popover-foreground: #1b3330;
+  --primary: #0f766e;
+  --primary-foreground: #ffffff;
+  --secondary: #cff0eb;
+  --secondary-foreground: #1b3330;
+  --muted: #e2eae9;
+  --muted-foreground: #4b6360;
+  --accent: #bcdcd8;
+  --accent-foreground: #1b3330;
+  --destructive: #df202e;
+  --border: #cfd8d7;
+  --input: #cfd8d7;
+  --ring: #0f766e;
+  --chart-1: #72cac0;
+  --chart-2: #4ba39a;
+  --chart-3: #27857c;
+  --chart-4: #00665f;
+  --chart-5: #004842;
+  --sidebar: #ecf4f3;
+  --sidebar-foreground: #1b3330;
+  --sidebar-primary: #0f766e;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #bcdcd8;
+  --sidebar-accent-foreground: #1b3330;
+  --sidebar-border: #cfd8d7;
+  --sidebar-ring: #0f766e;
+}
+
+.dark {
+  --background: #002622;
+  --foreground: #cfd6d5;
+  --card: #0d332e;
+  --card-foreground: #cfd6d5;
+  --popover: #0d332e;
+  --popover-foreground: #cfd6d5;
+  --primary: #27857d;
+  --primary-foreground: #000000;
+  --secondary: #1e3f3b;
+  --secondary-foreground: #cfd6d5;
+  --muted: #163a36;
+  --muted-foreground: #9fa6a5;
+  --accent: #345450;
+  --accent-foreground: #cfd6d5;
+  --destructive: #ff1c36;
+  --border: #1b4943;
+  --input: #1b4943;
+  --ring: #27857d;
+  --chart-1: #99f2e7;
+  --chart-2: #72c9c0;
+  --chart-3: #52aaa0;
+  --chart-4: #378a82;
+  --chart-5: #2d6a63;
+  --sidebar: #062c28;
+  --sidebar-foreground: #cfd6d5;
+  --sidebar-primary: #27857d;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #345450;
+  --sidebar-accent-foreground: #cfd6d5;
+  --sidebar-border: #1b4943;
+  --sidebar-ring: #27857d;
+}

@@ -1,0 +1,57 @@
+
+Contrast Audit [PASS] (wcag-aa): 36 passed, 0 failed, 0 unverified, 6 advisory
+Coverage: 22 text, 14 ui-graphic, 6 border-advisory
+
+[PASS] (light · text) foreground (#1d1f23) on background (#fdfdff) — WCAG 16.24:1 (exact 16.2429) | APCA Lc 102.3
+[PASS] (light · text) card-foreground (#1d1f23) on card (#ffffff) — WCAG 16.5:1 (exact 16.5020) | APCA Lc 103.5
+[PASS] (light · text) popover-foreground (#1d1f23) on popover (#fdfdff) — WCAG 16.24:1 (exact 16.2429) | APCA Lc 102.3
+[PASS] (light · text) primary-foreground (#ffffff) on primary (#2563eb) — WCAG 5.17:1 (exact 5.1696) | APCA Lc -80.3
+[PASS] (light · text) secondary-foreground (#000000) on secondary (#f1f2ff) — WCAG 18.89:1 (exact 18.8867) | APCA Lc 98.8
+[PASS] (light · text) muted-foreground (#52555c) on muted (#eff0f1) — WCAG 6.54:1 (exact 6.5444) | APCA Lc 77
+[PASS] (light · text) muted-foreground (#52555c) on background (#fdfdff) — WCAG 7.35:1 (exact 7.3492) | APCA Lc 84.9
+[PASS] (light · text) accent-foreground (#000000) on accent (#efeafa) — WCAG 17.82:1 (exact 17.8195) | APCA Lc 94.9
+[PASS] (light · text) sidebar-foreground (#1d1f23) on sidebar (#f8f8fa) — WCAG 15.56:1 (exact 15.5585) | APCA Lc 99.4
+[PASS] (light · text) sidebar-primary-foreground (#ffffff) on sidebar-primary (#2563eb) — WCAG 5.17:1 (exact 5.1696) | APCA Lc -80.3
+[PASS] (light · text) sidebar-accent-foreground (#000000) on sidebar-accent (#eae6f6) — WCAG 17.15:1 (exact 17.1458) | APCA Lc 92.5
+[PASS] (light · ui-graphic) sidebar-ring (#2563eb) on sidebar (#f8f8fa) — WCAG 4.87:1 (exact 4.8741) | APCA Lc 70.8
+[INFO] (light · border-advisory) sidebar-border (#dadadc) on sidebar (#f8f8fa) — WCAG 1.32:1 (exact 1.3164) | APCA Lc 15.1
+[PASS] (light · ui-graphic) ring (#2563eb) on background (#fdfdff) — WCAG 5.09:1 (exact 5.0885) | APCA Lc 73.7
+[PASS] (light · ui-graphic) chart-1 (#ab3500) on background (#fdfdff) — WCAG 6.38:1 (exact 6.3793) | APCA Lc 79.9
+[PASS] (light · ui-graphic) chart-2 (#676800) on background (#fdfdff) — WCAG 5.81:1 (exact 5.8113) | APCA Lc 78.3
+[PASS] (light · ui-graphic) chart-3 (#007367) on background (#fdfdff) — WCAG 5.67:1 (exact 5.6655) | APCA Lc 77.1
+[PASS] (light · ui-graphic) chart-4 (#0062bc) on background (#fdfdff) — WCAG 5.95:1 (exact 5.9509) | APCA Lc 78.3
+[PASS] (light · ui-graphic) chart-5 (#99269e) on background (#fdfdff) — WCAG 6.61:1 (exact 6.6145) | APCA Lc 80.8
+[INFO] (light · border-advisory) border (#dfdfe1) on background (#fdfdff) — WCAG 1.31:1 (exact 1.3100) | APCA Lc 15.2
+[INFO] (light · border-advisory) input (#e6e6e8) on background (#fdfdff) — WCAG 1.23:1 (exact 1.2269) | APCA Lc 11.1
+[PASS] (dark · text) foreground (#d7d9dc) on background (#020203) — WCAG 14.66:1 (exact 14.6624) | APCA Lc -83.4
+[PASS] (dark · text) card-foreground (#d7d9dc) on card (#08090b) — WCAG 14.08:1 (exact 14.0825) | APCA Lc -83.3
+[PASS] (dark · text) popover-foreground (#d7d9dc) on popover (#121417) — WCAG 13.04:1 (exact 13.0445) | APCA Lc -82.7
+[PASS] (dark · text) primary-foreground (#000000) on primary (#3a79ff) — WCAG 5.36:1 (exact 5.3581) | APCA Lc 38
+[PASS] (dark · text) secondary-foreground (#ffffff) on secondary (#0a0a19) — WCAG 19.62:1 (exact 19.6204) | APCA Lc -107.7
+[PASS] (dark · text) muted-foreground (#989ba2) on muted (#121417) — WCAG 6.63:1 (exact 6.6287) | APCA Lc -47.4
+[PASS] (dark · text) muted-foreground (#989ba2) on background (#020203) — WCAG 7.45:1 (exact 7.4509) | APCA Lc -48.2
+[PASS] (dark · text) accent-foreground (#ffffff) on accent (#130b1c) — WCAG 19.22:1 (exact 19.2242) | APCA Lc -107.5
+[PASS] (dark · text) sidebar-foreground (#d7d9dc) on sidebar (#08090b) — WCAG 14.08:1 (exact 14.0825) | APCA Lc -83.3
+[PASS] (dark · text) sidebar-primary-foreground (#000000) on sidebar-primary (#3a79ff) — WCAG 5.36:1 (exact 5.3581) | APCA Lc 38
+[PASS] (dark · text) sidebar-accent-foreground (#ffffff) on sidebar-accent (#181729) — WCAG 17.6:1 (exact 17.5985) | APCA Lc -106.6
+[PASS] (dark · ui-graphic) sidebar-ring (#3a79ff) on sidebar (#08090b) — WCAG 5.08:1 (exact 5.0822) | APCA Lc -35.5
+[INFO] (dark · border-advisory) sidebar-border (#27292b) on sidebar (#08090b) — WCAG 1.36:1 (exact 1.3643) | APCA Lc 0
+[PASS] (dark · ui-graphic) ring (#3a79ff) on background (#020203) — WCAG 5.29:1 (exact 5.2915) | APCA Lc -35.6
+[PASS] (dark · ui-graphic) chart-1 (#ff8259) on background (#020203) — WCAG 8.48:1 (exact 8.4819) | APCA Lc -54.4
+[PASS] (dark · ui-graphic) chart-2 (#b1b300) on background (#020203) — WCAG 9.2:1 (exact 9.2018) | APCA Lc -57.9
+[PASS] (dark · ui-graphic) chart-3 (#00c5b2) on background (#020203) — WCAG 9.51:1 (exact 9.5085) | APCA Lc -60
+[PASS] (dark · ui-graphic) chart-4 (#7da9ff) on background (#020203) — WCAG 8.88:1 (exact 8.8796) | APCA Lc -56.2
+[PASS] (dark · ui-graphic) chart-5 (#d87eff) on background (#020203) — WCAG 8.24:1 (exact 8.2443) | APCA Lc -53
+[INFO] (dark · border-advisory) border (#1c1c1f) on background (#020203) — WCAG 1.22:1 (exact 1.2199) | APCA Lc 0
+[INFO] (dark · border-advisory) input (#252528) on background (#020203) — WCAG 1.36:1 (exact 1.3569) | APCA Lc 0
+
+Polarity advisory (WCAG 2.x scores both directions the same; APCA does not):
+[ADVISORY] (dark · text) primary-foreground on primary — passes wcag-aa at 5.36:1 but APCA rates it Lc 38.0, below the Lc 75 needed for fluent body reading
+[ADVISORY] (dark · text) muted-foreground on muted — passes wcag-aa at 6.63:1 but APCA rates it Lc 47.4, below the Lc 75 needed for fluent body reading
+[ADVISORY] (dark · text) muted-foreground on background — passes wcag-aa at 7.45:1 but APCA rates it Lc 48.2, below the Lc 75 needed for fluent body reading
+[ADVISORY] (dark · text) sidebar-primary-foreground on sidebar-primary — passes wcag-aa at 5.36:1 but APCA rates it Lc 38.0, below the Lc 75 needed for fluent body reading
+- Advisory only: it does not affect the exit code. WCAG is the conformance standard;
+  APCA models readability better, especially for light text on dark backgrounds.
+
+Assumptions:
+- sRGB gamut policy: WCAG 2.x ratios are evaluated at full floating-point precision without pre-comparison rounding; colors outside sRGB gamut are marked unverified

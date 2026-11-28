@@ -1,0 +1,44 @@
+corporate wcag-aaa exit 1 :: 
+[FAIL] (light · text) primary-foreground (#000000) on primary (#c97272) — WCAG 6.13:1 (exact 6.1334) | APCA Lc
+[FAIL] (light · text) muted-foreground (#585e64) on muted (#e4e8ed) — WCAG 5.33:1 (exact 5.3325) | APCA Lc 68.
+[FAIL] (light · text) muted-foreground (#585e64) on background (#f3f7fc) — WCAG 6.1:1 (exact 6.1002) | APCA Lc
+[FAIL] (light · text) sidebar-primary-foreground (#000000) on sidebar-primary (#c97272) — WCAG 6.13:1 (exact 6
+[FAIL] (dark · text) primary-foreground (#292e34) on primary (#e89a99) — WCAG 6.2:1 (exact 6.1990) | APCA Lc 5
+[FAIL] (dark · text) muted-foreground (#a7abaf) on muted (#3d4044) — WCAG 4.51:1 (exact 4.5093) | APCA Lc -46.
+[FAIL] (dark · text) muted-foreground (#a7abaf) on background (#292c2f) — WCAG 6.08:1 (exact 6.0760) | APCA Lc
+[FAIL] (dark · text) accent-foreground (#d0d5d9) on accent (#574561) — WCAG 5.85:1 (exact 5.8464) | APCA Lc -6
+[FAIL] (dark · text) sidebar-primary-foreground (#292e34) on sidebar-primary (#e89a99) — WCAG 6.2:1 (exact 6.1
+[FAIL] (dark · text) sidebar-accent-foreground (#d0d5d9) on sidebar-accent (#574561) — WCAG 5.85:1 (exact 5.84
+freak wcag-aaa exit 1 :: 
+[FAIL] (light · text) primary-foreground (#000000) on primary (#c97272) — WCAG 6.13:1 (exact 6.1334) | APCA Lc
+[FAIL] (light · text) muted-foreground (#585e64) on muted (#e4e8ed) — WCAG 5.33:1 (exact 5.3325) | APCA Lc 68.
+[FAIL] (light · text) muted-foreground (#585e64) on background (#f3f7fc) — WCAG 6.1:1 (exact 6.1002) | APCA Lc
+[FAIL] (light · text) accent-foreground (#292e34) on accent (#cfa0e8) — WCAG 6.42:1 (exact 6.4161) | APCA Lc 5
+[FAIL] (light · text) sidebar-primary-foreground (#000000) on sidebar-primary (#c97272) — WCAG 6.13:1 (exact 6
+[FAIL] (light · text) sidebar-accent-foreground (#292e34) on sidebar-accent (#cfa0e8) — WCAG 6.42:1 (exact 6.4
+[FAIL] (dark · text) primary-foreground (#000000) on primary (#c97272) — WCAG 6.13:1 (exact 6.1334) | APCA Lc 
+[FAIL] (dark · text) muted-foreground (#a7abaf) on muted (#3d4044) — WCAG 4.51:1 (exact 4.5093) | APCA Lc -46.
+[FAIL] (dark · text) muted-foreground (#a7abaf) on background (#292c2f) — WCAG 6.08:1 (exact 6.0760) | APCA Lc
+[FAIL] (dark · text) accent-foreground (#292e34) on accent (#cfa0e8) — WCAG 6.42:1 (exact 6.4161) | APCA Lc 56
+[FAIL] (dark · text) sidebar-primary-foreground (#000000) on sidebar-primary (#c97272) — WCAG 6.13:1 (exact 6.
+[FAIL] (dark · text) sidebar-accent-foreground (#292e34) on sidebar-accent (#cfa0e8) — WCAG 6.42:1 (exact 6.41
+corporate apca exit 1 :: 
+[FAIL] (light · text) primary-foreground (#000000) on primary (#c97272) — WCAG 6.13:1 (exact 6.1334) | APCA Lc
+[FAIL] (light · text) sidebar-primary-foreground (#000000) on sidebar-primary (#c97272) — WCAG 6.13:1 (exact 6
+[FAIL] (dark · text) primary-foreground (#292e34) on primary (#e89a99) — WCAG 6.2:1 (exact 6.1990) | APCA Lc 5
+[FAIL] (dark · text) muted-foreground (#a7abaf) on muted (#3d4044) — WCAG 4.51:1 (exact 4.5093) | APCA Lc -46.
+[FAIL] (dark · text) muted-foreground (#a7abaf) on background (#292c2f) — WCAG 6.08:1 (exact 6.0760) | APCA Lc
+[FAIL] (dark · text) sidebar-primary-foreground (#292e34) on sidebar-primary (#e89a99) — WCAG 6.2:1 (exact 6.1
+freak apca exit 1 :: 
+[FAIL] (light · text) primary-foreground (#000000) on primary (#c97272) — WCAG 6.13:1 (exact 6.1334) | APCA Lc
+[FAIL] (light · text) accent-foreground (#292e34) on accent (#cfa0e8) — WCAG 6.42:1 (exact 6.4161) | APCA Lc 5
+[FAIL] (light · text) sidebar-primary-foreground (#000000) on sidebar-primary (#c97272) — WCAG 6.13:1 (exact 6
+[FAIL] (light · text) sidebar-accent-foreground (#292e34) on sidebar-accent (#cfa0e8) — WCAG 6.42:1 (exact 6.4
+[FAIL] (dark · text) primary-foreground (#000000) on primary (#c97272) — WCAG 6.13:1 (exact 6.1334) | APCA Lc 
+[FAIL] (dark · text) muted-foreground (#a7abaf) on muted (#3d4044) — WCAG 4.51:1 (exact 4.5093) | APCA Lc -46.
+[FAIL] (dark · text) muted-foreground (#a7abaf) on background (#292c2f) — WCAG 6.08:1 (exact 6.0760) | APCA Lc
+[FAIL] (dark · text) accent-foreground (#292e34) on accent (#cfa0e8) — WCAG 6.42:1 (exact 6.4161) | APCA Lc 56
+[FAIL] (dark · text) sidebar-primary-foreground (#000000) on sidebar-primary (#c97272) — WCAG 6.13:1 (exact 6.
+[FAIL] (dark · text) sidebar-accent-foreground (#292e34) on sidebar-accent (#cfa0e8) — WCAG 6.42:1 (exact 6.41
+[FAIL] (dark · ui-graphic) sidebar-ring (#c97272) on sidebar (#2f3235) — WCAG 3.77:1 (exact 3.7663) | APCA Lc 
+[FAIL] (dark · ui-graphic) ring (#c97272) on background (#292c2f) — WCAG 4.1:1 (exact 4.1010) | APCA Lc -36.1

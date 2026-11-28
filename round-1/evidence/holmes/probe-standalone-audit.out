@@ -1,0 +1,20 @@
+== corporate #2563eb :: header audit=pass
+standalone audit exit 1: Contrast Audit [FAIL] (wcag-aa): 33 passed, 3 failed, 0 unverified, 6 advisory
+[FAIL] (light · ui-graphic) chart-1 (#91b7ff) on background (#f4f7fc) — WCAG 1.88:1 (exact 1.8766) |
+[FAIL] (light · ui-graphic) chart-2 (#548cff) on background (#f4f7fc) — WCAG 2.98:1 (exact 2.9757) |
+[FAIL] (dark · ui-graphic) chart-5 (#2c57b2) on background (#141f35) — WCAG 2.44:1 (exact 2.4377) | 
+== freak #0f766e #c2410c :: header audit=pass
+standalone audit exit 1: Contrast Audit [FAIL] (wcag-aa): 33 passed, 3 failed, 0 unverified, 6 advisory
+[FAIL] (light · ui-graphic) chart-1 (#72cac0) on background (#f1f9f7) — WCAG 1.8:1 (exact 1.7971) | 
+[FAIL] (light · ui-graphic) chart-2 (#4ba39a) on background (#f1f9f7) — WCAG 2.8:1 (exact 2.8029) | 
+[FAIL] (dark · ui-graphic) chart-5 (#2d6a63) on background (#002622) — WCAG 2.58:1 (exact 2.5788) | 
+== freak #fdf6e3 #002b36 #268bd2 #d33682 #859900 :: header audit=pass
+standalone audit exit 1: Contrast Audit [FAIL] (wcag-aa): 34 passed, 2 failed, 0 unverified, 6 advisory
+[FAIL] (dark · ui-graphic) chart-4 (#1b434f) on background (#002b36) — WCAG 1.4:1 (exact 1.4029) | A
+[FAIL] (dark · ui-graphic) chart-5 (#002b36) on background (#002b36) — WCAG 1:1 (exact 1.0000) | APC
+== corporate #ffffff #000000 :: header audit=pass
+standalone audit exit 1: Contrast Audit [FAIL] (wcag-aa): 32 passed, 4 failed, 0 unverified, 6 advisory
+[FAIL] (light · ui-graphic) chart-1 (#d4d4d4) on background (#ffffff) — WCAG 1.48:1 (exact 1.4823) |
+[FAIL] (dark · ui-graphic) chart-3 (#525252) on background (#0d0d0d) — WCAG 2.49:1 (exact 2.4873) | 
+[FAIL] (dark · ui-graphic) chart-4 (#404040) on background (#0d0d0d) — WCAG 1.87:1 (exact 1.8745) | 
+[FAIL] (dark · ui-graphic) chart-5 (#262626) on background (#0d0d0d) — WCAG 1.28:1 (exact 1.2843) | 

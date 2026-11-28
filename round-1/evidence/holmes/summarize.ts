@@ -1,0 +1,2 @@
+const o = JSON.parse(await Bun.file(process.argv[2]!).text());
+for (const r of o) console.log(r.mood, r.name, r.error ?? `${r.status} p${r.passed} f${r.failed} req=${r.reqFail.join(",")} charts=${r.chartFail.join(",")} | L pri ${r.light.primary} sec ${r.light.secondary}(${r.light.secStatus}) acc ${r.light.accent}(${r.light.accStatus}) dest ${r.light.destructive} w${r.light.whiteOnDestructive} | D pri ${r.dark.primary} sec ${r.dark.secondary}(${r.dark.secStatus}) acc ${r.dark.accent}(${r.dark.accStatus}) bg ${r.dark.bg}`);

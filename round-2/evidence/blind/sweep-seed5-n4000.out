@@ -1,0 +1,12 @@
+subject=~/.local/state/baker-street/cases/2026-11-27-theme-book-pr30-r2/subject seed0=5 palettes=4030 built=8060 chartsAdvisoryRuns=12 failures=11
+corporate ["#eef28d","#93da10","#0be3fc"] status=fail light:sidebar-ring/sidebar=?
+freak ["#eef28d","#93da10","#0be3fc"] status=fail light:sidebar-ring/sidebar=?
+corporate ["#a4b022","#d678fa","#1157c2","#ef28a0","#bc82f2","#376fdd"] status=fail light:sidebar-ring/sidebar=?
+freak ["#a4b022","#d678fa","#1157c2","#ef28a0","#bc82f2","#376fdd"] status=fail light:sidebar-ring/sidebar=?
+corporate ["#eaa4dc","#b13cd1","#6d495c","#c4e40f","#3cb4e0","#65d638"] status=fail light:sidebar-ring/sidebar=?
+freak ["#eaa4dc","#b13cd1","#6d495c","#c4e40f","#3cb4e0","#65d638"] status=fail light:sidebar-ring/sidebar=?
+corporate ["#c065f7","#7e2c78"] status=fail light:sidebar-ring/sidebar=?
+freak ["#c065f7","#7e2c78"] status=fail light:sidebar-ring/sidebar=?
+freak ["#17b6c3","#939851","#4e8906","#6b56bc","#7c4cda","#49ba7a"] status=fail light:secondary-foreground/secondary=? dark:secondary-foreground/secondary=?
+corporate ["#eb2aec","#da1416","#436e1f","#10264e","#e2f474"] status=fail dark:muted-foreground/muted=?
+freak ["#eb2aec","#da1416","#436e1f","#10264e","#e2f474"] status=fail dark:muted-foreground/muted=?

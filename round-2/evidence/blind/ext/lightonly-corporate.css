@@ -1,0 +1,69 @@
+/* theme-book theme --seed "#0f766e" --seed "#c2410c" --seed "#7c3aed" --preset shadcn --mood corporate --generator oklch --standard wcag-aa --hex --book-sha256 e52d7c706b146170a6c27aed91586aaf05b44481fd5adacb9396f3f3dbea7039 --book ~/.local/state/baker-street/cases/2026-11-27-theme-book-pr30-r2/evidence/blind/ext/lightonly.book.ts */
+/* theme-book v0.4.0 · design-book v0.26.0+main.2d80b33 · audit=pass (wcag-aa) */
+:root {
+  --background: #f1f9f7;
+  --foreground: #1b3330;
+  --card: #fbfefe;
+  --card-foreground: #1b3330;
+  --popover: #fbfefe;
+  --popover-foreground: #1b3330;
+  --primary: #0f766e;
+  --primary-foreground: #ffffff;
+  --secondary: #e8e4ff;
+  --secondary-foreground: #1b3330;
+  --muted: #e2eae9;
+  --muted-foreground: #4b6360;
+  --accent: #bcdcd8;
+  --accent-foreground: #1b3330;
+  --destructive: #df202e;
+  --border: #cfd8d7;
+  --input: #cfd8d7;
+  --ring: #0f766e;
+  --chart-1: #123456;
+  --chart-2: #722ae0;
+  --chart-3: #00645d;
+  --chart-4: #00433e;
+  --chart-5: #002825;
+  --sidebar: #ecf4f3;
+  --sidebar-foreground: #1b3330;
+  --sidebar-primary: #0f766e;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #bcdcd8;
+  --sidebar-accent-foreground: #1b3330;
+  --sidebar-border: #cfd8d7;
+  --sidebar-ring: #0f766e;
+}
+
+.dark {
+  --background: #002622;
+  --foreground: #cfd6d5;
+  --card: #0d332e;
+  --card-foreground: #cfd6d5;
+  --popover: #0d332e;
+  --popover-foreground: #cfd6d5;
+  --primary: #69b0a8;
+  --primary-foreground: #1b3330;
+  --secondary: #393254;
+  --secondary-foreground: #cfd6d5;
+  --muted: #163a36;
+  --muted-foreground: #9fa6a5;
+  --accent: #345450;
+  --accent-foreground: #cfd6d5;
+  --destructive: #ff1c36;
+  --border: #1b4943;
+  --input: #1b4943;
+  --ring: #69b0a8;
+  --chart-1: #ffc9b8;
+  --chart-2: #c2b2ff;
+  --chart-3: #75b6ae;
+  --chart-4: #6c9b95;
+  --chart-5: #688985;
+  --sidebar: #062c28;
+  --sidebar-foreground: #cfd6d5;
+  --sidebar-primary: #69b0a8;
+  --sidebar-primary-foreground: #1b3330;
+  --sidebar-accent: #345450;
+  --sidebar-accent-foreground: #cfd6d5;
+  --sidebar-border: #1b4943;
+  --sidebar-ring: #69b0a8;
+}
