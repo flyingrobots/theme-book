@@ -26,7 +26,7 @@ import {
 } from "./render";
 import type { GeneratorKind, Mood } from "./palette";
 
-const VALID_MOODS = new Set<Mood>(["neutral", "muted", "vivid", "editorial", "high-contrast", "freak"]);
+const VALID_MOODS = new Set<Mood>(["neutral", "muted", "vivid", "editorial", "high-contrast", "freak", "corporate"]);
 const VALID_GENERATORS = new Set<GeneratorKind>(["oklch", "poline", "rampensau"]);
 const VALID_PRESETS = new Set<ThemePreset>(["shadcn", "semantic", "slide-deck"]);
 const VALID_FORMATS = new Set<RenderOutputFormat>(["css", "json", "w3-tokens", "svg"]);
@@ -38,11 +38,11 @@ function usage(): string {
 
 Usage:
   theme-book suggest --seed <color> [--seed <color>...] [--surface <color>]
-                     [--polarity light|dark] [--mood neutral|muted|vivid|editorial|high-contrast]
+                     [--polarity light|dark] [--mood neutral|muted|vivid|editorial|high-contrast|corporate|freak]
                      [--generator oklch|poline|rampensau] [--count 8] [--format text|json]
 
   theme-book theme   --seed <color> [--seed <color>...] [--preset shadcn|semantic|slide-deck]
-                     [--mood neutral|muted|vivid|editorial|high-contrast]
+                     [--mood neutral|muted|vivid|editorial|high-contrast|corporate|freak]
                      [--generator oklch|poline|rampensau]
                      [--standard wcag-aa|wcag-aaa|apca]
                      [--format css|json|w3-tokens|svg] [--hex | --native]
@@ -268,6 +268,7 @@ async function main() {
 
     const mood = (getOne(flags, "mood") ?? "neutral") as Mood;
     if (!VALID_MOODS.has(mood)) fail(`invalid --mood "${mood}"`);
+    if ((mood === "freak" || mood === "corporate") && preset !== "shadcn") fail(`--mood ${mood} has rules for --preset shadcn only, not "${preset}"`);
 
     const generator = (getOne(flags, "generator") ?? "oklch") as GeneratorKind;
     if (!VALID_GENERATORS.has(generator)) fail(`invalid --generator "${generator}"`);

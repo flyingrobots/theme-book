@@ -6,8 +6,31 @@ may change between minor versions.
 
 ## [Unreleased]
 
+### Added
+
+- **`--mood corporate` and `--mood freak`: light and dark from one palette** (shadcn only;
+  another preset is refused, exit `2`). The rules are fitted to seven famous light/dark pairs
+  (Solarized, Gruvbox, Tokyo Night, One, Catppuccin, Rosé Pine, GitHub): the dark page takes the
+  light theme's ink hue at about OKLCH L 0.24, never black; accents keep their hue and move
+  together (dark L = (1 − b)(L + s) + b · 0.76, chroma × k), `corporate` at the fitted average
+  (s 0.12, b 0.6, k 0.85) and `freak` unchanged, with the palette's own colors as flat fills;
+  contrast is a floor in each mode. Destructive is a fixed red that holds white text and, in dark,
+  is set for shadcn's 60% over the page; secondary and accent never take a red, yellow or green
+  palette color; charts run light to dark. Both audit with WCAG AA, chart bars advisory. See
+  [docs/topics/derived-moods](docs/topics/derived-moods/README.md).
+- **A benchmark against famous themes** (`scripts/benchmark/`): their verified palettes with
+  sources, a method scorer (theme-book's move lands within OKLab 0.080 of the official accents,
+  against 0.124 for Material's tone table), a scoreboard page with a static SVG, and a Mermaid
+  sankey traced from a built book. The test suite fails if the move gets worse.
+- **`chartsAdvisory`** in `evaluateAudit`: chart bars against the page are reported but not
+  required. Off by default; the derived moods turn it on.
+- **The README specimen is a stack of light/dark pairs**, one row per theme, and a test fails if
+  any two of its elements overlap.
+
 ### Changed
 
+- **The `shadcn` preset's rules version is 1.1.0**, for the two new moods; every other mood's
+  rules are unchanged. An extension naming `shadcn@1.0.0` is refused, as for any version change.
 - **design-book is a vendored build of `main` at `2d80b33`**, nine commits past the 0.26.0
   release: a book that measures APCA itself, contrast thresholds given as text styles, and
   selectors rendered as `var()`. No release contains them yet (meodai/design-book#5). Recipes

@@ -42,8 +42,8 @@ test("a preset's fingerprint depends on its rules, not on the seeds", () => {
 test("the fingerprint covers the achromatic, second-seed, AAA and APCA rule branches", () => {
   const lines = presetRulesLines("shadcn");
   const configs = new Set(lines.map((l) => l.split(" ")[0]));
-  // 5 moods x 3 standards x 3 kinds of seed set.
-  expect(configs.size).toBe(45);
+  // 7 moods (freak and corporate included) x 3 standards x 3 kinds of seed set.
+  expect(configs.size).toBe(63);
   for (const part of ["/achromatic", "/two-seed", "/wcag-aaa/", "/apca/", "high-contrast/"]) {
     expect([part, [...configs].some((c) => c.includes(part))]).toEqual([part, true]);
   }
@@ -160,7 +160,7 @@ test("reloading a rewritten extension applies the new rules, and the hash descri
 });
 
 // flyingrobots/theme-book#24: the hash names the extension module, which may import nothing.
-const HEADER = `name: "x", version: "1.0.0", extends: { preset: "shadcn", version: "1.0.0" }`;
+const HEADER = `name: "x", version: "1.0.0", extends: { preset: "shadcn", version: "${PRESET_RULES_VERSION.shadcn}" }`;
 const module = (name: string, source: string) => {
   const path = join(dir, `${name}.ts`);
   writeFileSync(path, source);

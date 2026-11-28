@@ -9,10 +9,12 @@ Compile rule-based light/dark UI color themes, verify contrast at full floating-
 
 ## Two-Stage Workflow (Pair With `color-expert`)
 
-1. **Choose color direction with `color-expert`** — decide the mood/character (*neutral, muted, vivid, editorial, high-contrast*), hue strategy, medium, naming register, and gamut constraints.
+1. **Choose color direction with `color-expert`** — decide the mood/character (*neutral, muted, vivid, editorial, high-contrast, corporate, freak*), hue strategy, medium, naming register, and gamut constraints.
 2. **Solve & verify with `theme-book`** — pass those seed colors and mood into the `theme-book` CLI so `design-book` resolves semantic roles by constraint (`closest`, `bestContrastWith`, `minContrastWith`, `mostVivid`, `furthestFrom`, `shade`, `colorMix`, `dark extends light`) and verifies serialized outputs against **WCAG 2.1** (`wcag-aa` / `wcag-aaa`) or **APCA Lc** (`apca`).
 
 **Never eyeball contrast ratios or invent ad-hoc hex pairs when `theme-book` can compute and verify them.**
+
+**Generate a theme with `theme-book theme`; never hand-pick its colors and then audit them.** An audit proves a theme is legible, not that its light and dark modes are related. A theme whose colors were chosen by hand, or copied from another theme, and only checked with `theme-book audit` is not a theme-book theme, and must not be described as one. When no preset or mood fits the target, write a book extension, or say that the target needs a preset; do not improvise the colors.
 
 ---
 
@@ -39,7 +41,7 @@ theme-book theme --seed "#2563eb" --preset shadcn --format svg --out theme-graph
 Options:
 - `--seed <color>` (repeatable; opaque in-gamut 8-bit sRGB hex seeds are preserved verbatim when readable; `seed-1` tints `--accent`)
 - `--preset shadcn|semantic|slide-deck`
-- `--mood neutral|muted|vivid|editorial|high-contrast`
+- `--mood neutral|muted|vivid|editorial|high-contrast|corporate|freak`. `corporate` and `freak` (shadcn only) build light and dark from one palette, with rules fitted to famous themes: give the whole palette as seeds, primary first, including its page and ink colors if it has them. `corporate` is quiet (soft tints, accents lifted in dark); `freak` puts the palette's own colors on show as flat fills, the same in both modes. See `docs/topics/derived-moods` in the theme-book repository.
 - `--generator oklch|poline|rampensau` (drives `chart-1..5` with legibility-wins pentagon supplementation when needed)
 - `--standard wcag-aa|wcag-aaa|apca` (defaults to `wcag-aaa` for `high-contrast`, `wcag-aa` otherwise)
 - `--format css|json|w3-tokens|svg` (`json` includes full rule expressions, `chartDiagnostics`, and a versioned `recipe`)
@@ -133,7 +135,7 @@ When a site needs a preset with some rules changed (for example, lighter dark su
 export default {
   name: "school",
   version: "1.0.0",
-  extends: { preset: "shadcn", version: "1.0.0" },
+  extends: { preset: "shadcn", version: "1.1.0" },
   apply({ light, dark, rules }) {
     dark.set("background", rules.closest(rules.color("oklch(0.145 0 0)"), rules.ref("neutrals")));
   },

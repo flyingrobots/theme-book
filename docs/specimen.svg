@@ -1,233 +1,1049 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 832" width="1200" height="832" role="img" aria-label="theme-book UI specimen across editorial and vivid moods in light and dark modes">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 3660" width="1200" height="3660" role="img" aria-label="theme-book UI specimen: 9 themes, each as a light and dark pair">
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
   </style>
   
   <g transform="translate(24, 24)">
     <!-- Panel background -->
-    <rect x="0" y="0" width="564" height="380" rx="14" fill="#fdfdff" stroke="#dfdfe1" stroke-width="1.5"/>
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#f3f7fc" stroke="#d1d6dc" stroke-width="1.5"/>
 
     <!-- Top header row -->
-    <text x="24" y="34" font-size="16" font-weight="700" fill="#1c1f25">editorial · Light</text>
-    <text x="24" y="54" font-size="11.5" fill="#51555e">seed=&quot;#2563eb&quot; · generator=poline · preset=shadcn</text>
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#292e34">Owl Coral · Light</text>
+    <text x="24" y="54" font-size="11.5" fill="#585e64">coral, blue, ochre, green, violet, charcoal · mood=corporate</text>
 
     <!-- Audit pill -->
-    <rect x="430" y="18" width="110" height="24" rx="12" fill="#eff0f2" stroke="#dfdfe1" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#51555e">✓ 18/18 wcag-aa</text>
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#e4e8ed" stroke="#d1d6dc" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#585e64">✓ 13/13 wcag-aa</text>
 
     <!-- Nested Card -->
-    <rect x="24" y="70" width="516" height="172" rx="10" fill="#ffffff" stroke="#dfdfe1" stroke-width="1"/>
-    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#1c1f25">Release v0.4.0</text>
-    <text x="40" y="114" font-size="11.5" fill="#51555e">Three tokens changed since v0.3.0. Review them before publishing.</text>
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#fcfeff" stroke="#d1d6dc" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#292e34">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#585e64">Three tokens changed since v0.3.0. Review them before publishing.</text>
 
     <!-- Input with focus ring -->
-    <rect x="40" y="128" width="236" height="32" rx="6" fill="#fdfdff" stroke="#2563eb" stroke-width="2"/>
-    <text x="52" y="148" font-size="11.5" fill="#1c1f25">theme-book --seed #2563eb</text>
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#f3f7fc" stroke="#c97272" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#292e34">theme-book --seed #e88e8d</text>
 
     <!-- Accent hover badge beside input -->
-    <rect x="288" y="128" width="136" height="32" rx="6" fill="#eaebfe" stroke="#dfdfe1" stroke-width="1"/>
-    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#000000">Draft</text>
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#dfccea" stroke="#d1d6dc" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#292e34">Draft</text>
 
     <!-- Primary + Secondary Buttons -->
-    <rect x="40" y="172" width="116" height="32" rx="6" fill="#2563eb"/>
-    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#ffffff">Publish</text>
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#c97272"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#000000">Publish</text>
 
-    <rect x="166" y="172" width="108" height="32" rx="6" fill="#f1f2ff" stroke="#dfdfe1" stroke-width="1"/>
-    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#000000">Preview</text>
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#cfeef7" stroke="#d1d6dc" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#292e34">Preview</text>
 
-    <!-- Destructive button, drawn as stock shadcn draws it: destructive text on a destructive tint
-         (bg-destructive/10 in light, /20 in dark). Stock shadcn has no destructive-foreground. -->
-    <rect x="288" y="172" width="236" height="32" rx="6" fill="#fdfdff"/>
-    <rect x="288" y="172" width="236" height="32" rx="6" fill="#af3433" fill-opacity="0.1"/>
-    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#af3433">Revoke token</text>
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#f3f7fc"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#df202e" fill-opacity="1"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
 
     <!-- Inline token footer inside card -->
-    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#51555e">primary=#2563eb · accent=#eaebfe · ring=#2563eb</text>
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">primary=#c97272 · accent=#dfccea · ring=#c97272</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#1c1f25">Chart series (chart-1..5 · min OKLab Δ=0.1234)</text>
-    <line x1="24" y1="340" x2="540" y2="340" stroke="#dfdfe1" stroke-width="1"/>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#292e34">Chart series (chart-1..5 · min OKLab Δ=0.0964)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#d1d6dc" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#335eb7"/>
-    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#51555e">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#903d8b"/>
-    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#51555e">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#a04400"/>
-    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#51555e">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#6c6600"/>
-    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#51555e">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#00726f"/>
-    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#51555e">chart-5</text>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#c97272"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#a678bd"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#ae823c"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#4296ab"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#3b9a6f"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-5</text>
   </g>
   
   <g transform="translate(612, 24)">
     <!-- Panel background -->
-    <rect x="0" y="0" width="564" height="380" rx="14" fill="#020203" stroke="#1c1c1f" stroke-width="1.5"/>
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#292c2f" stroke="#4a4e52" stroke-width="1.5"/>
 
     <!-- Top header row -->
-    <text x="24" y="34" font-size="16" font-weight="700" fill="#d7d9dd">editorial · Dark</text>
-    <text x="24" y="54" font-size="11.5" fill="#979ba4">seed=&quot;#2563eb&quot; · generator=poline · preset=shadcn</text>
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#d0d5d9">Owl Coral · Dark</text>
+    <text x="24" y="54" font-size="11.5" fill="#a7abaf">coral, blue, ochre, green, violet, charcoal · mood=corporate</text>
 
     <!-- Audit pill -->
-    <rect x="430" y="18" width="110" height="24" rx="12" fill="#121418" stroke="#1c1c1f" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#979ba4">✓ 18/18 wcag-aa</text>
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#3d4044" stroke="#4a4e52" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a7abaf">✓ 13/13 wcag-aa</text>
 
     <!-- Nested Card -->
-    <rect x="24" y="70" width="516" height="172" rx="10" fill="#08090c" stroke="#1c1c1f" stroke-width="1"/>
-    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#d7d9dd">Release v0.4.0</text>
-    <text x="40" y="114" font-size="11.5" fill="#979ba4">Three tokens changed since v0.3.0. Review them before publishing.</text>
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#36393c" stroke="#4a4e52" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#d0d5d9">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#a7abaf">Three tokens changed since v0.3.0. Review them before publishing.</text>
 
     <!-- Input with focus ring -->
-    <rect x="40" y="128" width="236" height="32" rx="6" fill="#020203" stroke="#5280db" stroke-width="2"/>
-    <text x="52" y="148" font-size="11.5" fill="#d7d9dd">theme-book --seed #2563eb</text>
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#292c2f" stroke="#e89a99" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#d0d5d9">theme-book --seed #e88e8d</text>
 
     <!-- Accent hover badge beside input -->
-    <rect x="288" y="128" width="136" height="32" rx="6" fill="#0f101f" stroke="#1c1c1f" stroke-width="1"/>
-    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#ffffff">Draft</text>
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#574561" stroke="#4a4e52" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#d0d5d9">Draft</text>
 
     <!-- Primary + Secondary Buttons -->
-    <rect x="40" y="172" width="116" height="32" rx="6" fill="#5280db"/>
-    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#000000">Publish</text>
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#e89a99"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#292e34">Publish</text>
 
-    <rect x="166" y="172" width="108" height="32" rx="6" fill="#0a0b16" stroke="#1c1c1f" stroke-width="1"/>
-    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">Preview</text>
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#1e3d45" stroke="#4a4e52" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#d0d5d9">Preview</text>
 
-    <!-- Destructive button, drawn as stock shadcn draws it: destructive text on a destructive tint
-         (bg-destructive/10 in light, /20 in dark). Stock shadcn has no destructive-foreground. -->
-    <rect x="288" y="172" width="236" height="32" rx="6" fill="#020203"/>
-    <rect x="288" y="172" width="236" height="32" rx="6" fill="#f77571" fill-opacity="0.2"/>
-    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#f77571">Revoke token</text>
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#292c2f"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#ff182d" fill-opacity="0.6"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
 
     <!-- Inline token footer inside card -->
-    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#979ba4">primary=#5280db · accent=#0f101f · ring=#5280db</text>
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">primary=#e89a99 · accent=#574561 · ring=#e89a99</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d7d9dd">Chart series (chart-1..5 · min OKLab Δ=0.1473)</text>
-    <line x1="24" y1="340" x2="540" y2="340" stroke="#1c1c1f" stroke-width="1"/>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d0d5d9">Chart series (chart-1..5 · min OKLab Δ=0.0815)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#4a4e52" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#7da9ff"/>
-    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#979ba4">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#df86d7"/>
-    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#979ba4">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#f68a51"/>
-    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#979ba4">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#b8af20"/>
-    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#979ba4">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#00c4be"/>
-    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#979ba4">chart-5</text>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#e89a99"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#c8a0dc"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#d0a970"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#78bcce"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#75c19a"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-5</text>
   </g>
   
   <g transform="translate(24, 428)">
     <!-- Panel background -->
-    <rect x="0" y="0" width="564" height="380" rx="14" fill="#fffdfc" stroke="#e1dfde" stroke-width="1.5"/>
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#f3f7fc" stroke="#d1d6dc" stroke-width="1.5"/>
 
     <!-- Top header row -->
-    <text x="24" y="34" font-size="16" font-weight="700" fill="#231e1c">vivid · Light</text>
-    <text x="24" y="54" font-size="11.5" fill="#5c5351">seeds=&quot;#c2410c, #0f766e&quot; · generator=rampensau · preset=shadcn</text>
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#292e34">Owl Coral, loud · Light</text>
+    <text x="24" y="54" font-size="11.5" fill="#585e64">the same palette, as fidelity · mood=freak</text>
 
     <!-- Audit pill -->
-    <rect x="430" y="18" width="110" height="24" rx="12" fill="#f1f0ef" stroke="#e1dfde" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#5c5351">✓ 18/18 wcag-aa</text>
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#e4e8ed" stroke="#d1d6dc" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#585e64">✓ 13/13 wcag-aa</text>
 
     <!-- Nested Card -->
-    <rect x="24" y="70" width="516" height="172" rx="10" fill="#ffffff" stroke="#e1dfde" stroke-width="1"/>
-    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#231e1c">Release v0.4.0</text>
-    <text x="40" y="114" font-size="11.5" fill="#5c5351">Three tokens changed since v0.3.0. Review them before publishing.</text>
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#fcfeff" stroke="#d1d6dc" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#292e34">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#585e64">Three tokens changed since v0.3.0. Review them before publishing.</text>
 
     <!-- Input with focus ring -->
-    <rect x="40" y="128" width="236" height="32" rx="6" fill="#fffdfc" stroke="#c2410c" stroke-width="2"/>
-    <text x="52" y="148" font-size="11.5" fill="#231e1c">theme-book --seed #c2410c</text>
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#f3f7fc" stroke="#c97272" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#292e34">theme-book --seed #e88e8d</text>
 
     <!-- Accent hover badge beside input -->
-    <rect x="288" y="128" width="136" height="32" rx="6" fill="#f2eae4" stroke="#e1dfde" stroke-width="1"/>
-    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#000000">Draft</text>
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#cfa0e8" stroke="#d1d6dc" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#292e34">Draft</text>
 
     <!-- Primary + Secondary Buttons -->
-    <rect x="40" y="172" width="116" height="32" rx="6" fill="#c2410c"/>
-    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#ffffff">Publish</text>
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#c97272"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#000000">Publish</text>
 
-    <rect x="166" y="172" width="108" height="32" rx="6" fill="#fcf1eb" stroke="#e1dfde" stroke-width="1"/>
-    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#000000">Preview</text>
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#79cce2" stroke="#d1d6dc" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#292e34">Preview</text>
 
-    <!-- Destructive button, drawn as stock shadcn draws it: destructive text on a destructive tint
-         (bg-destructive/10 in light, /20 in dark). Stock shadcn has no destructive-foreground. -->
-    <rect x="288" y="172" width="236" height="32" rx="6" fill="#fffdfc"/>
-    <rect x="288" y="172" width="236" height="32" rx="6" fill="#be0f22" fill-opacity="0.1"/>
-    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#be0f22">Revoke token</text>
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#f3f7fc"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#df202e" fill-opacity="1"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
 
     <!-- Inline token footer inside card -->
-    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5c5351">primary=#c2410c · accent=#f2eae4 · ring=#c2410c</text>
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">primary=#c97272 · accent=#cfa0e8 · ring=#c97272</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#231e1c">Chart series (chart-1..5 · min OKLab Δ=0.1194)</text>
-    <line x1="24" y1="340" x2="540" y2="340" stroke="#e1dfde" stroke-width="1"/>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#292e34">Chart series (chart-1..5 · min OKLab Δ=0.0964)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#d1d6dc" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#00736b"/>
-    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5c5351">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#005ccb"/>
-    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5c5351">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#9d2397"/>
-    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5c5351">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#a53d00"/>
-    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5c5351">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#626a00"/>
-    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5c5351">chart-5</text>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#c97272"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#a678bd"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#ae823c"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#4296ab"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#3b9a6f"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#585e64">chart-5</text>
   </g>
   
   <g transform="translate(612, 428)">
     <!-- Panel background -->
-    <rect x="0" y="0" width="564" height="380" rx="14" fill="#020202" stroke="#1c1c1c" stroke-width="1.5"/>
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#292c2f" stroke="#4a4e52" stroke-width="1.5"/>
 
     <!-- Top header row -->
-    <text x="24" y="34" font-size="16" font-weight="700" fill="#dcd8d7">vivid · Dark</text>
-    <text x="24" y="54" font-size="11.5" fill="#a19997">seeds=&quot;#c2410c, #0f766e&quot; · generator=rampensau · preset=shadcn</text>
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#d0d5d9">Owl Coral, loud · Dark</text>
+    <text x="24" y="54" font-size="11.5" fill="#a7abaf">the same palette, as fidelity · mood=freak</text>
 
     <!-- Audit pill -->
-    <rect x="430" y="18" width="110" height="24" rx="12" fill="#171312" stroke="#1c1c1c" stroke-width="1"/>
-    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a19997">✓ 18/18 wcag-aa</text>
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#3d4044" stroke="#4a4e52" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a7abaf">✓ 13/13 wcag-aa</text>
 
     <!-- Nested Card -->
-    <rect x="24" y="70" width="516" height="172" rx="10" fill="#0b0808" stroke="#1c1c1c" stroke-width="1"/>
-    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#dcd8d7">Release v0.4.0</text>
-    <text x="40" y="114" font-size="11.5" fill="#a19997">Three tokens changed since v0.3.0. Review them before publishing.</text>
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#36393c" stroke="#4a4e52" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#d0d5d9">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#a7abaf">Three tokens changed since v0.3.0. Review them before publishing.</text>
 
     <!-- Input with focus ring -->
-    <rect x="40" y="128" width="236" height="32" rx="6" fill="#020202" stroke="#d45529" stroke-width="2"/>
-    <text x="52" y="148" font-size="11.5" fill="#dcd8d7">theme-book --seed #c2410c</text>
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#292c2f" stroke="#c97272" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#d0d5d9">theme-book --seed #e88e8d</text>
 
     <!-- Accent hover badge beside input -->
-    <rect x="288" y="128" width="136" height="32" rx="6" fill="#06100f" stroke="#1c1c1c" stroke-width="1"/>
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#cfa0e8" stroke="#4a4e52" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#292e34">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#c97272"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#000000">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#79cce2" stroke="#4a4e52" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#292e34">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#292c2f"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#ff182d" fill-opacity="0.6"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">primary=#c97272 · accent=#cfa0e8 · ring=#c97272</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d0d5d9">Chart series (chart-1..5 · min OKLab Δ=0.0964)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#4a4e52" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#c97272"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#a678bd"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#ae823c"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#4296ab"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#3b9a6f"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7abaf">chart-5</text>
+  </g>
+  
+  <g transform="translate(24, 832)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#ffffff" stroke="#dedede" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#272f32">Corporate · Light</text>
+    <text x="24" y="54" font-size="11.5" fill="#575f63">white, fog, stone, charcoal, one blue · mood=corporate</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#f0f0f0" stroke="#dedede" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#575f63">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#ffffff" stroke="#dedede" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#272f32">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#575f63">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#ffffff" stroke="#3b93f1" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#272f32">theme-book --seed #ffffff</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#b6d8ff" stroke="#dedede" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#272f32">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#3b93f1"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#000000">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#d8eaff" stroke="#dedede" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#272f32">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#ffffff"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#df202e" fill-opacity="1"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#575f63">primary=#3b93f1 · accent=#b6d8ff · ring=#3b93f1</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#272f32">Chart series (chart-1..5 · min OKLab Δ=0.099)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#dedede" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#81bbff"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#575f63">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#3c94f2"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#575f63">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#1475d0"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#575f63">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#0058a3"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#575f63">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#003d75"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#575f63">chart-5</text>
+  </g>
+  
+  <g transform="translate(612, 832)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#192123" stroke="#374245" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#ccd6da">Corporate · Dark</text>
+    <text x="24" y="54" font-size="11.5" fill="#9da6aa">white, fog, stone, charcoal, one blue · mood=corporate</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#2c3537" stroke="#374245" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#9da6aa">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#252d2f" stroke="#374245" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#ccd6da">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#9da6aa">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#192123" stroke="#79b7ff" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#ccd6da">theme-book --seed #ffffff</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#2e4f74" stroke="#374245" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#ccd6da">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#79b7ff"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#272f32">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#203956" stroke="#374245" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#ccd6da">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#192123"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#ff1f35" fill-opacity="0.6"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">primary=#79b7ff · accent=#2e4f74 · ring=#79b7ff</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#ccd6da">Chart series (chart-1..5 · min OKLab Δ=0.1003)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#374245" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#c7e0ff"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#81bbff"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#549beb"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#427dbf"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#346091"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#9da6aa">chart-5</text>
+  </g>
+  
+  <g transform="translate(24, 1236)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#e9e6dd" stroke="#c9c5bb" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#302e27">Paper &amp; ink · Light</text>
+    <text x="24" y="54" font-size="11.5" fill="#605d56">blue, paper, taupe, black, coral · mood=freak</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#dad7ce" stroke="#c9c5bb" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#605d56">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#efeeeb" stroke="#c9c5bb" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#302e27">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#605d56">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#e9e6dd" stroke="#0274bd" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#302e27">theme-book --seed #0274bd</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#b7d9f8" stroke="#c9c5bb" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#302e27">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#0274bd"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#ffffff">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#d6ebff" stroke="#c9c5bb" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#302e27">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#e9e6dd"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#df202e" fill-opacity="1"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">primary=#0274bd · accent=#b7d9f8 · ring=#0274bd</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#302e27">Chart series (chart-1..5 · min OKLab Δ=0.1001)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#c9c5bb" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#76beff"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#3b98e4"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#0f79c2"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#005b97"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#00406b"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605d56">chart-5</text>
+  </g>
+  
+  <g transform="translate(612, 1236)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#211f19" stroke="#423f37" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#d7d4cb">Paper &amp; ink · Dark</text>
+    <text x="24" y="54" font-size="11.5" fill="#a7a49c">blue, paper, taupe, black, coral · mood=freak</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#35332c" stroke="#423f37" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a7a49c">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#2d2b25" stroke="#423f37" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#d7d4cb">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#a7a49c">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#211f19" stroke="#127ac4" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#d7d4cb">theme-book --seed #0274bd</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#2f506e" stroke="#423f37" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#d7d4cb">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#127ac4"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#000000">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#1c3a55" stroke="#423f37" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#d7d4cb">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#211f19"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#ff213c" fill-opacity="0.6"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">primary=#127ac4 · accent=#2f506e · ring=#127ac4</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d7d4cb">Chart series (chart-1..5 · min OKLab Δ=0.1013)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#423f37" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#c4e2ff"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#76beff"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#429eea"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#347fbe"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#2b628f"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a7a49c">chart-5</text>
+  </g>
+  
+  <g transform="translate(24, 1640)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#f5eedd" stroke="#d5cdb9" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#1f303b">Merino · Light</text>
+    <text x="24" y="54" font-size="11.5" fill="#4e606d">Merino, Rock Blue, Venice Blue · mood=corporate</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#e6dfce" stroke="#d5cdb9" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#4e606d">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#f9f7f0" stroke="#d5cdb9" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#1f303b">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#4e606d">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#f5eedd" stroke="#5d8ba5" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#1f303b">theme-book --seed #f5eedd</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#c5d7e3" stroke="#d5cdb9" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#1f303b">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#5d8ba5"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#000000">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#d3ecfc" stroke="#d5cdb9" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#1f303b">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#f5eedd"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#df202e" fill-opacity="1"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4e606d">primary=#5d8ba5 · accent=#c5d7e3 · ring=#5d8ba5</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#1f303b">Chart series (chart-1..5 · min OKLab Δ=0.0992)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#d5cdb9" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#8fbfda"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4e606d">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#6b99b3"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4e606d">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#4e7b94"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4e606d">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#315e76"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4e606d">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#134259"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4e606d">chart-5</text>
+  </g>
+  
+  <g transform="translate(612, 1640)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#062232" stroke="#214459" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#dbd4c3">Merino · Dark</text>
+    <text x="24" y="54" font-size="11.5" fill="#aba494">Merino, Rock Blue, Venice Blue · mood=corporate</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#1b3647" stroke="#214459" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#aba494">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#132e3f" stroke="#214459" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#dbd4c3">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#aba494">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#062232" stroke="#8cb4cb" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#dbd4c3">theme-book --seed #f5eedd</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#3e505a" stroke="#214459" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#dbd4c3">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#8cb4cb"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#1f303b">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#243b4a" stroke="#214459" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#dbd4c3">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#062232"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#ff1f2b" fill-opacity="0.6"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aba494">primary=#8cb4cb · accent=#3e505a · ring=#8cb4cb</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#dbd4c3">Chart series (chart-1..5 · min OKLab Δ=0.0995)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#214459" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#bce5fd"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aba494">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#96bed5"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aba494">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#789eb5"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aba494">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#5a8096"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aba494">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#3e6377"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#aba494">chart-5</text>
+  </g>
+  
+  <g transform="translate(24, 2044)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#f6f6fc" stroke="#d5d5dc" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#2c2c3c">Vista &amp; Oxford · Light</text>
+    <text x="24" y="54" font-size="11.5" fill="#5b5c6e">a duotone: Vista Blue, Blue Oxford · mood=corporate</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#e7e7ed" stroke="#d5d5dc" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#5b5c6e">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#fdfdff" stroke="#d5d5dc" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#2c2c3c">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#5b5c6e">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#f6f6fc" stroke="#6f86d6" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#2c2c3c">theme-book --seed #92acff</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#c7d3f6" stroke="#d5d5dc" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2c2c3c">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#6f86d6"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#000000">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#dfe7ff" stroke="#d5d5dc" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#2c2c3c">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#f6f6fc"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#df202e" fill-opacity="1"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5b5c6e">primary=#6f86d6 · accent=#c7d3f6 · ring=#6f86d6</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#2c2c3c">Chart series (chart-1..5 · min OKLab Δ=0.0984)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#d5d5dc" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#9cb4ff"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5b5c6e">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#758dde"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5b5c6e">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#596fbd"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5b5c6e">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#3e519c"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5b5c6e">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#25357d"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5b5c6e">chart-5</text>
+  </g>
+  
+  <g transform="translate(612, 2044)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#0e0929" stroke="#2b2752" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#d3d4d9">Vista &amp; Oxford · Dark</text>
+    <text x="24" y="54" font-size="11.5" fill="#a4a4a9">a duotone: Vista Blue, Blue Oxford · mood=corporate</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#1f1c3e" stroke="#2b2752" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a4a4a9">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#181536" stroke="#2b2752" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#d3d4d9">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#a4a4a9">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#0e0929" stroke="#97adf4" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#d3d4d9">theme-book --seed #92acff</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#414c6c" stroke="#2b2752" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#d3d4d9">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#97adf4"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#2c2c3c">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#2d3655" stroke="#2b2752" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#d3d4d9">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#0e0929"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#ff2f31" fill-opacity="0.6"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a9">primary=#97adf4 · accent=#414c6c · ring=#97adf4</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d3d4d9">Chart series (chart-1..5 · min OKLab Δ=0.0984)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#2b2752" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#d2ddff"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a9">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#9db4fb"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a9">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#7f95da"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a9">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#6276b8"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a9">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#475999"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a9">chart-5</text>
+  </g>
+  
+  <g transform="translate(24, 2448)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#f8f6fb" stroke="#d7d5db" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#2f2c33">Dusty rose · Light</text>
+    <text x="24" y="54" font-size="11.5" fill="#5f5c64">Salt Box to Romantic, five dusty roses · mood=corporate</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#e9e7ec" stroke="#d7d5db" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#5f5c64">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#fefdff" stroke="#d7d5db" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#2f2c33">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#5f5c64">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#f8f6fb" stroke="#af7d87" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#2f2c33">theme-book --seed #6d6875</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#e4ced2" stroke="#d7d5db" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2f2c33">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#af7d87"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#000000">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#f8e1e5" stroke="#d7d5db" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#2f2c33">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#f8f6fb"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#df202e" fill-opacity="1"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5f5c64">primary=#af7d87 · accent=#e4ced2 · ring=#af7d87</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#2f2c33">Chart series (chart-1..5 · min OKLab Δ=0.0275)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#d7d5db" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#bf7969"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5f5c64">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#c0767a"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5f5c64">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#b08269"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5f5c64">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#af7d87"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5f5c64">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#592e38"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5f5c64">chart-5</text>
+  </g>
+  
+  <g transform="translate(612, 2448)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#201e24" stroke="#413e46" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#d5d3d9">Dusty rose · Dark</text>
+    <text x="24" y="54" font-size="11.5" fill="#a5a3a9">Salt Box to Romantic, five dusty roses · mood=corporate</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#343138" stroke="#413e46" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a5a3a9">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#2c2a30" stroke="#413e46" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#d5d3d9">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#a5a3a9">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#201e24" stroke="#d0a4ac" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#d5d3d9">theme-book --seed #6d6875</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#5b474b" stroke="#413e46" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#d5d3d9">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#d0a4ac"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#2f2c33">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#453236" stroke="#413e46" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#d5d3d9">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#201e24"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#ff2135" fill-opacity="0.6"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">primary=#d0a4ac · accent=#5b474b · ring=#d0a4ac</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d5d3d9">Chart series (chart-1..5 · min OKLab Δ=0.0217)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#413e46" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#dfa092"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#e09ea0"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#d1a892"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#d0a4ac"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#ac8189"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-5</text>
+  </g>
+  
+  <g transform="translate(24, 2852)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#ffffff" stroke="#dedede" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#2e2e2e">Black &amp; white · Light</text>
+    <text x="24" y="54" font-size="11.5" fill="#5d5d5d">no hue at all · mood=corporate</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#f0f0f0" stroke="#dedede" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#5d5d5d">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#ffffff" stroke="#dedede" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#2e2e2e">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#5d5d5d">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#ffffff" stroke="#2e2e2e" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#2e2e2e">theme-book --seed #ffffff</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#d4d4d4" stroke="#dedede" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2e2e2e">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#2e2e2e"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#ffffff">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#e8e8e8" stroke="#dedede" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#2e2e2e">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#ffffff"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#df202e" fill-opacity="1"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5d5d5d">primary=#2e2e2e · accent=#d4d4d4 · ring=#2e2e2e</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#2e2e2e">Chart series (chart-1..5 · min OKLab Δ=0.0671)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#dedede" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#d4d4d4"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5d5d5d">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#737373"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5d5d5d">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#525252"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5d5d5d">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#404040"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5d5d5d">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#262626"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#5d5d5d">chart-5</text>
+  </g>
+  
+  <g transform="translate(612, 2852)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#0d0d0d" stroke="#2b2b2b" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#d4d4d4">Black &amp; white · Dark</text>
+    <text x="24" y="54" font-size="11.5" fill="#a4a4a4">no hue at all · mood=corporate</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#1f1f1f" stroke="#2b2b2b" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a4a4a4">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#181818" stroke="#2b2b2b" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#d4d4d4">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#a4a4a4">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#0d0d0d" stroke="#d4d4d4" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#d4d4d4">theme-book --seed #ffffff</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#4d4d4d" stroke="#2b2b2b" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#d4d4d4">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#d4d4d4"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#0d0d0d">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#383838" stroke="#2b2b2b" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#d4d4d4">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#0d0d0d"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#ff2d44" fill-opacity="0.6"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a4">primary=#d4d4d4 · accent=#4d4d4d · ring=#d4d4d4</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d4d4d4">Chart series (chart-1..5 · min OKLab Δ=0.0671)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#2b2b2b" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#d4d4d4"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a4">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#737373"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a4">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#525252"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a4">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#404040"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a4">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#262626"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a4a4a4">chart-5</text>
+  </g>
+  
+  <g transform="translate(24, 3256)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#f7f6fc" stroke="#d7d5dc" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#302b3b">Memphis · Light</text>
+    <text x="24" y="54" font-size="11.5" fill="#605a6c">pink, yellow, turquoise, tomato, violet · mood=freak</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#e9e7ed" stroke="#d7d5dc" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#605a6c">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#fefdff" stroke="#d7d5dc" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#302b3b">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#605a6c">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#f7f6fc" stroke="#f31685" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#302b3b">theme-book --seed #f31685</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#8c16f3" stroke="#d7d5dc" stroke-width="1"/>
     <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#ffffff">Draft</text>
 
     <!-- Primary + Secondary Buttons -->
-    <rect x="40" y="172" width="116" height="32" rx="6" fill="#d45529"/>
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#f31685"/>
     <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#000000">Publish</text>
 
-    <rect x="166" y="172" width="108" height="32" rx="6" fill="#140805" stroke="#1c1c1c" stroke-width="1"/>
-    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">Preview</text>
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#16f3dd" stroke="#d7d5dc" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#302b3b">Preview</text>
 
-    <!-- Destructive button, drawn as stock shadcn draws it: destructive text on a destructive tint
-         (bg-destructive/10 in light, /20 in dark). Stock shadcn has no destructive-foreground. -->
-    <rect x="288" y="172" width="236" height="32" rx="6" fill="#020202"/>
-    <rect x="288" y="172" width="236" height="32" rx="6" fill="#ff6e6a" fill-opacity="0.2"/>
-    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ff6e6a">Revoke token</text>
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#f7f6fc"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#db1a2b" fill-opacity="1"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
 
     <!-- Inline token footer inside card -->
-    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a19997">primary=#d45529 · accent=#06100f · ring=#d45529</text>
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605a6c">primary=#f31685 · accent=#8c16f3 · ring=#f31685</text>
 
     <!-- 5-Bar Chart (chart-1..5) -->
-    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#dcd8d7">Chart series (chart-1..5 · min OKLab Δ=0.1554)</text>
-    <line x1="24" y1="340" x2="540" y2="340" stroke="#1c1c1c" stroke-width="1"/>
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#302b3b">Chart series (chart-1..5 · min OKLab Δ=0.134)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#d7d5dc" stroke-width="1"/>
     
-    <rect x="42" y="300" width="72" height="40" rx="5" fill="#01c5b8"/>
-    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a19997">chart-1</text>
-    <rect x="144" y="284" width="72" height="56" rx="5" fill="#74acff"/>
-    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a19997">chart-2</text>
-    <rect x="246" y="310" width="72" height="30" rx="5" fill="#ea76ec"/>
-    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a19997">chart-3</text>
-    <rect x="348" y="292" width="72" height="48" rx="5" fill="#ff8259"/>
-    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a19997">chart-4</text>
-    <rect x="450" y="316" width="72" height="24" rx="5" fill="#abb500"/>
-    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a19997">chart-5</text>
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#a68700"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605a6c">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#f31685"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605a6c">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#f33416"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605a6c">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#009a8c"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605a6c">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#8c16f3"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#605a6c">chart-5</text>
+  </g>
+  
+  <g transform="translate(612, 3256)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="564" height="380" rx="14" fill="#221a31" stroke="#433958" stroke-width="1.5"/>
+
+    <!-- Top header row -->
+    <text x="24" y="34" font-size="16" font-weight="700" fill="#d5d3d9">Memphis · Dark</text>
+    <text x="24" y="54" font-size="11.5" fill="#a5a3a9">pink, yellow, turquoise, tomato, violet · mood=freak</text>
+
+    <!-- Audit pill -->
+    <rect x="430" y="18" width="110" height="24" rx="12" fill="#362e46" stroke="#433958" stroke-width="1"/>
+    <text x="485" y="34" text-anchor="middle" font-size="11" font-weight="600" fill="#a5a3a9">✓ 13/13 wcag-aa</text>
+
+    <!-- Nested Card -->
+    <rect x="24" y="70" width="516" height="172" rx="10" fill="#2e263e" stroke="#433958" stroke-width="1"/>
+    <text x="40" y="96" font-size="13.5" font-weight="600" fill="#d5d3d9">Release v0.4.0</text>
+    <text x="40" y="114" font-size="11.5" fill="#a5a3a9">Three tokens changed since v0.3.0. Review them before publishing.</text>
+
+    <!-- Input with focus ring -->
+    <rect x="40" y="128" width="236" height="32" rx="6" fill="#221a31" stroke="#f31685" stroke-width="2"/>
+    <text x="52" y="148" font-size="11.5" fill="#d5d3d9">theme-book --seed #f31685</text>
+
+    <!-- Accent hover badge beside input -->
+    <rect x="288" y="128" width="136" height="32" rx="6" fill="#8c16f3" stroke="#433958" stroke-width="1"/>
+    <text x="356" y="148" text-anchor="middle" font-size="11.5" font-weight="500" fill="#ffffff">Draft</text>
+
+    <!-- Primary + Secondary Buttons -->
+    <rect x="40" y="172" width="116" height="32" rx="6" fill="#f31685"/>
+    <text x="98" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#000000">Publish</text>
+
+    <rect x="166" y="172" width="108" height="32" rx="6" fill="#16f3dd" stroke="#433958" stroke-width="1"/>
+    <text x="220" y="192" text-anchor="middle" font-size="12" font-weight="500" fill="#302b3b">Preview</text>
+
+    <!-- Destructive button, as shadcn's Button variant="destructive" draws it: white text on
+         bg-destructive in light, on bg-destructive/60 over the page in dark. Stock shadcn has no
+         destructive-foreground. -->
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#221a31"/>
+    <rect x="288" y="172" width="236" height="32" rx="6" fill="#ff1a27" fill-opacity="0.6"/>
+    <text x="406" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Revoke token</text>
+
+    <!-- Inline token footer inside card -->
+    <text x="40" y="226" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">primary=#f31685 · accent=#8c16f3 · ring=#f31685</text>
+
+    <!-- 5-Bar Chart (chart-1..5) -->
+    <text x="24" y="272" font-size="11.5" font-weight="600" fill="#d5d3d9">Chart series (chart-1..5 · min OKLab Δ=0.134)</text>
+    <line x1="24" y1="340" x2="540" y2="340" stroke="#433958" stroke-width="1"/>
+    
+    <rect x="42" y="300" width="72" height="40" rx="5" fill="#a68700"/>
+    <text x="78" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-1</text>
+    <rect x="144" y="284" width="72" height="56" rx="5" fill="#f31685"/>
+    <text x="180" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-2</text>
+    <rect x="246" y="310" width="72" height="30" rx="5" fill="#f33416"/>
+    <text x="282" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-3</text>
+    <rect x="348" y="292" width="72" height="48" rx="5" fill="#009a8c"/>
+    <text x="384" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-4</text>
+    <rect x="450" y="316" width="72" height="24" rx="5" fill="#8c16f3"/>
+    <text x="486" y="354" text-anchor="middle" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#a5a3a9">chart-5</text>
   </g>
 </svg>

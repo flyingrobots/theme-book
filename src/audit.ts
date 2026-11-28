@@ -442,6 +442,12 @@ export interface AuditOptions {
   standard?: AuditStandard;
   withFixes?: boolean;
   strictBorders?: boolean;
+  /**
+   * Chart bars against the page are reported but not required. Stock shadcn's chart colors are one
+   * set for both modes, spread from light to dark, so some bars cannot clear 3:1 on both pages; a
+   * theme built that way opts in. Off by default: every other audit holds charts to 3:1.
+   */
+  chartsAdvisory?: boolean;
 }
 
 const COLOR_TOKEN_NAME_RE =
@@ -980,7 +986,8 @@ export function evaluateAudit(
   }
 
   for (const item of rawPairs) {
-    const required = item.kind !== "border-advisory" || strictBorders;
+    const isChart = /^chart-\d+$/.test(item.fgToken);
+    const required = (item.kind !== "border-advisory" || strictBorders) && !(isChart && (opts.chartsAdvisory ?? false));
     const { requiredWcag, requiredApca } = pairThresholds(item.kind, standard);
 
     const fgParsed = parseMaybeErrorToken(item.fgRaw);

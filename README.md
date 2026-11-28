@@ -2,7 +2,7 @@
 
 A local CLI and AI agent skill for compiling rule-based light/dark UI color themes, auditing contrast at full floating-point precision, and suggesting accessible companion colors — built on [David Aerne's (`@meodai`)](https://github.com/meodai) [`design-book`](https://github.com/meodai/design-book), [`poline`](https://github.com/meodai/poline) and [`rampensau`](https://github.com/meodai/rampensau), and on [`culori`](https://culorijs.org/), and paired with the separate [`skill.color-expert`](https://github.com/meodai/skill.color-expert) skill.
 
-![theme-book UI specimen across editorial and vivid moods in light and dark modes](docs/specimen.svg)
+![theme-book UI specimen: nine themes from one palette each, every one as a light and dark pair, side by side](docs/specimen.svg)
 
 ---
 
@@ -39,6 +39,11 @@ theme-book theme --seed "#2563eb" --preset shadcn --mood editorial --generator p
 
 # High-contrast theme (defaults to wcag-aaa and solves all text + status fills at 7:1)
 theme-book theme --seed "#2563eb" --preset shadcn --mood high-contrast --audit
+
+# Light and dark from one palette (see "Light and Dark From One Palette" below): corporate is
+# quiet, freak puts every palette color on show
+theme-book theme --seed "#e88e8d" --seed "#79cce2" --seed "#d1a45f" --seed "#60bd90" \
+  --seed "#cfa0e8" --seed "#292c2f" --preset shadcn --mood corporate --audit
 
 # APCA-verified dual-seed theme (seed-1 explicitly tints --accent)
 theme-book theme --seed "#c2410c" --seed "#0f766e" --preset shadcn --mood vivid --generator rampensau --standard apca --audit
@@ -84,7 +89,7 @@ passed to `apply`, so the file needs no imports, and it may have none:
 export default {
   name: "school",
   version: "1.0.0",
-  extends: { preset: "shadcn", version: "1.0.0" },
+  extends: { preset: "shadcn", version: "1.1.0" },
   apply({ dark, rules }) {
     dark.set("background", rules.closest(rules.color("oklch(0.145 0 0)"), rules.ref("neutrals")));
   },
@@ -123,9 +128,59 @@ theme-book theme --book school.book.ts --seed "#0f766e" --mood editorial --stand
 
 | Preset | Rules version |
 | --- | --- |
-| `shadcn` | 1.0.0 |
+| `shadcn` | 1.1.0 |
 | `semantic` | 1.0.0 |
 | `slide-deck` | 1.0.0 |
+
+---
+
+## Light and Dark From One Palette
+
+`--mood corporate` and `--mood freak` (shadcn only) build both modes from one palette, with rules fitted to
+seven famous light/dark pairs: Solarized, Gruvbox, Tokyo Night, One, Catppuccin, Rosé Pine and GitHub. Every
+color is a rule on where it came from, so this diagram is traced from the book theme-book built for Owl
+Coral's palette, not drawn by hand:
+
+```mermaid
+sankey-beta
+
+fixed status red,light destructive,1
+light charts,dark charts,5
+light destructive,dark destructive,1
+light lines,dark lines,5
+light primary,dark primary,2
+light secondary and accent,dark secondary and accent,4
+light surfaces,dark surfaces,4
+light text,dark text,10
+seed blue,light charts,1
+seed blue,light secondary and accent,1
+seed charcoal,light lines,3
+seed charcoal,light secondary and accent,1
+seed charcoal,light surfaces,4
+seed charcoal,light text,10
+seed coral,light charts,1
+seed coral,light lines,2
+seed coral,light primary,2
+seed green,light charts,1
+seed ochre,light charts,1
+seed violet,light charts,1
+seed violet,light secondary and accent,2
+```
+
+The three findings it rests on, each measured against the famous themes:
+
+- **The dark page takes the light theme's ink hue** (within 2-16° in six of the seven), at about L 0.24, never black.
+- **Accents keep their hue and move together:** dark L = (1 − b)(L + s) + b · 0.76, chroma × k. One setting
+  lands within OKLab 0.080 of the official accents on average, against 0.124 for Material's tone table and
+  0.319 for flipping OKLCH lightness.
+- **Contrast is a floor in each mode, never an equality across modes.**
+
+![Famous themes' official light sides, theme-book's dark sides generated from them, the official dark sides,
+and a lightness-against-hue chart of both moves](docs/topics/derived-moods/scoreboard.svg)
+
+The full derivation, the benchmark and its limits are in
+[docs/topics/derived-moods](docs/topics/derived-moods/README.md), with an
+[interactive scoreboard](docs/topics/derived-moods/scoreboard.html) (open it locally; GitHub shows its source).
 
 ---
 

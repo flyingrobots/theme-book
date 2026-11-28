@@ -518,8 +518,8 @@ describe("theme-book Commit 3: full rule provenance, reproducible recipe & deter
     const generated = generateSpecimenSvg();
     expect(onDisk).toBe(generated);
     expect(onDisk).toContain("<svg");
-    expect(onDisk).toContain("editorial");
-    expect(onDisk).toContain("vivid");
+    expect(onDisk).toContain("corporate");
+    expect(onDisk).toContain("freak");
   });
 });
 

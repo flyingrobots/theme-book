@@ -16,7 +16,7 @@ import {
   type ExactRgb,
 } from "./audit";
 
-export type Mood = "neutral" | "muted" | "vivid" | "editorial" | "high-contrast" | "freak";
+export type Mood = "neutral" | "muted" | "vivid" | "editorial" | "high-contrast" | "freak" | "corporate";
 export type GeneratorKind = "oklch" | "poline" | "rampensau";
 
 export interface MoodProfile {
@@ -89,7 +89,17 @@ export const MOOD_PROFILES: Record<Mood, MoodProfile> = {
     statusChroma: 0.2,
     minTextContrast: 14.0,
     minMutedContrast: 4.8,
-    description: "Spends the whole palette: seed-tinted surfaces in both modes, the seeds as fills and charts",
+    description: "Post-modern Memphis: cream page, hard outlines, the seeds as flat clashing fills and charts",
+  },
+  corporate: {
+    neutralChroma: 0.008,
+    accentChromaMin: 0.06,
+    accentChromaMax: 0.16,
+    secondaryChroma: 0.015,
+    statusChroma: 0.16,
+    minTextContrast: 14.0,
+    minMutedContrast: 4.8,
+    description: "Corporate grey and blue: cool slate surfaces, one blue doing the work, quiet hairlines",
   },
 };
 

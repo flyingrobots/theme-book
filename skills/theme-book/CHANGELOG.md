@@ -11,6 +11,15 @@ Versions track the tool's releases.
 
 ## [Unreleased]
 
+### Added
+
+- **Generate, never hand-pick and audit.** The skill now says a theme must come from
+  `theme-book theme`; colors chosen by hand or copied from another theme and then checked with
+  `theme-book audit` are not a theme-book theme and must not be called one. When nothing fits
+  the target, write an extension or say a preset is needed.
+- **The `corporate` and `freak` moods** (shadcn only): light and dark from one palette, with the
+  rules fitted to famous themes; and shadcn's rules version 1.1.0 in the extension example.
+
 ## [0.4.0] — 2026-11-23
 
 ### Added
