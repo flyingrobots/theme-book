@@ -23,10 +23,12 @@ may change between minor versions.
   [docs/topics/derived-moods](docs/topics/derived-moods/README.md).
 - **A benchmark against famous themes** (`scripts/benchmark/`): their verified palettes with
   sources, a method scorer (theme-book's move lands within OKLab 0.080 of the official accents,
-  against 0.124 for Material's tone table), a per-theme fit (`fit.ts`), a scoreboard page with a
-  static SVG, and a Mermaid sankey drawn from a built book (seed-to-light flows follow recorded origins;
-  light-to-dark flows pair role groups). The test suite
+  against 0.124 for a Material-style tone table (CIELAB L* 40 / 80, an approximation: Material's own tones are HCT)), a per-theme fit (`fit.ts`), a scoreboard page with a
+  static SVG, and a Mermaid sankey drawn from a built book (each flow follows recorded references: dark accents
+  from light ones, dark surfaces from the seed). The test suite
   fails if the move gets worse.
+- **`suggest` refuses `--mood corporate|freak`** (exit `2`): those moods build a whole shadcn
+  theme, so they belong to `theme`.
 - **`chartsAdvisory`** in `evaluateAudit`, and **`theme-book audit --charts-advisory`**: chart
   bars against the page are reported but not required. Off by default. A derived mood turns it on
   only for a palette with no hue (stock shadcn's greys), and the theme's header then reads

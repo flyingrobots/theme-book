@@ -47,7 +47,7 @@ What the moods do not read:
 - **`--generator` has no effect.** The palette is the seeds; no ramp is generated from them.
 - **`--standard wcag-aaa` and `--standard apca` audit, but do not change the colors.** The rules solve for
   WCAG AA, so expect failures: Listing 1's palette fails 10 pairs under `wcag-aaa` and 7 under `apca`.
-- **`suggest --mood corporate|freak` uses only those moods' chroma ranges**, not these rules, which apply to
+- **`suggest` refuses `--mood corporate|freak`** (exit `2`): these moods build a whole theme, so they belong to
   `theme`.
 - **An extension (`--book`) sees only the `seeds` and `palette` helper scopes**, and `dark` does not extend
   `light`. An extension that refers to `neutrals` or another pool scope exits `2` under these moods.
@@ -70,7 +70,8 @@ color its seed (text on a fill, and the base ramp, name the base seed), a dark a
 destructive names none. The values themselves are computed in TypeScript and stored fixed, so a record is an
 origin, not a live dependency. The diagram below is drawn from
 the book theme-book built for Listing 1 (`bun scripts/benchmark/sankey.ts`), not by hand: seed-to-light flows
-follow those records, and each light role group flows to its dark counterpart.
+follow those records; a dark color flows from light only where it derives from a light color (the accents, destructive
+and the charts), and otherwise from its own seed (the surfaces, text and lines).
 
 ```mermaid
 sankey-beta
@@ -78,13 +79,15 @@ sankey-beta
 fixed status red,light destructive,1
 light charts,dark charts,5
 light destructive,dark destructive,1
-light lines,dark lines,5
+light lines,dark lines,2
 light primary,dark primary,2
-light secondary and accent,dark secondary and accent,4
-light surfaces,dark surfaces,4
-light text,dark text,10
+light secondary and accent,dark secondary and accent,3
 seed blue,light charts,1
 seed blue,light secondary and accent,1
+seed charcoal,dark lines,3
+seed charcoal,dark secondary and accent,1
+seed charcoal,dark surfaces,4
+seed charcoal,dark text,10
 seed charcoal,light lines,3
 seed charcoal,light secondary and accent,1
 seed charcoal,light surfaces,4
@@ -98,8 +101,9 @@ seed violet,light charts,1
 seed violet,light secondary and accent,2
 ```
 
-_Figure 1. Where Owl Coral's colors come from. The charcoal seed is the base ramp (surfaces, text, lines);
-coral is the primary; each chart is one seed; destructive is the fixed status red, from no seed._
+_Figure 1. Where Owl Coral's colors come from. The charcoal seed is the base ramp (surfaces, text, lines) in both
+modes; coral is the primary; each chart is one seed; destructive is the fixed status red, from no seed; dark
+accents, destructive and charts derive from their light versions._
 
 The rules, in OKLCH:
 
@@ -147,7 +151,7 @@ Scored against the official accents (mean OKLab distance, lower is better; under
 | Method | Light → dark | Dark → light |
 | --- | --- | --- |
 | theme-book `corporate` (s 0.12, b 0.6, k 0.85) | **0.080** | **0.066** |
-| Material's tone table (40 / 80) | 0.124 | 0.114 |
+| Material-style tones (CIELAB L* 40 / 80, not HCT) | 0.124 | 0.114 |
 | HSL lightness inversion | 0.151 | 0.175 |
 | Sharing the accents unchanged | 0.152 | 0.152 |
 | OKLCH lightness inversion | 0.319 | 0.324 |
@@ -159,7 +163,8 @@ The dark → light column runs the move backwards: L = (1 − b)(L − s) + b ·
 and tested on the seventh, in turn, the formula scores 0.081 (both directions; the last line of the same
 command), so (s, b, k) are not memorising the themes they were fitted to. The band lightnesses 0.76 and 0.58
 were fitted on all seven and stay fixed in that test, so it is not fully held out. The test suite fails if a change makes either column worse than 0.085 and 0.07,
-or worse than Material's.
+or worse than the Material-style tones. Those tones are CIELAB lightness, an approximation: Material's own
+tonal palettes use HCT, which this benchmark does not implement.
 
 ![For each famous theme: its light side, theme-book's dark side generated from it, the official dark side,
 and a chart of lightness against hue joining each source color to the official answer and to

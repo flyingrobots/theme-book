@@ -1,8 +1,8 @@
 #!/usr/bin/env bun
 /**
  * A Mermaid sankey-beta of how a derived theme is built: each seed flows into the light roles made
- * from it (the origin each light color records), and each light role group into its dark
- * counterpart (paired by role, not read from a record). Values are computed and stored fixed.
+ * from it, and each dark role from what its recorded references reach: a light color for dark
+ * accents, the seed itself for dark surfaces, text and lines. Values are computed and stored fixed.
  * `bun scripts/benchmark/sankey.ts` prints the block for the README.
  */
 import { buildThemeBook } from "../../src/books";
@@ -43,10 +43,16 @@ function origin(key: string, seen = new Set<string>()): string {
 
 const flows = new Map<string, number>();
 const add = (a: string, b: string) => flows.set(`${a}\u0000${b}`, (flows.get(`${a}\u0000${b}`) ?? 0) + 1);
-for (const k of t.lightKeys) {
-  add(origin(`light.${k}`), `light ${groupOf(k)}`);
-  add(`light ${groupOf(k)}`, `dark ${groupOf(k)}`);
+/** Whether a token's references reach a light token or a light palette entry. */
+function fromLight(key: string, seen = new Set<string>()): boolean {
+  if (seen.has(key)) return false;
+  seen.add(key);
+  if (key.startsWith("light.") || /^palette\..*-light$/.test(key)) return true;
+  return (t.book.inspect(key)?.dependencies ?? []).some((d) => fromLight(d, seen));
 }
+for (const k of t.lightKeys) add(origin(`light.${k}`), `light ${groupOf(k)}`);
+// A dark token flows from light only where it derives from light; otherwise from its own origin.
+for (const k of t.darkKeys) add(fromLight(`dark.${k}`) ? `light ${groupOf(k)}` : origin(`dark.${k}`), `dark ${groupOf(k)}`);
 const csv = (s: string) => (/[,"]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s);
 console.log("```mermaid\nsankey-beta\n");
 for (const [k, v] of [...flows].sort()) {

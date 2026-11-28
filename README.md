@@ -142,7 +142,8 @@ theme-book theme --book school.book.ts --seed "#0f766e" --mood editorial --stand
 `--mood corporate` and `--mood freak` (shadcn only) build both modes from one palette, with rules fitted to
 seven famous light/dark pairs: Solarized, Gruvbox, Tokyo Night, One, Catppuccin, Rosé Pine and GitHub. This
 diagram is drawn from the book theme-book built for Owl Coral's palette, not by hand: each seed flows into the
-light roles that record it as their origin, and each light role group into its dark counterpart:
+light roles that record it as their origin, and a dark role flows from light only where it derives from light
+(the accents), otherwise from its own seed (the surfaces, text and lines):
 
 ```mermaid
 sankey-beta
@@ -150,13 +151,15 @@ sankey-beta
 fixed status red,light destructive,1
 light charts,dark charts,5
 light destructive,dark destructive,1
-light lines,dark lines,5
+light lines,dark lines,2
 light primary,dark primary,2
-light secondary and accent,dark secondary and accent,4
-light surfaces,dark surfaces,4
-light text,dark text,10
+light secondary and accent,dark secondary and accent,3
 seed blue,light charts,1
 seed blue,light secondary and accent,1
+seed charcoal,dark lines,3
+seed charcoal,dark secondary and accent,1
+seed charcoal,dark surfaces,4
+seed charcoal,dark text,10
 seed charcoal,light lines,3
 seed charcoal,light secondary and accent,1
 seed charcoal,light surfaces,4
@@ -174,7 +177,7 @@ The three findings it rests on, each measured against the famous themes:
 
 - **The dark page takes the light theme's ink hue** (within 1.4–16.4° in six of the seven), at about L 0.24, never black.
 - **Accents keep their hue and move together:** dark L = (1 − b)(L + s) + b · 0.76, chroma × k. One setting
-  lands within OKLab 0.080 of the official accents on average, against 0.124 for Material's tone table and
+  lands within OKLab 0.080 of the official accents on average, against 0.124 for a Material-style tone table (CIELAB L* 40 / 80, an approximation: Material's own tones are HCT) and
   0.319 for flipping OKLCH lightness.
 - **Contrast is a floor in each mode, never an equality across modes.**
 

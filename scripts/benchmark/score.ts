@@ -26,7 +26,7 @@ export const METHODS: Record<string, Method> = {
   "Identity (share accents)": (h) => h,
   "HSL lightness inversion": (h) => { const c = hsl(parse(h)!)!; return hex({ ...c, l: 1 - c.l }); },
   "OKLCH lightness inversion": (h) => { const c = oklch(parse(h)!)!; return hex({ ...c, l: 1 - c.l }); },
-  "Material tone table (40 / 80)": (h, toDark) => { const c = lch(parse(h)!)!; return hex({ mode: "lch", l: toDark ? 80 : 40, c: c.c, h: c.h }); },
+  "Material-style tones (CIELAB L* 40 / 80, not HCT)": (h, toDark) => { const c = lch(parse(h)!)!; return hex({ mode: "lch", l: toDark ? 80 : 40, c: c.c, h: c.h }); },
   "theme-book corporate (s 0.12, b 0.6, k 0.85)": (h, toDark) => accentMove(h, DERIVED_SETTINGS.corporate, toDark),
 };
 
@@ -50,9 +50,9 @@ export function leaveOneOut(): number {
 }
 
 if (import.meta.main) {
-  console.log("method".padEnd(46), "light→dark", "dark→light");
+  console.log("method".padEnd(52), "light→dark", "dark→light");
   for (const [name, m] of Object.entries(METHODS)) {
-    console.log(name.padEnd(46), meanDistance(m, true).toFixed(3).padStart(10), meanDistance(m, false).toFixed(3).padStart(10));
+    console.log(name.padEnd(52), meanDistance(m, true).toFixed(3).padStart(10), meanDistance(m, false).toFixed(3).padStart(10));
   }
   console.log(`\nleave-one-out (fit on six themes, score the seventh, both directions): ${leaveOneOut().toFixed(3)}`);
 }

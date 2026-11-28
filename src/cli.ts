@@ -38,7 +38,7 @@ function usage(): string {
 
 Usage:
   theme-book suggest --seed <color> [--seed <color>...] [--surface <color>]
-                     [--polarity light|dark] [--mood neutral|muted|vivid|editorial|high-contrast|corporate|freak]
+                     [--polarity light|dark] [--mood neutral|muted|vivid|editorial|high-contrast]
                      [--generator oklch|poline|rampensau] [--count 8] [--format text|json]
 
   theme-book theme   --seed <color> [--seed <color>...] [--preset shadcn|semantic|slide-deck]
@@ -210,6 +210,9 @@ async function main() {
 
     const mood = (getOne(flags, "mood") ?? "neutral") as Mood;
     if (!VALID_MOODS.has(mood)) fail(`invalid --mood "${mood}"`);
+    if (mood === "corporate" || mood === "freak") {
+      fail(`--mood ${mood} builds a whole shadcn theme from a palette; use \`theme-book theme --preset shadcn --mood ${mood}\`, not suggest`);
+    }
 
     const generator = (getOne(flags, "generator") ?? "oklch") as GeneratorKind;
     if (!VALID_GENERATORS.has(generator)) fail(`invalid --generator "${generator}"`);

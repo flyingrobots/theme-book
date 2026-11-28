@@ -11,7 +11,7 @@
  *   s lifts every accent by the same amount (Gruvbox, Catppuccin: s = 0.23), b pulls them into one
  *   band (Tokyo, GitHub), k sets the character (pastel below 1, vivid above). One global setting
  *   (s 0.12, b 0.6, k 0.85) lands within OKLab 0.08 of the official accents on average, against 0.124
- *   for Material's tone table and 0.32 for flipping OKLCH lightness.
+ *   for a Material-style tone table in CIELAB (not HCT) and 0.32 for flipping OKLCH lightness.
  * - Contrast is a floor in each mode, never an equality across modes.
  *
  * Moods are settings of (s, b, k) plus how soft roles are filled:
@@ -164,7 +164,9 @@ export interface Reading {
   hueless: boolean;
 }
 
-export function readPalette(seeds: string[]): Reading {
+export function readPalette(input: string[]): Reading {
+  // Each distinct color once, in its first spelling: three copies of one blue are one accent.
+  const seeds = input.filter((s, i) => input.findIndex((x) => x.toLowerCase() === s.toLowerCase()) === i);
   // The first colored seed is primary whatever its lightness: a navy or a yellow brand is the brand,
   // not the dark page or the light page. Grey seeds before it stay base material.
   const first = seeds.find((s) => ok(s).c >= 0.04);

@@ -23,6 +23,8 @@ Versions track the tool's releases.
   that the first colored seed is primary and the next non-status colors fill secondary then accent, that an
   extension sees only their `seeds` and `palette` scopes, and that a hueless palette's charts are
   audited with `theme-book audit --charts-advisory`.
+- **An audit checks thresholds; it does not prove legibility.** The "generate, never hand-pick"
+  rule no longer says an audit proves a theme legible.
 
 ## [0.4.0] — 2026-11-23
 

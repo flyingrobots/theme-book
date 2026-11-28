@@ -14,7 +14,7 @@ Compile rule-based light/dark UI color themes, verify contrast at full floating-
 
 **Never eyeball contrast ratios or invent ad-hoc hex pairs when `theme-book` can compute and verify them.**
 
-**Generate a theme with `theme-book theme`; never hand-pick its colors and then audit them.** An audit proves a theme is legible, not that its light and dark modes are related. A theme whose colors were chosen by hand, or copied from another theme, and only checked with `theme-book audit` is not a theme-book theme, and must not be described as one. When no preset or mood fits the target, write a book extension, or say that the target needs a preset; do not improvise the colors.
+**Generate a theme with `theme-book theme`; never hand-pick its colors and then audit them.** An audit checks that a theme's required pairs clear their contrast thresholds; it says nothing about whether its light and dark modes are related. A theme whose colors were chosen by hand, or copied from another theme, and only checked with `theme-book audit` is not a theme-book theme, and must not be described as one. When no preset or mood fits the target, write a book extension, or say that the target needs a preset; do not improvise the colors.
 
 ---
 
