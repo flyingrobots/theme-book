@@ -135,7 +135,7 @@ test("the recipe command replays the --book path literally in a POSIX shell", as
   const arg = command.split(" --book ")[1]!;
   // Let sh parse the quoted word back, and compare it with the real path.
   expect(Bun.spawnSync(["sh", "-c", `printf '%s' ${arg}`]).stdout.toString()).toBe(awkward);
-}, 30_000); // spawns the CLI
+});
 
 test("an extension loads from a path with a backslash, quote, spaces, # and ?", async () => {
   const path = join(dir, "it's \\ a b #h ?q.ts");
@@ -229,7 +229,7 @@ test.each([
   const stderr = r.stderr.toString();
   expect([r.exitCode, stderr.includes(`extension x@1.0.0 (${path})`)]).toEqual([2, true]);
   expect(stderr).toMatch(message);
-});
+}, 30_000); // spawns the CLI
 
 test("--book-sha256 accepts the extension's hash and refuses any other before running it, with exit 2", () => {
   const path = school();
